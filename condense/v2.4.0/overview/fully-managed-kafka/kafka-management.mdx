@@ -1,0 +1,219 @@
+---
+title: "Kafka Management"
+description: "For the complete documentation index, see . This page is also available as ."
+---
+
+Copy
+
+On this page
+
+1. [Overview](/condense/v2.4.0)
+2. [Fully Managed Kafka](/condense/v2.4.0/overview/fully-managed-kafka)
+
+## Kafka Component Architecture
+
+A KRaft-based Kafka cluster consists of broker nodes responsible for message delivery and controller nodes that manage cluster metadata and coordinate clusters. These roles can be configured using node pools in deployment manifests.
+
+Other Kafka components interact with the Kafka cluster for specific tasks.
+
+### Kafka Component Interactions
+
+![](/images/condense/v2.4.0/overview/fully-managed-kafka/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252FKvK2bP913eEJcrPMoB82%252FKafkaMgmtVec1.png)
+
+### Kafka Connect
+
+Kafka Connect is an integration toolkit for streaming data between Kafka brokers and other systems using *connector* plugins. Kafka Connect provides a framework for integrating Kafka with an external data source or target, such as a database, for import or export of data using connectors. Connectors provide the connection configuration needed.
+
+* A *source* connector pushes external data into Kafka.
+
+* A *sink* connector extracts data out of Kafka
+
+External data is translated and transformed into the appropriate format.
+
+Kafka Connect can be configured to build custom container images with the required connectors.
+
+### Kafka MirrorMaker
+
+Kafka MirrorMaker replicates data between two Kafka clusters, either in the same data center or across different locations.
+
+### Kafka Exporter
+
+Kafka Exporter extracts data for analysis as Prometheus metrics, primarily data relating to offsets, consumer groups, consumer lag and topics. Consumer lag is the delay between the last message written to a partition and the message currently being picked up from that partition by a consumer
+
+***
+
+## Securing Kafka
+
+### Encryption
+
+Kafka in Condense supports Transport Layer Security (TLS), a protocol for encrypted communication.
+
+IMPORTANT! Communication is always encrypted between Kafka components.
+
+### Authentication
+
+Kafka listeners use authentication to ensure a secure client connection to the Kafka cluster. Clients can also be configured for mutual authentication. Security credentials are created and managed by the Cluster and User Operator.
+
+### Supported authentication mechanisms
+
+* mTLS authentication (on listeners with TLS-enabled encryption)
+
+* SASL SCRAM-SHA-512
+
+* OAuth 2.0 token-based authentication
+
+* Custom authentication (supported by Kafka)
+
+### Authorization
+
+Authorization controls the operations that are permitted on Kafka brokers by specific clients or users.
+
+#### Supported authorization mechanisms
+
+* Simple authorization using ACL rules
+
+* OAuth 2.0 authorization (if you are using OAuth 2.0 token-based authentication)
+
+* Open Policy Agent (OPA) authorization
+
+* Custom authorization (supported by Kafka)
+
+### Federal Information Processing Standards (FIPS)
+
+Kafka in Condense can run on FIPS-enabled Kubernetes clusters to ensure data security and system interoperability if the native Kubernetes service of the cloud provider supports it.
+
+***
+
+## Monitoring Kafka
+
+Monitoring data allows you to monitor the performance and health of Kafka in Condense. You can configure your deployment to capture metrics data for analysis and notifications.
+
+Metrics data is useful when investigating issues with connectivity and data delivery. For example, metrics data can identify under-replicated partitions or the rate at which messages are consumed. Alerting rules can provide time-critical notifications on such metrics through a specified communications channel. Monitoring visualizations present real-time metrics data to help determine when and how to update the configuration of your deployment.
+
+The following tools are used for metrics and monitoring which is shipped with the Condense deployment
+
+### Prometheus
+
+[Prometheus](https://github.com/prometheus) pulls metrics from Kafka, Controllers, and Kafka Connect clusters. The Prometheus Alertmanager plugin handles alerts and routes them to a notification service.
+
+### Kafka Exporter
+
+[Kafka Exporter](https://github.com/danielqsj/kafka_exporter) adds additional Prometheus metrics.
+
+### Grafana
+
+[Grafana Labs](https://grafana.com/) provides dashboard visualizations of Prometheus metrics.
+
+***
+
+## Kafka management on your cloud
+
+### Multi-Zone Deployment for High Availability
+
+This architecture demonstrates how Condense achieves a highly available, scalable, and resilient Kafka deployment within a Virtual Private Cloud (VPC) on Azure Kubernetes Service (AKS).
+
+![](/images/condense/v2.4.0/overview/fully-managed-kafka/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252FMmZ9BQ40l3Kp8QTCS54s%252FKafkaMgmtVec4.png)
+
+#### Key Components
+
+* A dedicated node pool is distributed across three availability zones (Zone A, B, C) in Region A to enhance fault tolerance.
+
+* Each node contains:
+
+  * Kafka Operator – Manages Kafka lifecycle and configurations.
+
+  * Kafka Broker – Handles message storage and distribution, backed by Persistent Volume Claims (PVCs) for data durability.
+
+  * Controller – Manages cluster metadata and leadership election, also using PVCs for persistence.
+
+#### High Availability & Fault Tolerance
+
+* Multi-Zone Redundancy
+
+  Kafka components are distributed across three zones, preventing single points of failure and ensuring continuous availability.
+
+* Node Affinity & Pod Anti-Affinity
+
+  * Node Affinity ensures components are deployed on specific nodes that are running in different regions.
+
+  * Pod Anti-Affinity prevents multiple critical Kafka instances from running on the same node, improving redundancy.
+
+#### Networking & Load Balancing
+
+* Internal Access (VNet Peering): Allows internal clients to communicate with Kafka through an internal load balancer, maintaining security and low latency. This makes it easier to connect existing services to Kafka internally.
+
+* External Access (Internet Load Balancer): Distributes traffic efficiently to external clients, ensuring reliable connectivity.
+
+#### Scalability & Self-Healing
+
+* Dynamic Scaling: Kubernetes automatically scales Kafka brokers based on workload demands.
+
+* Self-Healing Mechanisms: Kubernetes reschedules failed pods and maintains cluster stability without manual intervention.
+
+### Multi-Region Deployment for Disaster Recovery
+
+Building on the high availability architecture defined earlier, this approach extends Kafka’s resilience by implementing a multi-region deployment for disaster recovery using Kafka MirrorMaker 2. This ensures seamless data replication and failover across geographically distributed clusters.
+
+#### Unidirectional
+
+![](/images/condense/v2.4.0/overview/fully-managed-kafka/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252FG2Xb967smnP5o9epxp5X%252FKafkaMgmtVec2.png)
+
+#### Bidirectional
+
+![](/images/condense/v2.4.0/overview/fully-managed-kafka/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252FxioVa518IXnnEpQfs1kt%252FKafkaMgmtVec3.png)
+
+#### Unidirectional Replication (Primary-Backup Model)
+
+* Primary Region (Region A):
+
+  A local producer writes data to the source Kafka cluster.
+
+* Cross-Region Replication:
+
+  Kafka MirrorMaker 2 replicates data to a secondary Kafka cluster in Region B.
+
+* Backup Region (Region B):
+
+  The target Kafka cluster serves as a hot backup, ensuring data availability in case of failure in Region A.
+
+* Use Case: Ensures a disaster recovery mechanism with a standby cluster that can take over operations if the primary region fails.
+
+#### Bidirectional Replication (Active-Active Model)
+
+* Multi-Region Active Clusters:
+
+  Clusters in Region A and Region B actively handle data ingestion, processing, and replication.
+
+* Real-Time Cross-Replication:
+
+  * Kafka MirrorMaker 2 ensures continuous synchronization between both regions.
+
+  * If one cluster fails, the other automatically continues operations, preventing downtime.
+
+**Use Case:**
+
+Enables an active-active multi-region setup, ensuring real-time failover and load balancing.
+
+***
+
+## Monitoring Kafka
+
+Monitoring data allows you to monitor the performance and health of Kafka in Condense. You can configure your deployment to capture metrics data for analysis and notifications.
+
+Metrics data is useful when investigating issues with connectivity and data delivery. For example, metrics data can identify under-replicated partitions or the rate at which messages are consumed. Alerting rules can provide time-critical notifications on such metrics through a specified communications channel. Monitoring visualizations present real-time metrics data to help determine when and how to update the configuration of your deployment.
+
+The following tools are used for metrics and monitoring which is shipped with the Condense deployment
+
+**Prometheus**
+
+[Prometheus](https://github.com/prometheus) pulls metrics from Kafka, Controllers, and Kafka Connect clusters. The Prometheus Alertmanager plugin handles alerts and routes them to a notification service.
+
+**Kafka Exporter**
+
+[Kafka Exporter](https://github.com/danielqsj/kafka_exporter) adds additional Prometheus metrics.
+
+**Grafana**
+
+[Grafana Labs](https://grafana.com/) provides dashboard visualizations of Prometheus metrics.
+
+[PreviousFully Managed Kafka](/condense/v2.4.0/overview/fully-managed-kafka)[NextKafka Connect](/condense/v2.4.0/overview/fully-managed-kafka/kafka-connect)

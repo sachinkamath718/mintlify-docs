@@ -1,0 +1,186 @@
+---
+title: "Glossary"
+description: "For the complete documentation index, see . This page is also available as ."
+---
+
+Copy
+
+On this page
+
+1. [Condense App - Getting Started](/condense/condense-app-getting-started)
+
+This glossary serves as a comprehensive guide to the key concepts, features, and components within the Condense App. It provides clear and concise definitions to help readers understand the platform's terminologies and functionalities.
+
+## SSO (Single Sign On)
+
+The Single Sign-On (SSO) feature in Condense allows users to authenticate seamlessly using their existing corporate or third-party identity provider credentials, eliminating the need for multiple login credentials. Currently, Condense supports SSO via Google and SSO via Microsoft.
+
+### Key Benefits of SSO in Condense:
+
+* **Simplified Access**: Users can log in using their work email associated with Google (GSuite) or Microsoft (M365).
+
+* **Enhanced Security**: Reduces password fatigue and minimizes the risk of credential leaks.
+
+* **Seamless User Experience**: Enables a frictionless sign-in process, reducing authentication time.
+
+* **Centralized Identity Management**: Organizations can maintain better control over user access and authentication policies.
+
+The SSO feature ensures that Condense aligns with modern security best practices while offering a user-friendly login experience.
+
+Learn more on how SSO is implemented in Condense, including sign-up and sign-in workflows by reading the detailed guide here: [SSO (Single Sign On)](/condense/condense-app-getting-started/sso-single-sign-on-creating-an-account-logging-into-the-condense-app)
+
+## User Roles and Permissions (RBAC - Role-Based Access Control)
+
+* Admin Role: Full control over the organization, including workspace management, user roles, and resource access.
+
+* Maintainer Role: Manages deployments, connectors, and applications in assigned workspaces.
+
+* Developer Role: Focuses on creating, editing, and managing applications in their assigned workspaces.
+
+* Viewer Role: Provides read-only access to pipelines, connectors, and other workspace resources.
+
+* RBAC (Role-Based Access Control): Framework for assigning roles and permissions to users, ensuring secure and efficient access management.
+
+* User Invitation: Process of inviting new users and assigning roles upon acceptance.
+
+* Role Management: Admin functionality to update or reassign roles for existing users.
+
+* Default Workspace Creation: Automatically generated workspace for new admins or restricted access for new users.
+
+Learn more on how RBAC is implemented in Condense, by reading the detailed guide here: [RBAC (Role Based Access Control)](/condense/condense-app-getting-started/role-based-access-control-rbac)
+
+## Workspaces and Pipelines
+
+* Workspace: Isolated environment for building, testing, and deploying data pipelines, with customizable names and descriptions.
+
+* Pipeline: A series of processes for ingesting, transforming, and routing data between sources and destinations.
+
+* Activity Auditor: Centralized tool to track, monitor, and audit actions within workspaces, pipelines, and user accounts.
+
+Learn more on how Workspaces and Pipelines are implemented in Condense, by reading the detailed guide here: [Workspace in Conden](/condense/condense-app-getting-started/workspaces)
+
+## Applications and Transforms
+
+* Application: Development environment for designing, testing, and publishing custom logic or transformations.
+
+* Custom Transform: Finalized and published version of an application, ready for deployment in pipelines.
+
+* Application Lifecycle: Includes drafting, editing, publishing, and versioning of applications.
+
+* IDE Integration: Built-in code editor within Condense for writing, debugging, and managing application logic.
+
+Learn more about how Applications and Transforms are implemented in Condense, by reading the detailed guide here: [Build your own Transforms in Condense](/condense/condense-app-getting-started/applications)
+
+## Connectors
+
+* Connector: A component for integrating data sources or destinations, classified into pre-built, stream, and store connectors.
+
+* Pre-Built Connectors: Ready-to-use connectors are categorized as vehicle telematics, stream, or store connectors.
+
+* Stream Connector: Facilitates real-time data flow, supporting Kafka, MQTT, Pub/Sub, and HTTPS protocols.
+
+* Store Connector: Integrates pipelines with storage systems such as MySQL, MongoDB, Cassandra, and Bigtable.
+
+* MQTT Connector: A lightweight connector for IoT applications using a publish-subscribe model.
+
+* Bigtable Connector: Store connector designed for real-time analytics in Google Cloud Bigtable.
+
+* Vehicle Telematics Connector: Handles data from telematics devices such as GPS and engine diagnostics systems.
+
+Learn more on how to find and use various connectors that are available in Condense, by reading the detailed guide here: [Connectors in Condense](/condense/condense-app-getting-started/connectors)
+
+## Monitoring and Configuration
+
+* Grafana Monitoring: Tool for visualizing metrics, monitoring pipeline performance, and tracking system health.
+
+* Edge Computing: Localized data processing using Condense Edge firmware to optimize cloud workloads.
+
+## Settings and Account Management
+
+Settings is a centralized hub for managing accounts, workspace, and organization configurations. Here is a list of things that are available to view or edit in settings:
+
+* **Personal Details**: Update user information like username, password, and phone number.
+
+* **Organization Details**: Manage organizational information, including name and unique ID.
+
+* **Workspace Details**: View and manage workspaces, including creation dates and descriptions.
+
+* **Users and Roles**: Invite users, assign roles, and manage permissions.
+
+* **Account Actions**: Includes signing out and deleting accounts.
+
+Learn more on how to access and modify settings in the Condense App, by reading the detailed guide here: [Available Settings in Condense](/condense/condense-app-getting-started/settings)
+
+## Split Utility
+
+The Split Utility in Condense is a no-code tool designed to intelligently route streaming data from Kafka topics based on customizable business rules. It helps structure and streamline real-time processing by directing condition-matching data to a primary topic and all others to a secondary topic—enabling clean separation of relevant and irrelevant streams.
+
+### Key Benefits of Split Utility
+
+#### Real-Time Conditional Routing
+
+Data is automatically filtered and dispatched to designated output topics using user-defined logic—without writing code.
+
+#### Zero-Code Rule Configuration
+
+Users can define routing policies through an intuitive interface using rule-based conditions on JSON fields (e.g., temperature > 50).
+
+#### Non-Disruptive Edits
+
+Update split logic live without stopping pipelines or redeploying services—ideal for agile operations.
+
+#### Schema-Aware & Validated
+
+Topic schemas are auto-loaded (or uploaded as JSON), ensuring rule compatibility before deployment.
+
+The Split Utility provides a powerful way to apply intelligent filtering logic across high-throughput Kafka streams, allowing Condense users to isolate actionable data while maintaining processing efficiency and flexibility.
+
+## Alert Utility
+
+The Alert Utility in Condense enables real-time monitoring of Kafka stream data by allowing users to define conditions and trigger alerts when those conditions persist over a specified time window. It provides a no-code way to detect anomalies or thresholds being crossed and proactively publish alerts for downstream systems to act on.
+
+### Key Benefits of Alert Utility
+
+#### Real-Time Anomaly Detection
+
+Continuously scans incoming Kafka events and triggers alerts as soon as defined thresholds or patterns are sustained, helping detect issues early.
+
+#### Time-Bound Condition Evaluation
+
+Allows setting an "alert duration"—a configurable time window to ensure conditions are persistently met before alerting, thereby minimizing false positives.
+
+#### Rule-Based, Grouped Monitoring
+
+Supports field-level rules (>, \<, =, matches, between) and groups them using logical operators. Alerts can be scoped per entity (e.g., device ID), enabling granular monitoring.
+
+#### No-Code Deployment
+
+Users configure alerting logic via an intuitive UI without writing scripts. Schema is auto-loaded from Kafka topics or via JSON uploads, ensuring validation before deployment.
+
+The Alert Utility makes it easy to transform raw stream data into actionable signals—ideal for monitoring system health, IoT sensors, user behaviours, or operational metrics—without building custom code or deploying external services.
+
+## KSQLDB
+
+ksqlDB in Condense provides a SQL-like interface to process and transform real-time Kafka streams without writing traditional code. It empowers users to define complex queries for filtering, joining, and aggregating streaming data making stream processing accessible to data and operations teams through familiar SQL syntax.
+
+### Key Benefits of ksqlDB
+
+#### SQL-Like Real-Time Stream Processing
+
+Write expressive SQL queries to process continuous data in real-time. Ideal for aggregations, pattern recognition, filtering, or joining Kafka topics directly.
+
+#### Streams and Tables
+
+Use streams for continuous, unbounded event data and tables for stateful computations. Both constructs are fully manageable from within the Condense interface.
+
+#### Transient Queries for On-the-Fly Insights
+
+Execute temporary queries without persisting output ideal for monitoring dashboards, alerts, or ad-hoc analysis.
+
+#### Integrated Access Control
+
+Role-Based Access Control (RBAC) ensures secure usage, where Admins and Developers can author queries while Viewers have restricted access for read-only insights.
+
+ksqlDB brings powerful streaming transformations directly into the Condense platform, enabling teams to build, test, and execute real-time logic using familiar SQL constructs without deploying additional infrastructure or custom code.
+
+[PreviousCondense App - Getting Started](/condense/condense-app-getting-started)[NextFeatures of Condense App](/condense/condense-app-getting-started/features-of-condense-app)

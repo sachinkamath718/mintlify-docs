@@ -1,0 +1,210 @@
+---
+title: "Schema Registry"
+description: "For the complete documentation index, see . This page is also available as ."
+---
+
+Copy
+
+On this page
+
+1. [Condense App - Getting Started](/condense/condense-app-getting-started)
+
+The Schema Registry in Condense is available as part of a managed Kafka deployment. It allows users to view schema subjects, check schema versions, manage compatibility settings, and access the registry endpoint used by applications. This documentation explains how to use the Schema Registry inside Condense.
+
+### **Accessing the Schema Registry**
+
+1. Log in to the Condense Console.
+
+2. Go to **Manage → Kafka Management**.
+
+3. Select **Schema Registry** from the left navigation panel.
+
+You will see:
+
+* A list of subjects on the left
+
+* Schema details and versions on the right
+
+### **Understanding Subjects**
+
+A **subject** represents the schema defined for a Kafka topic’s key or value.
+
+Selecting a subject displays its:
+
+* Compatibility Level
+
+* Version history
+
+* Schema ID for each version
+
+* Available actions
+
+### **Viewing Schema Versions**
+
+After selecting a subject, Condense shows a table with all schema versions registered under that subject. Each version entry includes:
+
+* **Version number**
+
+* **Schema ID**
+
+* **Actions** (such as viewing the schema)
+
+Selecting a version displays the schema associated with that version.
+
+### **Compatibility Levels**
+
+Each subject displays a **Compatibility Level**. Condense also exposes a **Global Compatibility Level** at the top of the page.
+
+These settings determine how schemas can evolve. Users can view:
+
+* The global compatibility value (read-only if locked)
+
+* The subject-specific compatibility value
+
+Compatibility can be updated using the Schema Registry API.
+
+### **Viewing the Registry URL**
+
+Condense provides a way to view the internal URL of the Schema Registry.
+
+To access it:
+
+1. Click the **link icon** in the top-right corner of the Schema Registry page.
+
+2. A modal appears titled **View Registry URL**.
+
+3. The modal displays the hostname and port used by client applications
+
+4. Use this URL in Kafka producers/consumers that interact with schemas.
+
+### **Registering and Managing Schemas (API)**
+
+Users can add, update, validate, or delete schemas using the Schema Registry API exposed through the internal load balancer.
+
+#### **Register a new schema version**
+
+Copy
+
+```
+curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
+     --data '{"schema": "{\"type\": \"string\"}"}' \
+     http://<internal-lb-ip>:8081/subjects/Kafka-key/versions
+```
+
+#### **List all subjects**
+
+Copy
+
+```
+curl -X GET http://<internal-lb-ip>:8081/subjects
+```
+
+#### **List schema versions for a subject**
+
+Copy
+
+```
+curl -X GET http://<internal-lb-ip>:8081/subjects/Kafka-value/versions
+```
+
+#### **Fetch schema by global ID**
+
+Copy
+
+```
+curl -X GET http://<internal-lb-ip>:8081/schemas/ids/1
+```
+
+#### **Fetch the latest schema**
+
+Copy
+
+```
+curl -X GET http://<internal-lb-ip>:8081/subjects/Kafka-value/versions/latest
+```
+
+#### **Delete a specific version**
+
+Copy
+
+```
+curl -X DELETE http://<internal-lb-ip>:8081/subjects/Kafka-value/versions/3
+```
+
+#### **Delete all versions**
+
+Copy
+
+```
+curl -X DELETE http://<internal-lb-ip>:8081/subjects/Kafka-value
+```
+
+#### **Test compatibility**
+
+Copy
+
+```
+curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
+     --data '{"schema": "{\"type\": \"string\"}"}' \
+     http://<internal-lb-ip>:8081/compatibility/subjects/Kafka-value/versions/latest
+```
+
+#### **View global compatibility**
+
+Copy
+
+```
+curl -X GET http://<internal-lb-ip>:8081/config
+```
+
+#### **Update global compatibility**
+
+Copy
+
+```
+curl -X PUT -H "Content-Type: application/vnd.schemaregistry.v1+json" \
+     --data '{"compatibility": "NONE"}' \
+     http://<internal-lb-ip>:8081/config
+```
+
+#### **Update compatibility for a subject**
+
+Copy
+
+```
+curl -X PUT -H "Content-Type: application/vnd.schemaregistry.v1+json" \
+     --data '{"compatibility": "BACKWARD"}' \
+     http://<internal-lb-ip>:8081/config/Kafka-value
+```
+
+***
+
+### **What You Can Do in the Condense UI**
+
+Using only the UI, users can:
+
+* Browse all schema subjects
+
+* View schema versions
+
+* Inspect version numbers and Schema IDs
+
+* View compatibility settings
+
+* Copy the Registry URL for application integration
+
+Schema creation, updates, and deletions are handled through the API.
+
+The Schema Registry in Condense provides:
+
+* A UI for viewing subjects and schema versions
+
+* A modal to retrieve the internal Schema Registry URL
+
+* Visibility into global and subject-level compatibility settings
+
+* A fully functional REST API for schema registration, validation, and evolution
+
+This enables users to manage Kafka schema lifecycle directly within Condense.
+
+[PreviousKafka Topics](/condense/condense-app-getting-started/kafka-topics)[NextConnectors in Condense](/condense/connectors-in-condense)

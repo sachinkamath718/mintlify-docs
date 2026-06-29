@@ -1,0 +1,79 @@
+---
+title: "Detailed Component Breakdown"
+description: "For the complete documentation index, see . This page is also available as ."
+---
+
+Copy
+
+On this page
+
+1. [Introduction to Condense](/condense/introduction-to-condense)
+2. [Condense Architecture](/condense/introduction-to-condense/condense-architecture)
+
+**First Time User? Free Credits on us!**
+
+Get up to $200 worth of Free credits when you sign up for the first time. Use this link to create a new account on Condense and claim your free credits!
+
+[https://www.zeliot.in/try-now](https://www.zeliot.in/try-now)
+
+Within the user's cloud environment, Condense provisions various resources to facilitate data ingestion:
+
+### Virtual Private Cloud (VPC) with Subnets
+
+Condense establishes a dedicated VPC with segmented subnets for enhanced security and resource management.
+
+* Kubernetes Cluster Subnet: Hosts the Kubernetes cluster for running Condense services in a private and secure manner.
+
+* Virtual Machine Subnet: Houses the virtual machine acting as the Condense management server.
+
+* Bastion Host Subnet: Provides a secure jump point for accessing the virtual machine for maintenance purposes.
+
+* Database Subnet: Isolates the Postgres database used by Condense for configuration and pipeline data storage.
+
+* Container Registry Subnet: Secures the container registry containing images specific to the deployed Condense instance.
+
+Also, read our article on Revitalizing the Ideality of Virtual Private Clouds on our website here: [https://www.zeliot.in/blog/revitalizing-enterprises-the-ideality-of-virtual-private-clouds](https://www.zeliot.in/blog/revitalizing-enterprises-the-ideality-of-virtual-private-clouds)
+
+### Kubernetes Cluster
+
+Condense utilizes a private Kubernetes cluster to run its services. This ensures secure containerized deployments and efficient resource allocation.
+
+### Container Registry
+
+Condense leverages a container registry to store Docker container images required for its various services. This allows for version control and streamlined deployment processes.
+
+#### Virtual Machine (VM)
+
+Condense provisions a virtual machine serving as the management server. This VM executes scripts for deployment, configuration
+
+* Manages Condense deployments and interacts with the Kubernetes cluster.
+
+* Performs release checks and health monitoring.
+
+* Provides a secure access point for authorized personnel (through Bastion host).
+
+### Bastion Host
+
+Condense utilizes a Bastion host as a secure gateway for accessing the management VM. This enhances security by eliminating direct internet access to the VM.
+
+#### Postgres Database
+
+Condense leverages a Postgres database to store critical information, including:
+
+* User credentials for accessing the configuration dashboard.
+
+* Master data such as connector and transform configurations, device information, and pipeline details.
+
+* System configuration data for Condense services.
+
+* A limited amount of Redis data is synchronized periodically for disaster recovery purposes.
+
+#### Load Balancer & Public Static IPs
+
+Condense utilizes a load balancer with public static IP addresses. This establishes an interface for devices to securely transmit data to the Condense application.
+
+> We regularly write articles and developer blogs for the community. Feel free to visit our blogs section on the website. If you want to get notified everytime we publish a new article, please subscribe to our newsletters. You can find an option to subscribe on the footer.
+>
+> [https://www.zeliot.in/blog](https://www.zeliot.in/blog)
+
+[PreviousCondense Architecture](/condense/introduction-to-condense/condense-architecture)[NextAdditional Services](/condense/introduction-to-condense/condense-architecture/additional-services)

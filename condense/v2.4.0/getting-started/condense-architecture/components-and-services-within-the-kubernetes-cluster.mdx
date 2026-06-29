@@ -1,0 +1,149 @@
+---
+title: "Components and Services within the Kubernetes Cluster"
+description: "For the complete documentation index, see . This page is also available as ."
+---
+
+Copy
+
+On this page
+
+1. [GETTING STARTED](/condense/v2.4.0/getting-started)
+2. [Condense Architecture](/condense/v2.4.0/getting-started/condense-architecture)
+
+**First Time User? Free Credits on us!**
+
+Get up to $200 worth of Free credits when you sign up for the first time. Use this link to create a new account on Condense and claim your free credits!
+
+[https://www.zeliot.in/try-now](https://www.zeliot.in/try-now)
+
+The heart of Condense lies within the Kubernetes cluster, where various services collaborate to process data:
+
+### Nginx
+
+This versatile web server acts as the network traffic controller for Condense.
+
+* Manages API access for user interaction with Condense.
+
+* Handles Communication Protocols like TCP/IP and MQTT(s).
+
+* Configures ingress resources and port mappings for API access and device data ingestion.
+
+* Facilitates TLS termination for secure communication.
+
+### Redis
+
+Condense leverages a Redis cluster for data caching and performance optimization.
+
+* Stores metering data for various dimensions used in consumption-based billing.
+
+* Manages authentication tokens used by Condense services for API interactions.
+
+* Acts as a checkpointing mechanism for user-configured pipelines, storing sequence information, metadata, and real-time data like throughput and status.
+
+* Stores asset ping information displayed on the Condense dashboard.
+
+> Also read our article on Redis - Harnessing the Power of In-Memory Data Storage here: [https://www.zeliot.in/blog/redis-harnessing-the-power-of-in-memory-data-storage](https://www.zeliot.in/blog/redis-harnessing-the-power-of-in-memory-data-storage)
+
+### Kafka
+
+Condense employs Kafka as a message queue, serving as the backbone for data communication between services after transformations.
+
+* Kafka brokers and Zookeeper run within the cluster, ensuring fault tolerance and data integrity.
+
+* Operates as a one-way queue, facilitating data progression through various transformation stages.
+
+* Event-driven auto scalers automatically adjust consumer group offsets to maintain optimal performance and prevent lag.
+
+* Kafka version upgrades are managed by Condense with user consent for seamless adoption of new features and security patches.
+
+## Condense inherently deploys with a Fully - Managed Kafka
+
+![](/images/condense/v2.4.0/getting-started/condense-architecture/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252FCngEpDKnbEn9sLAna2Ym%252FFtCondVec1.png)
+
+Condense provides a fully managed Kafka service within its Fully Managed BYOC model, ensuring seamless data streaming, high availability, and zero infrastructure complexity. By embedding Kafka into its industry-specific verticalized streaming ecosystem, Condense enables real-time event processing, data communication between services, and scalable pipeline orchestration—all within the customer's cloud environment.
+
+With Condense fully managed Kafka, enterprises get enterprise-grade performance, dynamic scaling, and automated operational management, eliminating the need for manual intervention in cluster provisioning, maintenance, scaling, and security updates.
+
+### Kafka as the Messaging Backbone
+
+#### Event-Driven Data Streaming
+
+Condense uses Kafka as a high-throughput event streaming system, ensuring fault-tolerant, distributed message queuing between microservices and streaming applications.
+
+#### One-Way Queue Model
+
+Kafka operates as a one-way queue, moving event data seamlessly through various prebuilt transformations, custom transformations, and real-time processing stages before reaching downstream applications.
+
+#### Decoupled Service Communication
+
+Kafka ensures service independence, meaning applications can produce and consume data asynchronously without blocking.
+
+#### High-Performance Streaming
+
+Optimized for millions of events per second, ensuring low-latency streaming and high-throughput data processing.
+
+### Cluster Management: Kafka Brokers and Zookeeper
+
+#### Fully Managed Kafka Cluster
+
+Kafka brokers and Zookeeper run within customer-controlled cloud environments, managed by Condense, ensuring high availability and resilience.
+
+#### Fault-Tolerant Architecture
+
+Multi-cluster redundancy and automatic replication prevent data loss and ensure continuous streaming even in the event of node failures.
+
+#### Data Integrity & Consistency
+
+Kafka maintains strong replication and partitioning strategies, ensuring data consistency across distributed environments.
+
+#### Seamless Kafka Version Upgrades
+
+Condense handles Kafka version upgrades with user consent, allowing smooth adoption of new features and security patches without disrupting operations.
+
+### Automated Scaling with Event-Driven Auto-Scalers
+
+#### Consumer Group Auto-Balancing
+
+Kafka dynamically scales consumer groups based on event throughput, preventing backlogs and maintaining near-real-time processing.
+
+#### Adaptive Resource Scaling
+
+Event-driven auto scalers optimize cluster performance by dynamically adjusting consumer group offsets, ensuring Kafka maintains low-latency event processing at scale.
+
+#### Intelligent Partition Rebalancing
+
+Kafka automatically redistributes partitions among consumers during scaling, eliminating bottlenecks.
+
+### Reliability and High Availability (99.95% Uptime SLA)
+
+#### Multi-Zone Deployment
+
+Kafka clusters are deployed across multiple availability zones within customer cloud environments, preventing downtime due to infrastructure failures.
+
+#### Automatic Failover & Leader Election
+
+If a Kafka broker fails, Zookeeper automatically elects a new leader, ensuring data availability and seamless failover.
+
+#### Log Retention & Durability
+
+Kafka persists event logs based on configurable retention policies, preventing data loss and ensuring replayability.
+
+### Security, Compliance, and Observability
+
+#### Data Encryption
+
+Condense ensures end-to-end encryption for Kafka data in transit (TLS) and at rest (AES-256).
+
+#### Role-Based Access Control (RBAC)
+
+Fine-grained permission management ensures that only authorized applications and users can interact with Kafka topics.
+
+#### Audit Logging & Monitoring
+
+Built-in observability tools provide real-time monitoring of Kafka performance, including throughput, latency, and partition distribution.
+
+#### Enterprise Compliance
+
+Kafka operates within customer-controlled BYOC environments, ensuring GDPR, HIPAA, and SOC 2 compliance.
+
+[PreviousAdditional Services](/condense/v2.4.0/getting-started/condense-architecture/additional-services)[NextKey Benefits of Condense](/condense/v2.4.0/getting-started/key-benefits-of-condense)

@@ -1,0 +1,283 @@
+---
+title: "Build your First Pipeline"
+description: "For the complete documentation index, see . This page is also available as ."
+---
+
+Copy
+
+On this page
+
+1. [Overview](/condense/v2.4.0)
+
+A **Pipeline** in Condense is the visual and functional representation of data flow between deployed connectors, transforms, and utilities inside a workspace. It is automatically materialized when a connector or transform is deployed. No manual creation needed.
+
+**Before you begin**, make sure you have:
+
+* A workspace created and configured
+
+* At least one environment linked to the workspace
+
+* Workspace Admin or Maintainer role
+
+## What You'll Build
+
+Copy
+
+```
+[ Input Connector ]  →  [ Kafka Topic ]  →  [ Transform ]  →  [ Output Connector ]
+   (Data Source)            (Stream)          (Process)          (Destination)
+```
+
+By the end of this guide, you will have a live pipeline ingesting data from a source, processing it through a transform, and delivering it to a destination, all inside your Condense workspace.
+
+***
+
+## Step 1 - Deploy an Input Connector
+
+An **Input Connector** receives data from an external system and injects it into your pipeline.
+
+1. Navigate to your **Workspace** → click **Connectors** in the left sidebar
+
+2. Click **+ Add Connector**
+
+3. Select **Input** as the connector role
+
+4. Choose your connector type (e.g. Kafka, HTTP, Teltonika, Pub/Sub)
+
+5. Fill in the required configuration fields:
+
+   * **Title** - a unique name for this connector
+
+   * **Output Topic** - the Kafka topic this connector will publish data to
+
+   * **Environment Variables** - credentials, endpoints, or protocol settings
+
+6. Click **Deploy**
+
+   Once deployed, your Input Connector will appear as a block on the Pipeline canvas and begin publishing data to the configured output topic.
+
+***
+
+## Step 2 - Add a Transform
+
+A **Transform** processes messages as they flow between your Input and Output connectors.
+
+#### Option A - Prebuilt Transform
+
+1. On the **Pipeline canvas**, click **+ Add Transform**
+
+2. Select **Prebuilt**
+
+3. Choose a transform type:
+
+   * **Geofence** - location-based event triggering
+
+   * **Alert Utility** - trigger alerts when a condition is met
+
+   * **Split Utility** - route messages based on rules
+
+4. Configure the required parameters:
+
+   * **Input Topic** - must match the Output Topic from your Input Connector
+
+   * **Output Topic** - the topic the transform will publish results to
+
+5. Click **Deploy**
+
+#### Option B - Custom Transform
+
+1. Go to **Applications** → create or select an existing application
+
+2. Build, test, and publish the application
+
+3. Back on the Pipeline canvas, click **+ Add Transform** → **Custom**
+
+4. Select your published application and version
+
+5. Configure input/output topics and environment variables
+
+6. Click **Deploy**
+
+***
+
+## Step 3 - Deploy an Output Connector
+
+An **Output Connector** takes the processed data and delivers it to an external destination.
+
+1. Navigate to **Connectors** → click **+ Add Connector**
+
+2. Select **Output** as the connector role
+
+3. Choose your connector type (e.g. PostgreSQL, Big Query, S3, Kafka)
+
+4. Fill in the required configuration fields:
+
+   * **Title** - a unique name for this connector
+
+   * **Input Topic** - must match the Output Topic from your Transform
+
+   * **Environment Variables** - destination credentials and settings
+
+5. Click **Deploy**
+
+   Condense automatically draws a connecting line between blocks that share matching topics. Your pipeline is now live.
+
+***
+
+## Step 4 - View Your Pipeline
+
+Click **Pipeline** in the left sidebar. You will see all deployed blocks connected by lines:
+
+<Frame caption="Pipeline Canvas Showing Connected Blocks">
+  <img src="/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FvbacpakLuL4x2VBp2174%252Fuploads%252FFXdRmLlbVOIi01MBO9Z9%252Fimage.png" />
+</Frame>
+
+Clicking any block opens its **Component Detail Panel** showing the connector name, category, type, status, and Kafka topic information:
+
+<Frame caption="Node Details Panel">
+  <img src="/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FvbacpakLuL4x2VBp2174%252Fuploads%252Fr9UecWjLEuGH0UP4zqLv%252Fimage.png" />
+</Frame>
+
+Pipelines are automatically materialized. They appear automatically as soon as connectors and transforms are deployed. You do not manually create a pipeline.
+
+***
+
+## Step 5 - Monitor Your Pipeline
+
+#### Real-Time Metrics
+
+Each block displays live CPU and memory utilization:
+
+<Frame caption="Real-Time Resource Utilization Metrics">
+  <img src="/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FvbacpakLuL4x2VBp2174%252Fuploads%252FQp8wuZOvEnHSpZhwjr2w%252Fimage.png" />
+</Frame>
+
+Colour-coded status indicators let you instantly identify Running, Stopped, or Error states:
+
+<Frame caption="Colour-Coded Pipeline Status Indicators">
+  <img src="/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FvbacpakLuL4x2VBp2174%252Fuploads%252FtzQPdQe4Ewy6WuOOc20U%252Fimage.png" />
+</Frame>
+
+#### Logs and Debugging
+
+Access detailed real-time logs for each block with customizable streaming intervals (5 seconds by default):
+
+<Frame caption="Logs and Debugging Panel">
+  <img src="/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FvbacpakLuL4x2VBp2174%252Fuploads%252FqftlDVlvswS9JJguZ5Hs%252Fimage.png" />
+</Frame>
+
+### Editing Your Pipeline
+
+If you need to fix a misconfiguration after deployment, use **Edit Configurations**:
+
+<Frame caption="Edit Configurations Panel">
+  <img src="/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FvbacpakLuL4x2VBp2174%252Fuploads%252FqvpSspmI0uQswtrcO8hz%252Fimage.png" />
+</Frame>
+
+1. Click the block you want to edit on the Pipeline canvas
+
+2. Click **Edit Configuration**
+
+3. Update the required fields
+
+4. Click **Save Changes**
+
+   Fields with a **lock icon** cannot be edited after deployment. To change locked fields, delete and redeploy the component.
+
+### Roles and Permissions
+
+Operation
+
+Admin
+
+Maintainer
+
+Developer
+
+Viewer
+
+Deploy pre-built connectors
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fr2zbjtbFoQojuTTPJ3Rg%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fr2zbjtbFoQojuTTPJ3Rg%252Fimage.png)
+
+Deploy custom connectors/transforms
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fr2zbjtbFoQojuTTPJ3Rg%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fr2zbjtbFoQojuTTPJ3Rg%252Fimage.png)
+
+Configure deployed components
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fr2zbjtbFoQojuTTPJ3Rg%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fr2zbjtbFoQojuTTPJ3Rg%252Fimage.png)
+
+Delete deployed components
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fr2zbjtbFoQojuTTPJ3Rg%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fr2zbjtbFoQojuTTPJ3Rg%252Fimage.png)
+
+View pipelines and connections
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+View component logs/configuration
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fvzb7BqqdPegDEdjO8T5c%252Fimage.png)
+
+***
+
+## Best Practices
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fbltm6MWTveArZyk3rEbZ%252Fimage.png) Use **clear topic naming** to make the pipeline canvas self-explanatory
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fbltm6MWTveArZyk3rEbZ%252Fimage.png) **Group related connectors and transforms** logically to simplify understanding
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fbltm6MWTveArZyk3rEbZ%252Fimage.png) **Avoid unused topic links** to reduce visual clutter
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fbltm6MWTveArZyk3rEbZ%252Fimage.png) **Regularly check component logs** to catch issues early
+
+![](/images/condense/v2.4.0/overview/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fbltm6MWTveArZyk3rEbZ%252Fimage.png) Document the pipeline purpose in the workspace description
+
+***
+
+## Common Pitfalls
+
+* **Misaligned Topic Names** - Double-check that Output Topic of one block exactly matches the Input Topic of the next block
+
+* **Unused Components Left Running** - Remove or disable unused connectors to prevent unnecessary resource usage
+
+* **Overcrowded Canvas** - Use multiple workspaces when a single pipeline becomes too dense
+
+[PreviousOverview](/condense/v2.4.0)[NextFully Managed Kafka](/condense/v2.4.0/overview/fully-managed-kafka)

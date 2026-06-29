@@ -1,0 +1,47 @@
+---
+title: "Build a custom transform service using code editor"
+description: "For the complete documentation index, see . This page is also available as ."
+---
+
+Copy
+
+On this page
+
+1. [Fundamentals](/condense/fundamentals)
+2. [Getting Set Up](/condense/fundamentals/getting-set-up)
+
+Pre-requisite - To initiate the build process for your custom transform service, a Docker file in your active branch is mandatory.
+
+The Dockerfile must include, at minimum:
+
+1. From: Command to pull Base image for the Docker container.
+
+2. Working Directory - Set the working directory inside the container and this directory will be used for running commands and copying files
+
+3. Copy Command - Copies the files from the host machine (the directory where the Docker file is located) to the directory in the container.
+
+4. Run Command - This command is used to install the necessary package or plugin
+
+5. Expose Command - Informs Docker that where should the container listen to.
+
+6. CMD Command - Specifies the default command to run when the container starts.
+
+![](/images/condense/fundamentals/getting-set-up/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FvbacpakLuL4x2VBp2174%252Fuploads%252FLupVE7p1EM54BKi7qoYS%252FStep%25205A.png)
+
+To build a custom transform service using code editor, please follow below steps:
+
+#### Step 1 - All repo from your Github account is now available in code editor. Choose the repo on which you want to build the custom transform
+
+![](/images/condense/fundamentals/getting-set-up/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FvbacpakLuL4x2VBp2174%252Fuploads%252Fo3Sv7dW5cy1KVbYRihWL%252FStep%25205B.png)
+
+#### Step 2 - Choose the branch where you want to develop your custom transform build. Selecting a repository and branch makes the relevant files and folders accessible in your code editor. The pulled content reflects the specific state of the chosen branch.
+
+![](/images/condense/fundamentals/getting-set-up/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FvbacpakLuL4x2VBp2174%252Fuploads%252FiZPevOZ5zdqMETiPOoeX%252FStep%25205C.png)
+
+#### Step 3 - Use your code editor to write the code for your transform service if required, adhering to the specific requirements and functionalities outlined for your custom transform.
+
+#### Step 4 - Once you are satisfied with the functionality, you have the option to commit any changes made using the "Commit Changes" option and commit them to the active branch. Alternatively, you can build directly if no changes need to be committed.
+
+#### Step 5 - Click on “Build” option and provide Image name and Tag value to initiate the build
+
+![](/images/condense/fundamentals/getting-set-up/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FvbacpakLuL4x2VBp2174%252Fuploads%252Fr8fsDdN95O24MP41p3IN%252FStep%25205D.png)

@@ -1,0 +1,232 @@
+---
+title: "What is Condense?"
+description: "For the complete documentation index, see . This page is also available as ."
+---
+
+Copy
+
+On this page
+
+1. [GETTING STARTED](/condense/v2.4.0/getting-started)
+
+![](/images/condense/v2.4.0/getting-started/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252FbOMMvKHRfu03EaogC84U%252FWhatCondVec1.png)
+
+At Zeliot, we are redefining the future of real-time data streaming with a passion for helping enterprises unlock the full potential of their data. We envision a world where data flows seamlessly, insights are delivered instantly, and innovation unfolds at the speed of thought.
+
+To bring this vision to life, we created Condense, a groundbreaking all-in-one data streaming platform that transforms how real-time applications are developed and managed. By combining intelligence, scalability, and ease of use with an industry-specific verticalized ecosystem, Condense delivers unmatched efficiency and innovation.
+
+Condense comes with built-in fully managed Kafka and deploys seamlessly on customer cloud environments through a fully managed BYOC (Bring Your Own Cloud) model. This ensures complete data sovereignty while eliminating the complexities of infrastructure management, freeing streaming applications from traditional limitations. Additionally, the Custom Transformation Framework allows users to write complex logic in their preferred programming language directly within the Condense platform and deploy it on streaming data, accelerating the development of real-time applications and allows enterprises to tailor solutions precisely to their needs.
+
+### Let's understand what Condense is solving
+
+**Challenges**
+
+The exponential growth of data in today’s digital-first world demands faster and more efficient insights. Real-time data streams from telemetry systems, APIs, and brokers present businesses with a critical "window of opportunity" to act on data as it is generated. However, traditional and modern streaming approaches fail to fully capitalize on this opportunity.
+
+#### Traditional Approach to Streaming Data, and where it falls short
+
+![](/images/condense/v2.4.0/getting-started/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252FtMy8Q5SPHHh4pZpjtNcH%252FWhatCondVec2.png)
+
+The diagram above illustrates the traditional pipeline for streaming data and the challenges associated with it. Let’s break it down step-by-step.
+
+### How Traditional Streaming Applications Work
+
+**Data Sources**
+
+Streaming data originates from various sources such as telemetry data, brokers, APIs, and messaging systems.
+
+**Pipeline Stages**
+
+1. Ingest: Data from different sources is captured.
+
+2. Filter: Irrelevant data is discarded, leaving only useful information.
+
+3. Enrich: Additional metadata is added to make the data more contextually valuable.
+
+4. Transform: Data is formatted or converted to make it compatible with downstream systems.
+
+5. Load: The processed data is stored in data warehouses or analytical databases.
+
+**Analytics and Reporting**
+
+After loading, the data is available for analysis through dashboards, reports, or business intelligence tools.
+
+### The "Window of Opportunity"
+
+**Real-Time Response**
+
+Businesses have a narrow window to act on data in real time, such as fraud detection, personalized recommendations, or anomaly detection.
+
+**Delayed Response**
+
+The traditional pipeline introduces significant delays in processing, often causing businesses to miss this critical window.
+
+**Retrospective Response**
+
+In most cases, insights are only available after the data is stored and processed, leading to actions based on outdated information.
+
+### Problems with Traditional Streaming Approaches
+
+**Loss of Real-Time Insights**
+
+The architecture of traditional systems prioritizes batch processing over real-time insights, often rendering decisions reactive rather than proactive.
+
+**High Costs**
+
+Developing and maintaining these pipelines requires significant investment in infrastructure, skilled personnel, and time.
+
+**Limited Scalability**
+
+As data grows in volume and velocity, traditional systems struggle to scale efficiently without further increasing operational complexity.
+
+**Inefficiency in Analytics**
+
+The reliance on batch data means that analytics are disconnected from live data, leading to insights that fail to capture the current state of operations.
+
+### Why This is a Problem
+
+Traditional approaches were designed in an era when batch processing was sufficient for business needs. However, the modern business environment demands agility and immediacy:
+
+* **Customer Experience**: Personalization and responsiveness are critical for customer satisfaction.
+
+* **Operational Efficiency**: Downtime or delays in decision-making can lead to revenue loss.
+
+* **Competitive Advantage**: Businesses that leverage real-time data gain a significant edge over those relying on retrospective analysis.
+
+### Transition to Modern Streaming Solutions
+
+As businesses began to realize the limitations of traditional data pipelines, modern streaming platforms emerged to address the need for real-time data processing. These platforms leverage advanced tools and frameworks to enable immediate data ingestion, transformation, and action.
+
+The modern approach significantly reduces the delay between data generation and actionable insights, aligning better with the "window of opportunity" for real-time response. However, this evolution has brought its own set of challenges, which prevent organizations from fully leveraging the potential of streaming data.
+
+#### Modern Data Streaming Platforms, New Solutions & New Challenges
+
+![](/images/condense/v2.4.0/getting-started/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252F2irIXmvFhSZcK1jcFra3%252FWhatCondVec3.png)
+
+### How Modern Streaming Platforms Operate
+
+**Custom Ingestion Connectors**
+
+Platforms often require tailored connectors to handle diverse data sources such as telemetry data, brokers, and APIs.
+
+**Custom Transformation Scripts**
+
+Data transformation in real-time is typically achieved through custom scripts designed for specific use cases.
+
+**Managed Streaming Platforms**
+
+These include both open-source frameworks and proprietary managed solutions designed to handle high-throughput streaming data pipelines.
+
+**Integration with Applications**
+
+Processed data is passed to online applications for immediate use or stored in analytical databases for later reporting and dashboard visualization.
+
+### The New Challenges
+
+While modern solutions improve on certain inefficiencies of traditional systems, they introduce their own problems:
+
+#### High Development Costs
+
+1. Developing custom connectors and transformation scripts is resource-intensive.
+
+2. Skilled engineers with deep expertise in streaming frameworks are required, leading to higher labour costs.
+
+#### Increased Time-to-Market
+
+1. Creating, testing, and deploying bespoke solutions delays the time it takes to realize value from data.
+
+2. Businesses often face bottlenecks when adapting their pipelines to new use cases or scaling them for additional workloads.
+
+#### Maintenance Complexity
+
+1. Custom solutions demand ongoing maintenance, updates, and troubleshooting to keep pace with evolving requirements.
+
+2. The cost of maintaining connectors and scripts grows exponentially as the data ecosystem expands.
+
+#### Limited Interoperability
+
+1. Many modern platforms are designed for specific frameworks, leading to vendor lock-in.
+
+2. Integrating these platforms with other tools or migrating to alternative solutions is often cumbersome and expensive.
+
+#### Scalability and Operational Overhead
+
+1. Though modern platforms are inherently scalable, managing this scalability requires advanced operational expertise.
+
+2. Organizations often need dedicated teams to monitor and optimize these systems.
+
+### Why These Challenges Persist
+
+The core issue with modern streaming platforms lies in their focus on providing tools rather than complete solutions. While they offer the building blocks for real-time data processing, the burden of assembling, customizing, and maintaining these components falls entirely on the organizations using them.
+
+This has led to a fragmented ecosystem where businesses are forced to:
+
+* Continuously reinvent the wheel by building bespoke pipelines.
+
+* Invest heavily in operational overhead and engineering talent.
+
+* Make trade-offs between cost, speed, and functionality.
+
+The promise of real-time data processing is clear: instant insights, smarter applications, and a competitive edge. However, the challenges of modern platforms create a significant barrier to achieving these outcomes.
+
+Organizations find themselves stuck between the limitations of traditional pipelines and the overwhelming complexity of modern solutions. This is where Condense disrupts the status quo by offering a streamlined, all-in-one solution.
+
+In the next section, we’ll explore how Condense redefines the landscape by addressing these pain points with a revolutionary approach.
+
+### The Solution: A Verticalized all-in-one Data Streaming Platform
+
+To address the gaps left by both traditional and modern streaming approaches, Condense emerges as a verticalized streaming data platform. Unlike general-purpose solutions, Condense provides a fully managed, end-to-end ecosystem that simplifies the process of streaming data ingestion, transformation, and integration with downstream applications or analytical platforms. It is designed to unlock the full potential of real-time data within the critical "window of opportunity."
+
+### A Verticalized Data Streaming Platform
+
+![](/images/condense/v2.4.0/getting-started/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fk37HyWddGs4Ioda4snHB%252FWhatCondVec4.png)
+
+In a world driven by immediacy, businesses need a solution that delivers actionable insights without complexity or delays. Condense is not just another tool—it is a game-changer for organizations looking to leverage the power of real-time data while optimizing their operational efficiency.
+
+### What Sets Condense Apart
+
+Condense provides a unique combination of features and capabilities that go beyond traditional and modern streaming approaches. Its design focuses on simplifying complexity, accelerating time-to-value, and empowering teams to concentrate on their core business goals.
+
+This is made possible by a design philosophy that prioritizes seamless integration, operational ease, and flexibility. Condense goes beyond merely addressing streaming challenges—it redefines how businesses interact with their data. Here’s how:
+
+#### Deployment on Customer Cloud (BYOC)
+
+![](/images/condense/v2.4.0/getting-started/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252Fyxa6tWBosMZPS7dAJB2Z%252FWhatCondVec5.png)
+
+* With Bring Your Own Cloud (BYOC) deployment, Condense operates on the customer’s infrastructure, ensuring complete data sovereignty and compliance.
+
+* The fully managed nature of the platform eliminates infrastructure management headaches, letting teams focus on insights rather than operations.
+
+#### Custom IDE for Complex Code
+
+![](/images/condense/v2.4.0/getting-started/files%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FrwKRGO3QthZ6EMqqYblg%252Fuploads%252FPPsVJ9z340ze2OZHGe7Y%252FWhatCondVec6.png)
+
+* Condense features a robust, built-in Integrated Development Environment (IDE) for creating advanced transformations in the programming language of your choice.
+
+* This enables teams to handle complex workflows while maintaining flexibility and control.
+
+#### Reduced development costs for custom connectors and scripts
+
+* While custom connectors can still be built within Condense using its intuitive tools, the platform provides a vast library of pre-built industry-specific connectors. These ready-to-use connectors significantly fast-track solution delivery and reduce time-to-market.
+
+* Developers can leverage the flexibility of Condense to customize connectors for unique use cases without needing to build everything from scratch.
+
+#### Faster time-to-value
+
+By combining pre-built tools and customizable options for seamless integrations, Condense ensures Accelerated time to Market.
+
+#### Scalable architecture
+
+Condense is built with a highly scalable architecture that adapts effortlessly to evolving data requirements, whether handling the telemetry of a startup or managing enterprise-scale workloads for global organizations.
+
+#### Operational simplicity
+
+By eliminating the need to manage streaming infrastructure, Condense allows teams to focus solely on building applications to realize their use cases.
+
+With Condense, organizations can eliminate the inefficiencies of traditional pipelines and the complexities of modern platforms, empowering teams to focus on building impactful applications.
+
+In the next section, explore how [Features of Condense](https://docs.zeliot.in/condense/introduction-to-condense/features-of-condense) can drive value for businesses across industries.
+
+Visit the website link to learn more about Condense. Access the website here:
+
+[PreviousIntroduction to Condense](/condense/v2.4.0/getting-started/introduction-to-condense)[NextWhy Condense?](/condense/v2.4.0/getting-started/why-condense)

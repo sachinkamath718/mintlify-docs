@@ -1,0 +1,50 @@
+---
+title: "Security"
+description: "For the complete documentation index, see . This page is also available as ."
+---
+
+Copy
+
+On this page
+
+**First Time User? Free Credits on us!**
+
+Get up to $200 worth of Free credits when you sign up for the first time. Use this link to create a new account on Condense and claim your free credits!
+
+[https://www.zeliot.in/try-now](https://www.zeliot.in/try-now)
+
+Condense prioritizes data security and access control to ensure user trust and compliance with data privacy regulations. Here's a closer look at the security measures employed:
+
+### Data Residency
+
+Data sovereignty is a core principle of Condense. Data from various sources never leave the user's cloud environment, offering superior control and compliance. This feature is particularly valuable for large Enterprises handling sensitive data.
+
+### Read-Only Deployment
+
+Condense is deployed with minimal permissions. It primarily focuses on network administration and utilizes a private Kubernetes cluster. This safeguards workloads from unauthorized access, accidental deletion, or tampering.
+
+### Secure Communication
+
+Communication between Condense and the Zeliot Central Tower is secured using tokens generated with a unique client ID and secret. This ID and secret are provided to Condense during the initial deployment and remain unchanged throughout the Condense lifecycle.
+
+### API Authentication and Authorization
+
+Condense utilizes a robust authentication and authorization mechanism for API access. Users are authenticated using credentials stored securely in the Postgres database. Role-based access control (RBAC) restricts user actions based on their assigned permissions, ensuring only authorized users can access specific functionalities.
+
+### Data Encryption
+
+Data at rest and in transit is encrypted using industry-standard algorithms. This protects sensitive information even in the event of a security breach.
+
+### Regular Security Updates
+
+Condense adheres to a rigorous security update schedule. The system automatically receives security patches and updates for its components to address vulnerabilities and maintain a secure environment.
+
+### Vulnerability Scanning and Penetration Testing
+
+Condense undergoes regular vulnerability scanning and penetration testing to identify and address potential security weaknesses. This proactive approach minimizes the risk of exploitation by malicious actors.
+
+### Audit Logging
+
+Condense maintains comprehensive audit logs that record user activity, system events, and configuration changes. These logs provide a valuable audit trail for security analysis and compliance purposes.
+
+[PreviousKafka Administration](/condense/fully-managed-kafka/kafka-administration)[NextCondense Deployment](/condense/condense-deployment)

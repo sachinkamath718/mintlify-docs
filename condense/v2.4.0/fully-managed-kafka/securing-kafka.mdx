@@ -1,0 +1,50 @@
+---
+title: "Securing Kafka"
+description: "For the complete documentation index, see . This page is also available as ."
+---
+
+Copy
+
+On this page
+
+1. [Fully Managed Kafka](/condense/v2.4.0/fully-managed-kafka)
+
+## Encryption
+
+Kafka in Condense supports Transport Layer Security (TLS), a protocol for encrypted communication.
+
+Communication is always encrypted between Kafka components.
+
+## Authentication
+
+Kafka listeners use authentication to ensure a secure client connection to the Kafka cluster. Clients can also be configured for mutual authentication. Security credentials are created and managed by the Cluster and User Operator.
+
+### **Supported authentication mechanisms**
+
+* mTLS authentication (on listeners with TLS-enabled encryption)
+
+* SASL SCRAM-SHA-512
+
+* OAuth 2.0 token based authentication
+
+* Custom authentication (supported by Kafka)
+
+## Authorization
+
+Authorization controls the operations that are permitted on Kafka brokers by specific clients or users.
+
+### **Supported authorization mechanisms**
+
+* Simple authorization using ACL rules
+
+* OAuth 2.0 authorization (if you are using OAuth 2.0 token-based authentication)
+
+* Open Policy Agent (OPA) authorization
+
+* Custom authorization (supported by Kafka)
+
+## **Federal Information Processing Standards (FIPS)**
+
+Kafka in Condense can run on FIPS-enabled Kubernetes clusters to ensure data security and system interoperability if the native Kubernetes service of the cloud provider supports it.
+
+[PreviousSchema Registry](/condense/v2.4.0/fully-managed-kafka/schema-registry)[NextKafka Administration](/condense/v2.4.0/fully-managed-kafka/kafka-administration)
