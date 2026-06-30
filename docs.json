@@ -367,5 +367,15 @@
       "youtube": "https://www.youtube.com/@zeliot_official",
       "website": "https://www.zeliot.in/"
     }
+  },
+  "contextual": {
+    "options": [
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "grok",
+      "aistudio"
+    ],
+    "display": "header"
   }
 }
