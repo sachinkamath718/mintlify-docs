@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "aspen",
+  "theme": "almond",
   "name": "Condense",
   "colors": {
     "primary": "#257df0",
@@ -13,7 +13,7 @@
         "version": "Legacy",
         "groups": [
           {
-            "group": "Introduction",
+            "group": "Overview",
             "pages": [
               "condense/legacy/introduction-to-condense",
               "condense/legacy/introduction-to-condense/what-is-condense",
@@ -22,7 +22,8 @@
               "condense/legacy/introduction-to-condense/key-benefits-of-condense",
               "condense/legacy/introduction-to-condense/condense-use-cases",
               "condense/legacy/introduction-to-condense/faqs"
-            ]
+            ],
+            "icon": "book-open"
           },
           {
             "group": "Architecture",
