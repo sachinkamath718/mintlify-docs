@@ -3,14 +3,14 @@
   "theme": "aspen",
   "name": "Condense",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#55D799",
-    "dark": "#0D9373"
+    "primary": "#257df0",
+    "light": "#246CC9",
+    "dark": "#1557AF"
   },
   "navigation": {
     "versions": [
       {
-        "version": "legacy",
+        "version": "Legacy",
         "groups": [
           {
             "group": "Introduction",
@@ -328,5 +328,43 @@
   },
   "seo": {
     "indexing": "all"
+  },
+  "logo": {
+    "light": "/images/CondenseLogoBlack.svg",
+    "dark": "/images/CondenseLogoWhite.svg"
+  },
+  "favicon": {
+    "light": "/images/CondenseIconBlack.svg",
+    "dark": "/images/CondenseIconWhite.svg"
+  },
+  "background": {
+    "color": {
+      "light": "#FFFFFF",
+      "dark": "#1C1D21"
+    }
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "appearance": {
+    "default": "light"
+  },
+  "navbar": {
+    "links": [
+      {
+        "href": "https://www.zeliot.in/",
+        "label": "Visit Website"
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/realzeliot",
+      "medium": "https://medium.com/condense-streams-by-zeliot",
+      "x": "https://x.com/realzeliot",
+      "instagram": "https://www.instagram.com/zeliotofficial",
+      "youtube": "https://www.youtube.com/@zeliot_official",
+      "website": "https://www.zeliot.in/"
+    }
   }
 }
