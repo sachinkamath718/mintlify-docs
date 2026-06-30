@@ -3,18 +3,13 @@ title: "Detailed Component Breakdown"
 description: "For the complete documentation index, see . This page is also available as ."
 ---
 
-Copy
+F**irst Time User? Free Credits on us!**
 
-On this page
+<Info>
+  Get up to \$200 worth of Free credits when you sign up for the first time. Use this link to create a new account on Condense and claim your free credits!
 
-1. [Introduction to Condense](/condense/introduction-to-condense)
-2. [Condense Architecture](/condense/introduction-to-condense/condense-architecture)
-
-**First Time User? Free Credits on us!**
-
-Get up to $200 worth of Free credits when you sign up for the first time. Use this link to create a new account on Condense and claim your free credits!
-
-[https://www.zeliot.in/try-now](https://www.zeliot.in/try-now)
+  [https://www.zeliot.in/try-no](https://www.zeliot.in/try-now)w
+</Info>
 
 Within the user's cloud environment, Condense provisions various resources to facilitate data ingestion:
 
@@ -22,17 +17,15 @@ Within the user's cloud environment, Condense provisions various resources to fa
 
 Condense establishes a dedicated VPC with segmented subnets for enhanced security and resource management.
 
-* Kubernetes Cluster Subnet: Hosts the Kubernetes cluster for running Condense services in a private and secure manner.
+- Kubernetes Cluster Subnet: Hosts the Kubernetes cluster for running Condense services in a private and secure manner.
+- Virtual Machine Subnet: Houses the virtual machine acting as the Condense management server.
+- Bastion Host Subnet: Provides a secure jump point for accessing the virtual machine for maintenance purposes.
+- Database Subnet: Isolates the Postgres database used by Condense for configuration and pipeline data storage.
+- Container Registry Subnet: Secures the container registry containing images specific to the deployed Condense instance.
 
-* Virtual Machine Subnet: Houses the virtual machine acting as the Condense management server.
-
-* Bastion Host Subnet: Provides a secure jump point for accessing the virtual machine for maintenance purposes.
-
-* Database Subnet: Isolates the Postgres database used by Condense for configuration and pipeline data storage.
-
-* Container Registry Subnet: Secures the container registry containing images specific to the deployed Condense instance.
-
-Also, read our article on Revitalizing the Ideality of Virtual Private Clouds on our website here: [https://www.zeliot.in/blog/revitalizing-enterprises-the-ideality-of-virtual-private-clouds](https://www.zeliot.in/blog/revitalizing-enterprises-the-ideality-of-virtual-private-clouds)
+<Info>
+  Also, read our article on Revitalizing the Ideality of Virtual Private Clouds on our website here: [https://www.zeliot.in/blog/revitalizing-enterprises-the-ideality-of-virtual-private-clouds](https://www.zeliot.in/blog/revitalizing-enterprises-the-ideality-of-virtual-private-clouds)
+</Info>
 
 ### Kubernetes Cluster
 
@@ -46,11 +39,9 @@ Condense leverages a container registry to store Docker container images require
 
 Condense provisions a virtual machine serving as the management server. This VM executes scripts for deployment, configuration
 
-* Manages Condense deployments and interacts with the Kubernetes cluster.
-
-* Performs release checks and health monitoring.
-
-* Provides a secure access point for authorized personnel (through Bastion host).
+- Manages Condense deployments and interacts with the Kubernetes cluster.
+- Performs release checks and health monitoring.
+- Provides a secure access point for authorized personnel (through Bastion host).
 
 ### Bastion Host
 
@@ -60,13 +51,10 @@ Condense utilizes a Bastion host as a secure gateway for accessing the managemen
 
 Condense leverages a Postgres database to store critical information, including:
 
-* User credentials for accessing the configuration dashboard.
-
-* Master data such as connector and transform configurations, device information, and pipeline details.
-
-* System configuration data for Condense services.
-
-* A limited amount of Redis data is synchronized periodically for disaster recovery purposes.
+- User credentials for accessing the configuration dashboard.
+- Master data such as connector and transform configurations, device information, and pipeline details.
+- System configuration data for Condense services.
+- A limited amount of Redis data is synchronized periodically for disaster recovery purposes.
 
 #### Load Balancer & Public Static IPs
 
@@ -74,6 +62,17 @@ Condense utilizes a load balancer with public static IP addresses. This establis
 
 > We regularly write articles and developer blogs for the community. Feel free to visit our blogs section on the website. If you want to get notified everytime we publish a new article, please subscribe to our newsletters. You can find an option to subscribe on the footer.
 >
-> [https://www.zeliot.in/blog](https://www.zeliot.in/blog)
+> [https://www.zeliot.in/blo](https://www.zeliot.in/blog)g
 
-[PreviousCondense Architecture](/condense/introduction-to-condense/condense-architecture)[NextAdditional Services](/condense/introduction-to-condense/condense-architecture/additional-services)
+<Columns cols={2}>
+  <Column>
+    **Previous**
+
+    [Condense Architecture](/condense/legacy/introduction-to-condense/condense-architecture)
+  </Column>
+  <Column>
+    **Next**
+
+    [Additional Services](/condense/legacy/introduction-to-condense/condense-architecture/additional-services)
+  </Column>
+</Columns>

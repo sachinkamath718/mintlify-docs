@@ -11,22 +11,23 @@
     "versions": [
       {
         "version": "Legacy",
-        "groups": [
+        "pages": [
           {
             "group": "Overview",
+            "icon": "book-open",
             "pages": [
-              "condense/legacy/introduction-to-condense",
-              "condense/legacy/introduction-to-condense/what-is-condense",
-              "condense/legacy/introduction-to-condense/features-of-condense",
-              "condense/legacy/introduction-to-condense/why-condense",
-              "condense/legacy/introduction-to-condense/key-benefits-of-condense",
-              "condense/legacy/introduction-to-condense/condense-use-cases",
-              "condense/legacy/introduction-to-condense/faqs"
-            ],
-            "icon": "book-open"
+              "untitled-page"
+            ]
           },
           {
-            "group": "Architecture",
+            "group": "Introduction to condense",
+            "pages": [
+              "condense/legacy/introduction-to-condense",
+              "condense/legacy/introduction-to-condense/features-of-condense"
+            ]
+          },
+          {
+            "group": "Condense Architecture",
             "pages": [
               "condense/legacy/introduction-to-condense/condense-architecture",
               "condense/legacy/introduction-to-condense/condense-architecture/detailed-component-breakdown",
@@ -34,19 +35,10 @@
               "condense/legacy/introduction-to-condense/condense-architecture/components-and-services-within-the-kubernetes-cluster"
             ]
           },
-          {
-            "group": "Deployment",
-            "pages": [
-              "condense/legacy/condense-deployment",
-              "condense/legacy/condense-deployment/bring-your-own-cloud-byoc",
-              "condense/legacy/condense-deployment/bring-your-own-cloud-byoc/deployment-from-aws-marketplace",
-              "condense/legacy/condense-deployment/bring-your-own-cloud-byoc/deployment-from-gcp-marketplace",
-              "condense/legacy/condense-deployment/bring-your-own-cloud-byoc/deployment-from-azure-marketplace",
-              "condense/legacy/condense-deployment/zeliots-cloud",
-              "condense/legacy/condense-deployment/upgrade",
-              "condense/legacy/condense-deployment/upgrade/condense-upgradation-faq"
-            ]
-          },
+          "condense/legacy/introduction-to-condense/key-benefits-of-condense",
+          "condense/legacy/introduction-to-condense/why-condense",
+          "condense/legacy/introduction-to-condense/condense-use-cases",
+          "condense/legacy/introduction-to-condense/faqs",
           {
             "group": "Fully Managed Kafka",
             "pages": [
@@ -59,47 +51,70 @@
             ]
           },
           {
-            "group": "Condense App",
-            "pages": [
-              "condense/legacy/condense-app-getting-started",
-              "condense/legacy/condense-app-getting-started/sso-single-sign-on-creating-an-account-logging-into-the-condense-app",
-              "condense/legacy/condense-app-getting-started/glossary",
-              "condense/legacy/condense-app-getting-started/features-of-condense-app",
-              "condense/legacy/condense-app-getting-started/video-guide",
-              "condense/legacy/condense-app-getting-started/workspaces",
-              "condense/legacy/condense-app-getting-started/connectors",
-              "condense/legacy/condense-app-getting-started/transforms",
-              "condense/legacy/condense-app-getting-started/applications",
-              "condense/legacy/condense-app-getting-started/pipelines",
-              "condense/legacy/condense-app-getting-started/settings",
-              "condense/legacy/condense-app-getting-started/role-based-access-control-rbac",
-              "condense/legacy/condense-app-getting-started/activity-auditor",
-              "condense/legacy/condense-app-getting-started/kafka-topics",
-              "condense/legacy/condense-app-getting-started/schema-registry",
-              "condense/legacy/condense-app-getting-started/split-utility",
-              "condense/legacy/condense-app-getting-started/alert-utility",
-              "condense/legacy/condense-app-getting-started/ksqldb",
-              "condense/legacy/condense-app-getting-started/campaigns",
-              "condense/legacy/condense-app-getting-started/private-version-control",
-              "condense/legacy/condense-app-getting-started/resource-utilization",
-              "condense/legacy/condense-app-getting-started/workspace-trust-in-openvscode-server",
-              "condense/legacy/condense-app-getting-started/condense-support"
-            ]
-          },
-          {
-            "group": "Connectors",
-            "pages": [
-              "condense/legacy/connectors-in-condense",
-              "condense/legacy/connectors-in-condense/available-connectors",
-              "condense/legacy/connectors-in-condense/custom-connectors",
-              "condense/legacy/connectors-in-condense/upcoming-connectors"
-            ]
-          },
-          {
             "group": "Security",
             "pages": [
               "condense/legacy/security",
               "condense/legacy/linking-environment"
+            ]
+          },
+          {
+            "group": "Condense deployment",
+            "pages": [
+              "condense/legacy/condense-deployment",
+              {
+                "group": "Bring Your Own Cloud(BYOC)",
+                "pages": [
+                  "condense/legacy/condense-deployment/bring-your-own-cloud-byoc",
+                  "condense/legacy/condense-deployment/bring-your-own-cloud-byoc/deployment-from-aws-marketplace",
+                  "condense/legacy/condense-deployment/bring-your-own-cloud-byoc/deployment-from-gcp-marketplace",
+                  "condense/legacy/condense-deployment/bring-your-own-cloud-byoc/deployment-from-azure-marketplace"
+                ]
+              },
+              "condense/legacy/condense-deployment/upgrade",
+              "condense/legacy/condense-deployment/zeliots-cloud",
+              "condense/legacy/condense-deployment/upgrade/condense-upgradation-faq"
+            ]
+          },
+          {
+            "group": "Condense App",
+            "pages": [
+              {
+                "group": "Condense App- Getting Started",
+                "pages": [
+                  "condense/legacy/condense-app-getting-started",
+                  "condense/legacy/condense-app-getting-started/glossary",
+                  "condense/legacy/condense-app-getting-started/features-of-condense-app",
+                  "condense/legacy/condense-app-getting-started/sso-single-sign-on-creating-an-account-logging-into-the-condense-app",
+                  "condense/legacy/condense-app-getting-started/workspaces",
+                  "condense/legacy/condense-app-getting-started/connectors",
+                  "condense/legacy/condense-app-getting-started/transforms",
+                  "condense/legacy/condense-app-getting-started/applications",
+                  "condense/legacy/condense-app-getting-started/pipelines",
+                  "condense/legacy/condense-app-getting-started/settings",
+                  "condense/legacy/condense-app-getting-started/condense-support",
+                  "condense/legacy/condense-app-getting-started/role-based-access-control-rbac",
+                  "condense/legacy/condense-app-getting-started/activity-auditor",
+                  "condense/legacy/condense-app-getting-started/split-utility",
+                  "condense/legacy/condense-app-getting-started/alert-utility",
+                  "condense/legacy/condense-app-getting-started/ksqldb",
+                  "condense/legacy/condense-app-getting-started/campaigns",
+                  "condense/legacy/condense-app-getting-started/workspace-trust-in-openvscode-server",
+                  "condense/legacy/condense-app-getting-started/private-version-control",
+                  "condense/legacy/condense-app-getting-started/resource-utilization",
+                  "condense/legacy/condense-app-getting-started/kafka-topics",
+                  "condense/legacy/condense-app-getting-started/schema-registry"
+                ]
+              },
+              "condense/legacy/condense-app-getting-started/video-guide"
+            ]
+          },
+          {
+            "group": "Connectors in Condense",
+            "pages": [
+              "condense/legacy/connectors-in-condense",
+              "condense/legacy/connectors-in-condense/available-connectors",
+              "condense/legacy/connectors-in-condense/upcoming-connectors",
+              "condense/legacy/connectors-in-condense/custom-connectors"
             ]
           },
           {
@@ -127,9 +142,9 @@
             "pages": [
               "condense/legacy/legal/end-user-license-agreement-eula",
               "condense/legacy/legal/privacy-policy",
+              "condense/legacy/legal/usage-of-cookies",
               "condense/legacy/legal/terms-and-conditions",
               "condense/legacy/legal/terms-of-use",
-              "condense/legacy/legal/usage-of-cookies",
               "condense/legacy/legal/support-terms"
             ]
           },

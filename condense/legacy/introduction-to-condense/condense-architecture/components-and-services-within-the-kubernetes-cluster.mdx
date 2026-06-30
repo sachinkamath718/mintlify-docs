@@ -1,20 +1,15 @@
 ---
 title: "Components and Services within the Kubernetes Cluster"
-description: "For the complete documentation index, see . This page is also available as ."
+description: "For the complete documentation index, see . This page is also avai"
 ---
 
-Copy
+<Info>
+  **First Time User? Free Credits on us!**
 
-On this page
+  Get up to \$200 worth of Free credits when you sign up for the first time. Use this link to create a new account on Condense and claim your free credits!
 
-1. [Introduction to Condense](/condense/introduction-to-condense)
-2. [Condense Architecture](/condense/introduction-to-condense/condense-architecture)
-
-**First Time User? Free Credits on us!**
-
-Get up to $200 worth of Free credits when you sign up for the first time. Use this link to create a new account on Condense and claim your free credits!
-
-[https://www.zeliot.in/try-now](https://www.zeliot.in/try-now)
+  [https://www.zeliot.in/try-now](https://www.zeliot.in/try-now)
+</Info>
 
 The heart of Condense lies within the Kubernetes cluster, where various services collaborate to process data:
 
@@ -22,25 +17,19 @@ The heart of Condense lies within the Kubernetes cluster, where various services
 
 This versatile web server acts as the network traffic controller for Condense.
 
-* Manages API access for user interaction with Condense.
-
-* Handles Communication Protocols like TCP/IP and MQTT(s).
-
-* Configures ingress resources and port mappings for API access and device data ingestion.
-
-* Facilitates TLS termination for secure communication.
+- Manages API access for user interaction with Condense.
+- Handles Communication Protocols like TCP/IP and MQTT(s).
+- Configures ingress resources and port mappings for API access and device data ingestion.
+- Facilitates TLS termination for secure communication.
 
 ### Redis
 
 Condense leverages a Redis cluster for data caching and performance optimization.
 
-* Stores metering data for various dimensions used in consumption-based billing.
-
-* Manages authentication tokens used by Condense services for API interactions.
-
-* Acts as a checkpointing mechanism for user-configured pipelines, storing sequence information, metadata, and real-time data like throughput and status.
-
-* Stores asset ping information displayed on the Condense dashboard.
+- Stores metering data for various dimensions used in consumption-based billing.
+- Manages authentication tokens used by Condense services for API interactions.
+- Acts as a checkpointing mechanism for user-configured pipelines, storing sequence information, metadata, and real-time data like throughput and status.
+- Stores asset ping information displayed on the Condense dashboard.
 
 > Also read our article on Redis - Harnessing the Power of In-Memory Data Storage here: [https://www.zeliot.in/blog/redis-harnessing-the-power-of-in-memory-data-storage](https://www.zeliot.in/blog/redis-harnessing-the-power-of-in-memory-data-storage)
 
@@ -48,13 +37,10 @@ Condense leverages a Redis cluster for data caching and performance optimization
 
 Condense employs Kafka as a message queue, serving as the backbone for data communication between services after transformations.
 
-* Kafka brokers and Zookeeper run within the cluster, ensuring fault tolerance and data integrity.
-
-* Operates as a one-way queue, facilitating data progression through various transformation stages.
-
-* Event-driven auto scalers automatically adjust consumer group offsets to maintain optimal performance and prevent lag.
-
-* Kafka version upgrades are managed by Condense with user consent for seamless adoption of new features and security patches.
+- Kafka brokers and Zookeeper run within the cluster, ensuring fault tolerance and data integrity.
+- Operates as a one-way queue, facilitating data progression through various transformation stages.
+- Event-driven auto scalers automatically adjust consumer group offsets to maintain optimal performance and prevent lag.
+- Kafka version upgrades are managed by Condense with user consent for seamless adoption of new features and security patches.
 
 ## Condense inherently deploys with a Fully - Managed Kafka
 

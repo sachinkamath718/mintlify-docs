@@ -1,73 +1,56 @@
 ---
 title: "Additional Services"
-description: "For the complete documentation index, see . This page is also available as ."
+description: " the complete documentation index, see . This page is also available as "
 ---
 
-Copy
+<Info>
+  **First Time User? Free Credits on us!**
 
-On this page
+  Get up to \$200 worth of Free credits when you sign up for the first time. Use this link to create a new account on Condense and claim your free credits!
 
-1. [Introduction to Condense](/condense/introduction-to-condense)
-2. [Condense Architecture](/condense/introduction-to-condense/condense-architecture)
-
-**First Time User? Free Credits on us!**
-
-Get up to $200 worth of Free credits when you sign up for the first time. Use this link to create a new account on Condense and claim your free credits!
-
-[https://www.zeliot.in/try-now](https://www.zeliot.in/try-now)
+  [https://www.zeliot.in/try-now](https://www.zeliot.in/try-now)
+</Info>
 
 ### MinIO
 
 Condense utilizes MinIO, an object storage solution similar to S3, for file-based operations. This includes:
 
-* Handling bulk data upload operations.
-
-* Managing configuration files required by Condense modules.
+- Handling bulk data upload operations.
+- Managing configuration files required by Condense modules.
 
 ### Metering Service
 
 Condense calculates and stores data ingestion charges based on user-configured dimensions. This service:
 
-* Tracks data volume ingested from mobility devices.
-
-* Applies user-defined billing dimensions to calculate costs.
-
-* Reports metering data to the Zeliot Central Tower daily, facilitating transparent billing.
+- Tracks data volume ingested from mobility devices.
+- Applies user-defined billing dimensions to calculate costs.
+- Reports metering data to the Zeliot Central Tower daily, facilitating transparent billing.
 
 ### Output Connector Services
 
 Condense empowers users to define the destination for processed data. This can be:
 
-* A message queue for further processing in other systems.
-
-* A database for long-term storage and analysis.
-
-* Condense provides client libraries for various output connectors, allowing seamless data transfer based on user preferences.
+- A message queue for further processing in other systems.
+- A database for long-term storage and analysis.
+- Condense provides client libraries for various output connectors, allowing seamless data transfer based on user preferences.
 
 ### Configuration Dashboards
 
 Condense offers a user-friendly web interface for managing configurations. Users can:
 
-* Register and configure one or more Data sources for data ingestion.
-
-* Select and configure data transformation modules (e.g., parsing, filtering).
-
-* Define output connectors for processed data.
-
-* Monitor data ingestion progress and view key metrics like data volume and throughput.
+- Register and configure one or more Data sources for data ingestion.
+- Select and configure data transformation modules (e.g., parsing, filtering).
+- Define output connectors for processed data.
+- Monitor data ingestion progress and view key metrics like data volume and throughput.
 
 ### Release Management & Health Probes
 
 Condense employs a dedicated service for managing deployments and monitoring system health. This service:
 
-* Deploys and manages Condense services based on user configurations and device types.
-
-* Manages service upgrades as new releases become available.
-
-* Runs health probes to monitor the performance and stability of Condense services.
-
-* Reports service health metrics to the Zeliot Central Tower for centralized monitoring and anomaly detection.
-
-* In case of anomalies, trigger alerts with relevant details to notify stakeholders for prompt action.
+- Deploys and manages Condense services based on user configurations and device types.
+- Manages service upgrades as new releases become available.
+- Runs health probes to monitor the performance and stability of Condense services.
+- Reports service health metrics to the Zeliot Central Tower for centralized monitoring and anomaly detection.
+- In case of anomalies, trigger alerts with relevant details to notify stakeholders for prompt action.
 
 [PreviousDetailed Component Breakdown](/condense/introduction-to-condense/condense-architecture/detailed-component-breakdown)[NextComponents and Services within the Kubernetes Cluster](/condense/introduction-to-condense/condense-architecture/components-and-services-within-the-kubernetes-cluster)
