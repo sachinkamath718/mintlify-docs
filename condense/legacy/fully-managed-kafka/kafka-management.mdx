@@ -173,3 +173,18 @@ The following tools are used for metrics and monitoring which is shipped with th
 **Grafana**
 
 [Grafana Labs](https://grafana.com/) provides dashboard visualizations of Prometheus metrics.
+
+- Multi-Zone Redundancy Kafka components are distributed across three zones, preventing single points of failure and ensuring continuous availability.
+- Node Affinity & Pod Anti-Affinity
+  - Node Affinity ensures components are deployed on specific nodes that are running in different regions.
+  - Pod Anti-Affinity prevents multiple critical Kafka instances from running on the same node, improving redundancy.
+
+- Primary Region (Region A): A local producer writes data to the source Kafka cluster.
+- Cross-Region Replication: Kafka MirrorMaker 2 replicates data to a secondary Kafka cluster in Region B.
+- Backup Region (Region B): The target Kafka cluster serves as a hot backup, ensuring data availability in case of failure in Region A.
+- Use Case: Ensures a disaster recovery mechanism with a standby cluster that can take over operations if the primary region fails.
+
+- Multi-Region Active Clusters: Clusters in Region A and Region B actively handle data ingestion, processing, and replication.
+- Real-Time Cross-Replication:
+  - Kafka MirrorMaker 2 ensures continuous synchronization between both regions.
+  - If one cluster fails, the other automatically continues operations, preventing downtime.
