@@ -161,6 +161,13 @@
               "condense/legacy/future-roadmap-and-development/whats-planned",
               "condense/legacy/future-roadmap-and-development/whats-coming"
             ]
+          },
+          {
+            "group": "Marketing Assets",
+            "pages": [
+              "wallpapers",
+              "social-media"
+            ]
           }
         ]
       },
