@@ -1,11 +1,6 @@
 ---
 title: "Glossary"
-description: "For the complete documentation index, see . This page is also available as ."
 ---
-
-Copy
-
-On this page
 
 1. [Condense App - Getting Started](/condense/v2.4.0/condense-app-getting-started)
 
@@ -17,13 +12,10 @@ The Single Sign-On (SSO) feature in Condense allows users to authenticate seamle
 
 ### Key Benefits of SSO in Condense:
 
-* **Simplified Access**: Users can log in using their work email associated with Google (GSuite) or Microsoft (M365).
-
-* **Enhanced Security**: Reduces password fatigue and minimizes the risk of credential leaks.
-
-* **Seamless User Experience**: Enables a frictionless sign-in process, reducing authentication time.
-
-* **Centralized Identity Management**: Organizations can maintain better control over user access and authentication policies.
+- **Simplified Access**: Users can log in using their work email associated with Google (GSuite) or Microsoft (M365).
+- **Enhanced Security**: Reduces password fatigue and minimizes the risk of credential leaks.
+- **Seamless User Experience**: Enables a frictionless sign-in process, reducing authentication time.
+- **Centralized Identity Management**: Organizations can maintain better control over user access and authentication policies.
 
 The SSO feature ensures that Condense aligns with modern security best practices while offering a user-friendly login experience.
 
@@ -31,83 +23,60 @@ Learn more on how SSO is implemented in Condense, including sign-up and sign-in 
 
 ## User Roles and Permissions (RBAC - Role-Based Access Control)
 
-* Admin Role: Full control over the organization, including workspace management, user roles, and resource access.
-
-* Maintainer Role: Manages deployments, connectors, and applications in assigned workspaces.
-
-* Developer Role: Focuses on creating, editing, and managing applications in their assigned workspaces.
-
-* Viewer Role: Provides read-only access to pipelines, connectors, and other workspace resources.
-
-* RBAC (Role-Based Access Control): Framework for assigning roles and permissions to users, ensuring secure and efficient access management.
-
-* User Invitation: Process of inviting new users and assigning roles upon acceptance.
-
-* Role Management: Admin functionality to update or reassign roles for existing users.
-
-* Default Workspace Creation: Automatically generated workspace for new admins or restricted access for new users.
+- Admin Role: Full control over the organization, including workspace management, user roles, and resource access.
+- Maintainer Role: Manages deployments, connectors, and applications in assigned workspaces.
+- Developer Role: Focuses on creating, editing, and managing applications in their assigned workspaces.
+- Viewer Role: Provides read-only access to pipelines, connectors, and other workspace resources.
+- RBAC (Role-Based Access Control): Framework for assigning roles and permissions to users, ensuring secure and efficient access management.
+- User Invitation: Process of inviting new users and assigning roles upon acceptance.
+- Role Management: Admin functionality to update or reassign roles for existing users.
+- Default Workspace Creation: Automatically generated workspace for new admins or restricted access for new users.
 
 Learn more on how RBAC is implemented in Condense, by reading the detailed guide here: [RBAC (Role Based Access Control)](/condense/v2.4.0/condense-guide/condense-console/roles-and-permissions)
 
 ## Workspaces and Pipelines
 
-* Workspace: Isolated environment for building, testing, and deploying data pipelines, with customizable names and descriptions.
-
-* Pipeline: A series of processes for ingesting, transforming, and routing data between sources and destinations.
-
-* Activity Auditor: Centralized tool to track, monitor, and audit actions within workspaces, pipelines, and user accounts.
+- Workspace: Isolated environment for building, testing, and deploying data pipelines, with customizable names and descriptions.
+- Pipeline: A series of processes for ingesting, transforming, and routing data between sources and destinations.
+- Activity Auditor: Centralized tool to track, monitor, and audit actions within workspaces, pipelines, and user accounts.
 
 Learn more on how Workspaces and Pipelines are implemented in Condense, by reading the detailed guide here: [Workspace in Conden](/condense/v2.4.0/condense-guide/condense-core/create-your-workspace)
 
 ## Applications and Transforms
 
-* Application: Development environment for designing, testing, and publishing custom logic or transformations.
-
-* Custom Transform: Finalized and published version of an application, ready for deployment in pipelines.
-
-* Application Lifecycle: Includes drafting, editing, publishing, and versioning of applications.
-
-* IDE Integration: Built-in code editor within Condense for writing, debugging, and managing application logic.
+- Application: Development environment for designing, testing, and publishing custom logic or transformations.
+- Custom Transform: Finalized and published version of an application, ready for deployment in pipelines.
+- Application Lifecycle: Includes drafting, editing, publishing, and versioning of applications.
+- IDE Integration: Built-in code editor within Condense for writing, debugging, and managing application logic.
 
 Learn more about how Applications and Transforms are implemented in Condense, by reading the detailed guide here: [Build your own Transforms in Condense](/condense/v2.4.0/deep-dive/applications)
 
 ## Connectors
 
-* Connector: A component for integrating data sources or destinations, classified into pre-built, stream, and store connectors.
-
-* Pre-Built Connectors: Ready-to-use connectors are categorized as vehicle telematics, stream, or store connectors.
-
-* Stream Connector: Facilitates real-time data flow, supporting Kafka, MQTT, Pub/Sub, and HTTPS protocols.
-
-* Store Connector: Integrates pipelines with storage systems such as MySQL, MongoDB, Cassandra, and Bigtable.
-
-* MQTT Connector: A lightweight connector for IoT applications using a publish-subscribe model.
-
-* Bigtable Connector: Store connector designed for real-time analytics in Google Cloud Bigtable.
-
-* Vehicle Telematics Connector: Handles data from telematics devices such as GPS and engine diagnostics systems.
+- Connector: A component for integrating data sources or destinations, classified into pre-built, stream, and store connectors.
+- Pre-Built Connectors: Ready-to-use connectors are categorized as vehicle telematics, stream, or store connectors.
+- Stream Connector: Facilitates real-time data flow, supporting Kafka, MQTT, Pub/Sub, and HTTPS protocols.
+- Store Connector: Integrates pipelines with storage systems such as MySQL, MongoDB, Cassandra, and Bigtable.
+- MQTT Connector: A lightweight connector for IoT applications using a publish-subscribe model.
+- Bigtable Connector: Store connector designed for real-time analytics in Google Cloud Bigtable.
+- Vehicle Telematics Connector: Handles data from telematics devices such as GPS and engine diagnostics systems.
 
 Learn more on how to find and use various connectors that are available in Condense, by reading the detailed guide here: [Connectors in Condense](/condense/v2.4.0/condense-guide/condense-core/deploy-an-input-connector)
 
 ## Monitoring and Configuration
 
-* Grafana Monitoring: Tool for visualizing metrics, monitoring pipeline performance, and tracking system health.
-
-* Edge Computing: Localized data processing using Condense Edge firmware to optimize cloud workloads.
+- Grafana Monitoring: Tool for visualizing metrics, monitoring pipeline performance, and tracking system health.
+- Edge Computing: Localized data processing using Condense Edge firmware to optimize cloud workloads.
 
 ## Settings and Account Management
 
 Settings is a centralized hub for managing accounts, workspace, and organization configurations. Here is a list of things that are available to view or edit in settings:
 
-* **Personal Details**: Update user information like username, password, and phone number.
-
-* **Organization Details**: Manage organizational information, including name and unique ID.
-
-* **Workspace Details**: View and manage workspaces, including creation dates and descriptions.
-
-* **Users and Roles**: Invite users, assign roles, and manage permissions.
-
-* **Account Actions**: Includes signing out and deleting accounts.
+- **Personal Details**: Update user information like username, password, and phone number.
+- **Organization Details**: Manage organizational information, including name and unique ID.
+- **Workspace Details**: View and manage workspaces, including creation dates and descriptions.
+- **Users and Roles**: Invite users, assign roles, and manage permissions.
+- **Account Actions**: Includes signing out and deleting accounts.
 
 Learn more on how to access and modify settings in the Condense App, by reading the detailed guide here: [Available Settings in Condense](/condense/v2.4.0/other-features/settings)
 
@@ -123,7 +92,7 @@ Data is automatically filtered and dispatched to designated output topics using 
 
 #### Zero-Code Rule Configuration
 
-Users can define routing policies through an intuitive interface using rule-based conditions on JSON fields (e.g., temperature > 50).
+Users can define routing policies through an intuitive interface using rule-based conditions on JSON fields (e.g., temperature \> 50).
 
 #### Non-Disruptive Edits
 
@@ -151,7 +120,7 @@ Allows setting an "alert duration"—a configurable time window to ensure condit
 
 #### Rule-Based, Grouped Monitoring
 
-Supports field-level rules (>, \<, =, matches, between) and groups them using logical operators. Alerts can be scoped per entity (e.g., device ID), enabling granular monitoring.
+Supports field-level rules (\>, \<, =, matches, between) and groups them using logical operators. Alerts can be scoped per entity (e.g., device ID), enabling granular monitoring.
 
 #### No-Code Deployment
 
