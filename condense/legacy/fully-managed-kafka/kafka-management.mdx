@@ -1,13 +1,7 @@
 ---
 title: "Kafka Management"
-description: "For the complete documentation index, see . This page is also available as ."
+description: "For the complete documentation index, see . This page is also available "
 ---
-
-Copy
-
-On this page
-
-1. [Fully Managed Kafka](/condense/fully-managed-kafka)
 
 ## Kafka Component Architecture
 
@@ -21,11 +15,10 @@ Other Kafka components interact with the Kafka cluster for specific tasks.
 
 ### **Kafka Connect**
 
-Kafka Connect is an integration toolkit for streaming data between Kafka brokers and other systems using *connector* plugins. Kafka Connect provides a framework for integrating Kafka with an external data source or target, such as a database, for import or export of data using connectors. Connectors provide the connection configuration needed.
+Kafka Connect is an integration toolkit for streaming data between Kafka brokers and other systems using _connector_ plugins. Kafka Connect provides a framework for integrating Kafka with an external data source or target, such as a database, for import or export of data using connectors. Connectors provide the connection configuration needed.
 
-* A *source* connector pushes external data into Kafka.
-
-* A *sink* connector extracts data out of Kafka
+- A _source_ connector pushes external data into Kafka.
+- A _sink_ connector extracts data out of Kafka
 
 External data is translated and transformed into the appropriate format.
 
@@ -53,13 +46,10 @@ Kafka listeners use authentication to ensure a secure client connection to the K
 
 ### **Supported authentication mechanisms**
 
-* mTLS authentication (on listeners with TLS-enabled encryption)
-
-* SASL SCRAM-SHA-512
-
-* OAuth 2.0 token-based authentication
-
-* Custom authentication (supported by Kafka)
+- mTLS authentication (on listeners with TLS-enabled encryption)
+- SASL SCRAM-SHA-512
+- OAuth 2.0 token-based authentication
+- Custom authentication (supported by Kafka)
 
 ### Authorization
 
@@ -67,13 +57,10 @@ Authorization controls the operations that are permitted on Kafka brokers by spe
 
 #### **Supported authorization mechanisms**
 
-* Simple authorization using ACL rules
-
-* OAuth 2.0 authorization (if you are using OAuth 2.0 token-based authentication)
-
-* Open Policy Agent (OPA) authorization
-
-* Custom authorization (supported by Kafka)
+- Simple authorization using ACL rules
+- OAuth 2.0 authorization (if you are using OAuth 2.0 token-based authentication)
+- Open Policy Agent (OPA) authorization
+- Custom authorization (supported by Kafka)
 
 ### **Federal Information Processing Standards (FIPS)**
 
@@ -109,39 +96,29 @@ This architecture demonstrates how Condense achieves a highly available, scalabl
 
 #### **Key Components**
 
-* A dedicated node pool is distributed across three availability zones (Zone A, B, C) in Region A to enhance fault tolerance.
-
-* Each node contains:
-
-  * Kafka Operator – Manages Kafka lifecycle and configurations.
-
-  * Kafka Broker – Handles message storage and distribution, backed by Persistent Volume Claims (PVCs) for data durability.
-
-  * Controller – Manages cluster metadata and leadership election, also using PVCs for persistence.
+- A dedicated node pool is distributed across three availability zones (Zone A, B, C) in Region A to enhance fault tolerance.
+- Each node contains:
+  - Kafka Operator – Manages Kafka lifecycle and configurations.
+  - Kafka Broker – Handles message storage and distribution, backed by Persistent Volume Claims (PVCs) for data durability.
+  - Controller – Manages cluster metadata and leadership election, also using PVCs for persistence.
 
 #### **High Availability & Fault Tolerance**
 
-* Multi-Zone Redundancy
-
+- Multi-Zone Redundancy
   Kafka components are distributed across three zones, preventing single points of failure and ensuring continuous availability.
-
-* Node Affinity & Pod Anti-Affinity
-
-  * Node Affinity ensures components are deployed on specific nodes that are running in different regions.
-
-  * Pod Anti-Affinity prevents multiple critical Kafka instances from running on the same node, improving redundancy.
+- Node Affinity & Pod Anti-Affinity
+  - Node Affinity ensures components are deployed on specific nodes that are running in different regions.
+  - Pod Anti-Affinity prevents multiple critical Kafka instances from running on the same node, improving redundancy.
 
 #### **Networking & Load Balancing**
 
-* Internal Access (VNet Peering): Allows internal clients to communicate with Kafka through an internal load balancer, maintaining security and low latency. This makes it easier to connect existing services to Kafka internally.
-
-* External Access (Internet Load Balancer): Distributes traffic efficiently to external clients, ensuring reliable connectivity.
+- Internal Access (VNet Peering): Allows internal clients to communicate with Kafka through an internal load balancer, maintaining security and low latency. This makes it easier to connect existing services to Kafka internally.
+- External Access (Internet Load Balancer): Distributes traffic efficiently to external clients, ensuring reliable connectivity.
 
 #### **Scalability & Self-Healing**
 
-* Dynamic Scaling: Kubernetes automatically scales Kafka brokers based on workload demands.
-
-* Self-Healing Mechanisms: Kubernetes reschedules failed pods and maintains cluster stability without manual intervention.
+- Dynamic Scaling: Kubernetes automatically scales Kafka brokers based on workload demands.
+- Self-Healing Mechanisms: Kubernetes reschedules failed pods and maintains cluster stability without manual intervention.
 
 ### **Multi-Region Deployment for Disaster Recovery**
 
@@ -157,31 +134,21 @@ Building on the high availability architecture defined earlier, this approach ex
 
 #### **Unidirectional Replication (Primary-Backup Model)**
 
-* Primary Region (Region A):
-
+- Primary Region (Region A):
   A local producer writes data to the source Kafka cluster.
-
-* Cross-Region Replication:
-
+- Cross-Region Replication:
   Kafka MirrorMaker 2 replicates data to a secondary Kafka cluster in Region B.
-
-* Backup Region (Region B):
-
+- Backup Region (Region B):
   The target Kafka cluster serves as a hot backup, ensuring data availability in case of failure in Region A.
-
-* Use Case: Ensures a disaster recovery mechanism with a standby cluster that can take over operations if the primary region fails.
+- Use Case: Ensures a disaster recovery mechanism with a standby cluster that can take over operations if the primary region fails.
 
 #### **Bidirectional Replication (Active-Active Model)**
 
-* Multi-Region Active Clusters:
-
+- Multi-Region Active Clusters:
   Clusters in Region A and Region B actively handle data ingestion, processing, and replication.
-
-* Real-Time Cross-Replication:
-
-  * Kafka MirrorMaker 2 ensures continuous synchronization between both regions.
-
-  * If one cluster fails, the other automatically continues operations, preventing downtime.
+- Real-Time Cross-Replication:
+  - Kafka MirrorMaker 2 ensures continuous synchronization between both regions.
+  - If one cluster fails, the other automatically continues operations, preventing downtime.
 
 **Use Case:**
 
@@ -206,5 +173,3 @@ The following tools are used for metrics and monitoring which is shipped with th
 **Grafana**
 
 [Grafana Labs](https://grafana.com/) provides dashboard visualizations of Prometheus metrics.
-
-[PreviousFully Managed Kafka](/condense/fully-managed-kafka)[NextKafka Connect](/condense/fully-managed-kafka/kafka-connect)

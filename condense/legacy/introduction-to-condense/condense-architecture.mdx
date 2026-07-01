@@ -29,26 +29,6 @@ Condense leverages a robust and secure architecture to facilitate efficient data
 
 Condense employs a three-tier architecture, ensuring clear separation of concerns and promoting efficient communication between components:
 
-![Cover](/images/gitbook/CondArchVec2.png)
-
-### **Cloud Provider**
-
-The cloud marketplace (e.g., Azure, AWS and GCP) serves as the platform for deploying Condense. Users access Condense through the provider's interface.
-
-![Cover](/images/gitbook/CondArchVec3.png)
-
-### Zeliot Central Tower
-
-This central hub manages deployments, user authentication, release updates, and monitors the overall health of Condense instances.
-
-<Frame>
-  <img
-    src="/images/gitbook/CondArchVec4.png"
-    alt="Cover"
-    className="mr-auto"
-  />
-</Frame>
-
 <Columns cols={2}>
   <Column>
     <Frame>
@@ -58,13 +38,32 @@ This central hub manages deployments, user authentication, release updates, and 
         title="Cloud Provider"
       />
     </Frame>
+
+    ## Cloud Provider
+
+    The cloud marketplace (e.g., Azure, AWS and GCP) serves as the platform for deploying Condense. Users access Condense through the provider's interface.
+  </Column>
+  <Column>
+    <Frame>
+      ![Image](/images/image.avif)
+    </Frame>
+
+    ## Zeliot Central Tower
+
+    This central hub manages deployments, user authentication, release updates, and monitors the overall health of Condense instances.
+  </Column>
+</Columns>
+
+<Columns cols={2}>
+  <Column>
+    <Frame>
+      ![Condense App Img 2](/images/condense-app-img-2.avif)
+    </Frame>
+
+    ## Condense Application
+
+    Deployed within the user's cloud environment, this application processes data from mobility devices, performs transformations, and sends it to designated outputs.
   </Column>
   <Column>
   </Column>
 </Columns>
-
-### Condense Application
-
-Deployed within the user's cloud environment, this application processes data from mobility devices, performs transformations, and sends it to designated outputs.
-
-[PreviousFeatures of Condense](/condense/introduction-to-condense/features-of-condense)[NextDetailed Component Breakdown](/condense/introduction-to-condense/condense-architecture/detailed-component-breakdown)

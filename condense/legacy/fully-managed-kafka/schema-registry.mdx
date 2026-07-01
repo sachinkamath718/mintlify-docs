@@ -3,12 +3,6 @@ title: "Schema Registry"
 description: "For the complete documentation index, see . This page is also available as ."
 ---
 
-Copy
-
-On this page
-
-1. [Fully Managed Kafka](/condense/fully-managed-kafka)
-
 With a managed Kafka instance, Condense ships a schema registry. It provides a RESTful interface for storing and retrieving your Avro®, JSON Schema, and Protobuf schemas.
 
 It stores a versioned history of all schemas based on a specified subject name strategy, provides multiple compatibility settings, and allows the evolution of schemas according to the configured compatibility settings and expanded support for these schema types.
@@ -19,9 +13,7 @@ Schema registry is hosted with the Condense deployment and the APIs are availabl
 
 ## Examples
 
-Copy
-
-```
+```text
 # Register a new version of a schema under the subject "Kafka-key"
 $ curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
     --data '{"schema": "{\"type\": \"string\"}"}' \
@@ -90,5 +82,3 @@ $ curl -X PUT -H "Content-Type: application/vnd.schemaregistry.v1+json" \
     http://<internal-lb-ip>:8081/config/Kafka-value
   {"compatibility":"BACKWARD"}
 ```
-
-[PreviousKafka Connect](/condense/fully-managed-kafka/kafka-connect)[NextSecuring Kafka](/condense/fully-managed-kafka/securing-kafka)
