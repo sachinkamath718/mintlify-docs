@@ -105,7 +105,7 @@ Opens the image name and tag dialog
   ![](/images/gitbook/image.png)
 </Frame>
 
-**Best practice:** Use Publish/Subscribe testers before building to catch schema or mapping issues early. {% endhint %}
+**Best practice:** Use Publish/Subscribe testers before building to catch schema or mapping issues early.
 
 ---
 
@@ -136,7 +136,7 @@ Opens the image name and tag dialog
 
 ### Step 4 - Publish the Application
 
-**Who can publish:** Admins, Maintainers
+> **Who can publish:** Admins, Maintainers
 
 1. Click **Publish Application**.
 2. Confirm **Publish as a custom**: select **Transform**.
@@ -149,13 +149,13 @@ Opens the image name and tag dialog
 
 Once published, the custom transform appears in the **Transforms → Custom** section of the pipeline editor and is ready to deploy.
 
-Published versions are **immutable**. To change logic, you must edit the code, rebuild, and publish a new version.
+> Published versions are **immutable**. To change logic, you must edit the code, rebuild, and publish a new version.
 
 ---
 
 ### Step 5 - Deploy to the Pipeline
 
-**Who can deploy:** Workspace Admins, Maintainers
+> **Who can deploy:** Workspace Admins, Maintainers
 
 1. Go to the **workspace pipeline editor**.
 
@@ -202,107 +202,17 @@ To **roll back**, simply select an older published version from the Version drop
 
 ### Roles and Permissions
 
-Search
-
-Operation
-
-Admin
-
-Maintainer
-
-Developer
-
-Viewer
-
-Create application
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Edit code / ENVs
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Build application
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Publish application
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Deploy transform to pipeline
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Edit deployed transform config
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Delete transform / application
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-View transform list / config
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Access transform logs
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
+| **Operation** | Admin | Maintainer | Developer | Viewer |
+| --- | --- | --- | --- | --- |
+| Create Application | **✓** | **✓** | **✓** | **✕** |
+| Edit code / ENVs | **✓** | **✓** | **✓** | **✕** |
+| Build application | **✓** | **✓** | **✓** | **✕** |
+| Publish application | **✓** | **✓** | **✕** | **✕** |
+| Deploy transform to pipeline | **✓** | **✓** | **✕** | **✕** |
+| Edit deployed transform config | **✓** | **✓** | **✓** | **✕** |
+| Delete transform / application | **✓** | **✓** | **✕** | **✕** |
+| View transform list / config | **✓** | **✓** | **✓** | **✓** |
+| Access transform logs | **✓** | **✓** | **✓** | **✓** |
 
 ---
 
@@ -318,7 +228,6 @@ In the pipeline view, click on a deployed transform block to open its detail pag
 - **Runtime logs** (stdout/stderr) via the Logger/observability stack
 
 <Frame caption="Monitoring Deployed Transform">
-  ![](/images/gitbook/image.png)
 </Frame>
 
 ---
@@ -337,41 +246,13 @@ In the pipeline view, click on a deployed transform block to open its detail pag
 
 ### Common Pitfalls
 
-Problem
-
-Cause
-
-How to Avoid
-
-Published transform not visible in pipeline
-
-Wrong publication type selected
-
-Always confirm **Transform** (not Input/Output Connector) before publishing
-
-Unreachable HTTP/TCP during testing
-
-Server not exposed or wrong port binding
-
-Enable the correct toggle and match the port ENV in code
-
-"No messages yet" in Subscribe
-
-Topic/partition/offset mismatch
-
-Use First/Last/Size presets and verify topic and partition
-
-Build failures due to missing dependencies
-
-Dependencies not in project config
-
-Add to dependency file (e.g. `requirements.txt`) and rebuild
-
-Runtime errors after deleting an application
-
-Active pipeline still references the application
-
-Update or remove dependent pipeline deployments first
+| **Problem** | Cause | How to Avoid |
+| --- | --- | --- |
+| Published transform not visible in pipeline | Wrong publication type selected | Always confirm **Transform** (not Input/Output Connector) before publishing |
+| Unreachable HTTP/TCP during testing | Server not exposed or wrong port binding | Enable the correct toggle and match the port ENV in code |
+| "No messages yet" in Subscribe | Topic/partition/offset mismatch | Use First/Last/Size presets and verify topic and partition |
+| Build failures due to missing dependencies | Dependencies not in project config | Add to dependency file (e.g. `requirements.txt`) and rebuild |
+| Runtime errors after deleting an application | Active pipeline still references the application | Update or remove dependent pipeline deployments first |
 
 ---
 
