@@ -76,7 +76,9 @@ Every workspace follows a clear lifecycle, from creation to configuration, ongoi
 
 ### Creating a Workspace
 
-**Who can create:** Only Organization Admins
+<Info>
+  **Who can create:** Only Organization Admins
+</Info>
 
 **Steps to create the workspace:**
 
@@ -124,13 +126,17 @@ Steps to edit the workspace:
 
 ### Deleting a Workspace
 
-Who can delete: Workspace Admins and Organization Admins
+<Info>
+  Who can delete: Workspace Admins and Organization Admins
+</Info>
 
-**Warning**
+<Warning>
+  **Warning**
 
-- Deletion is permanent. There is no backup, export, or recovery feature
-- All pipelines, connectors, transforms, and applications in the workspace are removed permanently
-- Confirm with your team before proceeding
+  - Deletion is permanent. There is no backup, export, or recovery feature
+  - All pipelines, connectors, transforms, and applications in the workspace are removed permanently
+  - Confirm with your team before proceeding
+</Warning>
 
 Steps to delete the workspace:
 
@@ -146,143 +152,26 @@ Steps to delete the workspace:
 
 Role bindings are assigned per workspace, so a user can have different permissions in different workspaces.
 
-Only existing organization members can be added to a workspace.
-
-Search
-
-Operation
-
-Admin
-
-Maintainer
-
-Developer
-
-Viewer
-
-Manage workspace members
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Create/edit/delete pipelines
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Deploy pre-
-
-built connectors
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Deploy custom connectors
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Deploy utilities
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Create/edit/delete applications
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-View pipelines/connectors
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-View connector logs/configs
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Access KSQL (if enabled)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Configure deployed connectors
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Delete deployed connectors
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Remove last Admin
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-### Role descriptions
+<Info>
+  Only existing organization members can be added to a workspace.
+</Info>
+
+| **Operation** | Admin | Maintainer | **Developer** | **Viewer** |
+| --- | --- | --- | --- | --- |
+| Manage workspace members | **✓** | **✓** | **✕** | **✕** |
+| Create/edit/delete pipelines | **✓** | **✓** | **✕** | **✕** |
+| Deploy prebuilt connectors | **✓** | **✓** | **✕** | **✕** |
+| Deploy custom connectors | **✓** | **✓** | **✕** | **✕** |
+| Deploy utilities | **✓** | **✓** | **✕** | **✕** |
+| Create/edit/delete applications | **✓** | **✓** | **✓** | **✕** |
+| View pipelines/connectors | **✓** | **✓** | **✓** | **✓** |
+| View connector logs/configs | **✓** | **✓** | **✓** | **✓** |
+| Access KSQL (if enabled) | **✓** | **✓** | **✓** | **✕** |
+| Configure deployed connectors | **✓** | **✓** | **✕** | **✕** |
+| Delete deployed connectors | **✓** | **✓** | **✕** | **✕** |
+| Remove last Admin | **✕** | **✕** | **✕** | **✕** |
+
+## Role descriptions
 
 - **Admin**: Full control over workspace resources, settings, and members
 - **Maintainer**: Can deploy and operate pipelines/connectors/transforms; manage members
@@ -299,7 +188,9 @@ Remove last Admin
 4. Assign a workspace role
 5. Click on Add
 
-Note: If a user does not appear in the list, they must first be added to the organization as a member by an Organization Admin.
+<Warning>
+  Note: If a user does not appear in the list, they must first be added to the organization as a member by an Organization Admin.
+</Warning>
 
 ### **Steps to associate members with the workspace**
 
@@ -313,7 +204,9 @@ Note: If a user does not appear in the list, they must first be added to the org
 
 #### Step 3: The Member will be added as a user of the workspace and moved to the assigned users list.
 
-By default, the user will be assigned a viewer role binding. Admin is required to bind the appropriate role to the added user.
+<Info>
+  By default, the user will be assigned a viewer role binding. Admin is required to bind the appropriate role to the added user.
+</Info>
 
 ![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FFfaRSvgMVPZuoVSDX9qH%2Fimage.png)
 
@@ -338,7 +231,9 @@ From Workspace Settings, you can:
 - Access activity logs
 - View resource usage and workspace parameters
 
-The Workspace settings page is where you get a list of existing workspaces in the organization
+<Info>
+  The Workspace settings page is where you get a list of existing workspaces in the organization
+</Info>
 
 ![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FV1zkAWv4UakQZfHyjA78%2Fimage.png)
 

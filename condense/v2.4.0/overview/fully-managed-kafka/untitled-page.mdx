@@ -80,3 +80,45 @@ Advanced settings allow fine-grained control of topic behavior. These fields map
 
 - [Resource Utilization](/condense/v2.4.0/other-features/resource-utilization)
 - [ksqlDB](/condense/v2.4.0/fully-managed-kafka/ksqldb)
+
+| Field | Description | Example |
+| --- | --- | --- |
+| Replication Factor | Number of replicas for each partition. Ensures data availability. | `3` |
+| No of Partitions | Number of partitions in the topic. Determines parallelism and throughput. | `6` |
+| Retention Period (days) | Duration for which messages are retained in the topic before deletion. | `7` |
+
+| Field | Description | Example |
+| --- | --- | --- |
+| Cleanup Policy | Determines log cleanup strategy. Options: `Delete` (default), `Compact`. | `Delete` |
+| Delete Retention Period (days) | How long delete markers are retained during log compaction. | `1` |
+| Max Compaction Lag (ms) | Maximum time a record can remain uncompacted. | `9223372036854775807` |
+| Max Message Size (bytes) | Maximum size of an individual message allowed. | `5242940` |
+| Message Timestamp After Max (ms) | Upper bound for timestamp range in messages. | `9223372036854775807` |
+| Message Timestamp Before Max (ms) | Lower bound for timestamp range in messages. | `9223372036854775807` |
+| Message Timestamp Type | Defines how message timestamps are set. Options: `CreateTime`, `LogAppendTime`. | `CreateTime` |
+| Min Compaction Lag (ms) | Minimum time a record must remain before compaction. | `0` |
+| Min In-Sync Replicas | Minimum number of replicas that must acknowledge a write for it to succeed. | `1` |
+| Retention Size (bytes) | Maximum total size of log segments retained before deletion. `-1` = unlimited. | `-1` |
+| Segment Size (bytes) | Size of each log segment file before rolling. | `1073741824` |
+| Segment Period (ms) | Time-based rolling interval for log segments. | `604800000` |
+
+| Field | Description | Example |
+| --- | --- | --- |
+| Replication Factor | Number of replicas for each partition. Ensures data availability. | `3` |
+| No of Partitions | Number of partitions in the topic. Determines parallelism and throughput. | `6` |
+| Retention Period (days) | Duration for which messages are retained in the topic before deletion. | `7` |
+
+| Field | Description | Example |
+| --- | --- | --- |
+| Cleanup Policy | Determines log cleanup strategy. Options: `Delete` (default), `Compact`. | `Delete` |
+| Delete Retention Period (days) | How long delete markers are retained during log compaction. | `1` |
+| Max Compaction Lag (ms) | Maximum time a record can remain uncompacted. | `9223372036854775807` |
+| Max Message Size (bytes) | Maximum size of an individual message allowed. | `5242940` |
+| Message Timestamp After Max (ms) | Upper bound for timestamp range in messages. | `9223372036854775807` |
+| Message Timestamp Before Max (ms) | Lower bound for timestamp range in messages. | `9223372036854775807` |
+| Message Timestamp Type | Defines how message timestamps are set. Options: `CreateTime`, `LogAppendTime`. | `CreateTime` |
+| Min Compaction Lag (ms) | Minimum time a record must remain before compaction. | `0` |
+| Min In-Sync Replicas | Minimum number of replicas that must acknowledge a write for it to succeed. | `1` |
+| Retention Size (bytes) | Maximum total size of log segments retained before deletion. `-1` = unlimited. | `-1` |
+| Segment Size (bytes) | Size of each log segment file before rolling. | `1073741824` |
+| Segment Period (ms) | Time-based rolling interval for log segments. | `604800000` |

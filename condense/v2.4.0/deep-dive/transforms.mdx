@@ -15,7 +15,9 @@ Transforms help:
 - Maintain consistency by executing processing in the same environment as ingestion and delivery.
 - Enable both no-code and code-based logic through prebuilt utilities or custom applications.
 
-> Transforms in Condense can be used in different ways depending on whether the need is rapid deployment of common logic, lightweight utilities, or fully customized business rules. Let’s look at the available options, starting with prebuilt transforms.
+<Info>
+  Transforms in Condense can be used in different ways depending on whether the need is rapid deployment of common logic, lightweight utilities, or fully customized business rules. Let’s look at the available options, starting with prebuilt transforms.
+</Info>
 
 ## What You Can Do with a Transform
 
@@ -45,7 +47,9 @@ Key Parameters
 - Group By: Field to segment conditions (e.g., device ID).
 - Rule Groups: AND/OR logical rules for evaluation.
 
-> **Usage Notes**: Use balanced duration settings to avoid false positives or excessive noise.
+<Info>
+  **Usage Notes**: Use balanced duration settings to avoid false positives or excessive noise.
+</Info>
 
 #### Logger
 
@@ -56,7 +60,9 @@ Key Parameters
 - Utility Name: Logical identifier.
 - Environment Variables: Logging target details.
 
-> **Usage Notes**: Apply consistent naming for easy search and filtering in external log systems.
+<Info>
+  **Usage Notes**: Apply consistent naming for easy search and filtering in external log systems.
+</Info>
 
 #### Split
 
@@ -67,9 +73,13 @@ Key Parameters
 - Rule Groups: Field, type, comparator, and value-based conditions.
 - Output Mapping: Definition of message structure per route.
 
-> **Usage Notes**: Multiple splits can be chained for multi-branch routing logic.
+<Info>
+  **Usage Notes**: Multiple splits can be chained for multi-branch routing logic.
+</Info>
 
-> Note: Additional utilities will be available in upcoming releases.
+<Warning>
+  Note: Additional utilities will be available in upcoming releases.
+</Warning>
 
 ## Custom Transforms
 
@@ -87,7 +97,9 @@ Every transform in Condense follows a defined lifecycle from creation and config
 
 #### Prebuilt Transform
 
-> **Who can deploy**: Workspace Admins, Maintainers, Developers (with RBAC restrictions on deployment)
+<Info>
+  **Who can deploy**: Workspace Admins, Maintainers, Developers (with RBAC restrictions on deployment)
+</Info>
 
 Steps :
 
@@ -117,11 +129,15 @@ Steps:
 4. Publish the application as a Custom Transform.
 5. Deploy it to the pipeline.
 
-> See [_Applications_](/condense/v2.4.0/deep-dive/applications) _in Condense_ for a step‑by‑step walkthrough of building, testing, publishing, versioning, and deploying a Custom Transform.
+<Info>
+  See [_Applications_](/condense/v2.4.0/deep-dive/applications) _in Condense_ for a step‑by‑step walkthrough of building, testing, publishing, versioning, and deploying a Custom Transform.
+</Info>
 
 ### **Editing a deployed Transform**
 
-> **Who can edit**: Workspace Admins, Maintainers, Developers (with deployment limits per RBAC)
+<Info>
+  **Who can edit**: Workspace Admins, Maintainers, Developers (with deployment limits per RBAC)
+</Info>
 
 **Editable**: Rules, mappings, parameters, and, for custom transforms, the associated application version.
 
@@ -137,10 +153,12 @@ Steps:
 
 ![](/images/condense/v2.4.0/deep-dive/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FQiRT3W0KVwU7PSY3EwyS%2Fimage.png)
 
-> **Note:**
->
-> - To edit the underlying logic of a custom transform, go to the **Applications** page in the workspace. Update the application code, test it, publish a new version, and then update the deployed transform to use the new version.
-> - Changes apply immediately when edits are saved.
+<Info>
+  **Note:**
+
+  - To edit the underlying logic of a custom transform, go to the **Applications** page in the workspace. Update the application code, test it, publish a new version, and then update the deployed transform to use the new version.
+  - Changes apply immediately when edits are saved.
+</Info>
 
 ### Deleting a custom Transform
 
@@ -148,11 +166,13 @@ Steps:
 
 Steps to delete the deployed
 
-> Warning!
->
-> - Deletion is permanent; removed transforms cannot be restored.
-> - All processing logic tied to the transform is removed from the pipeline and will no longer execute.
-> - Transform Roles and Permissions
+<Warning>
+  Warning!
+
+  - Deletion is permanent; removed transforms cannot be restored.
+  - All processing logic tied to the transform is removed from the pipeline and will no longer execute.
+  - Transform Roles and Permissions
+</Warning>
 
 ## Transform Roles and Permissions
 

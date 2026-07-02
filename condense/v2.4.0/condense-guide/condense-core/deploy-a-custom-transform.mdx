@@ -32,12 +32,14 @@ Every custom transform follows this lifecycle:
 
 ### Step 1 - Create an Application
 
-> **Who can create:** Workspace Admins, Maintainers, Developers
+<Info>
+  **Who can create:** Workspace Admins, Maintainers, Developers
+</Info>
 
 1. Go to **Applications** in your workspace → click **Create Application**.
 
 <Frame caption="Create Application screen">
-  ![](/images/gitbook/image.png)
+  ![Deployacustom1](/images/deployacustom1.png)
 </Frame>
 
 1. **Version Control**: Connect a Git provider (GitHub / GitLab / Bitbucket), then select your **Repository** and **Branch**.
@@ -52,46 +54,36 @@ Every custom transform follows this lifecycle:
 | About | Optional description shown in details and summaries | No |
 
 <Frame caption="Application Info Fields">
-  ![](/images/gitbook/image.png)
+  <img
+    src="/images/deployacustom2.png"
+    className="dark:hidden"
+  />
+  <img
+    src="/images/deployacustom2-1.png"
+    className="hidden dark:block"
+  />
 </Frame>
 
-1. Click **Develop Application** to open the IDE.
+3. Click **Develop Application** to open the IDE.
 
 ---
 
 ### Step 2 - Develop in the IDE
 
-**Who can edit drafts:** Admins, Maintainers, Developers
+<Info>
+  **Who can edit drafts:** Admins, Maintainers, Developers
+</Info>
 
 The IDE has the following structure:
 
-Element
-
-Description
-
-File Explorer (left)
-
-Navigate and manage your project files
-
-Code Editor (center)
-
-Write code with inline linting and error highlighting
-
-ENVs panel (side)
-
-Set runtime configuration — secrets are masked
-
-Publish tester
-
-Send a test message to a workspace topic
-
-Subscribe tester
-
-Fetch messages from a workspace topic to validate output
-
-Build Application
-
-Opens the image name and tag dialog
+| Element | Description |
+| --- | --- |
+| File Explorer (left) | Navigate and manage your project files |
+| Code Editor (center) | Write code with inline linting and error highlighting |
+| ENVs panel (side) | Set runtime configuration — secrets are masked |
+| Publish tester | Send a test message to a workspace topic |
+| Subscribe tester | Fetch messages from a workspace topic to validate output |
+| Build Application | Opens the image name and tag dialog |
 
 **In the IDE, you can:**
 
@@ -102,7 +94,14 @@ Opens the image name and tag dialog
 - Commit and push to the connected Git repository.
 
 <Frame caption="IDE screen">
-  ![](/images/gitbook/image.png)
+  <img
+    src="/images/deployacustom3.png"
+    className="dark:hidden"
+  />
+  <img
+    src="/images/deployacustom3-1.png"
+    className="hidden dark:block"
+  />
 </Frame>
 
 **Best practice:** Use Publish/Subscribe testers before building to catch schema or mapping issues early.
@@ -119,24 +118,42 @@ Opens the image name and tag dialog
 4. If the build fails, review the error output, fix code/ENVs/Dockerfile, and rebuild.
 
 <Frame caption="Build Application Dialog Box">
-  ![](/images/gitbook/image.png)
+  <img
+    src="/images/deployacustom4.png"
+    className="dark:hidden"
+  />
+  <img
+    src="/images/deployacustom4-1.png"
+    className="hidden dark:block"
+  />
 </Frame>
 
 <Frame caption="Build Logs Screen">
-  ![](/images/gitbook/image.png)
+  <img
+    src="/images/deployacustom5.png"
+    className="dark:hidden"
+  />
+  <img
+    src="/images/deployacustom5-1.png"
+    className="hidden dark:block"
+  />
 </Frame>
 
-**Build tips:**
+<Info>
+  **Build tips:**
 
-- Use a fully qualified image name for external registries.
-- Some registries enforce lowercase tags - prefer lowercase alphanumerics, dots, and dashes.
-- Pass secrets via ENVs; do not bake them into the image.
+  - Use a fully qualified image name for external registries.
+  - Some registries enforce lowercase tags - prefer lowercase alphanumerics, dots, and dashes.
+  - Pass secrets via ENVs; do not bake them into the image.
+</Info>
 
 ---
 
 ### Step 4 - Publish the Application
 
-> **Who can publish:** Admins, Maintainers
+<Info>
+  **Who can publish:** Admins, Maintainers
+</Info>
 
 1. Click **Publish Application**.
 2. Confirm **Publish as a custom**: select **Transform**.
@@ -144,18 +161,29 @@ Opens the image name and tag dialog
 4. Click **Publish**.
 
 <Frame caption="Publish Application Screen">
-  ![](/images/gitbook/image.png)
+  <img
+    src="/images/deployacustom6.png"
+    className="dark:hidden"
+  />
+  <img
+    src="/images/deployacustom6-1.png"
+    className="hidden dark:block"
+  />
 </Frame>
 
 Once published, the custom transform appears in the **Transforms → Custom** section of the pipeline editor and is ready to deploy.
 
-> Published versions are **immutable**. To change logic, you must edit the code, rebuild, and publish a new version.
+<Warning>
+  Published versions are **immutable**. To change logic, you must edit the code, rebuild, and publish a new version.
+</Warning>
 
 ---
 
 ### Step 5 - Deploy to the Pipeline
 
-> **Who can deploy:** Workspace Admins, Maintainers
+<Info>
+  **Who can deploy:** Workspace Admins, Maintainers
+</Info>
 
 1. Go to the **workspace pipeline editor**.
 
