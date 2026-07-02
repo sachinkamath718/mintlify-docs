@@ -15,7 +15,7 @@ They can operate in two roles:
 - **Input Connector**: Ingests data into Condense for processing
 - **Output Connector**: Delivers processed data from Condense to external systems
 
-To understand how connectors function in practice, let’s look at each role in detail.
+> To understand how connectors function in practice, let’s look at each role in detail.
 
 ## Connector Roles
 
@@ -51,15 +51,15 @@ Typical use cases:
 - Real-time ingestion from brokers, APIs, or event buses
 - Continuous event publishing to downstream consumers
 
-#### Currently Available Prebuilt Stream Connectors
-
-**Input**
-
-Apache Kafka, Google Cloud Pub/Sub, HTTP, HTTPS, Event Hub, IBM MQ, AWS Kinesis, Data Simulator
-
-**Output**
-
-Apache Kafka, Google Cloud Pub/Sub, HTTP, HTTPS, Event Hub, Amazon SQS, ElasticSearch
+> Currently Available Prebuilt Stream Connectors
+>
+> **Input**
+>
+> Apache Kafka, Google Cloud Pub/Sub, HTTP, HTTPS, Event Hub, IBM MQ, AWS Kinesis, Data Simulator
+>
+> **Output**
+>
+> Apache Kafka, Google Cloud Pub/Sub, HTTP, HTTPS, Event Hub, Amazon SQS, ElasticSearch
 
 ### 2. Store Connectors
 
@@ -71,11 +71,11 @@ Typical use cases:
 - Writing results to analytical data warehouses
 - Exporting transformed datasets to object storage
 
-#### Currently Available Prebuilt Store Connectors
-
-**Output**
-
-Azure Blob Storage, BigQuery, Couchbase, Google Storage, Microsoft SQL Server, MongoDB, MySQL, PostgreSQL, Amazon S3, SFTP, Snowflake
+> Currently Available Prebuilt Store Connectors
+>
+> **Output**
+>
+> Azure Blob Storage, BigQuery, Couchbase, Google Storage, Microsoft SQL Server, MongoDB, MySQL, PostgreSQL, Amazon S3, SFTP, Snowflake
 
 ### 3. Industry Specific Connectors
 
@@ -87,11 +87,11 @@ Typical use cases:
 - Industrial IoT
 - Healthcare device telemetry
 
-#### Currently available prebuilt industry-specific connectors
-
-**Input**
-
-Condense Edge, iTriangle, Jimi Concox, Teltonika, Volvo Trucks
+> Currently available prebuilt industry-specific connectors
+>
+> **Input**
+>
+> Condense Edge, iTriangle, Jimi Concox, Teltonika, Volvo Trucks
 
 ### 4. Custom Connectors
 
@@ -154,65 +154,13 @@ Only Admins or Maintainers can remove a deployed connector from a pipeline.
 
 Connector-related actions are restricted by workspace role.
 
-Operation
-
-Admin
-
-Maintainer
-
-Developer
-
-Viewer
-
-Deploy pre-built connectors
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Deploy custom connectors
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Edit deployed connector configs
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Remove deployed connectors
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-View connector configs/logs
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
+| **Operation** | Admin | Maintainer | Developer | Viewer |
+| --- | --- | --- | --- | --- |
+| Deploy pre-built connectors |  |  |  |  |
+| Deploy custom connectors |  |  |  |  |
+| Edit deployed connector configs |  |  |  |  |
+| Remove deployed connectors |  |  |  |  |
+| View connector configs/logs |  |  |  |  |
 
 ## Monitoring Connectors
 
