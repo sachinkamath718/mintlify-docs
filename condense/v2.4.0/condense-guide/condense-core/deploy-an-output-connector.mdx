@@ -1,6 +1,5 @@
 ---
 title: "Deploy an Output Connector"
-description: "For the complete documentation index, see . This page is also available as ."
 ---
 
 Copy
@@ -20,9 +19,8 @@ Every connector is deployed within a workspace and operates within the scope of 
 
 They can operate in two roles:
 
-* **Input Connector**: Ingests data into Condense for processing
-
-* **Output Connector**: Delivers processed data from Condense to external systems
+- **Input Connector**: Ingests data into Condense for processing
+- **Output Connector**: Delivers processed data from Condense to external systems
 
 To understand how connectors function in practice, let’s look at each role in detail.
 
@@ -34,23 +32,18 @@ Components that receive data from an external system and inject it into a Conden
 
 They are responsible for:
 
-* Establishing a session or subscription to the external source
-
-* Consuming incoming records/messages
-
-* Mapping them into a workspace’s processing schema
-
-* Delivering them to the pipeline’s first processing stage
+- Establishing a session or subscription to the external source
+- Consuming incoming records/messages
+- Mapping them into a workspace’s processing schema
+- Delivering them to the pipeline’s first processing stage
 
 ### Output Connectors
 
 Components that transmit processed pipeline data to an external target system. They are responsible for:
 
-* Accepting processed records/messages from the pipeline
-
-* Applying any required serialization, transformation, or batching
-
-* Sending them to the configured external system endpoint
+- Accepting processed records/messages from the pipeline
+- Applying any required serialization, transformation, or batching
+- Sending them to the configured external system endpoint
 
 ## Connector Categories
 
@@ -62,9 +55,8 @@ Designed for high-throughput, low-latency streaming integrations with event-driv
 
 Typical use cases:
 
-* Real-time ingestion from brokers, APIs, or event buses
-
-* Continuous event publishing to downstream consumers
+- Real-time ingestion from brokers, APIs, or event buses
+- Continuous event publishing to downstream consumers
 
 #### Currently Available Prebuilt Stream Connectors
 
@@ -82,11 +74,9 @@ Integrate with storage or database systems for persistence, analytics, and query
 
 Typical use cases:
 
-* Persisting processed events for long-term storage
-
-* Writing results to analytical data warehouses
-
-* Exporting transformed datasets to object storage
+- Persisting processed events for long-term storage
+- Writing results to analytical data warehouses
+- Exporting transformed datasets to object storage
 
 #### Currently Available Prebuilt Store Connectors
 
@@ -100,11 +90,9 @@ Purpose-built for specialized data domains, these connectors encapsulate industr
 
 Typical use cases:
 
-* Telematics & Fleet Management
-
-* Industrial IoT
-
-* Healthcare device telemetry
+- Telematics & Fleet Management
+- Industrial IoT
+- Healthcare device telemetry
 
 #### Currently available prebuilt industry-specific connectors
 
@@ -116,11 +104,9 @@ Condense Edge, iTriangle, Jimi Concox, Teltonika, Volvo Trucks
 
 Custom connectors are integration components developed using Condense inbuilt IDE as part of the Application development process, then published and deployed as connectors.
 
-* Can serve as input or output
-
-* Can be stream or store integrations
-
-* Fully customizable logic, protocol handling, and configuration schema
+- Can serve as input or output
+- Can be stream or store integrations
+- Fully customizable logic, protocol handling, and configuration schema
 
 The complete development lifecycle is covered in the [Applications](/condense/v2.4.0/deep-dive/applications) documentation.
 
@@ -140,9 +126,8 @@ Each connector in Condense has its own set of required configuration fields, def
 
 ### **For example:**
 
-* **Input Connectors** may require source-specific fields such as API endpoints, authentication keys, subscription topics, polling intervals, or data format options.
-
-* **Output Connectors** may require destination-specific fields such as queue or topic names, credentials, batching parameters, serialization formats, or endpoint URLs.
+- **Input Connectors** may require source-specific fields such as API endpoints, authentication keys, subscription topics, polling intervals, or data format options.
+- **Output Connectors** may require destination-specific fields such as queue or topic names, credentials, batching parameters, serialization formats, or endpoint URLs.
 
 The available ENVs vary per connector and are pre-defined in the connector’s metadata. These must be filled correctly before deployment. You can view the exact required fields in the **ENVs** tab of the deployment dialogue (as shown in the screenshot below for one of the connector configurations).
 
@@ -242,27 +227,19 @@ Monitoring is accessible from both the Pipeline view and the Connectors list in 
 
 Metrics include:
 
-* Connection State (connected, disconnected, error)
-
-* Data Throughput (messages/sec, bytes/sec)
-
-* Error Counters (by type)
-
-* Retry Count & Interval
-
-* Last Activity Timestamp
+- Connection State (connected, disconnected, error)
+- Data Throughput (messages/sec, bytes/sec)
+- Error Counters (by type)
+- Retry Count & Interval
+- Last Activity Timestamp
 
 ## Best Practices
 
-* Use pre-built connectors whenever available for tested, supported integration patterns.
-
-* For custom connectors, maintain them in Git and tag production-ready releases.
-
-* Clearly document all connector configurations for reproducibility.
-
-* Apply the principle of least privilege in assigning connector management roles.
-
-* Regularly review connector performance metrics to detect early issues.
+- Use pre-built connectors whenever available for tested, supported integration patterns.
+- For custom connectors, maintain them in Git and tag production-ready releases.
+- Clearly document all connector configurations for reproducibility.
+- Apply the principle of least privilege in assigning connector management roles.
+- Regularly review connector performance metrics to detect early issues.
 
 ## Common Pitfalls and Preventive Actions
 
@@ -280,10 +257,8 @@ Metrics include:
 
 ## Related Links
 
-* [Pipelines](/condense/v2.4.0/deep-dive/pipelines)
-
-* [Applications](/condense/v2.4.0/deep-dive/applications)
-
-* [Workspace](/condense/v2.4.0/condense-guide/condense-core/create-your-workspace)
+- [Pipelines](/condense/v2.4.0/deep-dive/pipelines)
+- [Applications](/condense/v2.4.0/deep-dive/applications)
+- [Workspace](/condense/v2.4.0/condense-guide/condense-core/create-your-workspace)
 
 [PreviousDeploy an Input Connector](/condense/v2.4.0/condense-guide/condense-core/deploy-an-input-connector)[NextDeploy a Custom Transform](/condense/v2.4.0/condense-guide/condense-core/deploy-a-custom-transform)
