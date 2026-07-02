@@ -19,24 +19,27 @@
               "untitled-page",
               {
                 "group": "Introduction to condense",
-                "pages": []
+                "pages": [
+                  "introduction-to-condense",
+                  "condense/legacy/introduction-to-condense/features-of-condense",
+                  "condense/legacy/introduction-to-condense/what-is-condense",
+                  {
+                    "group": "Condense Architecture",
+                    "pages": [
+                      "condense/legacy/introduction-to-condense/condense-architecture",
+                      "condense/legacy/introduction-to-condense/condense-architecture/detailed-component-breakdown",
+                      "condense/legacy/introduction-to-condense/condense-architecture/additional-services",
+                      "condense/legacy/introduction-to-condense/condense-architecture/components-and-services-within-the-kubernetes-cluster",
+                      "condense/legacy/introduction-to-condense/condense-architecture/untitled-pag-e"
+                    ]
+                  }
+                ]
               }
-            ]
-          },
-          {
-            "group": "Condense Architecture",
-            "pages": [
-              "condense/legacy/introduction-to-condense/condense-architecture",
-              "condense/legacy/introduction-to-condense/condense-architecture/detailed-component-breakdown",
-              "condense/legacy/introduction-to-condense/condense-architecture/additional-services",
-              "condense/legacy/introduction-to-condense/condense-architecture/components-and-services-within-the-kubernetes-cluster",
-              "condense/legacy/introduction-to-condense/condense-architecture/untitled-pag-e"
             ]
           },
           "condense/legacy/introduction-to-condense/key-benefits-of-condense",
           "condense/legacy/introduction-to-condense/why-condense",
           "condense/legacy/introduction-to-condense/condense-use-cases",
-          "condense/legacy/introduction-to-condense/features-of-condense",
           "condense/legacy/introduction-to-condense/faqs",
           {
             "group": "Fully Managed Kafka",
