@@ -13,15 +13,15 @@ To manage Kafka-related configurations, Condense offers Kafka admin client APIs.
 
 |  |  |  |
 | --- | --- | --- |
-| The purpose of the ListGroups API is to get a simple list of the Group IDs that are managed by broker. | <pre> <code> {`{ "data": { "groups": [ { "groupId": "b8316KqF_M9OwFfFAABXhdfhbu", "protocolType": "consumer" }, { "groupId": "connect-cluster-sqs", "protocolType": "connect" }, { "groupId": "connect-aws-sqs-sink-connector", "protocolType": "consumer" } ] }, "status": "success", "message": "Groups retrieved successfully" }`} </code> </pre> |  |
-| <pre> <code> {`{ "groupId": "my-consumer-group", "topic": "postmanValidation" }`} </code> </pre> | Resets the consumer group offset to the earliest or latest offset. Note that consumer group must have no running instances when performing the reset | <pre> <code> {`{ "status": "success", "message": "Offset Reset successfully" }`} </code> </pre> |
-| <pre> <code> {`{ "topic": "postmanValidation", "partitions": [ { "partition": 0, "offset": 0 } ] }`} </code> </pre> | Delete records for a selected topic. This will delete all records from the earliest offset. To delete all records in a partition, use a target offset of . |  |
-| <pre> <code> {`{ "topicName": "postmanValidation", "timeoutTime": 5000, "numOfPartitions": 2, "configEntries": [] }`} </code> </pre> | This API will create a new topic and will return true if created successfully or false when creating a new topic. <br /> <br /> NOTE: If <em>configEnties and other configurations are not given, it’ll take the default configuration from the Broker.</em> | <pre> <code> {`{ "status": "success", "message": "Topic Created Successfully" }`} </code> </pre> |
-| <pre> <code> {`{ "topicName":"postmanValidation" }`} </code> </pre> | <pre> <code> {`{ "status": "success", "message": "Topic deleted successfully" }`} </code> </pre> |  |
-| <pre> <code> {`{ "name": "test", "partitions": [ { "partitionErrorCode": 0, "partitionId": 0, "leader": 2, "replicas": [2, 1, 0], "isr": [2, 1, 0], "offlineReplicas": [] }, { "partitionErrorCode": 0, "partitionId": 3, "leader": 2, "replicas": [2, 0, 1], "isr": [2, 1, 0], "offlineReplicas": [] } ] }`} </code> </pre> |  |  |
-| <pre> <code> {`{ "topic": "postmanValidation" }`} </code> </pre> | <pre> <code> {`{ "data": { "topics": [ { "name": "postmanValidation", "partitions": [ { "partitionErrorCode": 0, "partitionId": 0, "leader": 2, "replicas": [2, 1, 0], "isr": [2, 1, 0], "offlineReplicas": [] }, { "partitionErrorCode": 0, "partitionId": 1, "leader": 1, "replicas": [1, 0, 2], "isr": [1, 0, 2], "offlineReplicas": [] } ], "offsetOfTopic": [ { "partition": 1, "offset": "0", "high": "0", "low": "0" }, { "partition": 0, "offset": "0", "high": "0", "low": "0" } ] } ] }, "status": "success", "message": "Data retrieved successfully" }`} </code> </pre> |  |
-| <pre> <code> {`{ "data": { "brokers": [ { "nodeId": 0, "host": "my-cluster-kafka-0.my-cluster-kafka-brokers.kafka.svc", "port": 9092 }, { "nodeId": 2, "host": "my-cluster-kafka-2.my-cluster-kafka-brokers.kafka.svc", "port": 9092 }, { "nodeId": 1, "host": "my-cluster-kafka-1.my-cluster-kafka-brokers.kafka.svc", "port": 9092 } ], "controller": 2, "clusterId": "YpxpUciGScack2Z9CijpGw" }, "status": "success", "message": "Data retrieved successfully" }`} </code> </pre> |  |  |
-| <pre> <code> {`{ "topicName":"postmanValidation" }`} </code> </pre> | <pre> <code> {`{ "data": { "resources": [ { "errorCode": 0, "errorMessage": "", "resourceType": 2, "resourceName": "postmanValidation", "configEntries": [ { "configName": "compression.type", "configValue": "producer", "readOnly": false, "isDefault": true, "configSource": 5, "isSensitive": false, "configSynonyms": [] } ] } ] }, "status": "success", "message": "Data retrieved successfully" }`} </code> </pre> |  |
-| <pre> <code> {`{ "topicName": "postmanValidation", "configEntries": [ { "name": "cleanup.policy", "value": "compact" } ] }`} </code> </pre> | <pre> <code> {`{ "data": { "resources": [ { "errorCode": 0, "errorMessage": null, "resourceType": 2, "resourceName": "postmanValidation" } ] }, "status": "success", "message": "Configuration updated successfully" }`} </code> </pre> |  |
-| <pre> <code> {`{ "groupId":"my-consumer-group" }`} </code> </pre> | <pre> <code> {`{ "status": "success", "message": "Offsets retrieved successfully", "partitions": [] }`} </code> </pre> |  |
-| <pre> <code> {`{ "groupId":"my-consumer-group" }`} </code> </pre> | <pre> <code> {`{ "status": "success", "message": "Group Deleted successfully" }`} </code> </pre> |  |
+| The purpose of the ListGroups API is to get a simple list of the Group IDs that are managed by broker. |  |  |
+| Resets the consumer group offset to the earliest or latest offset. Note that consumer group must have no running instances when performing the reset |  |  |
+| Delete records for a selected topic. This will delete all records from the earliest offset. To delete all records in a partition, use a target offset of . |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
