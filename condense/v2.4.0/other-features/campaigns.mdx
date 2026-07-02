@@ -125,5 +125,3 @@ Click the campaign name to view a table/list of all targeted devices, filtered b
 4. **How are overlapping campaigns handled?** If two campaigns targeting the same device (e.g., IMEI 1) with the **same start/expiry dates** are created, the system processes them in a **campaign creation order**. The earlier-created campaign executes first.
 5. **What happens to queued commands during retries?** Timed-out commands are **automatically removed** from the queue. Retrying adds the new campaign to the queue, subject to the same prioritization rules.
 6. **What are the stages for command execution?** Commands typically transition through: **Queued** → **Executing** → **Completed**/**Timed Out**/**Failed**.
-
-[PreviousResource Utilization](/condense/v2.4.0/other-features/resource-utilization)[NextPrivate Version Control](/condense/v2.4.0/other-features/private-version-control)
