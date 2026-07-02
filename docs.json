@@ -19,7 +19,9 @@
               "untitled-page",
               {
                 "group": "Introduction to condense",
-                "pages": []
+                "pages": [
+                  "untitle-d-page"
+                ]
               }
             ]
           },
@@ -29,7 +31,8 @@
               "condense/legacy/introduction-to-condense/condense-architecture",
               "condense/legacy/introduction-to-condense/condense-architecture/detailed-component-breakdown",
               "condense/legacy/introduction-to-condense/condense-architecture/additional-services",
-              "condense/legacy/introduction-to-condense/condense-architecture/components-and-services-within-the-kubernetes-cluster"
+              "condense/legacy/introduction-to-condense/condense-architecture/components-and-services-within-the-kubernetes-cluster",
+              "condense/legacy/introduction-to-condense/condense-architecture/untitled-pag-e"
             ]
           },
           "condense/legacy/introduction-to-condense/key-benefits-of-condense",
@@ -249,10 +252,10 @@
                   "condense/v2.4.0/condense-guide/condense-console/link-environments"
                 ]
               },
-              "condense/v2.4.0/condense-guide/condense-core",
               {
                 "group": "CONDENSE CORE",
                 "pages": [
+                  "condense/v2.4.0/condense-guide/condense-core",
                   "condense/v2.4.0/condense-guide/condense-core/create-your-workspace",
                   "condense/v2.4.0/condense-guide/condense-core/understand-and-assign-roles",
                   "condense/v2.4.0/condense-guide/condense-core/deploy-an-input-connector",
