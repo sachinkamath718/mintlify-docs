@@ -65,7 +65,9 @@ Data transfer orchestrated by the Kafka Connect runtime is split into tasks that
 
 For sink connectors, the number of tasks created relates to the number of partitions being consumed. For source connectors, the way how the source data is partitioned is defined by the connector. You can control the maximum number of tasks that can run in parallel by setting `tasksMax` in the connector configuration. The connector might create fewer tasks than the maximum setting. For example, the connector might create fewer tasks if it’s not possible to split the source data into that many partitions.
 
-In the context of Kafka Connect, a _partition_ can mean a topic partition or a _shard of data_ in an external system.
+<Info>
+  In the context of Kafka Connect, a _partition_ can mean a topic partition or a _shard of data_ in an external system.
+</Info>
 
 ## Workers
 
@@ -90,4 +92,6 @@ When a worker receives data, it converts the data into an appropriate format usi
 
 Kafka Connect can convert data to and from formats supported by Kafka, such as JSON or Avro. It also supports schemas for structuring data. If you are not converting data into a structured format, you don’t need to enable schemas.
 
-You can also specify converters for specific connectors to override the general Kafka Connect worker configuration that applies to all workers.
+<Info>
+  You can also specify converters for specific connectors to override the general Kafka Connect worker configuration that applies to all workers.
+</Info>
