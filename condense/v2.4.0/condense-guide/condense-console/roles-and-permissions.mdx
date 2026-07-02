@@ -1,6 +1,5 @@
 ---
 title: "Roles and Permissions"
-description: "For the complete documentation index, see . This page is also available as ."
 ---
 
 Copy
@@ -14,13 +13,10 @@ On this page
 
 Condense provides a layered Role-Based Access Control (RBAC) system that defines how users are onboarded, granted access, and permitted to operate within the platform. This RBAC model supports:
 
-* Clear administrative separation
-
-* Strong isolation between environments and workspaces
-
-* Predictable and least-privilege access assignment
-
-* Smooth governance for teams of all sizes
+- Clear administrative separation
+- Strong isolation between environments and workspaces
+- Predictable and least-privilege access assignment
+- Smooth governance for teams of all sizes
 
 The RBAC model spans two areas of the Condense platform:
 
@@ -34,7 +30,7 @@ Condense access is structured into three layers:
 
 Copy
 
-```
+```text
 Organization → Environment → Workspace
 ```
 
@@ -42,19 +38,15 @@ Each layer has its own hierarchy, responsibilities, and roles. The diagram below
 
 ![](/images/gitbook/RBAC---Console-and-Core.png)
 
-## **Organization Layer** *(Condense Console)*
+## **Organization Layer** _(Condense Console)_
 
 The Organization layer controls the company’s identity within Condense. Here, administrators manage:
 
-* Organization profile
-
-* Users and roles
-
-* Environment onboarding
-
-* Member invitation
-
-* Billing visibility
+- Organization profile
+- Users and roles
+- Environment onboarding
+- Member invitation
+- Billing visibility
 
 > Organization roles control **who governs the organization**, and **who can grant access to specific environments**.
 
@@ -66,15 +58,11 @@ The top-level administrative role for the entire organization.
 
 **Responsibilities**
 
-* Set up and manage the organization
-
-* Invite new members
-
-* Assign Organization-level roles (Billing Admin, Account Admin, Environment Admin, Environment User)
-
-* Assign environment access to members
-
-* Link and manage environments associated with the organization
+- Set up and manage the organization
+- Invite new members
+- Assign Organization-level roles (Billing Admin, Account Admin, Environment Admin, Environment User)
+- Assign environment access to members
+- Link and manage environments associated with the organization
 
 **Access Flow** While Organization Admin manages access centrally, they must assign themselves an Environment Admin or Environment User role to operationally enter a specific environment.
 
@@ -84,11 +72,9 @@ Focused on access management for assigned environments.
 
 **Responsibilities**
 
-* Invite members to their assigned environments
-
-* Assign environment roles (Environment Admin or Environment User)
-
-* Suspend users in the environments they manage
+- Invite members to their assigned environments
+- Assign environment roles (Environment Admin or Environment User)
+- Suspend users in the environments they manage
 
 #### **Billing Admin**
 
@@ -96,11 +82,9 @@ Role for financial governance and usage management.
 
 **Responsibilities**
 
-* View billing details and usage reports
-
-* Manage payment information
-
-* Visibility limited to the environments assigned to them
+- View billing details and usage reports
+- Manage payment information
+- Visibility limited to the environments assigned to them
 
 #### **Environment Admin (assigned from Console)**
 
@@ -114,15 +98,14 @@ A non-admin member of an environment.
 
 Environment Users gain workspace-level access only through workspace-role assignments inside Condense Core.
 
-## **Environment Layer** *(Condense Core)*
+## **Environment Layer** _(Condense Core)_
 
 An Environment represents an isolated execution space containing Workspaces, applications, connectors, Kafka resources, and monitoring.
 
 Each user entering an environment receives one of two roles:
 
-* Environment Admin
-
-* Environment User
+- Environment Admin
+- Environment User
 
 These roles control access to Workspaces and operational features.
 
@@ -132,19 +115,13 @@ The highest authority within an environment.
 
 **Capabilities**
 
-* Full visibility into every workspace in the environment
-
-* Create and manage workspaces
-
-* Manage workspace membership
-
-* Configure pipelines, connectors, transforms, and utilities
-
-* Create, modify, and delete applications
-
-* Access Kafka operations (topics, consumer groups, schema registry)
-
-* View environment metrics and dashboards
+- Full visibility into every workspace in the environment
+- Create and manage workspaces
+- Manage workspace membership
+- Configure pipelines, connectors, transforms, and utilities
+- Create, modify, and delete applications
+- Access Kafka operations (topics, consumer groups, schema registry)
+- View environment metrics and dashboards
 
 Environment Admins do **not** need workspace-role assignments. They can operate across all workspaces automatically.
 
@@ -158,17 +135,14 @@ Workspace visibility and workflow access depend entirely on the workspace roles 
 
 Within an environment:
 
-* An Environment User receives **one workspace role** (e.g., Developer, Maintainer)
-
-* The role applies to **all workspaces selected** during assignment
-
-* If more workspaces are added later, they must receive **the same role**
-
-* Environment Users **cannot** hold mixed roles (e.g., Developer in W1 and Viewer in W2) within the same environment
+- An Environment User receives **one workspace role** (e.g., Developer, Maintainer)
+- The role applies to **all workspaces selected** during assignment
+- If more workspaces are added later, they must receive **the same role**
+- Environment Users **cannot** hold mixed roles (e.g., Developer in W1 and Viewer in W2) within the same environment
 
 > This simplifies governance and preserves consistent privilege levels.
 
-## **Workspace Layer** *(Condense Core)*
+## **Workspace Layer** _(Condense Core)_
 
 Workspaces are operational areas inside an environment, each hosting its own applications, connectors, pipelines, and Kafka-based resources.
 
@@ -198,9 +172,8 @@ Read-only access to applications, connectors, logs, and configurations.
 
 To enter an environment inside Condense Core, a user must have:
 
-* Environment Admin, or
-
-* Environment User
+- Environment Admin, or
+- Environment User
 
 assigned at the organization layer.
 
@@ -233,9 +206,7 @@ Environment User → Sees only the workspaces for which a workspace role was ass
 As Organization Admin:
 
 1. Go to **Members**
-
 2. Select **Invite Member**
-
 3. Enter user details
 
 ![](/images/condense/v2.4.0/condense-guide/condense-console/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FfNDim7ZD6nX2yHinn0Y6%2Fimage.png)
@@ -248,15 +219,11 @@ Once accepted, the member appears under the organization.
 
 1. Select the member and assign one of the Organization-level roles:
 
-* Organization Admin
-
-* Account Admin
-
-* Billing Admin
-
-* Environment Admin (for selected environments)
-
-* Environment User (for selected environments)
+- Organization Admin
+- Account Admin
+- Billing Admin
+- Environment Admin (for selected environments)
+- Environment User (for selected environments)
 
 ![](/images/condense/v2.4.0/condense-guide/condense-console/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FctD33xsfBC7wOLDmZdc5%2Fimage.png)
 
@@ -266,11 +233,9 @@ You cannot assign any role to member if there is no Environment is associated to
 
 Organization Admins can assign:
 
-* Organization Admin
-
-* Account Admin
-
-* Billing Admin
+- Organization Admin
+- Account Admin
+- Billing Admin
 
 These roles control access in Condense Console.
 
@@ -279,16 +244,11 @@ These roles control access in Condense Console.
 Organization Admin or Account Admin can:
 
 1. Select a member
-
 2. Choose **Add to Environment**
-
 3. Select an environment
-
 4. Assign either:
-
-   * Environment Admin
-
-   * Environment User
+   - Environment Admin
+   - Environment User
 
 This determines the member’s access level inside Corrdese Core.
 
@@ -299,21 +259,13 @@ Only **Environment Admins** do this.
 For an Environment User:
 
 1. Navigate to **Members** in Condense Core
-
 2. Select the Environment User
-
 3. Choose **Assign Workspace Role**
-
 4. Select role:
-
-   * Kafka Admin
-
-   * Maintainer
-
-   * Developer
-
-   * Viewer
-
+   - Kafka Admin
+   - Maintainer
+   - Developer
+   - Viewer
 5. Select one or more workspaces
 
 > **Note** The role selected applies to all selected workspaces. Later additions must use the same role.
@@ -376,23 +328,17 @@ Viewer — Sandbox
 
 #### **User Experience**
 
-* **Anita** Full authority across both environments and all workspaces.
-
-* **Bharat** Sees Production only. Sees only FleetTracking because of the Kafka Admin role.
-
-* **Divya** Sees all workspaces in Testing. Can deploy and manage connectors in Sandbox.
-
-* **Eshan** Sees Production. Sees FleetTracking and ColdChain as Developer.
-
-* **Farah** Sees Sandbox with read-only access.
+- **Anita** Full authority across both environments and all workspaces.
+- **Bharat** Sees Production only. Sees only FleetTracking because of the Kafka Admin role.
+- **Divya** Sees all workspaces in Testing. Can deploy and manage connectors in Sandbox.
+- **Eshan** Sees Production. Sees FleetTracking and ColdChain as Developer.
+- **Farah** Sees Sandbox with read-only access.
 
 #### **Behavior**
 
-* Environment Admins see and operate across **all workspaces** of their environments
-
-* Environment Users only see the workspaces they have a role for
-
-* Workspace roles for an Environment User always remain uniform across all selected workspaces
+- Environment Admins see and operate across **all workspaces** of their environments
+- Environment Users only see the workspaces they have a role for
+- Workspace roles for an Environment User always remain uniform across all selected workspaces
 
 ## Capability **Overview**
 
@@ -454,11 +400,9 @@ Viewer only
 
 Condense RBAC provides a structured, predictable access model across three layers:
 
-* **Organization Layer** : governs who administers the organization and who can assign access
-
-* **Environment Layer** : determines seniority and visibility for operations
-
-* **Workspace Layer** : controls fine-grained operational capabilities
+- **Organization Layer** : governs who administers the organization and who can assign access
+- **Environment Layer** : determines seniority and visibility for operations
+- **Workspace Layer** : controls fine-grained operational capabilities
 
 Environment Admins manage the entire environment and all workspaces. Environment Users gain workspace access only through explicit workspace-role assignments using a consistent role across selected workspaces.
 
