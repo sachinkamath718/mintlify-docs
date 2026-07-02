@@ -28,9 +28,8 @@
                     "pages": [
                       "condense/legacy/introduction-to-condense/condense-architecture",
                       "condense/legacy/introduction-to-condense/condense-architecture/detailed-component-breakdown",
-                      "condense/legacy/introduction-to-condense/condense-architecture/additional-services",
                       "condense/legacy/introduction-to-condense/condense-architecture/components-and-services-within-the-kubernetes-cluster",
-                      "condense/legacy/introduction-to-condense/condense-architecture/untitled-pag-e"
+                      "condense/legacy/introduction-to-condense/condense-architecture/additional-services"
                     ]
                   }
                 ]
