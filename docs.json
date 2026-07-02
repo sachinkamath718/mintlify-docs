@@ -21,8 +21,8 @@
                 "group": "Introduction to condense",
                 "pages": [
                   "introduction-to-condense",
-                  "condense/legacy/introduction-to-condense/features-of-condense",
                   "condense/legacy/introduction-to-condense/what-is-condense",
+                  "condense/legacy/introduction-to-condense/features-of-condense",
                   {
                     "group": "Condense Architecture",
                     "pages": [
