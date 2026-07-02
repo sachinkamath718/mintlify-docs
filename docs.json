@@ -16,14 +16,11 @@
             "group": "Overview",
             "icon": "book-open",
             "pages": [
-              "untitled-page"
-            ]
-          },
-          {
-            "group": "Introduction to condense",
-            "pages": [
-              "condense/legacy/introduction-to-condense",
-              "condense/legacy/introduction-to-condense/features-of-condense"
+              "untitled-page",
+              {
+                "group": "Introduction to condense",
+                "pages": []
+              }
             ]
           },
           {
@@ -38,6 +35,7 @@
           "condense/legacy/introduction-to-condense/key-benefits-of-condense",
           "condense/legacy/introduction-to-condense/why-condense",
           "condense/legacy/introduction-to-condense/condense-use-cases",
+          "condense/legacy/introduction-to-condense/features-of-condense",
           "condense/legacy/introduction-to-condense/faqs",
           {
             "group": "Fully Managed Kafka",
