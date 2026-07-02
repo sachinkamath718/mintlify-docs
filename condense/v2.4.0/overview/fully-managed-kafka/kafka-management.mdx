@@ -1,14 +1,6 @@
 ---
 title: "Kafka Management"
-description: "For the complete documentation index, see . This page is also available as ."
 ---
-
-Copy
-
-On this page
-
-1. [Overview](/condense/v2.4.0)
-2. [Fully Managed Kafka](/condense/v2.4.0/overview/fully-managed-kafka)
 
 ## Kafka Component Architecture
 
@@ -16,31 +8,28 @@ A KRaft-based Kafka cluster consists of broker nodes responsible for message del
 
 Other Kafka components interact with the Kafka cluster for specific tasks.
 
-### Kafka Component Interactions
+### **Kafka Component Interactions**
 
 ![](/images/gitbook/KafkaMgmtVec1.png)
 
-### Kafka Connect
+### **Kafka Connect**
 
-Kafka Connect is an integration toolkit for streaming data between Kafka brokers and other systems using *connector* plugins. Kafka Connect provides a framework for integrating Kafka with an external data source or target, such as a database, for import or export of data using connectors. Connectors provide the connection configuration needed.
+Kafka Connect is an integration toolkit for streaming data between Kafka brokers and other systems using _connector_ plugins. Kafka Connect provides a framework for integrating Kafka with an external data source or target, such as a database, for import or export of data using connectors. Connectors provide the connection configuration needed.
 
-* A *source* connector pushes external data into Kafka.
-
-* A *sink* connector extracts data out of Kafka
+- A _source_ connector pushes external data into Kafka.
+- A _sink_ connector extracts data out of Kafka
 
 External data is translated and transformed into the appropriate format.
 
 Kafka Connect can be configured to build custom container images with the required connectors.
 
-### Kafka MirrorMaker
+### **Kafka MirrorMaker**
 
 Kafka MirrorMaker replicates data between two Kafka clusters, either in the same data center or across different locations.
 
-### Kafka Exporter
+### **Kafka Exporter**
 
 Kafka Exporter extracts data for analysis as Prometheus metrics, primarily data relating to offsets, consumer groups, consumer lag and topics. Consumer lag is the delay between the last message written to a partition and the message currently being picked up from that partition by a consumer
-
-***
 
 ## Securing Kafka
 
@@ -54,35 +43,27 @@ IMPORTANT! Communication is always encrypted between Kafka components.
 
 Kafka listeners use authentication to ensure a secure client connection to the Kafka cluster. Clients can also be configured for mutual authentication. Security credentials are created and managed by the Cluster and User Operator.
 
-### Supported authentication mechanisms
+### **Supported authentication mechanisms**
 
-* mTLS authentication (on listeners with TLS-enabled encryption)
-
-* SASL SCRAM-SHA-512
-
-* OAuth 2.0 token-based authentication
-
-* Custom authentication (supported by Kafka)
+- mTLS authentication (on listeners with TLS-enabled encryption)
+- SASL SCRAM-SHA-512
+- OAuth 2.0 token-based authentication
+- Custom authentication (supported by Kafka)
 
 ### Authorization
 
 Authorization controls the operations that are permitted on Kafka brokers by specific clients or users.
 
-#### Supported authorization mechanisms
+#### **Supported authorization mechanisms**
 
-* Simple authorization using ACL rules
+- Simple authorization using ACL rules
+- OAuth 2.0 authorization (if you are using OAuth 2.0 token-based authentication)
+- Open Policy Agent (OPA) authorization
+- Custom authorization (supported by Kafka)
 
-* OAuth 2.0 authorization (if you are using OAuth 2.0 token-based authentication)
-
-* Open Policy Agent (OPA) authorization
-
-* Custom authorization (supported by Kafka)
-
-### Federal Information Processing Standards (FIPS)
+### **Federal Information Processing Standards (FIPS)**
 
 Kafka in Condense can run on FIPS-enabled Kubernetes clusters to ensure data security and system interoperability if the native Kubernetes service of the cloud provider supports it.
-
-***
 
 ## Monitoring Kafka
 
@@ -92,19 +73,17 @@ Metrics data is useful when investigating issues with connectivity and data deli
 
 The following tools are used for metrics and monitoring which is shipped with the Condense deployment
 
-### Prometheus
+### **Prometheus**
 
 [Prometheus](https://github.com/prometheus) pulls metrics from Kafka, Controllers, and Kafka Connect clusters. The Prometheus Alertmanager plugin handles alerts and routes them to a notification service.
 
-### Kafka Exporter
+### **Kafka Exporter**
 
 [Kafka Exporter](https://github.com/danielqsj/kafka_exporter) adds additional Prometheus metrics.
 
-### Grafana
+### **Grafana**
 
 [Grafana Labs](https://grafana.com/) provides dashboard visualizations of Prometheus metrics.
-
-***
 
 ## Kafka management on your cloud
 
@@ -114,43 +93,32 @@ This architecture demonstrates how Condense achieves a highly available, scalabl
 
 ![](/images/gitbook/KafkaMgmtVec4.png)
 
-#### Key Components
+#### **Key Components**
 
-* A dedicated node pool is distributed across three availability zones (Zone A, B, C) in Region A to enhance fault tolerance.
+- A dedicated node pool is distributed across three availability zones (Zone A, B, C) in Region A to enhance fault tolerance.
+- Each node contains:
+  - Kafka Operator – Manages Kafka lifecycle and configurations.
+  - Kafka Broker – Handles message storage and distribution, backed by Persistent Volume Claims (PVCs) for data durability.
+  - Controller – Manages cluster metadata and leadership election, also using PVCs for persistence.
 
-* Each node contains:
+#### **High Availability & Fault Tolerance**
 
-  * Kafka Operator – Manages Kafka lifecycle and configurations.
+- Multi-Zone Redundancy Kafka components are distributed across three zones, preventing single points of failure and ensuring continuous availability.
+- Node Affinity & Pod Anti-Affinity
+  - Node Affinity ensures components are deployed on specific nodes that are running in different regions.
+  - Pod Anti-Affinity prevents multiple critical Kafka instances from running on the same node, improving redundancy.
 
-  * Kafka Broker – Handles message storage and distribution, backed by Persistent Volume Claims (PVCs) for data durability.
+#### **Networking & Load Balancing**
 
-  * Controller – Manages cluster metadata and leadership election, also using PVCs for persistence.
+- Internal Access (VNet Peering): Allows internal clients to communicate with Kafka through an internal load balancer, maintaining security and low latency. This makes it easier to connect existing services to Kafka internally.
+- External Access (Internet Load Balancer): Distributes traffic efficiently to external clients, ensuring reliable connectivity.
 
-#### High Availability & Fault Tolerance
+#### **Scalability & Self-Healing**
 
-* Multi-Zone Redundancy
+- Dynamic Scaling: Kubernetes automatically scales Kafka brokers based on workload demands.
+- Self-Healing Mechanisms: Kubernetes reschedules failed pods and maintains cluster stability without manual intervention.
 
-  Kafka components are distributed across three zones, preventing single points of failure and ensuring continuous availability.
-
-* Node Affinity & Pod Anti-Affinity
-
-  * Node Affinity ensures components are deployed on specific nodes that are running in different regions.
-
-  * Pod Anti-Affinity prevents multiple critical Kafka instances from running on the same node, improving redundancy.
-
-#### Networking & Load Balancing
-
-* Internal Access (VNet Peering): Allows internal clients to communicate with Kafka through an internal load balancer, maintaining security and low latency. This makes it easier to connect existing services to Kafka internally.
-
-* External Access (Internet Load Balancer): Distributes traffic efficiently to external clients, ensuring reliable connectivity.
-
-#### Scalability & Self-Healing
-
-* Dynamic Scaling: Kubernetes automatically scales Kafka brokers based on workload demands.
-
-* Self-Healing Mechanisms: Kubernetes reschedules failed pods and maintains cluster stability without manual intervention.
-
-### Multi-Region Deployment for Disaster Recovery
+### **Multi-Region Deployment for Disaster Recovery**
 
 Building on the high availability architecture defined earlier, this approach extends Kafka’s resilience by implementing a multi-region deployment for disaster recovery using Kafka MirrorMaker 2. This ensures seamless data replication and failover across geographically distributed clusters.
 
@@ -162,39 +130,23 @@ Building on the high availability architecture defined earlier, this approach ex
 
 ![](/images/gitbook/KafkaMgmtVec3.png)
 
-#### Unidirectional Replication (Primary-Backup Model)
+#### **Unidirectional Replication (Primary-Backup Model)**
 
-* Primary Region (Region A):
+- Primary Region (Region A): A local producer writes data to the source Kafka cluster.
+- Cross-Region Replication: Kafka MirrorMaker 2 replicates data to a secondary Kafka cluster in Region B.
+- Backup Region (Region B): The target Kafka cluster serves as a hot backup, ensuring data availability in case of failure in Region A.
+- Use Case: Ensures a disaster recovery mechanism with a standby cluster that can take over operations if the primary region fails.
 
-  A local producer writes data to the source Kafka cluster.
+#### **Bidirectional Replication (Active-Active Model)**
 
-* Cross-Region Replication:
-
-  Kafka MirrorMaker 2 replicates data to a secondary Kafka cluster in Region B.
-
-* Backup Region (Region B):
-
-  The target Kafka cluster serves as a hot backup, ensuring data availability in case of failure in Region A.
-
-* Use Case: Ensures a disaster recovery mechanism with a standby cluster that can take over operations if the primary region fails.
-
-#### Bidirectional Replication (Active-Active Model)
-
-* Multi-Region Active Clusters:
-
-  Clusters in Region A and Region B actively handle data ingestion, processing, and replication.
-
-* Real-Time Cross-Replication:
-
-  * Kafka MirrorMaker 2 ensures continuous synchronization between both regions.
-
-  * If one cluster fails, the other automatically continues operations, preventing downtime.
+- Multi-Region Active Clusters: Clusters in Region A and Region B actively handle data ingestion, processing, and replication.
+- Real-Time Cross-Replication:
+  - Kafka MirrorMaker 2 ensures continuous synchronization between both regions.
+  - If one cluster fails, the other automatically continues operations, preventing downtime.
 
 **Use Case:**
 
 Enables an active-active multi-region setup, ensuring real-time failover and load balancing.
-
-***
 
 ## Monitoring Kafka
 
@@ -215,5 +167,3 @@ The following tools are used for metrics and monitoring which is shipped with th
 **Grafana**
 
 [Grafana Labs](https://grafana.com/) provides dashboard visualizations of Prometheus metrics.
-
-[PreviousFully Managed Kafka](/condense/v2.4.0/overview/fully-managed-kafka)[NextKafka Connect](/condense/v2.4.0/overview/fully-managed-kafka/kafka-connect)

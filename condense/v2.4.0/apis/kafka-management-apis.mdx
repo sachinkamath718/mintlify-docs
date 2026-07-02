@@ -37,9 +37,11 @@ Kafka Exporter extracts data for analysis as Prometheus metrics, primarily data 
 
 Kafka in Condense supports Transport Layer Security (TLS), a protocol for encrypted communication.
 
-> IMPORTANT!
->
-> Communication is always encrypted between Kafka components.
+<Info>
+  IMPORTANT!
+
+  Communication is always encrypted between Kafka components.
+</Info>
 
 ### Authentication
 
@@ -146,9 +148,11 @@ Building on the high availability architecture defined earlier, this approach ex
   - Kafka MirrorMaker 2 ensures continuous synchronization between both regions.
   - If one cluster fails, the other automatically continues operations, preventing downtime.
 
-> **Use Case:**
->
-> Enables an active-active multi-region setup, ensuring real-time failover and load balancing.
+<Info>
+  **Use Case:**
+
+  Enables an active-active multi-region setup, ensuring real-time failover and load balancing.
+</Info>
 
 ## Monitoring Kafka
 

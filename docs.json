@@ -290,6 +290,25 @@
             ]
           },
           {
+            "group": "Security",
+            "pages": [
+              "condense/v2.4.0/security"
+            ]
+          },
+          {
+            "group": "Fully Managed Kafka",
+            "pages": [
+              "condense/v2.4.0/overview/fully-managed-kafka",
+              "condense/v2.4.0/overview/fully-managed-kafka/kafka-management",
+              "condense/v2.4.0/overview/fully-managed-kafka/untitled-page",
+              "condense/v2.4.0/overview/fully-managed-kafka/kafka-connect",
+              "condense/v2.4.0/overview/fully-managed-kafka/schema-registry",
+              "condense/v2.4.0/overview/fully-managed-kafka/securing-kafka",
+              "condense/v2.4.0/overview/fully-managed-kafka/kafka-administration",
+              "condense/v2.4.0/overview/fully-managed-kafka/untitled-page-1"
+            ]
+          },
+          {
             "group": "Utilities",
             "pages": [
               "condense/v2.4.0/utilities/split-utility",
@@ -313,12 +332,6 @@
               "condense/v2.4.0/other-features/resource-utilization",
               "condense/v2.4.0/other-features/campaigns",
               "condense/v2.4.0/other-features/private-version-control"
-            ]
-          },
-          {
-            "group": "Security",
-            "pages": [
-              "condense/v2.4.0/security"
             ]
           },
           {
