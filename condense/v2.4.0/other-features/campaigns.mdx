@@ -129,3 +129,53 @@ Click the campaign name to view a table/list of all targeted devices, filtered b
 4. **How are overlapping campaigns handled?** If two campaigns targeting the same device (e.g., IMEI 1) with the **same start/expiry dates** are created, the system processes them in a **campaign creation order**. The earlier-created campaign executes first.
 5. **What happens to queued commands during retries?** Timed-out commands are **automatically removed** from the queue. Retrying adds the new campaign to the queue, subject to the same prioritization rules.
 6. **What are the stages for command execution?** Commands typically transition through: **Queued** → **Executing** → **Completed**/**Timed Out**/**Failed**.
+
+### **Campaign Details**
+
+**Campaign Name**: Enter a unique name (e.g., "Q3 Fleet Tracking").
+
+![](/images/condense/v2.4.0/other-features/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FFUHb9r3wdJHtgNox0JUo%2FCampaign%2520-%2520New.png)
+
+**Expiry Date**: Select an end date for the campaign.
+
+![](/images/condense/v2.4.0/other-features/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FKmIM0SBmSRd7bHn5jJRc%2FCampaign%2520-%2520Action%25203.png)
+
+1. **Add IMEI details**:
+   - **Manual IMEI**: Enter the **IMEI Number** manually.
+   - **Bulk Upload**:
+     1. Download the **Template** for bulk entries.
+     2. Fill in IMEI numbers
+     3. Upload the file.
+2. **Commands Configuration**:
+   - **Choose Command**: Select predefined commands from the dropdown.
+   - **Custom Command**: Write a custom command if needed.
+3. **Finalize**:
+   - Click **Create Campaign** to save.
+   - Use **Cancel** to discard changes.
+
+### **Step 3: Managing Campaigns**
+
+#### **Campaign List View**:
+
+- Access the list by clicking the **Search Campaign**.
+- Columns include
+
+![](/images/condense/v2.4.0/other-features/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FY3PvzAmfzsYTP5jhbEE8%2FCampaign.png)
+
+- **Campaign Name -** A unique, user-defined identifier for the campaign
+- **Created On -** The timestamp (date and time) when the campaign was created.
+- **Created By -** The username associated with the Condense account who created the campaign
+- **Expiry Date -** The deadline by which the campaign must be completed. After this date, the campaign will cease execution.
+- **Progress** (% and entries completed) - The proportion of devices that have finished executing the command (ex - 1200 out of 2000 devices).
+
+#### **Actions**:
+
+- **Search**: Filter campaigns by name or date.
+- **Monitor Progress**: Track completion via the **Campaign Progress** bar.
+- **Delete**: Remove outdated campaigns (if supported).
+
+### **Step 4: Track Progress and status of each IMEI in the campaign**
+
+#### **IMEI List View**
+
+![](/images/condense/v2.4.0/other-features/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FioBtCBm76rRKGb6I0Jeh%2FCampaign%2520-%2520Action%25204.png)
