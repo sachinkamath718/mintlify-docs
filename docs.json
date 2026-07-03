@@ -276,14 +276,14 @@
                 "group": "Connectors",
                 "pages": [
                   "condense/v2.4.0/deep-dive/connectors",
-                  "condense/v2.4.0/deep-dive/connectors/available-connectors",
                   {
                     "group": "Connectors in Condense",
                     "pages": [
                       "condense/v2.4.0/deep-dive/connectors/connectors-in-condense",
                       "condense/v2.4.0/deep-dive/connectors/connectors-in-condense/upcoming-connectors"
                     ]
-                  }
+                  },
+                  "condense/v2.4.0/deep-dive/connectors/available-connectors"
                 ]
               },
               "condense/v2.4.0/deep-dive/connectors/connectors-in-condense/custom-connectors",
