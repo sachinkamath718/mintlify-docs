@@ -54,8 +54,7 @@
           {
             "group": "Security",
             "pages": [
-              "condense/legacy/security",
-              "condense/legacy/linking-environment"
+              "condense/legacy/security"
             ]
           },
           {
@@ -66,8 +65,8 @@
                 "group": "Bring Your Own Cloud(BYOC)",
                 "pages": [
                   "condense/legacy/condense-deployment/bring-your-own-cloud-byoc",
-                  "condense/legacy/condense-deployment/bring-your-own-cloud-byoc/deployment-from-aws-marketplace",
                   "condense/legacy/condense-deployment/bring-your-own-cloud-byoc/deployment-from-gcp-marketplace",
+                  "condense/legacy/condense-deployment/bring-your-own-cloud-byoc/deployment-from-aws-marketplace",
                   "condense/legacy/condense-deployment/bring-your-own-cloud-byoc/deployment-from-azure-marketplace"
                 ]
               },
@@ -77,8 +76,15 @@
             ]
           },
           {
-            "group": "Condense App",
+            "group": "Fundamentals",
             "pages": [
+              "condense/legacy/fundamentals/getting-set-up/create-a-workspace",
+              "condense/legacy/fundamentals/getting-set-up/select-an-input-connector",
+              "condense/legacy/fundamentals/getting-set-up/select-a-custom-transform-connector",
+              "condense/legacy/fundamentals/getting-set-up/connecting-with-github",
+              "condense/legacy/fundamentals/getting-set-up/build-a-custom-transform-service-using-code-editor",
+              "condense/legacy/fundamentals/getting-set-up/accessing-status-of-your-build",
+              "condense/legacy/fundamentals/getting-set-up/deploy-your-build",
               {
                 "group": "Condense App- Getting Started",
                 "pages": [
@@ -106,7 +112,13 @@
                   "condense/legacy/condense-app-getting-started/schema-registry"
                 ]
               },
-              "condense/legacy/condense-app-getting-started/video-guide"
+              "condense/legacy/fundamentals/getting-set-up/select-an-output-connector",
+              {
+                "group": "Condense App",
+                "pages": [
+                  "condense/legacy/condense-app-getting-started/video-guide"
+                ]
+              }
             ]
           },
           {
@@ -116,19 +128,6 @@
               "condense/legacy/connectors-in-condense/available-connectors",
               "condense/legacy/connectors-in-condense/upcoming-connectors",
               "condense/legacy/connectors-in-condense/custom-connectors"
-            ]
-          },
-          {
-            "group": "Fundamentals",
-            "pages": [
-              "condense/legacy/fundamentals/getting-set-up/create-a-workspace",
-              "condense/legacy/fundamentals/getting-set-up/select-an-input-connector",
-              "condense/legacy/fundamentals/getting-set-up/select-a-custom-transform-connector",
-              "condense/legacy/fundamentals/getting-set-up/connecting-with-github",
-              "condense/legacy/fundamentals/getting-set-up/build-a-custom-transform-service-using-code-editor",
-              "condense/legacy/fundamentals/getting-set-up/accessing-status-of-your-build",
-              "condense/legacy/fundamentals/getting-set-up/deploy-your-build",
-              "condense/legacy/fundamentals/getting-set-up/select-an-output-connector"
             ]
           },
           {
@@ -147,20 +146,6 @@
               "condense/legacy/legal/terms-and-conditions",
               "condense/legacy/legal/terms-of-use",
               "condense/legacy/legal/support-terms"
-            ]
-          },
-          {
-            "group": "Release Notes",
-            "pages": [
-              "condense/legacy/release-notes/july-2024-release",
-              "condense/legacy/release-notes/june-2024-release"
-            ]
-          },
-          {
-            "group": "Roadmap",
-            "pages": [
-              "condense/legacy/future-roadmap-and-development/whats-planned",
-              "condense/legacy/future-roadmap-and-development/whats-coming"
             ]
           },
           {
