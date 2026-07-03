@@ -25,10 +25,12 @@ Plugins provide the implementation for Kafka Connect to run connector instances.
 
 MirrorMaker 2 also uses the Kafka Connect framework. In this case, the external data system is another Kafka cluster. Specialized connectors for MirrorMaker 2 manage data replication between source and target Kafka clusters.
 
-In addition to the MirrorMaker 2 connectors, Kafka provides two connectors as examples:
+<Info>
+  In addition to the MirrorMaker 2 connectors, Kafka provides two connectors as examples:
 
-- `FileStreamSourceConnector` streams data from a file on the worker’s filesystem to Kafka, reading the input file and sending each line to a given Kafka topic.
-- `FileStreamSinkConnector` streams data from Kafka to the worker’s filesystem, reading messages from a Kafka topic and writing a line for each in an output file.
+  - `FileStreamSourceConnector` streams data from a file on the worker’s filesystem to Kafka, reading the input file and sending each line to a given Kafka topic.
+  - `FileStreamSinkConnector` streams data from Kafka to the worker’s filesystem, reading messages from a Kafka topic and writing a line for each in an output file.
+</Info>
 
 The following source connector diagram shows the process flow for a source connector that streams records from an external data system. A Kafka Connect cluster might operate source and sink connectors at the same time. Workers are running in a distributed mode in the cluster. Workers can run one or more tasks for more than one connector instance.
 
@@ -91,18 +93,6 @@ A transform comprises a set of Java class files packaged in a JAR file for inclu
 When a worker receives data, it converts the data into an appropriate format using a converter. You specify converters for workers in the worker `config` in the `KafkaConnect` resource.
 
 Kafka Connect can convert data to and from formats supported by Kafka, such as JSON or Avro. It also supports schemas for structuring data. If you are not converting data into a structured format, you don’t need to enable schemas.
-
-<Info>
-  You can also specify converters for specific connectors to override the general Kafka Connect worker configuration that applies to all workers.
-</Info>
-
-<Info>
-  In the context of Kafka Connect, a _partition_ can mean a topic partition or a _shard of data_ in an external system.
-</Info>
-
-<Info>
-  In the context of Kafka Connect, a _partition_ can mean a topic partition or a _shard of data_ in an external system.
-</Info>
 
 <Info>
   You can also specify converters for specific connectors to override the general Kafka Connect worker configuration that applies to all workers.

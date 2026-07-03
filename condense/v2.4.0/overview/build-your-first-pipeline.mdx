@@ -4,15 +4,15 @@ title: "Build your First Pipeline"
 
 A **Pipeline** in Condense is the visual and functional representation of data flow between deployed connectors, transforms, and utilities inside a workspace. It is automatically materialized when a connector or transform is deployed. No manual creation needed.
 
-**Before you begin**, make sure you have:
+<Info>
+  **Before you begin**, make sure you have:
 
-- A workspace created and configured
-- At least one environment linked to the workspace
-- Workspace Admin or Maintainer role
+  - A workspace created and configured
+  - At least one environment linked to the workspace
+  - Workspace Admin or Maintainer role
+</Info>
 
 ## What You'll Build
-
-Copy
 
 ```text
 [ Input Connector ]  →  [ Kafka Topic ]  →  [ Transform ]  →  [ Output Connector ]
@@ -35,7 +35,11 @@ An **Input Connector** receives data from an external system and injects it into
    - **Title** - a unique name for this connector
    - **Output Topic** - the Kafka topic this connector will publish data to
    - **Environment Variables** - credentials, endpoints, or protocol settings
-6. Click **Deploy** Once deployed, your Input Connector will appear as a block on the Pipeline canvas and begin publishing data to the configured output topic.
+6. Click **Deploy** 
+
+<Check>
+  Once deployed, your Input Connector will appear as a block on the Pipeline canvas and begin publishing data to the configured output topic.
+</Check>
 
 ---
 
@@ -78,7 +82,11 @@ An **Output Connector** takes the processed data and delivers it to an external 
    - **Title** - a unique name for this connector
    - **Input Topic** - must match the Output Topic from your Transform
    - **Environment Variables** - destination credentials and settings
-5. Click **Deploy** Condense automatically draws a connecting line between blocks that share matching topics. Your pipeline is now live.
+5. Click **Deploy** 
+
+<Check>
+  Condense automatically draws a connecting line between blocks that share matching topics. Your pipeline is now live.
+</Check>
 
 ---
 
@@ -87,16 +95,18 @@ An **Output Connector** takes the processed data and delivers it to an external 
 Click **Pipeline** in the left sidebar. You will see all deployed blocks connected by lines:
 
 <Frame caption="Pipeline Canvas Showing Connected Blocks">
-  ![](/images/gitbook/image.png)
+  ![Buildyourpipeline1](/images/buildyourpipeline1.png)
 </Frame>
 
 Clicking any block opens its **Component Detail Panel** showing the connector name, category, type, status, and Kafka topic information:
 
 <Frame caption="Node Details Panel">
-  ![](/images/gitbook/image.png)
+  ![Buildyourpipeline2](/images/buildyourpipeline2.png)
 </Frame>
 
-Pipelines are automatically materialized. They appear automatically as soon as connectors and transforms are deployed. You do not manually create a pipeline.
+<Info>
+  Pipelines are automatically materialized. They appear automatically as soon as connectors and transforms are deployed. You do not manually create a pipeline.
+</Info>
 
 ---
 
@@ -107,13 +117,13 @@ Pipelines are automatically materialized. They appear automatically as soon as c
 Each block displays live CPU and memory utilization:
 
 <Frame caption="Real-Time Resource Utilization Metrics">
-  ![](/images/gitbook/image.png)
+  ![Buildyourpipeline3](/images/buildyourpipeline3.png)
 </Frame>
 
 Colour-coded status indicators let you instantly identify Running, Stopped, or Error states:
 
 <Frame caption="Colour-Coded Pipeline Status Indicators">
-  ![](/images/gitbook/image.png)
+  ![Buildyourpipeline4](/images/buildyourpipeline4.png)
 </Frame>
 
 #### Logs and Debugging
@@ -121,7 +131,7 @@ Colour-coded status indicators let you instantly identify Running, Stopped, or E
 Access detailed real-time logs for each block with customizable streaming intervals (5 seconds by default):
 
 <Frame caption="Logs and Debugging Panel">
-  ![](/images/gitbook/image.png)
+  ![Buildyourpipeline5](/images/buildyourpipeline5.png)
 </Frame>
 
 ### Editing Your Pipeline
@@ -129,99 +139,42 @@ Access detailed real-time logs for each block with customizable streaming interv
 If you need to fix a misconfiguration after deployment, use **Edit Configurations**:
 
 <Frame caption="Edit Configurations Panel">
-  ![](/images/gitbook/image.png)
+  ![Buildyourpipeline6](/images/buildyourpipeline6.png)
 </Frame>
 
 1. Click the block you want to edit on the Pipeline canvas
 2. Click **Edit Configuration**
 3. Update the required fields
-4. Click **Save Changes** Fields with a **lock icon** cannot be edited after deployment. To change locked fields, delete and redeploy the component.
+4. Click **Save Changes**
+
+<Warning>
+  Fields with a **lock icon** cannot be edited after deployment. To change locked fields, delete and redeploy the component.
+</Warning>
 
 ### Roles and Permissions
 
-Operation
-
-Admin
-
-Maintainer
-
-Developer
-
-Viewer
-
-Deploy pre-built connectors
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Deploy custom connectors/transforms
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Configure deployed components
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-Delete deployed components
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-View pipelines and connections
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-View component logs/configuration
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
-
-![](/images/gitbook/image.png)
+| **Operation** | **Admin** | **Maintainer** | **Developer** | **Viewer** |
+| --- | --- | --- | --- | --- |
+| Deploy pre-built connectors | **✓** | **✓** | **✕** | **✕** |
+| Deploy custom connectors/transforms | **✓** | **✓** | **✕** | **✕** |
+| Configure deployed components | **✓** | **✓** | **✕** | **✕** |
+| Delete deployed components | **✓** | **✓** | **✕** | **✕** |
+| View pipelines and connections | **✓** | **✓** | **✓** | **✓** |
+| View component logs/configuration | **✓** | **✓** | **✓** | **✓** |
 
 ---
 
 ## Best Practices
 
-<img src="/images/gitbook/image.png" /> Use **clear topic naming** to make the pipeline canvas self-explanatory
+**✓**Use **clear topic naming** to make the pipeline canvas self-explanatory
 
-<img src="/images/gitbook/image.png" /> **Group related connectors and transforms** logically to simplify understanding
+ **✓Group related connectors and transforms** logically to simplify understanding
 
-<img src="/images/gitbook/image.png" /> **Avoid unused topic links** to reduce visual clutter
+ **✓Avoid unused topic links** to reduce visual clutter
 
-<img src="/images/gitbook/image.png" /> **Regularly check component logs** to catch issues early
+ **✓Regularly check component logs** to catch issues early
 
-<img src="/images/gitbook/image.png" /> Document the pipeline purpose in the workspace description
+**✓**Document the pipeline purpose in the workspace description
 
 ---
 

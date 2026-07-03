@@ -21,8 +21,6 @@ This document describes each role, how access propagates, and how administrators
 
 Condense access is structured into three layers:
 
-Copy
-
 ```text
 Organization → Environment → Workspace
 ```
@@ -59,7 +57,11 @@ The top-level administrative role for the entire organization.
 - Assign environment access to members
 - Link and manage environments associated with the organization
 
-> **Access Flow** While Organization Admin manages access centrally, they must assign themselves an Environment Admin or Environment User role to operationally enter a specific environment.
+<Info>
+  **Access Flow**
+
+  While Organization Admin manages access centrally, they must assign themselves an Environment Admin or Environment User role to operationally enter a specific environment.
+</Info>
 
 #### Account Admin
 
@@ -145,7 +147,9 @@ Within an environment:
 
 Workspaces are operational areas inside an environment, each hosting its own applications, connectors, pipelines, and Kafka-based resources.
 
-> Workspace roles determine operational capability.
+<Check>
+  Workspace roles determine operational capability.
+</Check>
 
 ### Workspace Roles
 
@@ -178,13 +182,23 @@ To enter an environment inside Condense Core, a user must have:
 
 assigned at the organization layer.
 
-> Environment Admin → full environment visibility Environment User → workspace visibility only after workspace-role assignment
+<Check>
+  Environment Admin → full environment visibility
+
+  Environment User → workspace visibility only after workspace-role assignment
+</Check>
 
 ### Workspace Access
 
-Environment Admin → Sees and manages all workspaces automatically
+Environment Admin
 
-Environment User → Sees only the workspaces for which a workspace role was assigned → Workspace role must be the same across all selected workspaces
+→ Sees and manages all workspaces automatically
+
+Environment User
+
+→ Sees only the workspaces for which a workspace role was assigned
+
+→ Workspace role must be the same across all selected workspaces
 
 ---
 
@@ -196,11 +210,11 @@ Environment User → Sees only the workspaces for which a workspace role was ass
 
 ![](/images/condense/v2.4.0/overview/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FJ4wWXaLFahV1z6wLIf9U%2Fimage.png)
 
-1. The creator automatically becomes the **Organization Admin**
+2. The creator automatically becomes the **Organization Admin**
 
 ![](/images/condense/v2.4.0/overview/rwKRGO3QthZ6EMqqYblg%2Fblobs%2Fq27pMxg6KS3bAIGPKWsP%2Fimage.png)
 
-1. Environment(s) can now be linked to the organization
+3. Environment(s) can now be linked to the organization
 
 ![](/images/condense/v2.4.0/overview/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FHuIV9Fj1r08FHp6MXdKk%2Fimage.png)
 
@@ -214,13 +228,13 @@ As Organization Admin:
 
 ![](/images/condense/v2.4.0/overview/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FfNDim7ZD6nX2yHinn0Y6%2Fimage.png)
 
-1. Send invite
+4. Send invite
 
 Once accepted, the member appears under the organization.
 
 ![](/images/condense/v2.4.0/overview/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FGl5snN5VMjFtcOtDRUXR%2Fimage.png)
 
-1. Select the member and assign one of the Organization-level roles:
+5. Select the member and assign one of the Organization-level roles:
 
 - Organization Admin
 - Account Admin
@@ -504,11 +518,11 @@ Environment User → Sees only the workspaces for which a workspace role was ass
 
 ![](/images/condense/v2.4.0/overview/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FJ4wWXaLFahV1z6wLIf9U%2Fimage.png)
 
-1. The creator automatically becomes the **Organization Admin**
+2. The creator automatically becomes the **Organization Admin**
 
 ![](/images/condense/v2.4.0/overview/rwKRGO3QthZ6EMqqYblg%2Fblobs%2Fq27pMxg6KS3bAIGPKWsP%2Fimage.png)
 
-1. Environment(s) can now be linked to the organization
+3. Environment(s) can now be linked to the organization
 
 ![](/images/condense/v2.4.0/overview/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FHuIV9Fj1r08FHp6MXdKk%2Fimage.png)
 
@@ -522,13 +536,13 @@ As Organization Admin:
 
 ![](/images/condense/v2.4.0/overview/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FfNDim7ZD6nX2yHinn0Y6%2Fimage.png)
 
-1. Send invite
+4. Send invite
 
 Once accepted, the member appears under the organization.
 
 ![](/images/condense/v2.4.0/overview/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FGl5snN5VMjFtcOtDRUXR%2Fimage.png)
 
-1. Select the member and assign one of the Organization-level roles:
+5. Select the member and assign one of the Organization-level roles:
 
 - Organization Admin
 - Account Admin
