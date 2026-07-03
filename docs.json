@@ -377,7 +377,8 @@
             "pages": [
               "condense/v2.4.0/future-roadmap-and-development/whats-planned",
               "condense/v2.4.0/future-roadmap-and-development/whats-coming"
-            ]
+            ],
+            "hidden": true
           },
           {
             "group": "Marketing ASSETS",
