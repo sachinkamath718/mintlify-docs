@@ -194,6 +194,7 @@
               },
               "condense/v2.4.0/overview/industry-use-cases",
               "condense/v2.4.0/overview/roles-and-governance",
+              "condense/v2.4.0/overview/help-and-support",
               {
                 "group": "BYOC",
                 "pages": [
@@ -206,8 +207,7 @@
                   "condense/v2.4.0/overview/byoc/upgrade",
                   "condense/v2.4.0/overview/byoc/upgrade/condense-upgradation-faq"
                 ]
-              },
-              "condense/v2.4.0/overview/help-and-support"
+              }
             ]
           },
           {
