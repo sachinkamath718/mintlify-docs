@@ -369,7 +369,8 @@
             "pages": [
               "condense/v2.4.0/release-notes/july-2024-release",
               "condense/v2.4.0/release-notes/june-2024-release"
-            ]
+            ],
+            "hidden": true
           },
           {
             "group": "Roadmap",
