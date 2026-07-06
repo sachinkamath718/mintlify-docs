@@ -18,7 +18,7 @@
             "pages": [
               "untitled-page",
               {
-                "group": "Introduction to condense",
+                "group": "Introduction to Condense",
                 "pages": [
                   "introduction-to-condense",
                   "condense/legacy/introduction-to-condense/what-is-condense",
@@ -257,7 +257,7 @@
           {
             "group": "Deep Dive",
             "pages": [
-              "condense/v2.4.0/deep-dive/untitled-page",
+              "condense/v2.4.0/deep-dive/deep-dive",
               {
                 "group": "Connectors",
                 "pages": [
@@ -372,6 +372,14 @@
               "wallpapers-1",
               "social-media-1"
             ]
+          }
+        ]
+      },
+      {
+        "version": "Untitled Version",
+        "tabs": [
+          {
+            "tab": "Untitled Tab"
           }
         ]
       }
