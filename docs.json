@@ -49,13 +49,15 @@
               "condense/legacy/fully-managed-kafka/schema-registry",
               "condense/legacy/fully-managed-kafka/securing-kafka",
               "condense/legacy/fully-managed-kafka/kafka-administration"
-            ]
+            ],
+            "icon": "blocks"
           },
           {
             "group": "Security",
             "pages": [
               "condense/legacy/security"
-            ]
+            ],
+            "icon": "shield-check"
           },
           {
             "group": "Condense deployment",
@@ -100,7 +102,8 @@
                   "condense/legacy/condense-app-getting-started/schema-registry"
                 ]
               }
-            ]
+            ],
+            "icon": "cloud"
           },
           {
             "group": "Connectors in Condense",
@@ -108,14 +111,16 @@
               "condense/legacy/connectors-in-condense",
               "condense/legacy/connectors-in-condense/available-connectors",
               "condense/legacy/connectors-in-condense/upcoming-connectors"
-            ]
+            ],
+            "icon": "credit-card"
           },
           {
             "group": "Certifications",
             "pages": [
               "condense/legacy/certifications/iso-27001-2013",
               "condense/legacy/certifications/iso-9001-2015"
-            ]
+            ],
+            "icon": "award"
           },
           {
             "group": "Legal",
@@ -126,14 +131,16 @@
               "condense/legacy/legal/terms-and-conditions",
               "condense/legacy/legal/terms-of-use",
               "condense/legacy/legal/support-terms"
-            ]
+            ],
+            "icon": "bookmark"
           },
           {
             "group": "Marketing Assets",
             "pages": [
               "wallpapers",
               "social-media"
-            ]
+            ],
+            "icon": "vector-square"
           }
         ]
       },
@@ -378,7 +385,7 @@
     }
   },
   "icons": {
-    "library": "lucide"
+    "library": "tabler"
   },
   "appearance": {
     "default": "light"
@@ -399,7 +406,93 @@
       "instagram": "https://www.instagram.com/zeliotofficial",
       "youtube": "https://www.youtube.com/@zeliot_official",
       "website": "https://www.zeliot.in/"
-    }
+    },
+    "links": [
+      {
+        "header": "Product",
+        "items": [
+          {
+            "label": "Condense",
+            "href": "https://www.zeliot.in/condense"
+          },
+          {
+            "label": "Pricing",
+            "href": "https://www.zeliot.in/pricing"
+          },
+          {
+            "label": "Try Now",
+            "href": "https://console-uat.condense.zeliot.in/try-now?utm_source=website&utm_medium=footer-section&utm_campaign=try-for-free-p1"
+          },
+          {
+            "label": "Product Updates",
+            "href": "https://www.zeliot.in/condense/updates"
+          }
+        ]
+      },
+      {
+        "header": "Company",
+        "items": [
+          {
+            "label": "About",
+            "href": "https://www.zeliot.in/company/about-us"
+          },
+          {
+            "label": "Partner Program",
+            "href": "https://www.zeliot.in/partners"
+          },
+          {
+            "label": "Contact Us",
+            "href": "https://www.zeliot.in/contact"
+          }
+        ]
+      },
+      {
+        "header": "Resources",
+        "items": [
+          {
+            "label": "Blogs",
+            "href": "https://www.zeliot.in/blog"
+          },
+          {
+            "label": "Developer Blogs",
+            "href": "https://www.zeliot.in/developer-blog"
+          },
+          {
+            "label": "eBooks",
+            "href": "https://www.zeliot.in/data-streaming-resources/ebooks"
+          },
+          {
+            "label": "Quick Links",
+            "href": "https://www.zeliot.in/quick-links"
+          },
+          {
+            "label": "Games Built on Condense",
+            "href": "https://www.zeliot.in/interactive-games-built-using-condense"
+          }
+        ]
+      },
+      {
+        "header": "Legal",
+        "items": [
+          {
+            "label": "Terms & Conditions",
+            "href": "https://www.zeliot.in/terms-and-conditions"
+          },
+          {
+            "label": "Security",
+            "href": "https://www.zeliot.in/security"
+          },
+          {
+            "label": "Privacy Policy",
+            "href": "https://www.zeliot.in/privacy-policy"
+          },
+          {
+            "label": "EULA",
+            "href": "https://zeliot.mintlify.app/condense/v2.4.0/legal/end-user-license-agreement-eula"
+          }
+        ]
+      }
+    ]
   },
   "contextual": {
     "options": [

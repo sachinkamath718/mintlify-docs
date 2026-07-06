@@ -2,7 +2,7 @@
 title: "Pipelines"
 ---
 
-Overview
+## **Overview**
 
 A Pipeline in Condense is the visual and functional representation of data flow between deployed connectors, transforms, and utilities inside a workspace. It is automatically materialized when a connector or transform is deployed and configured with its environment parameters. The pipeline canvas displays these deployed components as blocks, with lines between them representing live topic-based data flows.
 
@@ -24,8 +24,9 @@ Pipelines help:
 - Each block operates independently, processing messages from Kafka topics.
 - There is no central “pipeline engine”; data movement follows Kafka’s publish–subscribe model.
 - The pipeline view is a real-time reflection of deployed components and their topic mappings.
-
-![](/images/gitbook/image.png)
+  <Frame>
+    ![Image](/images/image-87.png)
+  </Frame>
 
 ## Configuring Components in a Pipeline
 
@@ -70,7 +71,9 @@ Clicking a block on the pipeline canvas opens its Component Detail Panel, which 
 
 When a node (e.g., a connector transform) is clicked, a detailed section opens with:
 
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-88.png)
+</Frame>
 
 - **Connector Information**: Name, category, type, and status (e.g., `Teltonika` as a `Input` connector with category as `Telematics Device` type and status as `Running` ).
 - **Kafka Topic Information**: Input and output topics configured by the user for the deployment of the connector.
@@ -78,25 +81,24 @@ When a node (e.g., a connector transform) is clicked, a detailed section opens w
 ### **Real-Time Monitoring**
 
 - Displays real-time metrics for each node, such as resource utilization (memory and CPU utilization).
-
-![](/images/gitbook/image.png)
+  <Frame>
+    ![Image](/images/image-89.png)
+  </Frame>
 
 - Visual indicators (e.g., colour-coded status for running, stopped, etc ) to quickly identify issues
-
-![](/images/gitbook/image.png)
-
-### **Logs and Debugging**
+  <Frame>
+    ![Image](/images/image-90.png)
+  </Frame>
+  ### **Logs and Debugging**
 
 - Access detailed logs for each node to track activities and troubleshoot issues.
 - It supports **real-time log streaming** with customizable intervals (e.g., 5 seconds by default) and allows users to **play**, **stop**, and **control** the flow of logs for better monitoring and debugging.
-
-![](/images/gitbook/image.png)
-
-### **Edit Configurations of deployed connectors / Transforms**
-
-![](/images/gitbook/image.png)
-
-After a system or pipeline is deployed, issues or bugs may be discovered that require adjustments to ensure smooth operation. The **Edit Configurations** functionality allows users to resolve these problems by correcting misconfigurations.
+  ![Image](/images/image-91.png)
+  ### **Edit Configurations of deployed connectors / Transforms**
+  <Frame>
+    ![Image](/images/image-92.png)
+  </Frame>
+  After a system or pipeline is deployed, issues or bugs may be discovered that require adjustments to ensure smooth operation. The **Edit Configurations** functionality allows users to resolve these problems by correcting misconfigurations.
 
 #### **Types of Edit Configurations**
 
@@ -115,15 +117,17 @@ Step 2: Editing the Configuration Fields
 1. All the configurations associated with the custom transform connector are populated.
 2. Make changes to the configuration field values as required.
 
-#### Example
+<Info>
+  **Example**
 
-**Title**
+  **Title**
 
-The current title is set to **data-validator**. If you need to change the title, enter the new title in the **Title** field.
+  The current title is set to **data-validator**. If you need to change the title, enter the new title in the **Title** field.
 
-**Port Number**
+  **Port Number**
 
-The current port number is set to **9000**. If you need to change the port number, enter the new port number in the **Port Number** field.
+  The current port number is set to **9000**. If you need to change the port number, enter the new port number in the **Port Number** field.
+</Info>
 
 Step 3: Saving or Cancelling Changes
 
@@ -148,15 +152,17 @@ Step 2: Editing the Configuration Fields
 1. All the configurations associated with the  \*\*\*\*telematics device type connector are populated.
 2. Make changes to the configuration field values as required.
 
-**Example**
+<Info>
+  **Example**
 
-**Title**
+  **Title**
 
-The current title is set to **data-validator**. If you need to change the title, enter the new title in the **Title** field.
+  The current title is set to **data-validator**. If you need to change the title, enter the new title in the **Title** field.
 
-**Output Topic**
+  **Output Topic**
 
-The current output topic is set to **user data**. If you need to change the output topic, enter the new output topic in the **output topic** field.
+  The current output topic is set to **user data**. If you need to change the output topic, enter the new output topic in the **output topic** field.
+</Info>
 
 Step 3: Saving or Cancelling Changes
 
@@ -170,7 +176,9 @@ If you do not wish to save the changes, click the **Cancel** button to exit with
 
 ### **Delete Connector**
 
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-87.png)
+</Frame>
 
 The **Delete Connector** functionality allows users to remove a connector that is no longer needed or is causing issues in the pipeline. However, deleting a connector can have significant consequences, including:
 
@@ -180,17 +188,27 @@ The **Delete Connector** functionality allows users to remove a connector that i
 
 ### **Steps to Delete a Connector**
 
-Step 1: Access the Connector Information Navigate to the **Pipeline** section where the  \*\*\*\*connector that you wish to delete is listed.
+Step 1: Access the Connector Information Navigate to the **Pipeline** section where the connector that you wish to delete is listed.
 
 Step 2: Confirm the Connector to Delete Click on the **Delete Connector** option associated with the connector.
 
 Step 3: Review the Warning Message
 
-**A warning message will appear, stating:** "**_Are you sure you want to delete the connector Title?_**" "**_If you delete the Connector title, you might break the flow of data in the pipeline and might cause problems in your deployed applications._**"
+<Warning>
+  **A warning message will appear, stating:**
+
+   "**_Are you sure you want to delete the connector Title?_**"
+
+   "**_If you delete the Connector title, you might break the flow of data in the pipeline and might cause problems in your deployed applications._**"
+</Warning>
 
 Carefully read the warning to understand the potential impact of deleting the connector.
 
-#### Step 4: Proceed or Cancel **Delete Connector** If you are certain that deleting the connector will not affect your system, click **Delete Connector** to proceed.
+#### Step 4: Proceed or Cancel
+
+####  **Delete Connector** 
+
+#### If you are certain that deleting the connector will not affect your system, click **Delete Connector** to proceed.
 
 **Cancel** If you are unsure or want to reconsider, click **Cancel** to abort the deletion process.
 
@@ -198,77 +216,14 @@ Carefully read the warning to understand the potential impact of deleting the co
 
 Only workspace members with appropriate roles can modify pipelines:
 
-Search
-
-Operation
-
-Admin
-
-Maintainer
-
-Developer
-
-Viewer
-
-Deploy pre-built connectors
-
-✅
-
-✅
-
-❌
-
-❌
-
-Deploy custom connectors/transforms
-
-✅
-
-✅
-
-❌
-
-❌
-
-Configure deployed connectors/transforms
-
-✅
-
-✅
-
-❌
-
-❌
-
-Delete deployed components
-
-✅
-
-✅
-
-❌
-
-❌
-
-View pipelines and connections
-
-✅
-
-✅
-
-✅
-
-✅
-
-View component logs/configuration
-
-✅
-
-✅
-
-✅
-
-✅
+| Search | Operation | Admin | Maintainer | Developer |
+| --- | --- | --- | --- | --- |
+| Deploy pre-built connectors <br /> | ✅ <br /> | ✅ <br /> | ❌ <br /> | ❌ <br /> |
+| Deploy custom connectors/transforms <br /> | ✅ <br /> | ✅ <br /> | ❌ <br /> | ❌ <br /> |
+| Configure deployed connectors/transforms <br /> | ✅ <br /> | ✅ <br /> | ❌ <br /> | ❌ <br /> |
+| Delete deployed components <br /> | ✅ <br /> | ✅ <br /> | ❌ <br /> | ❌ <br /> |
+| View pipelines and connections<br /> | ✅ <br /> | ✅ <br /> | ✅ <br /> | ✅ |
+| View component logs/configuration | ✅ <br /> | ✅ <br /> | ✅ <br /> | ✅ <br /> |
 
 ## Monitoring Pipelines
 
@@ -297,8 +252,6 @@ From the pipeline view, you can:
 ## Related Links
 
 - [Connectors](/condense/condense-app-getting-started/connectors)
-- [Transforms & Utilities](/condense/condense-app-getting-started/transforms)
-- [Workspace](/condense/condense-app-getting-started/workspaces)
-- [RBAC](/condense/condense-app-getting-started/role-based-access-control-rbac)
-
-[PreviousApplications](/condense/condense-app-getting-started/applications)[NextSettings](/condense/condense-app-getting-started/settings)
+- [Transforms & Utilities](https://docs.zeliot.in/condense/condense-app-getting-started/transforms)
+- [Workspace](https://docs.zeliot.in/condense/condense-app-getting-started/workspaces)
+- [RBAC](https://docs.zeliot.in/condense/condense-app-getting-started/role-based-access-control-rbac)
