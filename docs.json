@@ -16,7 +16,7 @@
             "group": "Overview",
             "icon": "book-open",
             "pages": [
-              "Condense-Documenation",
+              "condense/legacy/Condense-Documenation",
               {
                 "group": "Introduction to Condense",
                 "pages": [
