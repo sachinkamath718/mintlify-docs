@@ -64,8 +64,6 @@ Users can add, update, validate, or delete schemas using the Schema Registry API
 
 #### **Register a new schema version**
 
-Copy
-
 ```text
 curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
      --data '{"schema": "{\"type\": \"string\"}"}' \
@@ -74,15 +72,11 @@ curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
 
 #### **List all subjects**
 
-Copy
-
 ```text
 curl -X GET http://<internal-lb-ip>:8081/subjects
 ```
 
 #### **List schema versions for a subject**
-
-Copy
 
 ```text
 curl -X GET http://<internal-lb-ip>:8081/subjects/Kafka-value/versions
@@ -90,15 +84,11 @@ curl -X GET http://<internal-lb-ip>:8081/subjects/Kafka-value/versions
 
 #### **Fetch schema by global ID**
 
-Copy
-
 ```text
 curl -X GET http://<internal-lb-ip>:8081/schemas/ids/1
 ```
 
 #### **Fetch the latest schema**
-
-Copy
 
 ```text
 curl -X GET http://<internal-lb-ip>:8081/subjects/Kafka-value/versions/latest
@@ -106,23 +96,17 @@ curl -X GET http://<internal-lb-ip>:8081/subjects/Kafka-value/versions/latest
 
 #### **Delete a specific version**
 
-Copy
-
 ```text
 curl -X DELETE http://<internal-lb-ip>:8081/subjects/Kafka-value/versions/3
 ```
 
 #### **Delete all versions**
 
-Copy
-
 ```text
 curl -X DELETE http://<internal-lb-ip>:8081/subjects/Kafka-value
 ```
 
 #### **Test compatibility**
-
-Copy
 
 ```text
 curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
@@ -132,15 +116,11 @@ curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" \
 
 #### **View global compatibility**
 
-Copy
-
 ```text
 curl -X GET http://<internal-lb-ip>:8081/config
 ```
 
 #### **Update global compatibility**
-
-Copy
 
 ```text
 curl -X PUT -H "Content-Type: application/vnd.schemaregistry.v1+json" \
@@ -149,8 +129,6 @@ curl -X PUT -H "Content-Type: application/vnd.schemaregistry.v1+json" \
 ```
 
 #### **Update compatibility for a subject**
-
-Copy
 
 ```text
 curl -X PUT -H "Content-Type: application/vnd.schemaregistry.v1+json" \
