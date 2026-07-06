@@ -140,7 +140,7 @@
               "wallpapers",
               "social-media"
             ],
-            "icon": "vector-square"
+            "icon": "triangle-square-circle"
           }
         ]
       },
@@ -180,7 +180,8 @@
                   "condense/v2.4.0/overview/byoc/upgrade/condense-upgradation-faq"
                 ]
               }
-            ]
+            ],
+            "icon": "book"
           },
           {
             "group": "Getting Started",
@@ -202,7 +203,8 @@
               "condense/v2.4.0/getting-started/key-benefits-of-condense",
               "condense/v2.4.0/getting-started/condense-use-cases",
               "condense/v2.4.0/getting-started/faqs"
-            ]
+            ],
+            "icon": "api-app"
           },
           {
             "group": "Condense App",
@@ -212,7 +214,8 @@
               "condense/v2.4.0/condense-app-getting-started/features-of-condense-app",
               "condense/v2.4.0/condense-app-getting-started/glossary",
               "condense/v2.4.0/condense-app-getting-started/video-guide"
-            ]
+            ],
+            "icon": "app-window"
           },
           {
             "group": "Condense Guide",
@@ -239,7 +242,8 @@
                   "condense/v2.4.0/condense-guide/condense-core/monitor-grafana"
                 ]
               }
-            ]
+            ],
+            "icon": "books"
           },
           {
             "group": "Deep Dive",
@@ -263,7 +267,8 @@
               "condense/v2.4.0/deep-dive/transforms",
               "condense/v2.4.0/deep-dive/applications",
               "condense/v2.4.0/deep-dive/pipelines"
-            ]
+            ],
+            "icon": "notebook"
           },
           {
             "group": "Fully Managed Kafka",
@@ -276,20 +281,23 @@
               "condense/v2.4.0/overview/fully-managed-kafka/securing-kafka",
               "condense/v2.4.0/overview/fully-managed-kafka/kafka-administration",
               "condense/v2.4.0/overview/fully-managed-kafka/untitled-page-1"
-            ]
+            ],
+            "icon": "blocks"
           },
           {
             "group": "Security",
             "pages": [
               "condense/v2.4.0/security"
-            ]
+            ],
+            "icon": "shield-check"
           },
           {
             "group": "Utilities",
             "pages": [
               "condense/v2.4.0/utilities/split-utility",
               "condense/v2.4.0/utilities/alert-utility"
-            ]
+            ],
+            "icon": "automatic-gearbox"
           },
           {
             "group": "APIs",
@@ -297,7 +305,8 @@
               "condense/v2.4.0/apis/kafka-management-apis",
               "condense/v2.4.0/apis/prometheus-apis",
               "condense/v2.4.0/apis/device-connector-apis"
-            ]
+            ],
+            "icon": "api"
           },
           {
             "group": "Other Features",
@@ -308,7 +317,8 @@
               "condense/v2.4.0/other-features/resource-utilization",
               "condense/v2.4.0/other-features/campaigns",
               "condense/v2.4.0/other-features/private-version-control"
-            ]
+            ],
+            "icon": "cube"
           },
           {
             "group": "Help & Support",
@@ -317,14 +327,16 @@
               "condense/v2.4.0/help-and-support/contact-sales",
               "condense/v2.4.0/help-and-support/reach-out-via-email",
               "condense/v2.4.0/help-and-support/book-a-meeting"
-            ]
+            ],
+            "icon": "headset"
           },
           {
             "group": "Certifications",
             "pages": [
               "condense/v2.4.0/certifications/iso-27001-2013",
               "condense/v2.4.0/certifications/iso-9001-2015"
-            ]
+            ],
+            "icon": "award"
           },
           {
             "group": "Legal",
@@ -335,7 +347,8 @@
               "condense/v2.4.0/legal/terms-and-conditions",
               "condense/v2.4.0/legal/terms-of-use",
               "condense/v2.4.0/legal/support-terms"
-            ]
+            ],
+            "icon": "bookmark"
           },
           {
             "group": "Release Notes",
@@ -343,7 +356,8 @@
               "condense/v2.4.0/release-notes/july-2024-release",
               "condense/v2.4.0/release-notes/june-2024-release"
             ],
-            "hidden": true
+            "hidden": true,
+            "icon": "notes"
           },
           {
             "group": "Roadmap",
@@ -351,14 +365,16 @@
               "condense/v2.4.0/future-roadmap-and-development/whats-planned",
               "condense/v2.4.0/future-roadmap-and-development/whats-coming"
             ],
-            "hidden": true
+            "hidden": true,
+            "icon": "route"
           },
           {
-            "group": "Marketing ASSETS",
+            "group": "Marketing Assets",
             "pages": [
               "wallpapers-1",
               "social-media-1"
-            ]
+            ],
+            "icon": "triangle-square-circle"
           }
         ]
       }
