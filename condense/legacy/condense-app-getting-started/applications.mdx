@@ -94,10 +94,7 @@ Steps to build an application:
 
 1. Click Build Application.
 2. Enter Docker Image Name (registry path) and Tag.
-3. Start building and monitor Build Logs; fix errors and rebuild if needed.
-   ![Image](/images/image-91.png)
-   ![Image](/images/image-92.png)
-   Guidance on naming/registries: Read [Building an Application.](https://docs.zeliot.in/condense/condense-app-getting-started/applications#building-an-application)
+3. Start building and monitor Build Logs; fix errors and rebuild if needed. <img src="/images/image-91.png" alt="Image" /> <img src="/images/image-92.png" alt="Image" /> Guidance on naming/registries: Read [Building an Application.](https://docs.zeliot.in/condense/condense-app-getting-started/applications#building-an-application)
 
 ### **4) Publish the Application**
 
@@ -224,8 +221,7 @@ Post‑publish
 
 - Published versions are immutable.
 - To change logic, edit → build → publish a new version.
-- Deployed components can be switched to a new version from their configuration.
-  ![Image](/images/image-98.png)
+- Deployed components can be switched to a new version from their configuration. <img src="/images/image-98.png" alt="Image" />
 
 ## **Deleting an Application**
 
@@ -234,14 +230,13 @@ Who can delete: Admins (Maintainers if your policy allows)
 Warning
 
 - Irreversible in Condense.
-- If referenced by any deployment, update/remove those deployments first.
-  ![Image](/images/image-99.png)
+- If referenced by any deployment, update/remove those deployments first. <img src="/images/image-99.png" alt="Image" />
 
 ## **Configuration Parameters**
 
 A. Creation
 
-| **Field** | **Description** <br /> | **Required** | **Notes** <br /> |
+| **Field** | **Description**<br /> | **Required** | **Notes**<br /> |
 | --- | --- | --- | --- |
 | Application Name <br /> | Unique identifier in workspace <br /> | Yes | 3–63 chars; letters, numbers, -, \_ <br /> |
 | Publish as a custom <br /> | Publish target at release <br /> | Yes | Transform / Input Connector / Output Connector <br /> |
@@ -273,37 +268,11 @@ A. Creation
 
 ## **C. Build (Step 3)**
 
-**Field**
-
-**Description**
-
-**Required**
-
-**Notes**
-
-Docker Image Name
-
-Registry/repo path
-
-Yes
-
-e.g., registry/acme/vehicle-app
-
-Tag
-
-Image tag
-
-Yes
-
-Align with Version (e.g., v1.0.0)
-
-Logs
-
-Build output stream
-
-—
-
-Downloadable; success/failure pills
+| Field | Description | Required | Notes |
+| --- | --- | --- | --- |
+| **Docker Image Name** | Registry/repository path | Yes | Example: `registry/acme/vehicle-app` |
+| **Tag** | Image tag | Yes | Align with the version (e.g., `v1.0.0`) |
+| **Logs** | Build output stream | — | Downloadable; displays success/failure status pills |
 
 Summary Pane (left): provider, repo, branch; detected language/runtime; app name/type (Transform/Connector); version; About; configured ENVs (masked); flags for exposed servers.
 
@@ -315,37 +284,11 @@ Summary Pane (left): provider, repo, branch; detected language/runtime; app name
 
 ## **D. Publish**
 
-**Field**
-
-**Description**
-
-**Required**
-
-**Notes**
-
-Publish as a custom
-
-Transform / Connector type
-
-Yes
-
-Determines catalog destination
-
-Version
-
-Release version
-
-Yes
-
-Immutable after publish
-
-Notes
-
-Release notes
-
-No
-
-For operators/reviewers
+| Field | Description | Required | Notes |
+| --- | --- | --- | --- |
+| **Publish as** | Transform / Connector type | Yes | Determines the catalog destination |
+| **Version** | Release version | Yes | Immutable after publish |
+| **Notes** | Release notes | No | Intended for operators and reviewers |
 
 <Frame>
   ![Image](/images/image-104.png)
@@ -353,95 +296,16 @@ For operators/reviewers
 
 ## **Roles and Permissions (Applications)**
 
-**Operation**
-
-**Admin**
-
-**Maintainer**
-
-**Developer**
-
-**Viewer**
-
-Create application
-
-✅
-
-✅
-
-✅
-
-❌
-
-Edit code / ENVs
-
-✅
-
-✅
-
-✅
-
-❌
-
-Use Publish/Subscribe
-
-✅
-
-✅
-
-✅
-
-❌
-
-Build application
-
-✅
-
-✅
-
-✅
-
-❌
-
-Publish application
-
-✅
-
-✅
-
-❌
-
-❌
-
-Delete application
-
-✅
-
-✅\*
-
-❌
-
-❌
-
-View applications list
-
-✅
-
-✅
-
-✅
-
-✅
-
-View application details
-
-✅
-
-✅
-
-✅
-
-✅
+| Operation | Admin | Maintainer | Developer | Viewer |
+| --- | :-: | :-: | :-: | :-: |
+| **Create application** | ✅ | ✅ | ✅ | ❌ |
+| **Edit code / ENVs** | ✅ | ✅ | ✅ | ❌ |
+| **Use Publish/Subscribe** | ✅ | ✅ | ✅ | ❌ |
+| **Build application** | ✅ | ✅ | ✅ | ❌ |
+| **Publish application** | ✅ | ✅ | ❌ | ❌ |
+| **Delete application** | ✅ | ✅\* | ❌ | ❌ |
+| **View applications list** | ✅ | ✅ | ✅ | ✅ |
+| **View application details** | ✅ | ✅ | ✅ | ✅ |
 
 \* Maintainer deletion depends on your organization’s policy.
 
