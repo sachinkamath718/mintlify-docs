@@ -1,15 +1,10 @@
 ---
 title: "Alert Utility"
-description: "For the complete documentation index, see . This page is also available as ."
 ---
 
-Copy
-
-On this page
-
-1. [Condense App - Getting Started](/condense/condense-app-getting-started)
-
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-39.png)
+</Frame>
 
 ## **Overview**
 
@@ -43,65 +38,63 @@ Intuitive UI for rule creation—no scripting required.
 
 ## **How to Use the Alert Utility**
 
-**Prerequisites**
+<Info>
+  **Prerequisites**
 
-* Admin or Developer access in Condense
-
-* Kafka topics created with proper permissions
-
-* Basic understanding of your data schema
+  - Admin or Developer access in Condense
+  - Kafka topics created with proper permissions
+  - Basic understanding of your data schema
+</Info>
 
 ### **Step 1: Access the Alert Utility**
 
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-40.png)
+</Frame>
 
 1. Log in to your Condense account
-
 2. From the main menu, select **Transforms**
-
 3. Click on **Alert Utility** from the Transforms page
 
 ### **Step 2: Choose Configuration Method**
 
 #### **Option A: Auto-Fill from Topic (Recommended)**
 
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-41.png)
+</Frame>
 
-1. Click **"Choose a Topic"** under *Read Topic.* It auto-populates schema fields for the configuration of the Alert utility.
+1. Click **"Choose a Topic"** under _Read Topic._ It auto-populates schema fields for the configuration of the Alert utility.
 
 If the topic is empty, the user will not be able to set up the configuration for the Alert utility
 
 #### **Option B: Manual JSON Upload**
 
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-42.png)
+</Frame>
 
 Click "Upload" and provide JSON as well as validate it. It auto-populates schema fields for the configuration of the Alert utility.
 
-Manual JSON must exactly match your Kafka topic schema
+<Info>
+  Manual JSON must exactly match your Kafka topic schema
+</Info>
 
 ### **Step 3: Set Up Configurations for Topics**
 
 1. Enter a descriptive **Utility Name** for your Alert configuration
-
 2. Select or specify the **Input Topic** that will provide data to the utility
-
 3. Group incoming records by a selected **Group By** key field to configure alert logic
-
 4. Specify the alert duration to control how long a condition must persist before triggering an alert
-
 5. Define a unique **Output Topic** for the alerts utility.
 
 ### **Step 4: Configure Rules for Alert**
 
 1. Click **Add Rule**
-
 2. For each rule:
-
-   * **Field Name**: Select from auto-populated list (never type manually)
-
-   * **Condition**: Set operator (>, \<, =) and threshold
-
-3. Grouping Rules - Click **"Add Group"** to combine multiple rules *(Example: Group "Engine Alerts" with rules for temperature AND pressure).* Rules follow logical evaluation order.
+   - **Field Name**: Select from auto-populated list (never type manually)
+   - **Condition**: Set operator (\>, \<, =) and threshold
+3. Grouping Rules - Click **"Add Group"** to combine multiple rules _(Example: Group "Engine Alerts" with rules for temperature AND pressure)._ Rules follow logical evaluation order.
 
 ### **Step 5: Deploy**
 
@@ -109,42 +102,39 @@ Real-Time Rule Preview - The top preview bar shows your current rule structure (
 
 #### Check the preview bar to verify:
 
-* Correct grouping with parentheses
-
-* Logical operator priority matches your intent
+- Correct grouping with parentheses
+- Logical operator priority matches your intent
 
 1. Click **Deploy Utility**
+2. Go to **Pipelines** \> Your Alert Name to monitor your alert deployment on the pipeline.
 
-2. Go to **Pipelines** > Your Alert Name to monitor your alert deployment on the pipeline.
-
-The process of editing or deleting a deployed utility remains the same
+<Danger>
+  The process of editing or deleting a deployed utility remains the same
+</Danger>
 
 ## **Editing an Alert Configuration**
 
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-43.png)
+</Frame>
 
 1. Navigate to the **Pipelines** page
-
 2. Select the deployed Alert Utility you wish to modify
-
-![](/images/gitbook/image.png)
-
-1. Click **Edit Configurations** to access settings
-
-![](/images/gitbook/image.png)
-
-1. Update rule parameters as needed
-
-2. Click **Deploy Utility** to apply changes
+   <Frame>
+     ![Image](/images/image-44.png)
+   </Frame>
+3. Click **Edit Configurations** to access settings
+   <Frame>
+     ![Image](/images/image-45.png)
+   </Frame>
+4. Update rule parameters as needed
+5. Click **Deploy Utility** to apply changes
 
 ## **Deleting an Alert Configuration**
 
 1. Navigate to the **Pipelines** page
-
 2. Select the deployed Alert Utility you wish to remove
-
 3. Click the **Delete Utility** button
-
 4. Confirm deletion in the prompt window
 
 ## Frequently Asked Questions (FAQs)
@@ -167,7 +157,7 @@ The Alert Utility supports Integer, Float, String, and Boolean field types.
 
 #### Q5: What condition types are available for rule configuration?
 
-The available conditions include greater than (>), less than (\<), equal to (=), matches (for strings), and between (for ranges).
+The available conditions include greater than (\>), less than (\<), equal to (=), matches (for strings), and between (for ranges).
 
 #### Q6: Can I create rules in bulk?
 
@@ -178,11 +168,8 @@ No, rules must be added individually through the interface. Bulk rule creation i
 You can verify alert functionality by:
 
 1. Checking the status on the Pipelines page
-
 2. Monitoring the output topic for alert messages
 
 #### Q8: Can I temporarily disable an alert without deleting it?
 
 The current version does not support temporarily disabling alerts. You would need to delete the alert configuration and recreate it when needed again.
-
-[PreviousSplit Utility](/condense/condense-app-getting-started/split-utility)[NextksqlDB](/condense/condense-app-getting-started/ksqldb)

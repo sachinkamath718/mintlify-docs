@@ -1,15 +1,10 @@
 ---
 title: "Split Utility"
-description: "For the complete documentation index, see . This page is also available as ."
 ---
 
-Copy
-
-On this page
-
-1. [Condense App - Getting Started](/condense/condense-app-getting-started)
-
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-39.png)
+</Frame>
 
 ## Overview
 
@@ -19,73 +14,71 @@ The Split Utility in Kafka Streams helps streamline data processing by categoris
 
 ### **Intelligent Data Routing**
 
-* Automatically routes data to either primary or secondary topics based on conditional evaluation
-
-* Applies filtering logic to streaming data without coding or manual intervention
+- Automatically routes data to either primary or secondary topics based on conditional evaluation
+- Applies filtering logic to streaming data without coding or manual intervention
 
 ### **Operational Flexibility**
 
-* Modify routing rules without disrupting data flow or redeploying pipelines
-
-* Pre-validate data structures to ensure compatibility before deployment
+- Modify routing rules without disrupting data flow or redeploying pipelines
+- Pre-validate data structures to ensure compatibility before deployment
 
 ### **Zero-Code Implementation**
 
-* Configure complex stream splitting logic through an intuitive UI without writing code
-
-* Define data routing policies using a clear, business-oriented approach by defining rules for splitting
+- Configure complex stream splitting logic through an intuitive UI without writing code
+- Define data routing policies using a clear, business-oriented approach by defining rules for splitting
 
 ## **How to Use the Split Utility**
 
 ### **Step 1. Access the Split Utility**
 
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-40.png)
+</Frame>
 
 1. Log in to your Condense account
-
 2. From the main menu, select **Transforms**
-
 3. Click on **Split Utility** from the Transforms page
 
 ### **Step 2: Choose Configuration Method**
 
 #### **Option A: Auto-Fill from Topic** **(Recommended)**
 
-Click **"Choose a Topic"** under *Read Topic.* It auto-populates schema fields for the configuration of the Split Utility.
+Click **"Choose a Topic"** under _Read Topic._ It auto-populates schema fields for the configuration of the Split Utility.
 
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-41.png)
+</Frame>
 
-If the topic is empty, the user will not be able to set up the configuration for the Split utility
+<Info>
+  If the topic is empty, the user will not be able to set up the configuration for the Split utility
+</Info>
 
 #### **Option B: Manual JSON Upload**
 
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-42.png)
+</Frame>
 
 Click "Upload" and provide JSON as well as validate it. It auto-populates schema fields for the configuration of the Split Utility.
 
-Manual JSON must exactly match your Kafka topic schema
+<Info>
+  Manual JSON must exactly match your Kafka topic schema
+</Info>
 
 ### **Step 3. Set Up Configurations for Topic**
 
 1. Enter a descriptive **Utility Name** for your split configuration
-
 2. Select or specify the **Input Topic** that will provide data to the utility
-
 3. Define a unique **Primary Output Topic** for condition-satisfied data
-
 4. Define a unique **Secondary Output Topic** for condition-rejected data
 
 ### **Step 4: Configure Rules for Split**
 
 1. Click **Add Rule**
-
 2. For each rule:
-
-   * **Field Name**: Select from auto-populated list (never type manually)
-
-   * **Condition**: Set operator (>, \<, =) and threshold
-
-3. Grouping Rules - Click **"Add Group"** to combine multiple rule&#x73;*.* Rules follow logical evaluation order.
+   - **Field Name**: Select from auto-populated list (never type manually)
+   - **Condition**: Set operator (\>, \<, =) and threshold
+3. Grouping Rules - Click **"Add Group"** to combine multiple rules_._ Rules follow logical evaluation order.
 
 ### **Step 5: Deploy**
 
@@ -93,43 +86,38 @@ Manual JSON must exactly match your Kafka topic schema
 
 Check the preview bar to verify:
 
-* Correct grouping with parentheses
-
-* Logical operator priority matches your intent
+- Correct grouping with parentheses
+- Logical operator priority matches your intent
 
 1. Click **Deploy Utility**
-
 2. Go to **Pipelines** to monitor your split utility deployment on the pipeline.
 
 ## **Editing a Split Configuration**
 
 1. Navigate to the **Pipelines** page
-
-![](/images/gitbook/image.png)
-
-1. Select the deployed Split Utility you wish to modify
-
-2. Click **Edit Configurations** to access settings
-
-![](/images/gitbook/image.png)
-
-1. Update rule parameters as needed
-
-![](/images/gitbook/image.png)
-
-1. Click **Deploy Utility** to apply changes
+   <Frame>
+     ![Image](/images/image-43.png)
+   </Frame>
+2. Select the deployed Split Utility you wish to modify
+3. Click **Edit Configurations** to access settings
+   <Frame>
+     ![Image](/images/image-44.png)
+   </Frame>
+4. Update rule parameters as needed
+   <Frame>
+     ![Image](/images/image-45.png)
+   </Frame>
+5. Click **Deploy Utility** to apply changes
 
 ## **Deleting a Split Configuration**
 
 1. Navigate to the **Pipelines** page
-
 2. Select the deployed Split Utility you wish to remove
-
 3. Click the **Delete Utility** button
-
-![](/images/gitbook/image.png)
-
-1. Confirm deletion in the prompt window
+   <Frame>
+     ![Image](/images/image-46.png)
+   </Frame>
+   Confirm deletion in the prompt window
 
 ## Frequently Asked Questions (FAQs)
 
@@ -152,5 +140,3 @@ A: No, the input topic, primary output topic, and secondary output topic must al
 #### **Q5: What happens if I configure conflicting or overlapping rules?**
 
 A: Rules are evaluated in the order they are defined. Once a message satisfies a rule, it is immediately routed to the primary output topic.
-
-[PreviousActivity Auditor](/condense/condense-app-getting-started/activity-auditor)[NextAlert Utility](/condense/condense-app-getting-started/alert-utility)

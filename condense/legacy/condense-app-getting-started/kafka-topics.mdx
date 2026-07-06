@@ -1,15 +1,10 @@
 ---
 title: "Kafka Topics"
-description: "For the complete documentation index, see . This page is also available as ."
 ---
 
-Copy
-
-On this page
-
-1. [Condense App - Getting Started](/condense/condense-app-getting-started)
-
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-39.png)
+</Frame>
 
 ### Overview
 
@@ -21,67 +16,58 @@ Path: **Kafka Management → Kafka Topics**
 
 On the left-hand panel, Condense displays all existing topics in the connected Kafka cluster.
 
-* Topics are listed alphabetically.
+- Topics are listed alphabetically.
+- A search box allows filtering by topic name.
 
-* A search box allows filtering by topic name.
+<Frame>
+  ![Image](/images/image-40.png)
+</Frame>
 
-![](/images/gitbook/image.png)
+Selecting a topic loads its configuration details in the main panel.
 
-* Selecting a topic loads its configuration details in the main panel.
-
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-41.png)
+</Frame>
 
 ### Topic Actions
 
 For each topic, Condense provides the following actions in the top-right menu:
 
-* **Messages** → Opens the message viewer for browsing records in the topic.
+- **Messages** → Opens the message viewer for browsing records in the topic.
+- **Edit** → Enables modification of topic configuration.
+  <Frame>
+    ![Image](/images/image-42.png)
+  </Frame>
 
-* **Edit** → Enables modification of topic configuration.
-
-![](/images/gitbook/image.png)
-
-* **Delete** → Permanently deletes the selected topic from the cluster.
-
-![](/images/gitbook/image.png)
+- **Delete** → Permanently deletes the selected topic from the cluster.
+  <Frame>
+    ![Image](/images/image-43.png)
+  </Frame>
 
 Additionally, the **Create Topic** button allows new topic creation with custom parameters.
 
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-44.png)
+</Frame>
 
 ### Basic Configuration
 
 When creating or editing a topic, the following required fields must be defined:
 
-Field
-
-Description
-
-Example
-
-**Replication Factor**
-
-Number of replicas for each partition. Ensures data availability.
-
-`3`
-
-**No of Partitions**
-
-Number of partitions in the topic. Determines parallelism and throughput.
-
-`6`
-
-**Retention Period (days)**
-
-Duration for which messages are retained in the topic before deletion.
-
-`7`
+| Field | Description | Example |
+| --- | --- | --- |
+| **Replication Factor** | Number of replicas `for `each partition. Ensures<br /> data availability. | `3` |
+| **No of Partitions** | Number of partitions in the topic. Determines parallelism <br />and throughput. | `6` |
+| **Retention Period (days)** | Duration for which messages are retained <br />in the topic before deletion. | `7` |
 
 ### Advanced Configurations
 
 Advanced settings allow fine-grained control of topic behavior. These fields map directly to Kafka topic configuration parameters.
 
-Search
+|  |  |  |
+| --- | --- | --- |
+|  |  |  |
+|  |  |  |
 
 Field
 
@@ -163,18 +149,12 @@ Time-based rolling interval for log segments.
 
 ### Usage Notes
 
-* All advanced fields correspond to Kafka’s topic-level configuration properties.
-
-* Fields not explicitly set in Condense will use Kafka cluster defaults.
-
-* Certain changes (e.g., partition count) are not reversible once applied.
-
-* Care must be taken with retention and cleanup policies to avoid unintended data loss.
+- All advanced fields correspond to Kafka’s topic-level configuration properties.
+- Fields not explicitly set in Condense will use Kafka cluster defaults.
+- Certain changes (e.g., partition count) are not reversible once applied.
+- Care must be taken with retention and cleanup policies to avoid unintended data loss.
 
 ### Related Sections
 
-* [Resource Utilization](/condense/condense-app-getting-started/resource-utilization)
-
-* [ksqlDB](/condense/condense-app-getting-started/ksqldb)
-
-[PreviousResource Utilization](/condense/condense-app-getting-started/resource-utilization)[NextSchema Registry](/condense/condense-app-getting-started/schema-registry)
+- [Resource Utilization](/condense/condense-app-getting-started/resource-utilization)
+- [ksqlDB](/condense/condense-app-getting-started/ksqldb)

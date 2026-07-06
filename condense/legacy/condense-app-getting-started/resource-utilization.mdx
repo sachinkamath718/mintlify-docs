@@ -1,15 +1,10 @@
 ---
 title: "Resource Utilization"
-description: "For the complete documentation index, see . This page is also available as ."
 ---
 
-Copy
-
-On this page
-
-1. [Condense App - Getting Started](/condense/condense-app-getting-started)
-
-![](/images/gitbook/image.png)
+<Frame>
+  ![Image](/images/image-39.png)
+</Frame>
 
 ### Overview
 
@@ -21,43 +16,16 @@ The page is accessed from: **Kafka Management → Resource Utilization**
 
 At the top of the page, Condense displays an aggregated cluster status panel with the following key indicators:
 
-Search
-
-Field
-
-Description
-
-**Broker Status**
-
-Number of brokers online versus the total expected in the cluster.
-
-**Online Replicas**
-
-Total number of replicas currently in sync and online across topics.
-
-**Fetch Rate (kps)**
-
-The rate of fetch requests per second (in thousands) handled by the cluster.
-
-**Incoming Messages Rate (wr/s)**
-
-The number of messages written into the cluster per second.
-
-**Incoming Byte Rate (kB/s)**
-
-The volume of incoming data in kilobytes per second.
-
-**Outgoing Byte Rate (B/s)**
-
-The volume of data sent from the cluster in bytes per second.
-
-**Produce Request Rate (kps)**
-
-The rate of produce requests per second (in thousands) received by brokers.
-
-**Cloud Region**
-
-The deployment region for the Kafka cluster (if applicable).
+| Field | Description |
+| --- | --- |
+| **Broker Status** | Number of brokers online versus the total expected in the <br />cluster. |
+| **Online Replicas** | Total number of replicas currently in sync and online across<br /> topics. |
+| **Fetch Rate (kps)** | The rate of fetch requests per second (in thousands)<br /> handled by the cluster. |
+| **Incoming Messages Rate (wr/s)** | The number of messages written into the cluster per second. |
+| **Incoming Byte Rate (kB/s)** | The volume of incoming data in kilobytes per second. |
+| **Outgoing Byte Rate (B/s)** | The volume of data sent from the cluster in bytes per second. |
+| **Produce Request Rate (kps)** | The rate of produce requests per second (in thousands)<br />received by brokers. |
+| **Cloud Region** | The deployment region for the Kafka cluster (if applicable). |
 
 This panel provides a consolidated health snapshot of the Kafka cluster.
 
@@ -67,76 +35,38 @@ Below the cluster summary, the dashboard displays per-broker utilization charts.
 
 #### Memory Usage (in GB)
 
-* Shows real-time memory consumption per broker.
-
-* Values are expressed in gigabytes.
-
-* Allows identification of brokers under disproportionate memory load.
+- Shows real-time memory consumption per broker.
+- Values are expressed in gigabytes.
+- Allows identification of brokers under disproportionate memory load.
 
 #### CPU Usage
 
-* Displays CPU utilization per broker as a ratio (0–1 scale).
-
-* Tracks processing load trends across brokers.
-
-* Useful for detecting uneven request distribution or overloaded nodes.
+- Displays CPU utilization per broker as a ratio (0–1 scale).
+- Tracks processing load trends across brokers.
+- Useful for detecting uneven request distribution or overloaded nodes.
 
 #### Storage Usage (in GB)
 
-* Indicates disk space usage per broker in gigabytes.
-
-* Helps monitor storage capacity and anticipate the need for scaling or partition reassignment.
+- Indicates disk space usage per broker in gigabytes.
+- Helps monitor storage capacity and anticipate the need for scaling or partition reassignment.
 
 ### Field Reference
 
-Chart
-
-Metric
-
-Unit
-
-Scope
-
-**Memory Usage**
-
-Allocated and used memory
-
-GB
-
-Broker-level
-
-**CPU Usage**
-
-Processor utilization ratio
-
-Value between 0–1
-
-Broker-level
-
-**Storage Usage**
-
-Disk space usage
-
-GB
-
-Broker-level
+| Chart | Metric | Unit | Scope |
+| --- | --- | --- | --- |
+| **Memory Usage** | Allocated and used memory | GB | Broker-level |
+| **CPU Usage** | Processor utilization ratio | Value between 0–1 | Broker-level |
+| **Storage Usage** | Disk space usage | GB | Broker-level |
 
 ### Usage Notes
 
-* All metrics are collected from Kafka brokers and displayed in real time.
-
-* Historical data can be reviewed by adjusting the time interval controls (default: minute-level sampling).
-
-* Resource imbalance across brokers may indicate:
-
-  * Uneven partition distribution
-
-  * Overloaded producers or consumers targeting specific brokers
-
-  * Hardware performance differences
+- All metrics are collected from Kafka brokers and displayed in real time.
+- Historical data can be reviewed by adjusting the time interval controls (default: minute-level sampling).
+- Resource imbalance across brokers may indicate:
+  - Uneven partition distribution
+  - Overloaded producers or consumers targeting specific brokers
+  - Hardware performance differences
 
 ### Related Sections
 
-* [Kafka Topics](/condense/condense-app-getting-started/kafka-topics)
-
-[PreviousPrivate Version Control](/condense/condense-app-getting-started/private-version-control)[NextKafka Topics](/condense/condense-app-getting-started/kafka-topics)
+- [Kafka Topics](/condense/condense-app-getting-started/kafka-topics)
