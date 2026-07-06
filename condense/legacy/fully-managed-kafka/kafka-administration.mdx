@@ -8,13 +8,10 @@ To manage Kafka-related configurations, Condense offers Kafka admin client APIs.
 
 ## API Contract along with a detailed description
 
----
-
-title: Kafka Administration
-
-description: Kafka admin client APIs for cluster operations
-
----
+|  |  |  |
+| --- | --- | --- |
+|  |  |  |
+|  |  |  |
 
 # Kafka Administration
 
@@ -35,4 +32,4 @@ To manage Kafka-related configurations, Condense offers Kafka admin client APIs.
 | describeTopic <br /> | `{ "topicName":"postmanValidation" }`<br /> | Get the configuration for the specified topic in kafka cluster <br /> | `{ "configName": "compression.type", "configValue": "producer", "readOnly": false, "isDefault": true, `<br />`"configSource": 5,`<br />` "isSensitive": false, "configSynonyms": []},]}]},"status": "success", "message":`<br />` "Data retrieved successfully" }`<br /> |
 | updateTopicConfigs <br /> | `{ "topicName": "postmanValidation", "configEntries":`<br />` [{ "name": "cleanup.policy", "value": "compact" }]}`<br /><br /> | <br />Update the configuration for the specified topic <br /> | `{ "data":{ "resources":[{ "errorCode": 0, "errorMessage": null, "resourceType": 2, "resourceName":`<br />` "postmanValidation"}]},"status": "success",`<br />` "message": "Configuration updated successfully" }`<br /><br /> |
 | getOffsetsForGroup <br /> | `{ "groupId":"my-consumer-group" }`<br /> | It returns the consumer group offset for a list of topics <br /> | `{ "status": "success", "message": "Offsets retrieved successfully", "partitions": [] }`<br /> |
-| deleteGroup <br /> | `{ "groupId":"my-consumer-group" }` <br /><br /> | This API shall delete group by groupId. Only a single<br /> group can be deleted at once <br /><br /> | `{ "status": "success", "message": "Group Deleted successfully" }` <br /> |
+| deleteGroup <br /> | `{ "groupId":"my-consumer-group" }`<br /><br /> | This API shall delete group by groupId. Only a single<br /> group can be deleted at once <br /><br /> | `{ "status": "success", "message": "Group Deleted successfully" }`<br /> |
