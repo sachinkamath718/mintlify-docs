@@ -72,19 +72,7 @@
               },
               "condense/legacy/condense-deployment/upgrade",
               "condense/legacy/condense-deployment/upgrade/condense-upgradation-faq",
-              "condense/legacy/condense-deployment/linking-environment"
-            ]
-          },
-          {
-            "group": "Fundamentals",
-            "pages": [
-              "condense/legacy/fundamentals/getting-set-up/create-a-workspace",
-              "condense/legacy/fundamentals/getting-set-up/select-an-input-connector",
-              "condense/legacy/fundamentals/getting-set-up/select-a-custom-transform-connector",
-              "condense/legacy/fundamentals/getting-set-up/connecting-with-github",
-              "condense/legacy/fundamentals/getting-set-up/build-a-custom-transform-service-using-code-editor",
-              "condense/legacy/fundamentals/getting-set-up/accessing-status-of-your-build",
-              "condense/legacy/fundamentals/getting-set-up/deploy-your-build",
+              "condense/legacy/condense-deployment/linking-environment",
               {
                 "group": "Condense App- Getting Started",
                 "pages": [
@@ -110,13 +98,6 @@
                   "condense/legacy/condense-app-getting-started/resource-utilization",
                   "condense/legacy/condense-app-getting-started/kafka-topics",
                   "condense/legacy/condense-app-getting-started/schema-registry"
-                ]
-              },
-              "condense/legacy/fundamentals/getting-set-up/select-an-output-connector",
-              {
-                "group": "Condense App",
-                "pages": [
-                  "condense/legacy/condense-app-getting-started/video-guide"
                 ]
               }
             ]
