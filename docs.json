@@ -71,8 +71,8 @@
                 ]
               },
               "condense/legacy/condense-deployment/upgrade",
-              "condense/legacy/condense-deployment/zeliots-cloud",
-              "condense/legacy/condense-deployment/upgrade/condense-upgradation-faq"
+              "condense/legacy/condense-deployment/upgrade/condense-upgradation-faq",
+              "condense/legacy/condense-deployment/linking-environment"
             ]
           },
           {
@@ -126,8 +126,7 @@
             "pages": [
               "condense/legacy/connectors-in-condense",
               "condense/legacy/connectors-in-condense/available-connectors",
-              "condense/legacy/connectors-in-condense/upcoming-connectors",
-              "condense/legacy/connectors-in-condense/custom-connectors"
+              "condense/legacy/connectors-in-condense/upcoming-connectors"
             ]
           },
           {
