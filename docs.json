@@ -12,25 +12,20 @@
       {
         "version": "Legacy",
         "pages": [
+          "condense",
           {
-            "group": "Overview",
-            "icon": "book",
+            "group": "Introduction to Condense",
+            "icon": "cube",
             "pages": [
-              "condense/legacy/Condense-Documenation",
+              "introduction-to-condense",
+              "condense/legacy/introduction-to-condense/what-is-condense",
+              "condense/legacy/introduction-to-condense/features-of-condense",
               {
-                "group": "Introduction to Condense",
+                "group": "Condense Architecture",
                 "pages": [
-                  "introduction-to-condense",
-                  "condense/legacy/introduction-to-condense/what-is-condense",
-                  "condense/legacy/introduction-to-condense/features-of-condense",
-                  {
-                    "group": "Condense Architecture",
-                    "pages": [
-                      "condense/legacy/introduction-to-condense/condense-architecture",
-                      "condense/legacy/introduction-to-condense/condense-architecture/additional-services",
-                      "condense/legacy/introduction-to-condense/condense-architecture/detailed-component-breakdown"
-                    ]
-                  }
+                  "condense/legacy/introduction-to-condense/condense-architecture",
+                  "condense/legacy/introduction-to-condense/condense-architecture/additional-services",
+                  "condense/legacy/introduction-to-condense/condense-architecture/detailed-component-breakdown"
                 ]
               }
             ]
