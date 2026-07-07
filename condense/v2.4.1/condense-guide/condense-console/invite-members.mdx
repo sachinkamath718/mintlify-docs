@@ -1,0 +1,145 @@
+---
+title: "Invite Members"
+---
+
+### **Creating an Organization and Becoming Organization Admin**
+
+1. Sign up or create a new organization in Condense Console [https://console.condense.zeliot.in/signUp](https://console.condense.zeliot.in/signUp)
+
+![](/images/condense/v2.4.0/condense-guide/condense-console/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FJ4wWXaLFahV1z6wLIf9U%2Fimage.png)
+
+2. The creator automatically becomes the **Organization Admin**
+
+![](/images/condense/v2.4.0/condense-guide/condense-console/rwKRGO3QthZ6EMqqYblg%2Fblobs%2Fq27pMxg6KS3bAIGPKWsP%2Fimage.png)
+
+3. Environment(s) can now be linked to the organization
+
+![](/images/condense/v2.4.0/condense-guide/condense-console/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FHuIV9Fj1r08FHp6MXdKk%2Fimage.png)
+
+### **Inviting Members**
+
+As Organization Admin:
+
+1. Go to **Members**
+2. Select **Invite Member**
+3. Enter user details
+
+![](/images/condense/v2.4.0/condense-guide/condense-console/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FfNDim7ZD6nX2yHinn0Y6%2Fimage.png)
+
+4. Send invite
+
+Once accepted, the member appears under the organization.
+
+![](/images/condense/v2.4.0/condense-guide/condense-console/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FGl5snN5VMjFtcOtDRUXR%2Fimage.png)
+
+5. Select the member and assign one of the Organization-level roles:
+
+- Organization Admin
+- Account Admin
+- Billing Admin
+- Environment Admin (for selected environments)
+- Environment User (for selected environments)
+
+![](/images/condense/v2.4.0/condense-guide/condense-console/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FctD33xsfBC7wOLDmZdc5%2Fimage.png)
+
+<Danger>
+  You cannot assign any role to member if there is no Environment is associated to organization
+</Danger>
+
+### **Assigning Organizational Roles**
+
+Organization Admins can assign:
+
+- Organization Admin
+- Account Admin
+- Billing Admin
+
+These roles control access in Condense Console.
+
+### **Assigning Environment Roles**
+
+Organization Admin or Account Admin can:
+
+1. Select a member
+2. Choose **Add to Environment**
+3. Select an environment
+4. Assign either:
+   - Environment Admin
+   - Environment User
+
+This determines the member’s access level inside Condese Core.
+
+### **Assigning Workspace Roles (inside Condense Core)**
+
+Only **Environment Admins** do this.
+
+For an Environment User:
+
+1. Navigate to **Members** in Condense Core
+2. Select the Environment User
+3. Choose **Assign Workspace Role**
+4. Select role:
+   - Kafka Admin
+   - Maintainer
+   - Developer
+   - Viewer
+5. Select one or more workspaces
+
+> **Note** The role selected applies to all selected workspaces. Later additions must use the same role.
+
+## **Example Scenario**
+
+#### **Setup**
+
+**Environments**: Production, Testing **Workspaces**: FleetTracking, ColdChain, Sandbox
+
+#### **Team**
+
+| Name | Org Role | Environment Role | Workspace Role |
+| --- | --- | --- | --- |
+| Anita | Organization Admin | Env Admin (Prod, Test) | — |
+| Bharat | Account Admin | Env User (Prod) | Kafka Admin — FleetTracking |
+| Divya | — | Env Admin (Test) | Maintainer — Sandbox |
+| Eshan | — | Env User (Prod) | Developer — FleetTracking, ColdChain |
+| Farah | — | Env User (Test) | Viewer — Sandbox |
+
+#### **User Experience**
+
+- **Anita** Full authority across both environments and all workspaces.
+- **Bharat** Sees Production only. Sees only FleetTracking because of the Kafka Admin role.
+- **Divya** Sees all workspaces in Testing. Can deploy and manage connectors in Sandbox.
+- **Eshan** Sees Production. Sees FleetTracking and ColdChain as Developer.
+- **Farah** Sees Sandbox with read-only access.
+
+#### **Behavior**
+
+- Environment Admins see and operate across **all workspaces** of their environments
+- Environment Users only see the workspaces they have a role for
+- Workspace roles for an Environment User always remain uniform across all selected workspaces
+
+## Capability **Overview**
+
+| Capability | Env Admin | Env User (Workspace Role) |
+| --- | :-: | :-: |
+| Access all Workspaces | ✅ | ❌ |
+| Access only assigned Workspaces | Not applicable | ✅ |
+| Create / delete Workspaces | ✅ | ❌ |
+| Manage Workspace members | ✅ | ❌ |
+| Deploy connectors | ✅ | Maintainer only |
+| Develop applications | ✅ | Developer only |
+| Kafka operations | ✅ | Kafka Admin only |
+| View everything | ✅ | Viewer only |
+
+Condense RBAC provides a structured, predictable access model across three layers:
+
+- **Organization Layer** : governs who administers the organization and who can assign access
+- **Environment Layer** : determines seniority and visibility for operations
+- **Workspace Layer** : controls fine-grained operational capabilities
+
+Environment Admins manage the entire environment and all workspaces. Environment Users gain workspace access only through explicit workspace-role assignments using a consistent role across selected workspaces.
+
+This model keeps permissions clear, secure, and scalable, supporting diverse teams collaborating across multiple environments and workspaces.
+
+## Lifecycle Guide
+
+## **Frequently Asked Questions (FAQs)**
