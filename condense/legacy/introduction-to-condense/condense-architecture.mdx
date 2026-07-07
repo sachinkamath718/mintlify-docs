@@ -30,34 +30,22 @@ Condense employs a three-tier architecture, ensuring clear separation of concern
 
 <Columns cols={2}>
   <Column>
-    <Frame>
-      ![Cloud Provider](/images/cloud-provider.png)
-    </Frame>
-
-    ## Cloud Provider
-
-    The cloud marketplace (e.g., Azure, AWS and GCP) serves as the platform for deploying Condense. Users access Condense through the provider's interface.
+    <Card title="CLOUD PROVIDER" img="/images/cloud-provider.png">
+      The cloud marketplace (e.g., Azure, AWS and GCP) serves as the platform for deploying Condense. Users access Condense through the provider's interface.
+    </Card>
   </Column>
   <Column>
-    <Frame>
-      ![Image](/images/image.avif)
-    </Frame>
-
-    ## Zeliot Central Tower
-
-    This central hub manages deployments, user authentication, release updates, and monitors the overall health of Condense instances.
+    <Card title="ZELIOT CENTRAL TOWER" horizontal img="/images/image.avif">
+      This central hub manages deployments, user authentication, release updates, and monitors the overall health of Condense instances.\
+    </Card>
   </Column>
 </Columns>
 
 <Columns cols={2}>
   <Column>
-    <Frame>
-      ![Condense App Img 2](/images/condense-app-img-2.avif)
-    </Frame>
-
-    ## Condense Application
-
-    Deployed within the user's cloud environment, this application processes data from mobility devices, performs transformations, and sends it to designated outputs.
+    <Card title="CONDENSE APPLICATION" img="/images/condense-app-img-2.avif">
+      Deployed within the user's cloud environment, this application processes data from mobility devices, performs transformations, and sends it to designated outputs.
+    </Card>
   </Column>
   <Column>
   </Column>
