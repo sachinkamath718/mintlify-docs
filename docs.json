@@ -14,7 +14,7 @@
         "pages": [
           {
             "group": "Overview",
-            "icon": "book-open",
+            "icon": "book",
             "pages": [
               "condense/legacy/Condense-Documenation",
               {
