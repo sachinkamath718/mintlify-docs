@@ -17,7 +17,7 @@
             "group": "Introduction to Condense",
             "icon": "cube",
             "pages": [
-              "introduction-to-condense",
+              "before-you-begin",
               "condense/legacy/introduction-to-condense/what-is-condense",
               "condense/legacy/introduction-to-condense/features-of-condense",
               {
@@ -27,18 +27,18 @@
                   "condense/legacy/introduction-to-condense/condense-architecture/additional-services",
                   "condense/legacy/introduction-to-condense/condense-architecture/detailed-component-breakdown"
                 ]
-              }
+              },
+              "condense/legacy/introduction-to-condense/condense-architecture/components-and-services-within-the-kubernetes-cluster",
+              "condense/legacy/introduction-to-condense/key-benefits-of-condense",
+              "condense/legacy/introduction-to-condense/why-condense",
+              "condense/legacy/introduction-to-condense/condense-use-cases",
+              "condense/legacy/introduction-to-condense/faqs"
             ]
           },
-          "condense/legacy/introduction-to-condense/condense-architecture/components-and-services-within-the-kubernetes-cluster",
-          "condense/legacy/introduction-to-condense/key-benefits-of-condense",
-          "condense/legacy/introduction-to-condense/why-condense",
-          "condense/legacy/introduction-to-condense/condense-use-cases",
-          "condense/legacy/introduction-to-condense/faqs",
           {
             "group": "Fully Managed Kafka",
             "pages": [
-              "condense/legacy/fully-managed-kafka",
+              "condense/legacy/streaming-implified",
               "condense/legacy/fully-managed-kafka/kafka-management",
               "condense/legacy/fully-managed-kafka/kafka-connect",
               "condense/legacy/fully-managed-kafka/schema-registry",
@@ -216,7 +216,7 @@
             "group": "Condense Guide",
             "pages": [
               {
-                "group": "CONDENSE CONSOLE",
+                "group": "Condense Console",
                 "pages": [
                   "condense/v2.4.0/condense-guide/condense-console/create-your-organization",
                   "condense/v2.4.0/condense-guide/condense-console/invite-members",
@@ -226,7 +226,7 @@
                 ]
               },
               {
-                "group": "CONDENSE CORE",
+                "group": "Condense Core",
                 "pages": [
                   "condense/v2.4.0/condense-guide/condense-core",
                   "condense/v2.4.0/condense-guide/condense-core/create-your-workspace",
