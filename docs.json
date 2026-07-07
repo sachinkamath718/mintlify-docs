@@ -640,6 +640,10 @@
       {
         "href": "https://console.condense.zeliot.in/try-for-free?utm_source=website&utm_medium=menu-button&utm_campaign=try-for-free-p1",
         "label": "Get Started with Condense"
+      },
+      {
+        "href": "https://www.zeliot.in",
+        "label": "zeliot"
       }
     ]
   },
