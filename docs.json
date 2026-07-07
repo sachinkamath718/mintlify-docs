@@ -409,15 +409,14 @@
   "navbar": {
     "links": [
       {
-        "href": "https://www.zeliot.in/",
-        "label": "Visit Website"
+        "href": "https://console.condense.zeliot.in/try-for-free?utm_source=website&utm_medium=menu-button&utm_campaign=try-for-free-p1",
+        "label": "Get Started with Condense"
       }
     ]
   },
   "footer": {
     "socials": {
       "linkedin": "https://www.linkedin.com/company/realzeliot",
-      "medium": "https://medium.com/condense-streams-by-zeliot",
       "x": "https://x.com/realzeliot",
       "instagram": "https://www.instagram.com/zeliotofficial",
       "youtube": "https://www.youtube.com/@zeliot_official",
@@ -482,7 +481,7 @@
             "href": "https://www.zeliot.in/quick-links"
           },
           {
-            "label": "Games Built on Condense",
+            "label": "Built with Condense",
             "href": "https://www.zeliot.in/interactive-games-built-using-condense"
           }
         ]
