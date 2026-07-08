@@ -744,7 +744,8 @@
       "claude",
       "perplexity",
       "grok",
-      "aistudio"
+      "aistudio",
+      "download-pdf"
     ],
     "display": "header"
   },
