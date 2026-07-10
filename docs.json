@@ -421,6 +421,17 @@
               "condense/v2.4.1/getting-started/why-condense",
               "condense/v2.4.1/getting-started/features-of-condense",
               {
+                "group": "Try For Free",
+                "pages": [
+                  "overview",
+                  "guided",
+                  "trial-experience",
+                  "demo-workspaces",
+                  "evaluation-limits",
+                  "faq"
+                ]
+              },
+              {
                 "group": "Architecture",
                 "pages": [
                   "condense/v2.4.1/getting-started/condense-architecture",
@@ -436,18 +447,8 @@
             "icon": "api-app"
           },
           {
-            "group": "Condense App",
-            "pages": [
-              "condense/v2.4.1/condense-app-getting-started",
-              "condense/v2.4.1/condense-app-getting-started/sso-single-sign-on-creating-an-account-logging-into-the-condense-app",
-              "condense/v2.4.1/condense-app-getting-started/features-of-condense-app",
-              "condense/v2.4.1/condense-app-getting-started/glossary",
-              "condense/v2.4.1/condense-app-getting-started/video-guide"
-            ],
-            "icon": "app-window"
-          },
-          {
             "group": "Condense Guide",
+            "icon": "books",
             "pages": [
               {
                 "group": "CONDENSE CONSOLE",
@@ -456,7 +457,17 @@
                   "condense/v2.4.1/condense-guide/condense-console/invite-members",
                   "condense/v2.4.1/condense-guide/condense-console/roles-and-permissions",
                   "condense/v2.4.1/condense-guide/condense-console/deploy-environments",
-                  "condense/v2.4.1/condense-guide/condense-console/link-environments"
+                  "condense/v2.4.1/condense-guide/condense-console/link-environments",
+                  {
+                    "group": "Organization Management",
+                    "pages": [
+                      "overview-1",
+                      "creating-an-organization",
+                      "joining-an-organization",
+                      "managing-organization-members",
+                      "multi-organization-support"
+                    ]
+                  }
                 ]
               },
               {
@@ -471,8 +482,36 @@
                   "condense/v2.4.1/condense-guide/condense-core/monitor-grafana"
                 ]
               }
+            ]
+          },
+          {
+            "group": "Billing & Pricing",
+            "pages": [
+              "pricing-model",
+              "flat-pricing",
+              "tiered-pricing",
+              "pricing-calculator",
+              "frequently-asked-questions"
+            ]
+          },
+          {
+            "group": "Condense App",
+            "pages": [
+              "condense/v2.4.1/condense-app-getting-started",
+              "condense/v2.4.1/condense-app-getting-started/sso-single-sign-on-creating-an-account-logging-into-the-condense-app",
+              "condense/v2.4.1/condense-app-getting-started/features-of-condense-app",
+              "condense/v2.4.1/condense-app-getting-started/glossary",
+              "condense/v2.4.1/condense-app-getting-started/video-guide"
             ],
-            "icon": "books"
+            "icon": "app-window"
+          },
+          {
+            "group": "AI Agents",
+            "pages": [
+              "overview-2",
+              "getting-started",
+              "untitled-page"
+            ]
           },
           {
             "group": "Deep Dive",
