@@ -1,0 +1,193 @@
+---
+title: "Azure Blob Storage (Output, Store)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Stores processed data from Condense into Azure Blob containers for secure, long-term retention.
+
+**Brief Description**
+
+The Azure Blob Storage Store Output Connector allows seamless integration of real-time event streams from Condense into Azure Blob Storage. It supports secure, scalable, and structured streaming of data into cloud-based object storage, making it ideal for archival, batch analytics, data lake pipelines, compliance snapshots, and downstream machine learning workflows.
+
+This connector consumes data from a Kafka-native topic and writes each message into blob files (typically JSON, NDJSON, or CSV) in the specified Azure Blob container.
+
+**Links to Relevant Documents**
+
+- \[[https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction)\]
+- \[[https://learn.microsoft.com/en-us/azure/storage/common/storage-auth](https://learn.microsoft.com/en-us/azure/storage/common/storage-auth)\]
+- \[[https://learn.microsoft.com/en-us/rest/api/storageservices/](https://learn.microsoft.com/en-us/rest/api/storageservices/)\]
+- \[[https://learn.microsoft.com/en-us/azure/storage/common/storage-auth-aad-sas](https://learn.microsoft.com/en-us/azure/storage/common/storage-auth-aad-sas)\]
+- \[[https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview](https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview)\]
+
+**Connector Overview**
+
+This output connector enables event streaming into Azure Blob Storage using structured Kafka messages published in Condense. It is ideal for building:
+
+A. Cost-effective long-term archives.
+
+B. Time-partitioned batch analytics pipelines.
+
+C. Cold data lakes that integrate with Azure Synapse, Azure Databricks, or Power BI.
+
+D. Compliance snapshots of streaming data.
+
+Data is written as individual blob objects and can be grouped by time window or custom partitioning logic defined in the Condense transform layer.
+
+**Core Functionality**
+
+1. Converts Condense events into blob objects in Azure Blob Storage.
+2. Supports Shared Key and SAS Token authentication.
+3. Supports partitioning based on time, topic, or custom attributes.
+4. Supports JSON, NDJSON, CSV, and custom output formats.
+5. Provides reliable delivery with write acknowledgements and logging.
+
+**How It Works in Condense**
+
+1. The connector subscribes to a Kafka-native topic inside Condense.
+2. Streaming messages are consumed in real time.
+3. The connector authenticates with Azure Blob Storage using either a Shared Key or SAS Token.
+4. Messages are converted into the configured file format.
+5. Blob files are created inside the configured container based on batching policies such as time window, record count, or file size.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Storage | Storage Account Name | Azure Storage Account name | Yes |
+| Storage | Storage Container Name | Azure Blob container name | Yes |
+| Storage | Storage Access Key | Shared Key or SAS Token | Yes |
+| Storage | Storage Credential Type | `shared_key` or `sas_token` | Yes |
+| Condense | Topic (Input) | Kafka-native topic to consume from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Internal reference name for the connector.
+
+**Examples:**
+
+- azure-archive-2025
+- telemetry-backup
+- audit-trail-writes
+
+**2. Storage Account Name**
+
+Name of the Azure Storage Account.
+
+Do not include the protocol or `blob.core.windows.net`.
+
+**Examples:**
+
+- zeliotdatastore
+- iotanalyticsprod
+
+**3. Storage Container Name**
+
+Blob container where files will be written.
+
+Container names must be lowercase.
+
+**Examples:**
+
+- vehicle-trips
+- archive2025
+- realtime-dumps
+
+**4. Storage Access Key**
+
+Credential used to authenticate with Azure Blob Storage.
+
+Supported credential types:
+
+- Shared Key
+- SAS Token
+
+For better security, Microsoft recommends using short-lived SAS Tokens.
+
+Credentials can be obtained from:
+
+- Azure Portal → Storage Account → Access Keys
+- Azure Portal → Shared Access Signature
+
+**5. Storage Credential Type**
+
+Defines how Condense authenticates with Azure Blob Storage.
+
+Supported values:
+
+- `shared_key`
+- `sas_token`
+
+**6. Topic (Input)**
+
+Kafka-native Condense topic from which streaming records are consumed.
+
+Messages should already be formatted as JSON, CSV, or another supported output format.
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "azure-lake-writer",
+  "storageAccountName": "iotanalyticsprod",
+  "storageContainerName": "vehicle-trips",
+  "storageAccessKey": "REDACTED",
+  "storageCredentialType": "shared_key",
+  "inputTopic": "trip-summary-events"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Unauthorized Access (403)**
+
+**Cause:** Invalid or expired credentials.
+
+**Solution:** Verify the Shared Key or regenerate the SAS Token and ensure it has not expired.
+
+**2. Blob Not Created**
+
+**Cause:** Incorrect topic mapping or empty payload.
+
+**Solution:** Verify the input topic and inspect the payload before publishing.
+
+**3. Container Not Found**
+
+**Cause:** The configured container does not exist.
+
+**Solution:** Create the container manually or ensure the connector has permission to create it.
+
+**4. Slow Upload Performance**
+
+**Cause:** Network latency or inefficient batching.
+
+**Solution:** Increase batch size where appropriate and verify connectivity to the Azure Storage endpoint.
+
+**Advanced Considerations**
+
+**1. File Format and Naming**
+
+- Files can be generated using time-based or record-count batching.
+- File names typically include timestamps, topic names, and partition metadata.
+- Custom transforms can generate custom file names and payload structures.
+
+**2. Storage Access Tier**
+
+Azure Lifecycle Management can automatically move blobs between Hot, Cool, and Archive tiers after upload.
+
+**3. Replication**
+
+Replication (LRS, GRS, RA-GRS, etc.) is managed by the Azure Storage Account configuration and is not controlled by Condense.
+
+**Best Practices**
+
+1. Use SAS Tokens instead of Shared Keys whenever possible.
+2. Organize containers by business domain or retention policy.
+3. Integrate Azure Blob Storage with Azure Synapse, Azure Data Factory, or Databricks for downstream analytics.
+4. Apply schema validation and transformations before writing data.
+5. Configure Azure Lifecycle Management policies to archive or delete old data automatically.

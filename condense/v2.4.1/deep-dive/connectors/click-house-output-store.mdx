@@ -1,0 +1,192 @@
+---
+title: "ClickHouse (Output, Store)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Writes structured data from Condense into ClickHouse for ultra-fast analytical querying.
+
+**Brief Description**
+
+The ClickHouse Store Output Connector enables Condense to write event streams from Kafka-native topics into ClickHouse tables. ClickHouse is a high-performance columnar database optimized for real-time analytical processing (OLAP). By integrating with ClickHouse, this connector enables low-latency persistence of structured streaming data for large-scale analytics, dashboards, and time-series applications.
+
+This connector is well suited for IoT telemetry, financial event processing, log analytics, and other high-volume analytical workloads.
+
+**Links to Relevant Documents**
+
+- [https://clickhouse.com/docs](https://clickhouse.com/docs)
+- [https://clickhouse.com/docs/sql-reference](https://clickhouse.com/docs/sql-reference)
+- [https://clickhouse.com/docs/interfaces](https://clickhouse.com/docs/interfaces)
+
+**Connector Overview**
+
+| **Feature** | **Value** |
+| :-- | :-- |
+| Connector Type | Output |
+| Stream Type | Database (OLAP) |
+| Supported Operations | Insert |
+| Target System | ClickHouse cluster or standalone server |
+| Authentication | Username/Password, SSL |
+| Input | Kafka-native topic from Condense |
+| Storage Format | Structured rows mapped to ClickHouse columns |
+
+**Core Functionality**
+
+1. Writes Kafka messages into ClickHouse tables.
+2. Supports efficient batch inserts.
+3. Maps JSON payload fields to ClickHouse columns.
+4. Supports secure authentication using username/password and SSL.
+5. Optimized for high-throughput analytical workloads.
+
+**How It Works in Condense**
+
+1. The connector subscribes to a configured Kafka-native topic.
+2. Incoming JSON messages are parsed into structured records.
+3. Fields are mapped to the destination ClickHouse table schema.
+4. Records are inserted into ClickHouse using the HTTP interface or native protocol.
+5. Messages are batched before insertion to improve performance.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| ClickHouse | URL | ClickHouse server hostname or IP address | Yes |
+| ClickHouse | Port | ClickHouse HTTP or TCP port | Yes |
+| ClickHouse | Database Name | Target database | Yes |
+| ClickHouse | Table Name | Destination table | Yes |
+| Authentication | User | ClickHouse username | Yes |
+| Authentication | Password | ClickHouse password | Yes |
+| Condense | Topic (Input) | Kafka-native topic to consume from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Unique identifier for this connector inside Condense.
+
+**Example:**
+
+`ClickHouse_Output_Orders`
+
+**2. URL**
+
+Hostname or IP address of the ClickHouse server.
+
+**Example:**
+
+`clickhouse.company.com`
+
+**3. Port**
+
+Port used by ClickHouse.
+
+Common values:
+
+- 8123 (HTTP)
+- 9000 (Native TCP)
+
+**4. Database Name**
+
+Target ClickHouse database.
+
+**Example:**
+
+`analytics`
+
+**5. Table Name**
+
+Destination ClickHouse table where records will be inserted.
+
+**Example:**
+
+`events_stream`
+
+**6. User**
+
+Username used to authenticate with ClickHouse.
+
+**Example:**
+
+`default`
+
+**7. Password**
+
+Password associated with the ClickHouse user.
+
+**8. Topic (Input)**
+
+Kafka-native Condense topic from which records are consumed.
+
+**Example:**
+
+`processed_events`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "ClickHouse_Output_Orders",
+  "url": "clickhouse.company.com",
+  "port": 8123,
+  "databaseName": "analytics",
+  "tableName": "orders_processed",
+  "user": "default",
+  "password": "secret123",
+  "inputTopic": "processed_order_stream"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Connection Refused**
+
+**Cause:** Incorrect URL or port.
+
+**Solution:** Verify the ClickHouse endpoint, firewall rules, and network connectivity.
+
+**2. Authentication Error**
+
+**Cause:** Invalid username or password.
+
+**Solution:** Verify the configured credentials and ensure the user has permission to write to the target database.
+
+**3. Schema Mismatch**
+
+**Cause:** Incoming JSON fields do not match the ClickHouse table schema.
+
+**Solution:** Update the Condense transform or modify the ClickHouse table schema.
+
+**4. Slow Inserts**
+
+**Cause:** Small batch size or network latency.
+
+**Solution:** Increase the batch size and optimize network connectivity.
+
+**Advanced Considerations**
+
+**1. Data Types**
+
+Ensure incoming JSON fields match the destination ClickHouse column types such as `Int32`, `String`, or `DateTime`.
+
+**2. Indexing**
+
+Use appropriate primary keys, partition keys, and ordering keys to improve query performance.
+
+**3. Cluster Deployments**
+
+When using distributed ClickHouse clusters, configure sharding and replication according to your deployment architecture.
+
+**4. Security**
+
+Use SSL/TLS for production deployments and securely manage authentication credentials.
+
+**Best Practices**
+
+1. Use dedicated tables for different event streams.
+2. Define explicit schemas to avoid data type conflicts.
+3. Monitor connector logs for failed insert operations.
+4. Partition tables using timestamps or business attributes to improve analytical performance.
+5. Periodically optimize ClickHouse tables using appropriate maintenance operations.

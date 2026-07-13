@@ -1,0 +1,196 @@
+---
+title: "Elasticsearch (Output, Stream)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Streams processed data from Condense into Elasticsearch for indexing, search, and visualization.
+
+**Brief Description**
+
+The Elasticsearch Stream Output Connector enables real-time ingestion of Kafka-native messages into Elasticsearch indexes. Elasticsearch is a distributed search and analytics engine designed for near real-time indexing, full-text search, and large-scale analytics.
+
+This connector is ideal for searchable logs, dashboards, metrics pipelines, security monitoring, and full-text indexing of streaming data.
+
+**Links to Relevant Documents**
+
+- \[[https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)\]
+- \[[https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index\_.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html)\]
+- \[[https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-security.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-security.html)\]
+
+**Connector Overview**
+
+The connector consumes events from a Kafka-native Condense topic and indexes them into an Elasticsearch index.
+
+Common use cases include:
+
+A. Centralized log indexing.
+
+B. Kibana dashboards.
+
+C. Security event indexing.
+
+D. Full-text search.
+
+**Core Functionality**
+
+1. Streams Kafka-native events into Elasticsearch.
+2. Supports secure authentication.
+3. Indexes JSON documents into configurable Elasticsearch indexes.
+4. Supports Elasticsearch 7.x and 8.x deployments.
+5. Provides high-throughput indexing for real-time workloads.
+
+**How It Works in Condense**
+
+1. Condense publishes events into a Kafka-native topic.
+2. The connector subscribes to the configured input topic.
+3. Each message is converted into a JSON document.
+4. The document is indexed into the configured Elasticsearch index.
+5. Connector status, retries, and errors are visible within Condense.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Authentication | Elasticsearch User | Username used for authentication | Yes |
+| Authentication | Elasticsearch Password | Password for the configured user | No |
+| Connection | Elasticsearch Address | Elasticsearch hostname or endpoint | Yes |
+| Connection | Elasticsearch Cluster Name | Target Elasticsearch cluster name | Yes |
+| Storage | Elasticsearch Index Name | Destination Elasticsearch index | Yes |
+| Condense | Topic (Input) | Kafka-native topic to consume from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Unique identifier for the connector inside Condense.
+
+**Example:**
+
+`es-security-logs-output`
+
+**2. Elasticsearch User**
+
+Username used to authenticate with the Elasticsearch cluster.
+
+The user should have permission to create and write documents to the target index.
+
+**3. Elasticsearch Password**
+
+Password associated with the configured Elasticsearch user.
+
+Store credentials securely using encrypted secrets or environment variables.
+
+**4. Elasticsearch Address**
+
+Hostname or endpoint of the Elasticsearch cluster.
+
+**Examples:**
+
+- `https://es-node1.company.com:9200`
+- `http://localhost:9200`
+
+HTTPS is recommended for production deployments.
+
+**5. Elasticsearch Cluster Name**
+
+Logical name of the Elasticsearch cluster.
+
+**Example:**
+
+`elasticsearch`
+
+**6. Elasticsearch Index Name**
+
+Destination index where documents are stored.
+
+Examples:
+
+- iot-events
+- transaction-logs
+- user-interactions
+
+If automatic index creation is enabled, Elasticsearch can create the index automatically.
+
+**7. Topic (Input)**
+
+Kafka-native Condense topic from which records are consumed.
+
+Messages should be valid JSON documents.
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "es-fleet-telemetry-writer",
+  "esUser": "elastic-user",
+  "esPassword": "REDACTED",
+  "esAddress": "https://es.zeliot.io:9200",
+  "esClusterName": "zeliot-prod-cluster",
+  "esIndexName": "fleet-tracking-events",
+  "inputTopic": "vehicle.geoposition.raw"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Authentication Errors**
+
+**Symptoms:** HTTP 401 Unauthorized.
+
+**Solution:** Verify the configured username, password, and assigned roles.
+
+**2. Index Not Found**
+
+**Symptoms:** HTTP 404 or index not found.
+
+**Solution:** Create the index manually or enable automatic index creation.
+
+**3. Document Rejected**
+
+**Symptoms:** Mapping exceptions or illegal field errors.
+
+**Solution:** Verify the document schema and ensure reserved fields such as `_id` and `_index` are not overwritten.
+
+**4. Connection Timeout**
+
+**Symptoms:** Requests to Elasticsearch time out.
+
+**Solution:** Verify network connectivity, firewall rules, and DNS resolution.
+
+**5. Cluster Health Issues**
+
+**Symptoms:** Writes are delayed or rejected.
+
+**Solution:** Check cluster health, shard allocation, and available disk space using Elasticsearch APIs or Kibana.
+
+**Advanced Considerations**
+
+**1. Index Sharding**
+
+Configure shards and replica counts based on indexing throughput and query requirements.
+
+**2. Document IDs**
+
+If a document ID is not supplied, Elasticsearch automatically generates one.
+
+Custom document IDs can be used for idempotent indexing.
+
+**3. Bulk Indexing**
+
+Bulk indexing improves throughput and reduces indexing overhead.
+
+**4. Compatibility**
+
+Supports Elasticsearch 7.x, Elasticsearch 8.x, Elastic Cloud, self-managed deployments, and OpenSearch-compatible clusters.
+
+**Best Practices**
+
+1. Define index mappings before ingesting production data.
+2. Use ingest pipelines for enrichment or post-processing.
+3. Configure Index Lifecycle Management (ILM) for time-based indexes.
+4. Monitor indexing throughput and latency using Elasticsearch monitoring tools.
+5. Use HTTPS and secure authentication for production environments.

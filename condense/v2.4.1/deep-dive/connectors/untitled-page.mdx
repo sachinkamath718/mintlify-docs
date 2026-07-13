@@ -1,0 +1,229 @@
+---
+title: "Apache Kafka (Input, Stream)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Ingests messages from external Kafka topics into Condense for routing, enrichment, and delivery.
+
+**Brief Description**
+
+The Apache Kafka Stream Input Connector allows Condense to consume real-time data from any externally managed or self-hosted Apache Kafka cluster. This connector acts as a bridge, ingesting messages from a specified Kafka topic and publishing them into a Kafka-native topic inside Condense, enabling downstream stream processing, transformations, and real-time application logic.
+
+It supports secure and authenticated Kafka clusters, with configurability for consumer group tracking and fine-grained offset control.
+
+**Links to Relevant Documentation**
+
+- [https://kafka.apache.org/documentation/](https://kafka.apache.org/documentation/)
+
+- [https://kafka.apache.org/documentation/#security](https://kafka.apache.org/documentation/#security)
+
+- [https://kafka.apache.org/documentation/#consumerconfigs](https://kafka.apache.org/documentation/#consumerconfigs)
+
+**Connector Overview**
+
+This connector is designed for importing real-time events from an existing Apache Kafka infrastructure into the Condense platform. It supports TLS, SASL authentication mechanisms, consumer group assignment, and high-throughput ingestion into Condense-managed streaming pipelines.
+
+**Core Functionality**
+
+1. Connects to one or more Apache Kafka brokers as an external client.
+
+2. Consumes data from a specified topic with full offset tracking.
+
+3. Supports TLS and SASL-based secure connections.
+
+4. Publishes consumed messages into a Kafka-native Condense topic.
+
+5. Designed for real-time, high-volume event ingestion from enterprise Kafka clusters.
+
+**How It Works in Condense**
+
+1. The connector establishes a consumer connection to the configured Kafka cluster.
+
+2. It subscribes to the specified topic using the provided consumer group.
+
+3. Data is consumed and converted into Condense's internal streaming format.
+
+4. Messages are published into the defined Output Topic inside Condense for real-time processing or further routing.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+
+| :-- | :-- | :-- | :--: |
+
+| General | Title | Unique identifier for the connector in Condense | Yes |
+
+| Kafka | Bootstrap Servers | Comma-separated list of Kafka broker addresses | Yes |
+
+| Kafka | Topic Name | Kafka topic to consume from | Yes |
+
+| Kafka | Security Protocol | Protocol used (PLAINTEXT, SSL, SASL\_SSL) | Yes |
+
+| Kafka | Kafka Username | Username for SASL authentication | Yes |
+
+| Kafka | Kafka Password | Password for SASL authentication | No |
+
+| Kafka | Consumer Group | Kafka consumer group ID used for offset tracking | Yes |
+
+| Condense | Topic (Output) | Internal Kafka-native topic in Condense to publish data to | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Human-readable identifier within the Condense UI.
+
+Used to distinguish among multiple connectors connected to different Kafka sources.
+
+**2. Bootstrap Servers**
+
+**Example:**
+
+`kafka1.example.com:9092,kafka2.example.com:9092`
+
+One or more brokers used to discover the Kafka cluster.
+
+These should be publicly accessible if the Kafka cluster is outside Condense.
+
+**3. Topic Name**
+
+The source Kafka topic to consume from.
+
+Data from this topic will be streamed into Condense for further processing.
+
+**4. Security Protocol**
+
+Options include:
+
+- PLAINTEXT – No security, basic TCP
+
+- SSL – TLS encryption only
+
+- SASL\_SSL – Authentication (SASL/PLAIN, SASL/SCRAM) over SSL
+
+Choose according to how the external Kafka cluster is configured.
+
+**5. Kafka Username / Password**
+
+Applicable when using SASL\_SSL or other authenticated protocols.
+
+Typically configured with:
+
+- `sasl.mechanism=PLAIN`
+
+- `security.protocol=SASL_SSL`
+
+Username is mandatory when authentication is enabled.
+
+Password is optional if the mechanism is token-based.
+
+**6. Consumer Group**
+
+The Kafka consumer group ID used for offset management.
+
+Enables consistent processing during connector restart or failover.
+
+Allows multiple connectors to read independently from the same topic.
+
+**7. Topic (Output)**
+
+Condense-native Kafka topic to which consumed records are published.
+
+Enables downstream apps, transforms, or alerts to process the ingested data.
+
+**Sample Configuration Example**
+
+\`\`\`json
+
+{
+
+  "title": "external-kafka-ingest-finance",
+
+  "bootstrapServers": "broker1.kafka.company.com:9093,broker2.kafka.company.com:9093",
+
+  "topicName": "finance.transactions.raw",
+
+  "securityProtocol": "SASL\_SSL",
+
+  "kafkaUsername": "condense\_user",
+
+  "kafkaPassword": "secure\_password\_123",
+
+  "consumerGroup": "condense-finance-cg",
+
+  "outputTopic": "[condense.finance](http://condense.finance).ingest"
+
+}
+
+\`\`\`
+
+**Troubleshooting and Common Issues**
+
+**1. Invalid Credentials**
+
+**Symptoms:** Authentication failure, repeated connection attempts.
+
+**Fix:** Double-check the Kafka Username, Kafka Password, and authentication mechanism. Confirm the configuration with your Kafka administrator.
+
+**2. Cannot Connect to Broker**
+
+**Symptoms:** Connection timeout or "No leader" errors.
+
+**Fix:** Validate firewall access, DNS resolution, and TLS certificates if using SSL.
+
+**3. Duplicate Records**
+
+**Cause:** Incorrect or reused consumer group ID across multiple connectors.
+
+**Fix:** Assign a unique consumer group ID for each connector unless shared consumption is intended.
+
+**4. No Records Consumed**
+
+**Possible Causes:** Incorrect topic name, committed offsets, or consumer group position.
+
+**Fix:** Verify the topic name and reset consumer group offsets if required.
+
+**Advanced Topics**
+
+**1. SASL Mechanisms**
+
+- PLAIN
+
+- SCRAM-SHA-256
+
+- SCRAM-SHA-512
+
+Configure the connector to match your Kafka cluster authentication.
+
+**2. TLS Configuration**
+
+- Uses SSL connections for encrypted communication.
+
+- Currently relies on the default JVM truststore.
+
+**3. Offset Management**
+
+- Managed automatically by Condense.
+
+- Future releases may include offset replay and visualization.
+
+**4. Performance Notes**
+
+- Consumes data from multiple Kafka partitions in parallel.
+
+- Uses Kafka-native flow control for handling backpressure.
+
+**Best Practices**
+
+1. Use SASL\_SSL instead of PLAINTEXT for production environments.
+
+2. Monitor consumer lag using your Kafka monitoring tools.
+
+3. Use dedicated consumer groups for independent ingestion pipelines.
+
+4. Keep connector names and output topics aligned for easier troubleshooting.
+
+5. Design source topics around business domains for simpler routing.

@@ -1,0 +1,181 @@
+---
+title: "Azure Event Hubs (Output, Stream)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Streams processed data from Condense into Azure Event Hubs for cloud-native event workflows.
+
+**Brief Description**
+
+The Azure Event Hubs Stream Output Connector enables real-time publishing of events from Kafka-native Condense topics into Azure Event Hubs. It allows Condense pipelines to integrate with Azure-native services such as Azure Stream Analytics, Azure Functions, Azure Data Explorer, and custom event consumers.
+
+The connector supports secure, partition-aware publishing and high-throughput event delivery for telemetry, logging, application events, and enterprise integration scenarios.
+
+**Links to Relevant Documents**
+
+- [https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about)
+- [https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-java-get-started-send](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-java-get-started-send)
+- [https://learn.microsoft.com/en-us/azure/event-hubs/authorize-access-event-hubs](https://learn.microsoft.com/en-us/azure/event-hubs/authorize-access-event-hubs)
+
+**Connector Overview**
+
+The connector consumes messages from a Kafka-native Condense topic and publishes them to a specified Azure Event Hub.
+
+Common use cases include:
+
+A. Forwarding processed events into Azure analytics platforms.
+
+B. Integrating with Azure-native machine learning and automation services.
+
+C. Streaming IoT, fleet, or telemetry data into Azure Stream Analytics.
+
+D. Connecting Kafka-native workloads with Azure-based event processing pipelines.
+
+**Core Functionality**
+
+1. Publishes events from Kafka-native Condense topics into Azure Event Hubs.
+2. Supports partition-aware message publishing.
+3. Authenticates using Azure Shared Access Policies.
+4. Uses asynchronous batching for high-throughput publishing.
+5. Delivers events for downstream Azure consumers.
+
+**How It Works in Condense**
+
+1. The connector subscribes to the configured Kafka-native input topic.
+2. Incoming messages are packaged as Azure Event Hub events.
+3. The connector authenticates using the configured Shared Access Policy.
+4. Messages are published asynchronously into the target Event Hub.
+5. Azure consumers can immediately consume the published events.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Event Hub | Namespace Name | Azure Event Hubs namespace | Yes |
+| Event Hub | Event Hub Name | Destination Event Hub | Yes |
+| Authentication | Shared Access Name | Shared Access Policy name | Yes |
+| Authentication | Shared Access Key | Shared Access Policy key | Yes |
+| Condense | Topic (Input) | Kafka-native topic to consume from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Unique identifier for the connector.
+
+**Example:**
+
+`eventhub-analytics-output`
+
+**2. Namespace Name**
+
+Azure Event Hubs namespace.
+
+**Example:**
+
+`stream-namespace.servicebus.windows.net`
+
+The namespace groups one or more Event Hubs.
+
+**3. Event Hub Name**
+
+Destination Event Hub where events are published.
+
+**Examples:**
+
+- analytics-events
+- telemetry-stream
+- processed-events
+
+The Event Hub must already exist.
+
+**4. Shared Access Name**
+
+Azure Shared Access Policy used for authentication.
+
+The policy must include **Send** permissions.
+
+**Example:**
+
+`condenseEventPublisher`
+
+**5. Shared Access Key**
+
+Secret key associated with the Shared Access Policy.
+
+Rotate keys regularly and store them securely.
+
+**6. Topic (Input)**
+
+Kafka-native Condense topic from which events are consumed.
+
+Messages published to this topic are forwarded to Azure Event Hubs.
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "eventhub-analytics-output",
+  "namespaceName": "stream-namespace.servicebus.windows.net",
+  "eventHubName": "analytics-events",
+  "sharedAccessName": "condenseEventPublisher",
+  "sharedAccessKey": "REDACTED",
+  "inputTopic": "normalized-events-topic"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Authentication Failed**
+
+**Cause:** Invalid Shared Access Policy or insufficient permissions.
+
+**Solution:** Verify the Shared Access Policy has **Send** permissions and update the credentials if necessary.
+
+**2. Events Not Appearing**
+
+**Cause:** Incorrect Event Hub name or no data in the input topic.
+
+**Solution:** Verify the Event Hub configuration and confirm messages are available in the configured Kafka-native topic.
+
+**3. Throughput Bottlenecks**
+
+**Cause:** Insufficient Azure Event Hubs Throughput Units.
+
+**Solution:** Increase the number of Throughput Units or scale the Event Hub namespace appropriately.
+
+**4. Connector Startup Failure**
+
+**Cause:** Network restrictions or firewall configuration.
+
+**Solution:** Verify network connectivity and ensure the Event Hub namespace is accessible from the Condense deployment.
+
+**Advanced Topics**
+
+**1. Event Size Limits**
+
+Azure Event Hubs supports a maximum event size of 1 MB. Messages larger than this limit should be transformed or split before publishing.
+
+**2. Retry Handling**
+
+The connector automatically retries transient Azure Event Hubs failures using exponential backoff.
+
+**3. Partitioning**
+
+Events can be routed using partition keys or distributed automatically across available Event Hub partitions.
+
+**4. High Availability**
+
+The connector supports scalable publishing to Azure Event Hubs for high-throughput production deployments.
+
+**Best Practices**
+
+1. Create separate Event Hubs for different business domains or workloads.
+2. Use dedicated Kafka-native topics for each publishing pipeline.
+3. Monitor Azure Event Hubs metrics for throughput, throttling, and latency.
+4. Store Shared Access Keys securely using Azure Key Vault or another secret management solution.
+5. Align Kafka partitions with Event Hub partitions where consistent ordering is required.
