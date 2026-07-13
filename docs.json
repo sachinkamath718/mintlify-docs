@@ -509,8 +509,8 @@
             "group": "Marketing Assets",
             "icon": "triangle-square-circle",
             "pages": [
-              "condense/v2.4.1/marketing-assets/wallpapers",
-              "condense/v2.4.1/marketing-assets/social-media"
+              "wallpapers-1",
+              "social-media-1"
             ]
           }
         ]
@@ -720,7 +720,8 @@
                       "condense/v2.4.1/deep-dive/connectors/untitled-page-8",
                       "condense/v2.4.1/deep-dive/connectors/kinesis",
                       "condense/v2.4.1/deep-dive/connectors/kinesis-1",
-                      "condense/v2.4.1/deep-dive/connectors/microsoft-sql-server"
+                      "condense/v2.4.1/deep-dive/connectors/microsoft-sql-server",
+                      "condense/v2.4.1/deep-dive/connectors/mongo"
                     ]
                   }
                 ]

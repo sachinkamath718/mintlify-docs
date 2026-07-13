@@ -1,0 +1,189 @@
+---
+title: "MongoDB (Input, Store)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Polls data from MongoDB into Condense for analytics, modeling, and dashboarding.
+
+**Brief Description**
+
+The **MongoDB Change Data Capture (CDC) Stream Input Connector** enables Condense to ingest real-time change events from MongoDB databases into Kafka-native topics for downstream processing, analytics, and transformations. It captures **insert, update, and delete** operations from MongoDB collections and streams them into Condense topics with minimal latency.
+
+This connector is designed for applications requiring continuous synchronization between operational databases and event-driven platforms, such as analytics pipelines, real-time monitoring, or microservices that react to database changes.
+
+**Links to Relevant Documents**
+
+- [https://www.mongodb.com/docs/manual/changeStreams/](https://www.mongodb.com/docs/manual/changeStreams/)
+- [https://www.mongodb.com/docs/kafka-connector/current/](https://www.mongodb.com/docs/kafka-connector/current/)
+
+**Connector Overview**
+
+| **Feature** | **Value** |
+| :-- | :-- |
+| Connector Type | Input |
+| Stream Type | Database Change Data Capture (CDC) |
+| Supported MongoDB | Replica Sets / Sharded Clusters (Atlas or self-managed) |
+| Operations Captured | Insert, Update, Delete |
+| Supported Kafka | Apache Kafka 3.8.0\+ via Condense platform |
+| Authentication | Username/Password, TLS certificates |
+| Output | Publishes change events to Condense topics in JSON format |
+
+**Core Functionality**
+
+- **Real-time Change Data Capture** – Streams inserts, updates, and deletes as events.
+- **Full Document Mode** – Supports capturing the complete changed document in addition to deltas.
+- **Batch Polling** – Groups events into configurable batch sizes for efficient ingestion.
+- **Flexible Mapping** – Allows namespace mapping (database.collection → topic).
+- **Scalable** – Horizontally scalable using Condense Kafka-native architecture.
+- **Fault-Tolerant** – Supports resume tokens to recover from interruptions without data loss.
+
+**How MongoDB CDC Input Works in Condense**
+
+1. **Connection Established** – Connector connects to MongoDB using the provided URI.
+2. **Change Stream Subscription** – Subscribes to a collection's Change Stream.
+3. **Event Capture** – Detects insert, update, and delete operations.
+4. **Batch Aggregation** – Buffers events up to Poll Max Batch Size before pushing.
+5. **Publishing to Condense** – Events are converted to JSON and published into the configured Condense Kafka topic.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | A unique name for the connector instance within Condense | Yes |
+| Connection | Connection URI | MongoDB connection string with authentication and database details | Yes |
+| Database | Database Name | The MongoDB database to monitor | Yes |
+| Database | Collection Name | The MongoDB collection from which changes will be captured | Yes |
+| CDC | Full Document Mode | Determines whether the full updated document is included in change events | Yes |
+| CDC | Poll Max Batch Size | Maximum number of documents processed per polling cycle | Yes |
+| Condense | Output Topic | Condense Kafka topic where MongoDB change events will be published | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- **Description:** A unique name for the connector instance within Condense.
+- **Example:** `MongoDB_CDC_Input_Orders`
+
+---
+
+**2. Connection URI**
+
+- **Description:** MongoDB connection string with authentication and database details.
+- **How to Obtain:**
+  - For MongoDB Atlas → Copy from **Cluster → Connect → Connect your application**.
+  - For self-hosted MongoDB → Format:
+
+```text
+mongodb://username:password@host:port/database
+```
+
+- **Example:**
+
+```text
+mongodb://cdcuser:cdcpass@cluster0.mongodb.net:27017/myapp
+```
+
+---
+
+**3. Database Name**
+
+- **Description:** The MongoDB database to monitor.
+- **Example:** `salesdb`
+
+---
+
+**4. Collection Name**
+
+- **Description:** The MongoDB collection from which changes will be captured.
+- **Example:** `orders`
+
+---
+
+**5. Full Document Mode**
+
+- **Description:** Determines whether the full updated document is included in change events.
+- **Options:**
+  - `off` → Only delta/change fields are included.
+  - `updateLookup` → Full document returned on updates.
+- **Example:** `updateLookup`
+
+---
+
+**6. Poll Max Batch Size**
+
+- **Description:** Maximum number of documents processed per polling cycle.
+- **Default:** `1000`
+- **Example:** `500`
+
+---
+
+**7. Output Topic**
+
+- **Description:** Condense Kafka topic where MongoDB change events will be published.
+- **How to Obtain:** Select an existing topic from the Condense Topics Dashboard.
+- **Example:** `mongodb_order_changes`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "MongoDB_CDC_Input_Orders",
+  "connectionUri": "mongodb://cdcuser:cdcpass@cluster0.mongodb.net:27017/salesdb",
+  "databaseName": "salesdb",
+  "collectionName": "orders",
+  "fullDocumentMode": "updateLookup",
+  "pollMaxBatchSize": 500,
+  "outputTopic": "mongodb_order_changes"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**Connector not starting**
+
+- Check MongoDB URI format and credentials.
+- Ensure the database and collection exist.
+- Verify that Change Streams are enabled (requires replica set/sharded cluster).
+
+**No messages in topic**
+
+- Confirm that test data is being inserted into the monitored collection.
+- Check if poll batch size is too restrictive.
+
+**Schema wrapper in messages**
+
+- Enable raw JSON mode in configuration.
+
+**Connection timeout**
+
+- Verify MongoDB Atlas IP whitelist settings.
+- Ensure network connectivity between Condense and MongoDB cluster.
+
+**Advanced Topics**
+
+**1. Performance Tuning**
+
+- Adjust Poll Max Batch Size and polling intervals for optimal throughput.
+
+**2. Resume Tokens**
+
+- Enables recovery from interruptions without reprocessing old data.
+
+**3. Filtering**
+
+- Use MongoDB aggregation pipelines to filter out unnecessary events before they are published.
+
+**4. Security**
+
+- Always use TLS-encrypted URIs and restrict database users to least-privilege roles.
+
+**Best Practices**
+
+1. Use TLS-encrypted MongoDB connections.
+2. Configure dedicated users with least-privilege permissions.
+3. Monitor connector lag and throughput.
+4. Tune Poll Max Batch Size based on expected change volume.
+5. Use separate Condense topics for different collections or business domains.
