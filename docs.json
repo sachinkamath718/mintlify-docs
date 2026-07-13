@@ -729,7 +729,10 @@
                       "condense/v2.4.1/deep-dive/connectors/post-1",
                       "condense/v2.4.1/deep-dive/connectors/rabit",
                       "condense/v2.4.1/deep-dive/connectors/rabbit",
-                      "condense/v2.4.1/deep-dive/connectors/rio"
+                      "condense/v2.4.1/deep-dive/connectors/rio",
+                      "condense/v2.4.1/deep-dive/connectors/s3",
+                      "condense/v2.4.1/deep-dive/connectors/sftp",
+                      "condense/v2.4.1/deep-dive/connectors/untitled-page-10"
                     ]
                   }
                 ]

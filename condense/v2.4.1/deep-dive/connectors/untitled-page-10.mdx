@@ -1,0 +1,263 @@
+---
+title: "Snowflake (Output, Store)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Writes processed data from Condense into Snowflake for analytics, reporting, and data warehousing.
+
+**Brief Description**
+
+The Snowflake Output Connector enables Condense to stream processed or enriched data from Kafka-native topics directly into Snowflake. It provides a reliable mechanism for persisting streaming events into structured tables for business intelligence, reporting, compliance, and long-term analytics.
+
+The connector securely connects to a Snowflake account, executes parameterized SQL statements for incoming events, and supports inserts, updates, and upserts using standard Snowflake SQL.
+
+**Links to Relevant Documents**
+
+- [https://docs.snowflake.com/en/user-guide/data-load-overview](https://docs.snowflake.com/en/user-guide/data-load-overview)
+- [https://docs.snowflake.com/en/user-guide/jdbc-configure](https://docs.snowflake.com/en/user-guide/jdbc-configure)
+- [https://docs.snowflake.com/en/sql-reference/sql](https://docs.snowflake.com/en/sql-reference/sql)
+
+**Connector Overview**
+
+The Snowflake Output Connector consumes events from a Condense Kafka topic and writes them into Snowflake tables using configurable SQL statements. It is designed for low-latency ingestion into enterprise data warehouses while maintaining transactional consistency and observability.
+
+Typical use cases include:
+
+- Real-time analytics
+- Business intelligence
+- Operational reporting
+- Compliance archiving
+- Data warehousing
+- Machine learning feature stores
+
+**Core Functionality**
+
+- Streams Kafka events into Snowflake tables.
+- Supports parameterized SQL execution.
+- Supports INSERT, UPDATE, and MERGE operations.
+- Authenticates using Snowflake credentials.
+- Supports secure encrypted connections.
+- Provides retry and operational monitoring.
+
+**How It Works in Condense**
+
+1. The connector subscribes to the configured Kafka topic.
+2. Incoming events are mapped to SQL parameters.
+3. The connector establishes a secure connection to Snowflake.
+4. SQL statements are executed against the configured database.
+5. Execution status and metrics are exposed through Condense observability.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Snowflake | Instance URL | Snowflake account endpoint | Yes |
+| Authentication | Username | Snowflake username | Yes |
+| Authentication | Password | Snowflake password | No |
+| Snowflake | Database Name | Target Snowflake database | Yes |
+| Execution | Query | SQL statement executed for incoming records | Yes |
+| Condense | Input Topic | Kafka topic to consume events from | Yes |
+
+**Field-by-Field Explanation**
+
+### Title
+
+- **Description:** Friendly name for the connector.
+- **Example:** `Snowflake_Streaming_Orders`
+
+---
+
+### Instance URL
+
+- **Description:** Fully qualified Snowflake account URL.
+- **Example:**
+
+```text
+xy12345.ap-south-1.snowflakecomputing.com
+```
+
+- **Requirements:**
+  - Must match your Snowflake account endpoint.
+  - Must be reachable from the Condense deployment.
+
+---
+
+### Username
+
+- **Description:** Snowflake user used for authentication.
+- **Requirements:**
+  - Must have permissions to connect.
+  - Must have privileges to execute the configured SQL.
+
+---
+
+### Password
+
+- **Description:** Password associated with the Snowflake user.
+- **Security Recommendation:** Store credentials securely and rotate them regularly.
+
+---
+
+### Database Name
+
+- **Description:** Target Snowflake database.
+- **Example:** `STREAMING_DB`
+- **Requirements:**
+  - Database must already exist.
+  - User must have access permissions.
+
+---
+
+### Query
+
+- **Description:** SQL statement executed for each incoming record or batch.
+- **Supported Statements:**
+  - INSERT
+  - UPDATE
+  - MERGE
+- **Example:**
+
+```sql
+INSERT INTO sensor_readings
+(device_id, event_time, temperature)
+VALUES (?, ?, ?)
+```
+
+- **Recommendation:** Use parameterized queries to improve security and performance.
+
+---
+
+### Input Topic
+
+- **Description:** Kafka topic inside Condense that supplies events.
+- **Example:** `sensor.events.processed`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "Snowflake_Streaming_Orders",
+  "instanceUrl": "xy12345.ap-south-1.snowflakecomputing.com",
+  "username": "condense_writer",
+  "password": "********",
+  "databaseName": "STREAMING_DB",
+  "query": "INSERT INTO sensor_readings (device_id, event_time, temperature) VALUES (?, ?, ?)",
+  "inputTopic": "sensor.events.processed"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+### Authentication Failed
+
+**Possible Causes**
+
+- Incorrect username or password.
+- Invalid Snowflake account URL.
+
+**Resolution**
+
+- Verify account endpoint.
+- Confirm credentials using the Snowflake web interface or SQL client.
+
+---
+
+### SQL Execution Failed
+
+**Possible Causes**
+
+- Invalid SQL syntax.
+- Missing table or columns.
+- Parameter mismatch.
+
+**Resolution**
+
+- Validate the SQL statement directly in Snowflake.
+- Ensure the number of placeholders matches the mapped event fields.
+
+---
+
+### No Data Written
+
+**Possible Causes**
+
+- No events in the input topic.
+- Incorrect topic configuration.
+
+**Resolution**
+
+- Verify the input topic is receiving events.
+- Review connector logs for processing errors.
+
+---
+
+### Connection Timeout
+
+**Possible Causes**
+
+- Network restrictions.
+- Firewall rules.
+- Incorrect endpoint.
+
+**Resolution**
+
+- Verify outbound connectivity.
+- Confirm the Snowflake endpoint is accessible.
+
+---
+
+### Permission Denied
+
+**Possible Causes**
+
+- Insufficient database privileges.
+
+**Resolution**
+
+- Grant the required INSERT, UPDATE, or MERGE privileges to the configured user.
+
+**Advanced Considerations**
+
+### Batch Processing
+
+The connector supports processing events in batches to improve throughput and reduce execution overhead.
+
+---
+
+### Parameterized Queries
+
+Using parameter placeholders (`?`) helps prevent SQL injection and enables prepared statement optimization.
+
+---
+
+### Semi-Structured Data
+
+Snowflake's `VARIANT` data type can be used to store JSON payloads directly when schema flexibility is required.
+
+---
+
+### Schema Evolution
+
+If incoming event schemas change frequently, consider storing payloads as `VARIANT` columns and transforming them later using Snowflake SQL.
+
+---
+
+### Performance Optimization
+
+For high-volume workloads:
+
+- Use appropriately sized Snowflake warehouses.
+- Batch writes whenever possible.
+- Partition large tables appropriately.
+
+**Best Practices**
+
+1. Use dedicated service accounts with the minimum required privileges.
+2. Always use parameterized SQL statements.
+3. Validate SQL queries before deploying the connector.
+4. Store credentials securely using secret management solutions.
+5. Monitor connector throughput, latency, and failures using Condense observability and Snowflake monitoring.

@@ -1,0 +1,260 @@
+---
+title: "SFTP (Output, Store)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Writes Kafka topic data to a remote SFTP server as files in a specified directory.
+
+**Brief Description**
+
+The SFTP Output Connector enables Condense to securely deliver streaming data from Kafka-native topics to remote systems using the Secure File Transfer Protocol (SFTP). It converts streamed events into files and uploads them to a designated directory, making it ideal for organizations that exchange data through secure file-based integrations.
+
+The connector supports continuous streaming, configurable batching, secure SSH-based authentication, and compatibility with downstream enterprise systems that consume flat files instead of streaming protocols.
+
+**Links to Relevant Documents**
+
+- [https://datatracker.ietf.org/doc/html/rfc4253](https://datatracker.ietf.org/doc/html/rfc4253)
+- [https://man.openbsd.org/sftp](https://man.openbsd.org/sftp)
+
+**Connector Overview**
+
+The SFTP Output Connector continuously consumes events from a Condense Kafka topic, batches them into files, and securely uploads those files to a remote SFTP server.
+
+Typical use cases include:
+
+- Enterprise file exchanges
+- Banking and financial reporting
+- Regulatory submissions
+- Partner data sharing
+- Legacy application integration
+- Batch ingestion workflows
+
+**Core Functionality**
+
+- Streams Kafka events into files.
+- Securely transfers files using SFTP.
+- Supports configurable remote directories.
+- Supports username/password authentication.
+- Buffers events before upload for efficient transfers.
+- Compatible with cloud-hosted and on-premises SFTP servers.
+
+**How It Works in Condense**
+
+1. The connector subscribes to the configured Kafka topic.
+2. Incoming events are buffered.
+3. Buffered events are written into a file using the configured format.
+4. The file is uploaded securely to the remote SFTP server.
+5. Upload status and connector metrics are available through Condense observability.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| SFTP | Connection Host | Hostname or IP address of the SFTP server | Yes |
+| SFTP | Connection Port | SFTP server port | Yes |
+| Authentication | Username | Username used to authenticate | Yes |
+| Authentication | Password | Password used to authenticate | No |
+| Destination | Directory | Remote directory for uploaded files | Yes |
+| Condense | Input Topic | Kafka topic to consume events from | Yes |
+
+**Field-by-Field Explanation**
+
+### Title
+
+- **Description:** Friendly name for the connector.
+- **Example:** `SFTP_Financial_Exports`
+
+---
+
+### Connection Host
+
+- **Description:** Hostname or IP address of the destination SFTP server.
+- **Examples:**
+  - `sftp.partner.com`
+  - `192.168.10.20`
+- **Requirements:**
+  - The server must be reachable from the Condense deployment.
+
+---
+
+### Connection Port
+
+- **Description:** TCP port used by the SFTP server.
+- **Default:** `22`
+- **Examples:**
+  - `22`
+  - `2022`
+
+---
+
+### Username
+
+- **Description:** Username used for authenticating with the SFTP server.
+- **Requirements:**
+  - The account must have write access to the destination directory.
+
+---
+
+### Password
+
+- **Description:** Password associated with the configured username.
+- **Security Recommendation:** Store credentials securely and rotate them regularly.
+
+---
+
+### Directory
+
+- **Description:** Remote directory where uploaded files will be stored.
+- **Examples:**
+  - `/incoming/reports/`
+  - `/exports/events/`
+- **Requirements:**
+  - Directory must already exist.
+  - User must have write permissions.
+
+---
+
+### Input Topic
+
+- **Description:** Kafka topic inside Condense from which events are consumed.
+- **Example:** `payment.events.processed`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "SFTP_Financial_Exports",
+  "connectionHost": "sftp.partner.com",
+  "connectionPort": 22,
+  "username": "condense_writer",
+  "password": "********",
+  "directory": "/incoming/reports/",
+  "inputTopic": "payment.events.processed"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+### Connection Refused
+
+**Possible Causes**
+
+- Incorrect hostname.
+- Incorrect port.
+- Firewall restrictions.
+
+**Resolution**
+
+- Verify network connectivity.
+- Confirm the configured host and port.
+- Ensure outbound access from Condense.
+
+---
+
+### Authentication Failed
+
+**Possible Causes**
+
+- Invalid username or password.
+- Account disabled or locked.
+
+**Resolution**
+
+- Verify credentials.
+- Confirm the account has SFTP access.
+
+---
+
+### Permission Denied
+
+**Possible Causes**
+
+- User lacks write permission.
+- Destination directory is read-only.
+
+**Resolution**
+
+- Verify directory permissions.
+- Ensure the configured account has write access.
+
+---
+
+### Files Not Uploaded
+
+**Possible Causes**
+
+- Kafka topic contains no events.
+- Upload interrupted.
+- Directory path is incorrect.
+
+**Resolution**
+
+- Verify data is available in the input topic.
+- Check connector logs.
+- Confirm the remote directory exists.
+
+---
+
+### Upload Timeout
+
+**Possible Causes**
+
+- Slow network.
+- Idle connection timeout.
+
+**Resolution**
+
+- Verify network stability.
+- Review server timeout settings.
+
+**Advanced Considerations**
+
+### File Naming
+
+By default, files are generated using timestamp-based names similar to:
+
+```text
+condense-20260713-154500.json
+```
+
+Future releases may support:
+
+- Custom filename templates
+- File rotation by size
+- File rotation by time
+- Dynamic directory structures
+
+---
+
+### Output Formats
+
+The connector supports writing data in formats such as:
+
+- JSON
+- NDJSON
+- CSV
+
+Output formatting depends on upstream Condense transformations.
+
+---
+
+### Security
+
+For production deployments:
+
+- Restrict users to dedicated upload directories.
+- Rotate credentials regularly.
+- Limit server access using firewalls or VPNs.
+- Use dedicated service accounts.
+
+**Best Practices**
+
+1. Create dedicated SFTP accounts for Condense integrations.
+2. Ensure destination directories exist before deployment.
+3. Organize files using logical directory structures.
+4. Monitor upload status through Condense observability and server logs.
+5. Validate generated files before integrating with downstream applications.
