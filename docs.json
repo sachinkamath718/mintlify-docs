@@ -532,7 +532,7 @@
                   "condense/v2.4.1/overview1/fully-managed-kafka/consumer-group",
                   "condense/v2.4.1/fully-managed-kafka/kafka-connect",
                   "condense/v2.4.1/fully-managed-kafka/schema-registry",
-                  "condense/v2.4.1/fully-managed-kafka/securing-kafka",
+                  "condense/v2.4.1/overview1/fully-managed-kafka/securing-kafka",
                   {
                     "group": "Kafka Administration",
                     "pages": [
@@ -731,12 +731,12 @@
             "group": "Fully Managed Kafka",
             "icon": "blocks",
             "pages": [
-              "condense/v2.4.1/overview/fully-managed-kafka",
-              "condense/v2.4.1/overview/fully-managed-kafka/kafka-management",
-              "condense/v2.4.1/overview/fully-managed-kafka/untitled-page",
+              "condense/v2.4.1/fully-managed-kafka",
+              "condense/v2.4.1/fully-managed-kafka/kafka-management",
+              "condense/v2.4.1/fully-managed-kafka/untitled-page",
               "condense/v2.4.1/overview/fully-managed-kafka/kafka-connect",
               "condense/v2.4.1/overview/fully-managed-kafka/schema-registry",
-              "condense/v2.4.1/overview/fully-managed-kafka/securing-kafka",
+              "condense/v2.4.1/fully-managed-kafka/securing-kafka",
               "condense/v2.4.1/overview/fully-managed-kafka/kafka-administration",
               "condense/v2.4.1/overview/fully-managed-kafka/untitled-page-1"
             ]

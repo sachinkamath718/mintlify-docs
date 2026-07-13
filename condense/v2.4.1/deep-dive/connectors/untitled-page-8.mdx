@@ -1,3 +1,202 @@
 ---
-title: "Jimi"
+title: "Jimi Concox (Input, Stream)"
 ---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Ingests real-time telematics data from Jimi Concox devices into Condense.
+
+**Brief Description**
+
+The **Jimi Concox Input Connector** is a prebuilt custom connector in the Condense platform, enabling real-time data ingestion from a wide range of Concox GPS tracking and telematics devices. These devices transmit location, vehicle status, and IoT telemetry signals directly to Condense using TCP or UDP protocols.
+
+The connector handles native Concox message parsing, secure authentication, topic routing, and stream formatting, making it production-ready for fleet tracking, geofencing, alerting, and downstream analytics.
+
+The connector is fully managed by Zeliot and requires no manual decoding, protocol wiring, or operational setup. It is ideal for mobility, logistics, and remote asset monitoring scenarios where near real-time visibility is critical.
+
+**Links to Relevant Documents**
+
+- [https://www.iconcox.com/](https://www.iconcox.com/)
+- [https://kafka.apache.org/documentation/#security\_sasl](https://kafka.apache.org/documentation/#security_sasl)
+
+**Connector Overview**
+
+The **Jimi Concox Input Connector**:
+
+- Supports TCP/UDP-based data ingestion from Concox trackers.
+- Automatically parses GPS, I/O, ignition, and telemetry packets.
+- Authenticates via Kafka SASL to ensure secure data ingestion.
+- Publishes structured event messages to a Condense Kafka topic.
+- Enables real-time fleet insights without custom logic or code.
+
+The connector is tested and production-ready for high-scale deployments across fleet categories such as last-mile delivery, logistics, personal vehicles, and industrial assets.
+
+**Supported Devices**
+
+| **Series** | **Device Models Included** |
+| :-- | :-- |
+| **GT** | GT02D, GT03, GT03A, GT03B, GT07, GT300, GT710, GT800 |
+| **GK** | GK301, GK503 |
+| **OBD / Other** | OB22, CRX3 |
+
+For firmware-specific features (for example, remote immobilization or fuel cut-off), compatibility depends on the model and command support from the device.
+
+**Core Functionality**
+
+- **Native Protocol Handling:** Decodes proprietary binary packets used by Concox over TCP/UDP.
+- **Message Stream Formatting:** Transforms raw telemetry into JSON format for use in transforms and applications.
+- **Kafka Topic Routing:** Routes all parsed events to a user-defined Condense topic.
+- **SASL/PLAIN Security:** Secures the connection using Kafka-native SASL authentication.
+- **No-Code Integration:** Requires no manual parsing or driver code from the user.
+
+**How It Works in Condense**
+
+1. The selected Jimi Concox device is configured to point to a Condense-managed IP address and port.
+2. The connector receives packets and parses them into structured messages.
+3. SASL credentials are used to authenticate the device stream to Kafka.
+4. Parsed events are published to the configured Kafka topic in Condense.
+5. The topic can be linked to no-code transforms, Git-backed applications, or downstream sinks.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique title for the connector instance in Condense | Yes |
+| Device | Select a Device | Choose the Jimi Concox device model | Yes |
+| Messaging | Output Topic | Kafka topic to stream parsed messages to | Yes |
+| Security | SASL Username | Kafka authentication username | Yes |
+| Security | SASL Password | Kafka authentication password | No |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- User-defined label for the connector.
+- Displayed under **Stream Connectors** in the Condense dashboard.
+
+**Example:**
+
+`Concox_GT07_WarehouseFleet`
+
+---
+
+**2. Select a Device**
+
+- Choose the Concox device model used in the deployment.
+
+**Available Options**
+
+- GT07
+- GT03
+- GT03A
+- GT03B
+- GT02D
+- GK301
+- GK503
+- CRX3
+- GT300
+- GT710
+- GT800
+- OB22
+
+Condense applies protocol parsing logic depending on the selected model.
+
+---
+
+**3. Output Topic**
+
+- Kafka-native topic to which parsed data will be published.
+- Ensure topic names are meaningful and aligned with telemetry use cases.
+
+**Recommended Examples**
+
+`vehicle_location_tracking`
+
+`concox_fleet_events`
+
+`geo_alerts`
+
+**To define a topic:**
+
+- Go to **Condense Dashboard → Topics**.
+- Click **Create New Topic** or select an existing topic.
+
+---
+
+**4. SASL Username**
+
+- Kafka SASL/PLAIN authentication username issued by Condense.
+- Secures access to the data stream.
+- Retrieve from **Condense Admin Console → Security Settings**.
+
+**Example:**
+
+`concox-connect-user`
+
+---
+
+**5. SASL Password**
+
+- Password corresponding to the SASL Username.
+- Used to authenticate inbound messages securely.
+- Default: Admin password unless overridden.
+- Retrieve from **Condense Admin Console**.
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "GT07_Unit_A1",
+  "device": "Concox GT07",
+  "outputTopic": "fleet_telemetry",
+  "saslUsername": "concox-connect-user",
+  "saslPassword": "admin-password"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. No Data Appearing in Topic**
+
+- **Cause:** Device misconfiguration (wrong IP, port, or APN).
+- **Fix:** Ensure the device points to the Condense connector IP address and port. Check device dashboard logs.
+
+**2. Authentication Failures**
+
+- **Cause:** Incorrect SASL credentials or expired password.
+- **Fix:** Update credentials in the Condense Admin Console and reassign them in the connector settings.
+
+**3. Data Format Errors**
+
+- **Cause:** Unsupported model or unrecognized packet variation.
+- **Fix:** Contact Zeliot for model-specific decoder updates.
+
+**4. Duplicate Events or Drops**
+
+- **Cause:** Network retransmissions or delayed device buffering.
+- **Fix:** Enable deduplication logic in downstream transforms if required.
+
+**Advanced Considerations**
+
+**1. Multi-Vehicle Management**
+
+- Configure separate connectors per vehicle group or assign one topic per region or fleet for easier partitioning.
+
+**2. Firmware-Specific Payloads**
+
+- Some Concox models support advanced commands such as cut-off and immobilizer.
+- Condense only processes uplink telemetry. Command support must be custom integrated.
+
+**3. UDP vs TCP Device Mode**
+
+- Both modes are supported.
+- TCP is recommended because it provides event acknowledgment and reduces the chance of data loss.
+
+**Best Practices**
+
+1. Always validate the IP address, port, device IMEI, and firmware version before deployment.
+2. Use separate topics for high-frequency and low-frequency telemetry.
+3. Rotate SASL passwords every 90 days for security compliance.
+4. Enable log tracing in Condense for better observability during pilot deployments.

@@ -2,10 +2,6 @@
 title: "Securing Kafka"
 ---
 
-## Overview
-
-Kafka in Condense provides multiple layers of security to protect data in transit, authenticate clients, and control access to Kafka resources. Security is implemented using industry-standard encryption, authentication, and authorization mechanisms while simplifying administration through the Condense platform.
-
 ## Encryption
 
 Kafka in Condense supports Transport Layer Security (TLS), a protocol for encrypted communication.
@@ -25,7 +21,7 @@ Kafka listeners use authentication to ensure a secure client connection to the K
 
 ## Authorization
 
-Authorization controls the operations that are permitted on Kafka brokers by specific clients or users.In addition to Kafka's native authorization mechanisms, Condense provides centralized permission management through **Users & Role Management** and **ACL Management** under **Kafka Administration**. These capabilities simplify the administration of Kafka resource permissions through the Condense portal.
+Authorization controls the operations that are permitted on Kafka brokers by specific clients or users.
 
 ### **Supported authorization mechanisms**
 
@@ -37,11 +33,3 @@ Authorization controls the operations that are permitted on Kafka brokers by spe
 ## **Federal Information Processing Standards (FIPS)**
 
 Kafka in Condense can run on FIPS-enabled Kubernetes clusters to ensure data security and system interoperability if the native Kubernetes service of the cloud provider supports it.
-
-## Related Documentation
-
-- Users & Role Management
-- ACL Management
-- Kafka Topics
-- Consumer Groups
-- Schema Registry
