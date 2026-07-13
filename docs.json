@@ -550,8 +550,9 @@
                 "pages": [
                   "condense/v2.4.1/deep-dive/connectors",
                   "condense/v2.4.1/deep-dive/connectors/connectors-in-condense",
-                  "condense/v2.4.1/deep-dive/connectors/available-connectors",
-                  "condense/v2.4.1/deep-dive/connectors/connectors-in-condense/upcoming-connectors"
+                  "",
+                  "condense/v2.4.1/deep-dive/connectors/connectors-in-condense/upcoming-connectors",
+                  "condense/v2.4.1/deep-dive/available-connectors"
                 ]
               },
               "condense/v2.4.1/deep-dive/transforms",
