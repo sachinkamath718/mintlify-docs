@@ -324,7 +324,7 @@
             "group": "Getting Started",
             "icon": "api-app",
             "pages": [
-              "condense/v2.4.0/whats-new-in-v2.4.0",
+              "condense/v2.4.0/getting-started/whats-new-in-v2.4.0",
               "condense/v2.4.0/getting-started/introduction-to-condense",
               "condense/v2.4.0/getting-started/what-is-condense",
               "condense/v2.4.0/getting-started/why-condense",
