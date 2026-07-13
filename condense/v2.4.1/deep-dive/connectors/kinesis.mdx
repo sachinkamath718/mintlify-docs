@@ -1,0 +1,203 @@
+---
+title: "Kinesis (Input, Stream)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Pulls messages from AWS Kinesis streams into Condense for real-time processing.
+
+**Brief Description**
+
+The Kinesis Stream Input Connector in Condense enables real-time data ingestion from Amazon Kinesis Data Streams into the Condense platform. This connector allows you to stream data from a Kinesis stream to Condense for processing, transformation, and further routing to downstream systems such as Kafka topics, databases, or other APIs.
+
+This connector is ideal for applications that require real-time data streaming from Kinesis and need to route the data to other systems for further analysis, storage, or processing.
+
+**Core Features**
+
+1. Real-Time Data Ingestion: The connector listens to an active Kinesis stream and consumes data in real time, making it ideal for event-driven applications.
+2. Scalable Data Flow: Condense ensures seamless scalability to handle high-throughput streaming data from Kinesis, making it suitable for large-scale applications.
+3. Data Transformation: The data can be processed or transformed before being sent to Kafka topics or other systems.
+4. Security: Supports secure connections using TLS and SSL for encrypted communication.
+
+**Links to Relevant Documentation**
+
+- [https://docs.aws.amazon.com/streams/latest/dev/introduction.html](https://docs.aws.amazon.com/streams/latest/dev/introduction.html)
+- [https://docs.aws.amazon.com/kinesis/latest/APIReference/Welcome.html](https://docs.aws.amazon.com/kinesis/latest/APIReference/Welcome.html)
+- [https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
+
+**Connector Overview**
+
+The Kinesis Stream Input Connector enables Condense to securely consume events from Amazon Kinesis Data Streams and publish them into Kafka-native Condense topics for downstream processing.
+
+**Core Functionality**
+
+1. Consumes real-time events from Amazon Kinesis Data Streams.
+2. Authenticates using AWS IAM Access Key and Secret Key credentials.
+3. Supports scalable ingestion from high-throughput Kinesis streams.
+4. Publishes all received events into a Kafka-native Condense topic.
+5. Enables downstream transforms, routing, analytics, and application processing.
+
+**How It Works in Condense**
+
+1. The connector authenticates with AWS using the configured IAM credentials.
+2. It connects to the specified Kinesis Data Stream.
+3. Records are continuously consumed from the stream shards.
+4. Events are published into the configured Kafka-native topic inside Condense.
+5. Downstream applications, transforms, or connectors consume the streamed data.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique identifier for the Kinesis connector inside Condense | Yes |
+| Stream | Stream Name | Name of the Kinesis Data Stream to subscribe to | Yes |
+| Region | Region | AWS Region where the stream is deployed | Yes |
+| Auth | Access Key | AWS Access Key ID used for authentication | Yes |
+| Auth | Secret Key | AWS Secret Access Key used for authentication | Yes |
+| Condense | Topic (Output) | Kafka-native topic where incoming data will be published | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Logical identifier used to track and manage this connector inside Condense.
+
+**Example:**
+
+`vehicle-kinesis-ingest`
+
+---
+
+**2. Stream Name**
+
+Name of your Kinesis stream. This is case-sensitive and must match exactly.
+
+**How to Obtain**
+
+- Log in to AWS Console.
+- Navigate to **Kinesis → Data Streams**.
+- Copy the stream name.
+
+---
+
+**3. Region**
+
+AWS Region where your stream is deployed.
+
+**Example Values**
+
+- `us-east-1`
+- `eu-west-1`
+- `ap-south-1`
+
+The region is displayed in the AWS Console and the stream details page.
+
+---
+
+**4. Access Key**
+
+AWS IAM Access Key ID used to authenticate Condense with Kinesis.
+
+**How to Obtain**
+
+- Go to **AWS Console → IAM → Users**.
+- Select the appropriate IAM user.
+- Under **Security credentials**, generate a new Access Key.
+
+Ensure the IAM user has:
+
+- `kinesis:GetRecords`
+- `kinesis:GetShardIterator`
+- `kinesis:DescribeStream`
+
+---
+
+**5. Secret Key**
+
+AWS Secret Access Key associated with the Access Key.
+
+Store this credential securely and never expose it publicly.
+
+---
+
+**6. Topic (Output)**
+
+Kafka-native Condense topic where Kinesis events will be published.
+
+**Recommended Examples**
+
+`kinesis_orders_events`
+
+`iot_telemetry_apac`
+
+`sensor_data_stream`
+
+Create the topic beforehand using the Condense UI or CLI if it does not already exist.
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "KinesisFleetData",
+  "streamName": "fleet_stream_india",
+  "region": "ap-south-1",
+  "accessKey": "AKIA************",
+  "secretKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCY********",
+  "condenseTopic": "vehicle_telemetry"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Connection Refused**
+
+**Cause:** Incorrect Kinesis stream configuration, credentials, or AWS Region.
+
+**Fix:** Verify the stream name, AWS Region, and IAM credentials.
+
+**2. Authentication Issues**
+
+**Cause:** Invalid or expired Access Key or Secret Key.
+
+**Fix:** Generate a new IAM Access Key and update the connector configuration.
+
+**3. Data Loss**
+
+**Cause:** Insufficient Kinesis stream retention period.
+
+**Fix:** Increase the retention period to ensure events remain available until consumed.
+
+**4. No Data Received**
+
+**Cause:** Stream is inactive or not receiving records.
+
+**Fix:** Verify stream activity using the AWS Management Console.
+
+**Advanced Topics**
+
+**1. Handling High-Volume Traffic**
+
+- Condense can be horizontally scaled for large Kinesis streams.
+- Load balancing across multiple connector instances improves throughput.
+- Rate limiting can help manage sudden traffic spikes.
+
+**2. Handling Large Payloads**
+
+- Use GZIP or Brotli compression before publishing to Condense.
+- Configure Kafka topic limits such as `max.message.bytes` when large payloads are expected.
+
+**3. Timeouts and Retries**
+
+- Configure appropriate request timeouts for Kinesis connections.
+- Use exponential backoff for automatic retry handling during transient failures.
+
+**Best Practices**
+
+1. Use IAM roles and policies instead of long-lived credentials whenever possible.
+2. Use meaningful naming conventions for connectors and topics.
+3. Rotate IAM credentials every 90 days and audit access policies regularly.
+4. Partition Kafka topics using the Kinesis `PartitionKey` to maximize parallelism.
+5. For regulated environments, use AWS VPC Endpoints and least-privilege IAM policies.
+6. Configure an appropriate Kinesis retention period to prevent data loss.

@@ -1,0 +1,94 @@
+---
+title: "Access Control Lists (ACLs)"
+---
+
+Access Control Lists (ACLs) enable Kafka Administrators to define and manage permissions for Kafka resources. ACLs determine the operations that authenticated users are allowed to perform on specific Kafka resources, providing fine-grained access control across the Kafka cluster.
+
+In Condense, ACLs are managed through the Kafka Administration interface and are mapped to users based on their assigned Condense roles.
+
+## Overview
+
+The **ACL Management** page provides a centralized interface for viewing and managing access policies for Kafka resources.
+
+Kafka Administrators can:
+
+- View existing ACL entries.
+- Review user permissions for Kafka resources.
+- Update permission types.
+- Remove existing ACL entries.
+- Monitor the status of ACL assignments.
+
+ACLs are displayed in a tabular format, allowing administrators to review permissions for each user and resource.
+
+## ACL Information
+
+Each ACL entry contains the following information.
+
+| Field | Description |
+| --- | --- |
+| Principal | The user to whom the ACL applies. |
+| Permission | Defines whether access is **Allow** or **Deny**. |
+| Operation | Kafka operations assigned to the user. |
+| Resource | Kafka resource associated with the permission. |
+| Status | Current state of the ACL configuration. |
+| Actions | Available actions for managing the ACL. |
+
+Permission is initially set to **Deny** until it is explicitly updated by a Kafka Administrator.
+
+## ACL States
+
+ACLs progress through different states depending on resource availability and administrator actions.
+
+| State | Description |
+| --- | --- |
+| Pending | Required resources are not yet available or the ACL has not been fully configured. |
+| Active | The ACL has been configured and the permissions are enforced. |
+
+When an ACL entry is deleted, it is removed from the ACL list.
+
+## Permission Types
+
+ACL Management supports the following permission types.
+
+| Permission | Description |
+| --- | --- |
+| Allow | Grants the configured operation on the selected Kafka resource. |
+| Deny | Prevents the configured operation on the selected Kafka resource. |
+
+New ACL entries default to **Deny** until updated by a Kafka Administrator.
+
+## Supported Kafka Resources
+
+ACLs can be configured for supported Kafka resources, including:
+
+- Topics
+- Consumer Groups
+
+Additional resource types may be supported depending on the Kafka deployment.
+
+## Managing ACLs
+
+Kafka Administrators can:
+
+- Review ACL entries.
+- Update permission types.
+- Modify resource assignments.
+- Remove ACL entries when access is no longer required.
+
+Changes take effect after the updated ACL configuration is saved.
+
+## Best Practices
+
+- Grant only the permissions required for users to perform their responsibilities.
+- Review ACL assignments regularly.
+- Remove obsolete ACL entries.
+- Use predefined Condense roles to simplify permission management.
+- Verify resource assignments before updating permissions.
+
+## Related Documentation
+
+- Users & Role Management
+- Resource Management
+- Consumer Groups
+- Kafka Topics
+- Securing Kafka

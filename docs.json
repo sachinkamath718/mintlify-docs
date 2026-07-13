@@ -509,8 +509,8 @@
             "group": "Marketing Assets",
             "icon": "triangle-square-circle",
             "pages": [
-              "condense/v2.4.0/marketing-assets/wallpapers",
-              "social-media-1"
+              "condense/v2.4.1/marketing-assets/wallpapers",
+              "condense/v2.4.1/marketing-assets/social-media"
             ]
           }
         ]
@@ -527,22 +527,22 @@
                 "group": "Fully Managed Kafka",
                 "pages": [
                   "condense/v2.4.1/overview/fully-managed-kafka/overview",
-                  "condense/v2.4.1/overview1/fully-managed-kafka/kafka-management",
-                  "condense/v2.4.1/overview1/fully-managed-kafka/kafka-topics",
-                  "condense/v2.4.1/overview1/fully-managed-kafka/consumer-group",
-                  "condense/v2.4.1/fully-managed-kafka/kafka-connect",
-                  "condense/v2.4.1/fully-managed-kafka/schema-registry",
-                  "condense/v2.4.1/overview1/fully-managed-kafka/securing-kafka",
+                  "condense/v2.4.1/overview/fully-managed-kafka/kafka-management",
+                  "condense/v2.4.1/overview/fully-managed-kafka/kafka-topics",
+                  "condense/v2.4.1/overview/fully-managed-kafka/consumer-group",
+                  "condense/v2.4.1/overview/fully-managed-kafka/kafka-connect",
+                  "condense/v2.4.1/overview/fully-managed-kafka/schema-registry",
+                  "condense/v2.4.1/overview/fully-managed-kafka/securing-kafka",
                   {
                     "group": "Kafka Administration",
                     "pages": [
-                      "condense/v2.4.1/fully-managed-kafka/kafka-administration",
-                      "condense/v2.4.1/fully-managed-kafka/users-and-role-management",
-                      "condense/v2.4.1/fully-managed-kafka/untitled-page-1",
-                      "condense/v2.4.1/fully-managed-kafka/untitled-page-2"
+                      "condense/v2.4.1/fully-managed-kafka/kafka-administration/overview",
+                      "condense/v2.4.1/fully-managed-kafka/kafka-administration/users-and-role-management",
+                      "condense/v2.4.1/fully-managed-kafka/kafka-administration/access-control-lists",
+                      "condense/v2.4.1/fully-managed-kafka/kafka-administration/users-and-role-management/resource-management"
                     ]
                   },
-                  "condense/v2.4.1/fully-managed-kafka/ksqldb"
+                  "condense/v2.4.1/overview/fully-managed-kafka/ksqldb"
                 ]
               },
               "condense/v2.4.1/overview/industry-use-cases",
@@ -717,7 +717,8 @@
                       "condense/v2.4.1/deep-dive/connectors/untitled-page-6",
                       "condense/v2.4.1/deep-dive/connectors/untitled-page-7",
                       "condense/v2.4.1/deep-dive/connectors/i-teiangle",
-                      "condense/v2.4.1/deep-dive/connectors/untitled-page-8"
+                      "condense/v2.4.1/deep-dive/connectors/untitled-page-8",
+                      "condense/v2.4.1/deep-dive/connectors/kinesis"
                     ]
                   }
                 ]
@@ -733,12 +734,12 @@
             "pages": [
               "condense/v2.4.1/fully-managed-kafka",
               "condense/v2.4.1/fully-managed-kafka/kafka-management",
-              "condense/v2.4.1/fully-managed-kafka/untitled-page",
-              "condense/v2.4.1/overview/fully-managed-kafka/kafka-connect",
-              "condense/v2.4.1/overview/fully-managed-kafka/schema-registry",
+              "condense/v2.4.1/fully-managed-kafka/kafka-topics",
+              "condense/v2.4.1/fully-managed-kafka/kafka-connect",
+              "condense/v2.4.1/fully-managed-kafka/schema-registry",
               "condense/v2.4.1/fully-managed-kafka/securing-kafka",
-              "condense/v2.4.1/overview/fully-managed-kafka/kafka-administration",
-              "condense/v2.4.1/overview/fully-managed-kafka/untitled-page-1"
+              "condense/v2.4.1/fully-managed-kafka/kafka-administration",
+              "condense/v2.4.1/fully-managed-kafka/untitled-page-1"
             ]
           },
           {

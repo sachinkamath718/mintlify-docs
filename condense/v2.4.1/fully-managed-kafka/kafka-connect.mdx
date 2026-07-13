@@ -2,9 +2,9 @@
 title: "Kafka Connect"
 ---
 
-## Overview
+Kafka Connect uses connector instances to integrate with other systems to stream data.
 
-Kafka Connect in Condense provides a managed framework for integrating Apache Kafka with external systems through reusable source and sink connectors. Kafka Connect loads existing connector instances on start-up and distributes data streaming tasks and connector configuration across worker pods. Workers run the tasks for the connector instances. Each worker runs as a separate pod to make the Kafka Connect cluster more fault-tolerant. If there are more tasks than workers, workers are assigned multiple tasks. If a worker fails, its tasks are automatically assigned to active workers in the Kafka Connect cluster.
+Kafka Connect loads existing connector instances on start-up and distributes data streaming tasks and connector configuration across worker pods. Workers run the tasks for the connector instances. Each worker runs as a separate pod to make the Kafka Connect cluster more fault-tolerant. If there are more tasks than workers, workers are assigned multiple tasks. If a worker fails, its tasks are automatically assigned to active workers in the Kafka Connect cluster.
 
 The main Kafka Connect components used in streaming data are as follows:
 
@@ -16,10 +16,6 @@ The main Kafka Connect components used in streaming data are as follows:
 
 ## Connectors
 
-### Connector Types
-
-Condense supports two categories of Kafka Connect connectors.
-
 Connectors can be one of the following types:
 
 - Source connectors that push data into Kafka
@@ -29,12 +25,10 @@ Plugins provide the implementation for Kafka Connect to run connector instances.
 
 MirrorMaker 2 also uses the Kafka Connect framework. In this case, the external data system is another Kafka cluster. Specialized connectors for MirrorMaker 2 manage data replication between source and target Kafka clusters.
 
-<Info>
-  In addition to the MirrorMaker 2 connectors, Kafka provides two connectors as examples:
+In addition to the MirrorMaker 2 connectors, Kafka provides two connectors as examples:
 
-  - `FileStreamSourceConnector` streams data from a file on the worker’s filesystem to Kafka, reading the input file and sending each line to a given Kafka topic.
-  - `FileStreamSinkConnector` streams data from Kafka to the worker’s filesystem, reading messages from a Kafka topic and writing a line for each in an output file.
-</Info>
+- `FileStreamSourceConnector` streams data from a file on the worker’s filesystem to Kafka, reading the input file and sending each line to a given Kafka topic.
+- `FileStreamSinkConnector` streams data from Kafka to the worker’s filesystem, reading messages from a Kafka topic and writing a line for each in an output file.
 
 The following source connector diagram shows the process flow for a source connector that streams records from an external data system. A Kafka Connect cluster might operate source and sink connectors at the same time. Workers are running in a distributed mode in the cluster. Workers can run one or more tasks for more than one connector instance.
 
