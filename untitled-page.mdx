@@ -1,0 +1,130 @@
+---
+title: "GitHub Integration"
+---
+
+# Overview
+
+The Coding Agent integrates with GitHub to help developers manage repositories, source code, branches, issues, and pull requests directly from Condense.
+
+Using GitHub integration, developers can generate code, update existing repositories, collaborate with teams, and automate common version control operations without leaving the Condense platform.
+
+The Coding Agent invokes GitHub tools to perform repository operations while respecting repository permissions and branch protection policies.
+
+---
+
+# Prerequisites
+
+Before using GitHub Integration, ensure that:
+
+- GitHub integration is enabled for your organization.
+- You have access to the target GitHub repository.
+- The required GitHub permissions have been granted.
+- A GitHub account has been authenticated with Condense.
+
+---
+
+# Supported Operations
+
+The GitHub integration supports:
+
+- Creating repositories
+- Searching repositories
+- Reading repository files
+- Creating or updating files
+- Creating branches
+- Forking repositories
+- Creating issues
+- Creating pull requests
+
+---
+
+# Available Tools
+
+| Tool | Description | Required Input |
+| --- | --- | --- |
+| **createRepositoryGithub** | Creates a new GitHub repository. | Repository Owner |
+| **searchRepositoriesGithub** | Searches GitHub repositories. | Repository Owner, Repository Name |
+| **getFileContents** | Retrieves the contents of a file or directory. | Repository Owner, Repository Name, Branch, File Path |
+| **createUpdateFileGithub** | Creates or updates a file within a repository. | Repository Owner, Repository Name, Branch, File Path |
+| **forkRepositoryGithub** | Forks an existing repository. | Repository Owner, Repository Name |
+| **createBranchGithub** | Creates a new branch from an existing reference. | Repository Owner, Repository Name, Branch Name |
+| **createIssueGithub** | Creates a GitHub Issue. | Repository Owner, Repository Name, Issue Details |
+| **createPullRequestGithub** | Creates a Pull Request. | Repository Owner, Repository Name, Source Branch, Target Branch |
+
+---
+
+# Typical Workflow
+
+A typical GitHub workflow consists of:
+
+1. Search or create a repository.
+2. Create a development branch.
+3. Generate or update project files.
+4. Commit the generated code.
+5. Create an Issue (optional).
+6. Create a Pull Request for review.
+7. Merge after approval.
+
+---
+
+# Typical Use Cases
+
+GitHub Integration can be used to:
+
+- Create new Condense projects.
+- Update existing applications.
+- Generate new connectors.
+- Generate custom transforms.
+- Create feature branches.
+- Submit Pull Requests.
+- Collaborate with development teams.
+
+---
+
+# Best Practices
+
+- Use feature branches for development.
+- Review AI-generated code before merging.
+- Protect production branches.
+- Require Pull Request reviews.
+- Maintain repository permissions using GitHub access controls.
+
+---
+
+# Related Documentation
+
+- Coding Agent
+- GitLab Integration
+- Private Version Control
+
+---
+
+# Frequently Asked Questions (FAQs)
+
+### Can the Coding Agent create GitHub repositories?
+
+Yes. The Coding Agent can create new GitHub repositories using the configured GitHub integration.
+
+---
+
+### Can it update existing repositories?
+
+Yes. Files within existing repositories can be created or updated using the available GitHub tools.
+
+---
+
+### Can it create Pull Requests?
+
+Yes. The Coding Agent can create Pull Requests after code has been committed to a branch.
+
+---
+
+### Does it support branch creation?
+
+Yes. New branches can be created directly from the Coding Agent.
+
+---
+
+### Does GitHub Integration require authentication?
+
+Yes. Users must have the necessary GitHub permissions and authentication configured before repository operations can be performed.
