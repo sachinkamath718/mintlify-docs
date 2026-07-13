@@ -275,8 +275,8 @@
             "group": "Marketing Assets",
             "icon": "triangle-square-circle",
             "pages": [
-              "wallpapers",
-              "social-media"
+              "condense/legacy/wallpapers",
+              "condense/legacy/social-media"
             ]
           }
         ]
