@@ -1,0 +1,170 @@
+---
+title: "Apache Kafka (Output, Stream)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Streams processed messages from Condense into external Kafka topics for downstream use.
+
+**Brief Description**
+
+The Apache Kafka Stream Output Connector enables real-time delivery of processed events from Condense to an external Kafka cluster. It connects securely to a Kafka broker, serializes records from an internal Condense topic, and produces them to a specified Kafka topic. This connector is suitable for forwarding transformed or enriched data to external systems, microservices, databases, or other stream processors that consume from Apache Kafka.
+
+**Links to Relevant Documents**
+
+- [https://kafka.apache.org/documentation/](https://kafka.apache.org/documentation/)
+- \[[https://kafka.apache.org/documentation/#producerconfigs](https://kafka.apache.org/documentation/#producerconfigs)\]
+- \[[https://kafka.apache.org/documentation/#security](https://kafka.apache.org/documentation/#security)\]
+
+**Connector Overview**
+
+The Kafka Output Connector acts as a Kafka producer from the Condense platform. It streams structured records from an internal Kafka-native topic to an external Kafka topic with full support for encryption, authentication, batching, and partitioning. It is compatible with any standards-compliant Kafka broker (self-managed or cloud-hosted), including Amazon MSK, Confluent, Redpanda, Instaclustr, and more.
+
+**Core Functionality**
+
+1. Connects to external Apache Kafka brokers over TCP, SSL, or SASL\_SSL.
+2. Serializes records from a Condense topic and publishes them to a Kafka topic.
+3. Supports secure protocols (SSL and SASL\_SSL).
+4. Maintains high throughput using Kafka producer batching and partitioning.
+5. Enables full pipeline closure from ingestion to output in real-time systems.
+
+**How it Works in Condense**
+
+1. The connector reads messages from a specified Condense Kafka topic.
+2. Each message is serialized (typically JSON or Avro).
+3. A Kafka producer is instantiated using the provided credentials and security configuration.
+4. Messages are published to the external Kafka topic with delivery guarantees (acks).
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique name to identify this Kafka connector instance in the UI | Yes |
+| Kafka | Bootstrap Servers | Comma-separated list of Kafka brokers | Yes |
+| Kafka | Topic Name | Destination Kafka topic to produce to | Yes |
+| Kafka | Security Protocol | PLAINTEXT, SSL, or SASL\_SSL | Yes |
+| Kafka | Username | Username used for SASL authentication | Yes |
+| Kafka | Password | Password or token used for authentication | No |
+| Condense | Topic (Input) | Internal topic inside Condense to consume from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+This is the internal name for the connector inside the Condense UI.
+
+Helps identify output endpoints and trace delivery issues in logs.
+
+**2. Bootstrap Servers**
+
+**Format:**
+
+`broker1:9092,broker2:9092`
+
+Used to connect to the external Kafka cluster.
+
+Should include reachable hostnames or IP addresses with open ports.
+
+**3. Topic Name**
+
+The destination topic in the external Kafka cluster.
+
+Ensure this topic exists with appropriate partitions and ACLs.
+
+Data will be continuously pushed to this topic as it is published in Condense.
+
+**4. Security Protocol**
+
+Specifies how the connection to Kafka is secured.
+
+- PLAINTEXT – No encryption or authentication.
+- SSL – TLS-encrypted connection.
+- SASL\_SSL – Encrypted connection with SASL authentication.
+
+**5. Kafka Username**
+
+Applicable when using SASL\_SSL.
+
+Provided by your Kafka administrator or IAM system if using Amazon MSK or Confluent.
+
+**6. Kafka Password**
+
+Used together with the username for SASL authentication.
+
+Can be a static password or token depending on your Kafka provider.
+
+Optional when using PLAINTEXT or SSL.
+
+**7. Topic (Input)**
+
+The Condense-native topic carrying processed or enriched data.
+
+Messages from this topic are serialized and published to the external Kafka broker.
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "push-to-msk-topic",
+  "bootstrapServers": "b-1.msk.prod:9094,b-2.msk.prod:9094",
+  "topicName": "analytics-pipeline-output",
+  "securityProtocol": "SASL_SSL",
+  "kafkaUsername": "condense_service",
+  "kafkaPassword": "secure_token_xyz",
+  "inputTopic": "condense.analytics.normalized"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Authentication Errors**
+
+**Symptoms:** SASL authentication failed or connection closed.
+
+**Fix:** Check the Kafka Username, Kafka Password, and authentication mechanism. Ensure SASL is correctly configured on the broker.
+
+**2. Broker Unreachable**
+
+**Symptoms:** Connection timeout or `UnknownHostException`.
+
+**Fix:** Validate network routing, firewall rules, and DNS settings. Try using IP addresses to rule out DNS issues.
+
+**3. Topic Not Found**
+
+**Symptoms:** `UnknownTopicOrPartitionException`.
+
+**Fix:** Ensure the Kafka topic exists. If using Amazon MSK or Confluent Cloud, verify the correct cluster and region.
+
+**4. Throttled Delivery or Latency**
+
+**Cause:** Large batch sizes or insufficient acknowledgements.
+
+**Fix:** Optimize the batch size and enable retries with backoff in the Kafka producer configuration.
+
+**Advanced Topics**
+
+**1. Kafka Producer Internals**
+
+- Uses asynchronous batching to improve throughput.
+- Uses `acks=all` by default for stronger delivery guarantees.
+- Future enhancement: partition key assignment for ordered delivery.
+
+**2. Multi-region Kafka**
+
+- Consider network latency and encryption overhead when publishing across regions.
+- Compression such as Snappy or LZ4 can reduce outbound traffic.
+
+**3. Format and Schema**
+
+- Data is serialized using the configured Condense format (JSON or Avro).
+- Integration with Schema Registry (for example, Confluent Schema Registry) can be implemented through custom transforms.
+
+**Best Practices**
+
+1. Always use SASL\_SSL for production deployments.
+2. Use service accounts with scoped Kafka permissions.
+3. Monitor connector logs for delivery failures and retries.
+4. Use separate input and output topics for different business workflows.
+5. Validate Kafka ACLs and quotas before deploying high-throughput connectors.

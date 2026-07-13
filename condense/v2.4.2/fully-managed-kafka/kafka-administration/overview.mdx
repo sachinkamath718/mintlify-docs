@@ -1,0 +1,194 @@
+---
+title: "Overview"
+---
+
+Condense offers a fully managed Apache Kafka service that simplifies the deployment, operation, and administration of Kafka clusters. It automates infrastructure provisioning, cluster scaling, maintenance, monitoring, and security, allowing engineering teams to focus on building and operating real-time data streaming applications instead of managing Kafka infrastructure.
+
+Kafka Administration extends these capabilities by providing a centralized interface for managing Kafka resources and performing administrative operations directly from Condense. Administrators can manage topics, monitor consumer groups, configure users and access control, and perform operational tasks through an intuitive user interface or Kafka Management APIs.
+
+Whether managing a development environment or a production deployment, Kafka Administration provides the tools required to administer Kafka clusters securely and efficiently.
+
+## Key Capabilities
+
+Kafka Administration enables administrators to:
+
+- Create, view, update, and delete Kafka topics.
+- Monitor and manage Kafka consumer groups.
+- Manage Kafka users and assign administrative roles.
+- Configure Access Control Lists (ACLs) for Kafka resources.
+- Retrieve cluster metadata and topic information.
+- Update topic configurations.
+- Manage consumer group offsets.
+- Automate Kafka administrative operations using REST APIs.
+
+## Kafka Management APIs
+
+Condense exposes Kafka Management APIs that enable applications and administrators to automate common Kafka administrative operations without interacting directly with Kafka command-line tools.
+
+These APIs can be used to:
+
+- Retrieve cluster information.
+- Create and manage Kafka topics.
+- Configure topic settings.
+- Monitor and manage consumer groups.
+- Retrieve topic metadata.
+- Manage consumer offsets.
+- Perform cluster administration tasks.
+
+The following table provides an overview of the available Kafka Management APIs.
+
+# Kafka Management API Reference
+
+| API | Description |
+| --- | --- |
+| `/listGroups` | Retrieves all consumer groups available in the Kafka cluster. |
+| `/resetOffsets` | Resets the offsets for a consumer group. |
+| `/setOffsets` | Updates offsets for one or more topic partitions. |
+| `/createTopic` | Creates a new Kafka topic. |
+| `/deleteTopic` | Deletes an existing Kafka topic. |
+| `/getAllTopicDetails` | Retrieves metadata for all topics in the Kafka cluster. |
+| `/getTopicDetails/{topic}` | Retrieves metadata and offset information for a specific topic. |
+| `/describeCluster` | Returns broker and cluster metadata. |
+| `/describeTopic` | Retrieves configuration details for a specific topic. |
+| `/updateTopicConfigs` | Updates the configuration of a Kafka topic. |
+| `/getOffsetsForGroup` | Retrieves committed offsets for a consumer group. |
+| `/deleteGroup` | Deletes a consumer group from the Kafka cluster. |
+
+## API Contract
+
+### `/listGroups`
+
+**Description**
+
+Returns a list of all consumer groups available in the Kafka cluster.
+
+**Response**
+
+```json
+{
+  "data": {
+    "groups": [
+      {
+        "groupId": "b8316KqF_M9OwFfFAABXhdfhbu",
+        "protocolType": "consumer"
+      },
+      {
+        "groupId": "connect-cluster-sqs",
+        "protocolType": "connect"
+      }
+    ]
+  },
+  "status": "success",
+  "message": "Groups retrieved successfully"
+}
+```
+
+### `/resetOffsets`
+
+**Request**
+
+```json
+{
+  "groupId": "my-consumer-group",
+  "topic": "postmanValidation"
+}
+```
+
+**Description**
+
+Resets the offsets for the specified consumer group to the configured target offset. The consumer group must not have any active running instances while performing the reset operation.
+
+**Response**
+
+```json
+{
+  "status": "success",
+  "message": "Offset Reset successfully"
+}
+```
+
+### `/setOffsets`
+
+**Request**
+
+```json
+{
+  "topic": "postmanValidation",
+  "partitions": [
+    {
+      "partition": 0,
+      "offset": 0
+    }
+  ]
+}
+```
+
+**Description**
+
+Updates the offset for the specified topic partition. This operation can also be used to delete records from a topic by specifying the target offset.
+
+**Response**
+
+### `/createTopic`
+
+**Request**
+
+```json
+{
+  "topicName": "postmanValidation",
+  "timeoutTime": 5000,
+  "numOfPartitions": 2,
+  "configEntries": []
+}
+```
+
+**Description**
+
+Creates a new Kafka topic. If optional configuration values are not provided, the broker's default configuration is applied.
+
+**Response**
+
+```json
+{
+  "status": "success",
+  "message": "Topic Created Successfully"
+}
+```
+
+### `/deleteTopic`
+
+**Request**
+
+```json
+{
+  "topicName": "postmanValidation"
+}
+```
+
+**Description**
+
+Deletes the specified Kafka topic.
+
+**Response**
+
+```json
+{
+  "status": "success",
+  "message": "Topic deleted successfully"
+}
+```
+
+| API Name | API Request | API Description | API Response |
+| --- | --- | --- | --- |
+| `/listGroups` | NA | The purpose of the ListGroups API is to get a simple list of the Group IDs that are managed by broker. | `json { "data": { "groups": [ { "groupId": "b8316KqF_M9OwFfFAABXhdfhbu", "protocolType": "consumer" }, { "groupId": "connect-cluster-sqs", "protocolType": "connect" }, { "groupId": "connect-aws-sqs-sink-connector", "protocolType": "consumer" } ] }, "status": "success", "message": "Groups retrieved successfully" } ` |
+| `/resetoffSets` | `{ "groupId": "my-consumer-group", "topic": "postmanValidation" }` | Resets the consumer group offset to the earliest or latest offset. Note that consumer group must have no running instances when performing the reset | `json { "status": "success", "message": "Offset Reset successfully" } ` |
+| `/setOffSets` | `{ "topic": "postmanValidation", "partitions": [ { "partition": 0, "offset": 0 } ] }` | Delete records for a selected topic. This will delete all records from the earliest offset. To delete all records in a partition, use a target offset of `-1`. | NA |
+| `/createTopic` | `{ "topicName": "postmanValidation", "timeoutTime": 5000, "numOfPartitions": 2, "configEntries": [] }` | This API will create a new topic and will return true if created successfully or false when creating a new topic. <br />NOTE: If _configEnties and other configurations are not given, it’ll take the default configuration from the Broker._<br /> | `{ "status": "success", "message": "Topic Created Successfully" }` |
+| `/deleteTopic` | `{ "topicName": "postmanValidation" }` | This will delete the topic from kafka cluster. Only one topic can be deleted at once. | `{ "status": "success", "message": "Topic deleted successfully" }` |
+| `/getAllTopicDetails` | NA | API will fetch all the metadata related to all topics in kafka cluster | `{ "name": "test", "partitions": [ { "partitionErrorCode": 0, "partitionId": 0, "leader": 2, "replicas": [ 2, 1, 0 ], "isr": [ 2, 1, 0 ], "offlineReplicas": [] }, { "partitionErrorCode": 0, "partitionId": 3, "leader": 2, "replicas": [ 2, 0, 1 ], "isr": [ 2, 1, 0 ], "offlineReplicas": [] } ] }` |
+| `/getTopicDetails/:topic` | `{ "topic": "postmanValidation" }` | This API shall fetch metadata along with latest offset of a single topic. | `{ "data": { "topics": [ { "name": "postmanValidation", "partitions": [ { "partitionErrorCode": 0, "partitionId": 0, "leader": 2, "replicas": [ 2, 1, 0 ], "isr": [ 2, 1, 0 ], "offlineReplicas": [] }, { "partitionErrorCode": 0, "partitionId": 1, "leader": 1, "replicas": [ 1, 0, 2 ], "isr": [ 1, 0, 2 ], "offlineReplicas": [] } ], "offsetOfTopic": [ { "partition": 1, "offset": "0", "high": "0", "low": "0" }, { "partition": 0, "offset": "0", "high": "0", "low": "0" } ] } ] }, "status": "success", "message": "Data retrieved successfully" }` |
+| `/describeCluster` | NA | API gets information about the broker cluster. This API details contains details related to monitoring | `{ "data": { "brokers": [ { "nodeId": 0, "host": "my-cluster-kafka-0.my-cluster-kafka-brokers.kafka.svc", "port": 9092 }, { "nodeId": 2, "host": "my-cluster-kafka-2.my-cluster-kafka-brokers.kafka.svc", "port": 9092 }, { "nodeId": 1, "host": "my-cluster-kafka-1.my-cluster-kafka-brokers.kafka.svc", "port": 9092 } ], "controller": 2, "clusterId": "YpxpUciGScack2Z9CijpGw" }, "status": "success", "message": "Data retrieved successfully" } ` |
+| `/describeTopic` | `{ "topicName": "postmanValidation" }` | Get the configuration for the specified topic in kafka cluster | `{ "data": { "resources": [ { "errorCode": 0, "errorMessage": "", "resourceType": 2, "resourceName": "postmanValidation", "configEntries": [ { "configName": "compression.type", "configValue": "producer", "readOnly": false, "isDefault": true, "configSource": 5, "isSensitive": false, "configSynonyms": [] } ] } ] }, "status": "success", "message": "Data retrieved successfully" }` |
+| `/updateTopicConfigs` | `{ "topicName": "postmanValidation", "configEntries": [ { "name": "cleanup.policy", "value": "compact" } ] } ` | Update the configuration for the specified topic | `{ "data": { "resources": [ { "errorCode": 0, "errorMessage": null, "resourceType": 2, "resourceName": "postmanValidation" } ] }, "status": "success", "message": "Configuration updated successfully" }` |
+| `/getOffsetsForGroup` | `{ "groupId": "my-consumer-group" }` | It returns the consumer group offset for a list of topics | `{ "status": "success", "message": "Offsets retrieved successfully", "partitions": [] }` |
+| `/deleteGroup` | `{ "groupId": "my-consumer-group" }` | This API shall delete group by groupId. Only a single group can be deleted at once | `{ "status": "success", "message": "Group Deleted successfully" }` |

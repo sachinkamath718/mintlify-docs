@@ -1,0 +1,234 @@
+---
+title: "Transforms"
+---
+
+## Overview
+
+A Transform in Condense is a real-time processing component that applies business logic, enrichment, or routing to streaming events within a pipeline.
+
+It operates inside a workspace pipeline and processes messages as they flow between source connectors and sink connectors.
+
+Transforms help:
+
+- Apply custom or prebuilt processing logic to streaming data without leaving Condense.
+- Implement domain-specific rules, validation, and enrichment directly in the event flow.
+- Maintain consistency by executing processing in the same environment as ingestion and delivery.
+- Enable both no-code and code-based logic through prebuilt utilities or custom applications.
+
+<Info>
+  Transforms in Condense can be used in different ways depending on whether the need is rapid deployment of common logic, lightweight utilities, or fully customized business rules. Let’s look at the available options, starting with prebuilt transforms.
+</Info>
+
+## What You Can Do with a Transform
+
+### Prebuilt Transforms
+
+Ready-to-use, maintained by Condense, and optimized for low-latency execution.
+
+#### Examples include
+
+**Geofence**: Location-based event triggering.
+
+Configuration is done entirely in the UI, no coding required.
+
+Within the Prebuilt category, Condense also offers Utilities lightweight, no-code operators designed for essential, recurring logic tasks that can be quickly dropped into a pipeline without development effort.
+
+### Utilities
+
+Utilities are lightweight, no-code operators provided under the Prebuilt category for essential, recurring logic.
+
+#### Alerts
+
+**Function**: Triggers alert events when a specified condition remains true for a defined duration.
+
+Key Parameters
+
+- Duration: Time threshold for condition persistence.
+- Group By: Field to segment conditions (e.g., device ID).
+- Rule Groups: AND/OR logical rules for evaluation.
+
+<Info>
+  **Usage Notes**: Use balanced duration settings to avoid false positives or excessive noise.
+</Info>
+
+#### Logger
+
+**Function**: Streams workspace logs to an external logging destination for monitoring and audit.
+
+Key Parameters
+
+- Utility Name: Logical identifier.
+- Environment Variables: Logging target details.
+
+<Info>
+  **Usage Notes**: Apply consistent naming for easy search and filtering in external log systems.
+</Info>
+
+#### Split
+
+**Function**: Routes messages into different paths based on evaluated conditions.
+
+Key Parameters
+
+- Rule Groups: Field, type, comparator, and value-based conditions.
+- Output Mapping: Definition of message structure per route.
+
+<Info>
+  **Usage Notes**: Multiple splits can be chained for multi-branch routing logic.
+</Info>
+
+<Warning>
+  Note: Additional utilities will be available in upcoming releases.
+</Warning>
+
+## Custom Transforms
+
+Developed in the Applications section of Condense using the inbuilt IDE, connected to a Git repository.
+
+- Support any programming language in Condense IDE.
+- Can perform advanced processing, cross-event correlation, or domain-specific analytics.
+- Once published, appear alongside prebuilt transforms for deployment into pipelines.
+
+## Transform Lifecycle
+
+Every transform in Condense follows a defined lifecycle from creation and configuration to updates, monitoring, and eventual removal. This section explains the key stages in that lifecycle and the actions available at each step, starting with how to deploy a transform.
+
+### Deploy a Transform
+
+#### Prebuilt Transform
+
+<Info>
+  **Who can deploy**: Workspace Admins, Maintainers, Developers (with RBAC restrictions on deployment)
+</Info>
+
+Steps :
+
+1. Go to the workspace pipeline editor.
+
+![](/images/condense/v2.4.0/deep-dive/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FjK7Nffmq4vtjK6M4hDJR%2Fimage.png)
+
+2. Click Add Transform.
+3. Select from the Prebuilt category or Utilities.
+4. Configure parameters, rules, and mappings.
+
+![](/images/condense/v2.4.0/deep-dive/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FArD4PUdpdyc9epIf1i63%2Fimage.png)
+
+5. Save and deploy.
+
+![](/images/condense/v2.4.0/deep-dive/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FBUPVh08NqZauv1axFCZC%2Fimage.png)
+
+#### Custom Transform
+
+Who can create: Workspace Admins, Maintainers, Developers
+
+Steps:
+
+1. Go to Applications in the workspace.
+2. Create a new application in the IDE or import from Git.
+3. Implement and test the logic.
+4. Publish the application as a Custom Transform.
+5. Deploy it to the pipeline.
+
+<Info>
+  See [_Applications_](/condense/v2.4.0/deep-dive/applications) _in Condense_ for a step‑by‑step walkthrough of building, testing, publishing, versioning, and deploying a Custom Transform.
+</Info>
+
+### **Editing a deployed Transform**
+
+<Info>
+  **Who can edit**: Workspace Admins, Maintainers, Developers (with deployment limits per RBAC)
+</Info>
+
+**Editable**: Rules, mappings, parameters, and, for custom transforms, the associated application version.
+
+**Non-editable**: Name of the transform
+
+**Editing Deployed Transform**
+
+1. In the pipeline canvas, select the deployed transform block you wish to modify, then click the **Edit** button in the top-right corner.
+
+![](/images/condense/v2.4.0/deep-dive/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FAMcIJhAAn6XLyLXzKnRB%2Fimage.png)
+
+2. Editable parameters vary depending on the transform type. Fields that cannot be modified will appear disabled with a lock icon, while editable fields will remain active. After making changes, click **Save**.
+
+![](/images/condense/v2.4.0/deep-dive/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FQiRT3W0KVwU7PSY3EwyS%2Fimage.png)
+
+<Info>
+  **Note:**
+
+  - To edit the underlying logic of a custom transform, go to the **Applications** page in the workspace. Update the application code, test it, publish a new version, and then update the deployed transform to use the new version.
+  - Changes apply immediately when edits are saved.
+</Info>
+
+### Deleting a custom Transform
+
+> **Who can delete**: Workspace Admins, Maintainers
+
+Steps to delete the deployed
+
+<Warning>
+  Warning!
+
+  - Deletion is permanent; removed transforms cannot be restored.
+  - All processing logic tied to the transform is removed from the pipeline and will no longer execute.
+  - Transform Roles and Permissions
+</Warning>
+
+## Transform Roles and Permissions
+
+Roles are assigned per workspace, so a user’s transform permissions depend on their workspace role.
+
+| **Operation** | **Admin** | **Maintainer** | **Developer** | **Viewer** |
+| --- | --- | --- | --- | --- |
+| Add prebuilt transform | **✓** | **✓** | **✓** | **✕** |
+| Add custom transform | **✓** | **✓** | **✓** | **✕** |
+| Configure transform parameters | **✓** | **✓** | **✓** | **✕** |
+| Deploy transform to pipeline | **✓** | **✓** | **✕** | **✕** |
+| Edit transform configuration | **✓** | **✓** | **✓** | **✕** |
+| Delete transform | **✓** | **✓** | **✕** | **✕** |
+| View transform list/config | **✓** | **✓** | **✓** | **✓** |
+| Access transform logs | **✓** | **✓** | **✓** | **✓** |
+
+## Role descriptions:
+
+- Admin: Full control over transforms and other pipeline resources.
+- Maintainer: Can create, configure, and deploy transforms, but not manage workspace settings.
+- Developer: Can create and configure transforms, but cannot deploy or delete them.
+- Viewer: Read-only access to transform details.
+
+## Monitoring and Audit
+
+Transforms include monitoring and auditing tools for operational visibility:
+
+- Status (active, error)
+- Execution metrics (throughput, processing latency, error rate)
+- Version history for each transform
+- Activity logs for creation, modification, and deletion events
+
+#### **Sample Screens for Monitoring Deployed Transforms**
+
+In the pipeline view, click on a deployed transform block to open its detail page. Here you can view resource utilization metrics, execution statistics, and status information specific to that transform.
+
+![](/images/condense/v2.4.0/deep-dive/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FLLj9G2Y88L1fjyZ1lD1e%2Fimage.png)
+
+## Best Practices
+
+- Use prebuilt transforms for rapid deployment of common logic.
+- Keep custom transform logic modular and version-controlled in Git.
+- Document each transform’s purpose and configuration for team clarity.
+- Regularly review transform performance metrics to detect bottlenecks early.
+
+## Common Pitfalls and How to Avoid Them
+
+1. Deploying too many transforms in sequence **Avoidance**: Consolidate logic where possible to reduce processing latency.
+2. Incorrect RBAC assumptions **Avoidance**: Confirm role permissions before assigning transform-related tasks.
+3. Using the wrong transform type **Avoidance**: For quick standard tasks, use prebuilt utilities instead of building custom transforms.
+4. Not testing before deployment **Avoidance**: Always validate logic using sample data before pushing to production.
+
+## Related Links
+
+- [Workspaces in Condense](/condense/v2.4.0/condense-guide/condense-core/create-your-workspace)
+- [Pipelines in Condense](/condense/v2.4.0/deep-dive/pipelines)
+- [Applications in Condense](/condense/v2.4.0/deep-dive/applications)
+- [Connectors in Condense](/condense/v2.4.0/deep-dive/connectors/connectors-in-condense)
+- [RBAC](/condense/v2.4.0/condense-guide/condense-console/roles-and-permissions)

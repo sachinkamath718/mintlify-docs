@@ -1,0 +1,96 @@
+---
+title: "Resource Management"
+---
+
+Resource Management provides Kafka Administrators with a centralized view of Kafka resources and their associated access permissions. It enables administrators to review resource assignments, verify configured Access Control Lists (ACLs), and understand which users have access to specific Kafka resources.
+
+Resource Management complements Users & Role Management and ACL Management by providing a resource-centric view of access control across the Kafka cluster.
+
+---
+
+## Overview
+
+The **Resource Management** page helps Kafka Administrators review Kafka resources and the permissions configured for them.
+
+Using this page, administrators can:
+
+- View Kafka resources that have ACLs configured.
+- Review user access for individual resources.
+- Verify effective permissions for assigned users.
+- Review role and workspace associations for Kafka resources.
+
+---
+
+## Supported Resources
+
+Resource Management currently supports visibility into Kafka resources managed through Condense.
+
+Supported resource types include:
+
+- Topics
+- Consumer Groups
+- Schemas (where Schema Registry is enabled)
+
+Additional Kafka resources may be supported in future releases.
+
+---
+
+## Resource Information
+
+For each Kafka resource, Resource Management provides visibility into:
+
+| Information | Description |
+| --- | --- |
+| Resource Name | Name of the Kafka resource. |
+| Resource Type | Type of Kafka resource. |
+| Assigned Users | Users who have access to the resource. |
+| Assigned Roles | Condense roles associated with the users. |
+| Effective Permissions | Permissions applied through ACLs. |
+| Workspace Association | Workspace to which the resource access applies. |
+
+This information enables Kafka Administrators to quickly review how access has been configured for each resource.
+
+---
+
+## Reviewing Resource Permissions
+
+Resource Management allows administrators to review the permissions configured for each Kafka resource.
+
+Administrators can verify:
+
+- Which users have access.
+- Which Condense role has been assigned.
+- Which permissions are currently effective through ACLs.
+
+This helps ensure that resource access aligns with organizational governance policies.
+
+---
+
+## Relationship with Users and ACLs
+
+Resource Management works together with Users & Role Management and ACL Management.
+
+- **Users & Role Management** defines who can access Kafka resources.
+- **ACL Management** defines the permissions granted to those users.
+- **Resource Management** provides a consolidated view of the configured access for each Kafka resource.
+
+Together, these capabilities provide centralized administration of Kafka resource permissions.
+
+---
+
+## Best Practices
+
+- Review resource permissions regularly.
+- Remove unnecessary access to Kafka resources.
+- Verify workspace associations before granting permissions.
+- Periodically audit resource assignments to maintain least-privilege access.
+
+---
+
+## Related Documentation
+
+- Users & Role Management
+- ACL Management
+- Consumer Groups
+- Kafka Topics
+- Securing Kafka

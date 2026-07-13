@@ -1,0 +1,281 @@
+---
+title: "Create Your Workspace"
+---
+
+## Overview
+
+A Workspace in Condense is a dedicated, isolated space where you build and operate your real-time streaming solutions. It is the functional boundary where teams can design pipelines, configure connectors, develop and deploy applications or transforms, and manage access for team members.
+
+Workspaces help:
+
+- Keep development process organized (e.g., development, staging, production)
+- Separate resources for different business units, customers, or use cases
+- Control access with fine-grained, workspace-specific roles
+- Monitor, audit, and manage all resources within a contained scope
+
+## What you can do in a Workspace
+
+A workspace is more than just a container for resources, it is the active space where all real-time streaming components come together. In this section, you will find how a workspace brings together pipelines, connectors, applications, and transforms into a cohesive workflow. You’ll also see how members collaborate within this space, manage configurations, and monitor performance, all without leaving the workspace boundary.
+
+To understand this better, let’s look at the key components that make up a workspace and how each one contributes to building and operating real-time streaming solutions.
+
+### Pipelines
+
+Design complete, event-driven workflows by linking sources, processing logic, and destinations. Within a pipeline, you can:
+
+- Ingest data through connectors
+- Process and enrich streams with transforms or utilities
+- Deliver results to output systems
+
+### Connectors
+
+Integrate your workspace with external systems.
+
+- Source connectors bring data into the workspace
+- Sink connectors send processed data to other systems
+- Configuration includes workspace parameters, authentication, and topic/data mapping
+
+### Applications
+
+Custom-built solutions created in Condense in-built IDE, connected to a Git repository for version control.
+
+Applications:
+
+- contain custom logic written in supported programming languages
+- are tested and refined in the workspace IDE
+- can be published as Custom Transforms or a Custom connector for deployment in pipelines
+
+### Transforms
+
+Processing components are added directly into pipelines.
+
+Types:
+
+- pre-built Transforms: Ready-to-use, provided by Condense (e.g., Geofence, Alerts, Split, Logger)
+- custom Transforms: Derived from your published applications
+- utilities: NCLC tools for common processing needs (e.g., conditional splits, alert triggers).
+
+### Workspace Members
+
+Manage which existing organization members can access the workspace and what they can do.
+
+- Assign workspace-specific role bindings: **Admin, Maintainer, Developer, Viewer**
+- Adjust or revoke access instantly from Workspace Settings
+
+### Monitoring & Audit
+
+- Monitor pipeline, connector, and transform health
+- Review activity logs for changes and actions
+- View dashboards for throughput, latency, and error tracking
+
+Now that we’ve explored the key components and capabilities within a workspace, the next step is understanding its lifecycle from creation and configuration to updates and eventual deletion.
+
+## Workspace Lifecycle
+
+Every workspace follows a clear lifecycle, from creation to configuration, ongoing updates, and eventual deletion. This section explains who can create, edit, or delete a workspace, the steps involved in each stage, and the rules that apply. You’ll also find naming guidelines, role considerations, and important safeguards to prevent accidental loss of resources.
+
+### Creating a Workspace
+
+<Info>
+  **Who can create:** Only Organization Admins
+</Info>
+
+**Steps to create the workspace:**
+
+- Upon successful login and selecting the organization, you will be redirected to the workspace catalogue.
+- Click Create Workspace
+- Enter a unique name and optional description/tags
+- Click Create
+
+**Naming Rules**
+
+- Allowed: Letters, numbers, hyphens (-), underscores (\_)
+- Length: 3–63 characters
+- Unique within the organization
+
+#### Step 1: Create a Workspace
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FVUIRd1SYLejnqTjCweS0%2Fimage.png)
+
+#### Step 2: Configuration of Workspace
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FJe9U5HgUqaSilAmYfSga%2Fimage.png)
+
+A new workspace created will be added to the catalogue of Workspaces
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FbpwAZzsq58iug81Cc3Pq%2Fimage.png)
+
+### **Editing a Workspace**
+
+Who can edit: Workspace Admins and Organization Admins
+
+- Editable: Name, description, tags
+- Non-editable: Workspace ID, creation date
+
+Changes apply immediately
+
+Steps to edit the workspace:
+
+#### **Step 1:** Go to Settings and click on the workspace
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FoGT97mLJ8LGxgJkYYeqt%2Fimage.png)
+
+#### **Step 2:** Select the workspace and in the action section, click on the edit icon. A dedicated workspace settings page will open where you can edit the name and about the workspace.
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2F0THGVFj5XNd2N2H9WL84%2Fimage.png)
+
+### Deleting a Workspace
+
+<Info>
+  Who can delete: Workspace Admins and Organization Admins
+</Info>
+
+<Danger>
+  **Warning**
+
+  - Deletion is permanent. There is no backup, export, or recovery feature
+  - All pipelines, connectors, transforms, and applications in the workspace are removed permanently
+  - Confirm with your team before proceeding
+</Danger>
+
+Steps to delete the workspace:
+
+#### Step 1: Go to settings and click on the delete icon of the action section against the workspace name which needs to be deleted
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2Fi3xwBn56DKpxT7fteChF%2Fimage.png)
+
+#### Step 2: Confirm the delete operation by typing the workspace name. If the entered workspace name matches, then deletion will be executed, and it will be removed from the catalogue of workspaces.
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FyGtRnPP0dsrWxXfJJa84%2Fimage.png)
+
+## Workspace Roles and Permissions
+
+Role bindings are assigned per workspace, so a user can have different permissions in different workspaces.
+
+<Info>
+  Only existing organization members can be added to a workspace.
+</Info>
+
+| **Operation** | Admin | Maintainer | **Developer** | **Viewer** |
+| --- | --- | --- | --- | --- |
+| Manage workspace members | **✓** | **✓** | **✕** | **✕** |
+| Create/edit/delete pipelines | **✓** | **✓** | **✕** | **✕** |
+| Deploy prebuilt connectors | **✓** | **✓** | **✕** | **✕** |
+| Deploy custom connectors | **✓** | **✓** | **✕** | **✕** |
+| Deploy utilities | **✓** | **✓** | **✕** | **✕** |
+| Create/edit/delete applications | **✓** | **✓** | **✓** | **✕** |
+| View pipelines/connectors | **✓** | **✓** | **✓** | **✓** |
+| View connector logs/configs | **✓** | **✓** | **✓** | **✓** |
+| Access KSQL (if enabled) | **✓** | **✓** | **✓** | **✕** |
+| Configure deployed connectors | **✓** | **✓** | **✕** | **✕** |
+| Delete deployed connectors | **✓** | **✓** | **✕** | **✕** |
+| Remove last Admin | **✕** | **✕** | **✕** | **✕** |
+
+## Role descriptions
+
+- **Admin**: Full control over workspace resources, settings, and members
+- **Maintainer**: Can deploy and operate pipelines/connectors/transforms; manage members
+- **Developer**: Can build and edit applications/transforms; view configurations; cannot deploy or change settings
+- **Viewer**: Read-only access
+
+## Managing users in a Workspace
+
+### Add users
+
+1. Go to the Workspace catalogue page
+2. Click on the "Add User \+" icon on the workspace card
+3. Search and select users from the organization member list
+4. Assign a workspace role
+5. Click on Add
+
+<Warning>
+  Note: If a user does not appear in the list, they must first be added to the organization as a member by an Organization Admin.
+</Warning>
+
+### **Steps to associate members with the workspace**
+
+#### **Step 1**: Select the workspace from the catalogue to add the users
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2F8HbGasUjSIvP96It4ToA%2Fimage.png)
+
+#### Step 2: Look for the unassigned users list and select the member, and click on the "add user" icon.
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2F8R98SsQPryi8t2auCdWf%2Fimage.png)
+
+#### Step 3: The Member will be added as a user of the workspace and moved to the assigned users list.
+
+<Info>
+  By default, the user will be assigned a viewer role binding. Admin is required to bind the appropriate role to the added user.
+</Info>
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FFfaRSvgMVPZuoVSDX9qH%2Fimage.png)
+
+### Change Roles
+
+- Admins and Maintainers can change roles anytime
+- Changes take effect immediately
+
+### Remove workspace user
+
+- Admins and Maintainers can remove workspace users
+- You cannot directly remove the last Admin. Promote another user first
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2Fw6JU0ZESHO9isCKGbWZg%2Fimage.png)
+
+## Workspace Settings
+
+From Workspace Settings, you can:
+
+- View and update workspace details
+- Manage workspace members and roles
+- Access activity logs
+- View resource usage and workspace parameters
+
+<Info>
+  The Workspace settings page is where you get a list of existing workspaces in the organization
+</Info>
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FV1zkAWv4UakQZfHyjA78%2Fimage.png)
+
+Select the workspace name, and click on the edit icon of the action section to open the workspace setting page
+
+![](/images/condense/v2.4.0/condense-guide/condense-core/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FFMjSwQWq3k1uerjIRQOT%2Fimage.png)
+
+## Monitoring and Audit
+
+Workspaces include monitoring and auditing tools to help manage operations:
+
+- Pipeline status (running, stopped, error)
+- Connector health (connected, disconnected, error state)
+- Transform/application status (active version, logs)
+- Activity log (who changed what, when)
+
+## Best Practices
+
+- Use separate workspaces for each development stage (dev, staging, prod)
+- Apply the least privilege principle when assigning roles
+- Document the workspace's purpose in the description
+- Regularly review membership and roles
+- Remove unused pipelines/connectors to keep the workspace clean
+
+## Common Pitfalls and How to Avoid Them
+
+1. Trying to add a user who not member of organization
+
+**Avoidance**: Confirm the user has been added at the organization level before attempting to add them to a workspace
+
+2. Accidentally deleting a workspace
+
+**Avoidance**: Double-check the workspace name and confirm with the team before deletion
+
+3. Assigning all members as Admins
+
+**Avoidance**: Limit Admin roles to those responsible for workspace governance; use Maintainer, Developer, or Viewer roles for others
+
+## Relevant Links
+
+- [Pipelines](/condense/v2.4.0/deep-dive/pipelines)
+- [Connectors](/condense/v2.4.0/condense-guide/condense-core/deploy-an-input-connector)
+- [Applications](/condense/v2.4.0/deep-dive/applications)
+- [Transforms](/condense/v2.4.0/getting-started/introduction-to-condense)
+- [RBAC Overview](/condense/v2.4.0/condense-guide/condense-console/roles-and-permissions)

@@ -1,0 +1,204 @@
+---
+title: "BigQuery (Output, Store)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Stores processed real-time data into BigQuery tables for querying, dashboards, and analytics.
+
+**Brief Description**
+
+The BigQuery Store Output Connector enables real-time event ingestion from Condense Kafka-native topics directly into Google BigQuery tables. This allows users to stream data into Google's cloud-native data warehouse for immediate querying, analytics, dashboards, compliance tracking, and machine learning workflows.
+
+This connector supports continuous write operations from Kafka into a specified BigQuery table using a Google Cloud service account for authentication. It handles streaming inserts, schema matching, and structured JSON payload mapping.
+
+**Links to Relevant Documents**
+
+- [https://cloud.google.com/bigquery/docs/introduction](https://cloud.google.com/bigquery/docs/introduction)
+- [https://cloud.google.com/bigquery/streaming-data-into-bigquery](https://cloud.google.com/bigquery/streaming-data-into-bigquery)
+- [https://cloud.google.com/bigquery/docs/datasets-intro](https://cloud.google.com/bigquery/docs/datasets-intro)
+- [https://cloud.google.com/iam/docs/creating-managing-service-account-keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
+- [https://cloud.google.com/bigquery/docs/schemas](https://cloud.google.com/bigquery/docs/schemas)
+
+**Connector Overview**
+
+This output connector continuously consumes structured messages from a Kafka-native Condense topic and inserts them as rows into a specified BigQuery table.
+
+Best suited for:
+
+A. Real-time analytics pipelines.
+
+B. Dashboard integration with Looker, Superset, or Looker Studio.
+
+C. Machine learning feature store population.
+
+D. Regulatory audit trails and compliance reporting.
+
+E. Event archiving with fast SQL access.
+
+**Core Functionality**
+
+1. Streams data into BigQuery using JSON row inserts.
+2. Maps event fields to BigQuery table columns.
+3. Authenticates using Google Cloud service accounts.
+4. Logs schema validation and write errors for troubleshooting.
+5. Supports batched inserts for improved performance where applicable.
+
+**How It Works in Condense**
+
+1. The connector subscribes to a Kafka-native Condense topic.
+2. Incoming messages are expected to be valid JSON objects.
+3. The connector authenticates using the configured Google Cloud Service Account.
+4. Each message is inserted into the configured BigQuery table.
+5. Insert status and errors are recorded in Condense logs.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Storage | Project ID | Google Cloud project containing the dataset | Yes |
+| Storage | Dataset ID | BigQuery dataset name | Yes |
+| Storage | Table ID | Destination BigQuery table | Yes |
+| Authentication | Service Account Key | Google Cloud Service Account JSON key | Yes |
+| Condense | Topic (Input) | Kafka-native topic to consume from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Internal reference name for the connector.
+
+**Examples:**
+
+- bq-fleet-logger
+- bq-revenue-stream
+- bq-telemetry-archive
+
+**2. Project ID**
+
+The Google Cloud project containing the BigQuery dataset.
+
+The configured Service Account must have access to this project.
+
+**Examples:**
+
+- fleet-intelligence-prod
+- customer-analytics-2025
+
+**3. Dataset ID**
+
+The BigQuery dataset containing the destination table.
+
+The dataset must already exist.
+
+**Examples:**
+
+- raw\_events
+- vehicle\_telemetry
+- streamed\_data
+
+**4. Table ID**
+
+Destination table where streaming records will be inserted.
+
+The table schema should match the incoming JSON payload.
+
+**Examples:**
+
+- driver\_behaviour
+- trip\_summaries
+- fraud\_alerts
+
+**5. Service Account Key**
+
+JSON credentials for a Google Cloud Service Account.
+
+The Service Account should have the `roles/bigquery.dataEditor` role on the dataset or table.
+
+For security:
+
+- Use dedicated service accounts.
+- Rotate credentials periodically.
+- Store credentials securely.
+
+The Service Account JSON can be downloaded from:
+
+**Google Cloud Console → IAM & Admin → Service Accounts**
+
+**6. Topic (Input)**
+
+Kafka-native Condense topic from which records are consumed.
+
+Payloads should be valid JSON.
+
+If necessary, use a Condense Transform to flatten or modify the schema before writing to BigQuery.
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "bq-realtime-vehicle",
+  "bigQueryProjectId": "fleet-intelligence-prod",
+  "bigQueryDatasetId": "vehicle_events",
+  "bigQueryTableId": "geofence_breaches",
+  "serviceAccountKey": "{...GCP Service Account JSON...}",
+  "inputTopic": "geo-breach-stream"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Schema Mismatch**
+
+**Error:** Incoming payload does not match the BigQuery table schema.
+
+**Solution:** Update the table schema or preprocess the payload using a Condense Transform.
+
+**2. Authentication Failed**
+
+**Error:** Invalid Service Account credentials or insufficient permissions.
+
+**Solution:** Verify the Service Account JSON and ensure it has the `roles/bigquery.dataEditor` permission.
+
+**3. Streaming Insert Failures**
+
+**Cause:** Network issues or BigQuery streaming quota limits.
+
+**Solution:** Verify connectivity and monitor Google Cloud quotas.
+
+**4. Payload Parsing Error**
+
+**Cause:** Payload is not valid JSON.
+
+**Solution:** Transform Avro, CSV, or binary payloads into JSON before sending them to the connector.
+
+**Advanced Topics**
+
+**1. Streaming Inserts**
+
+BigQuery streaming inserts provide low-latency data availability for analytics.
+
+**2. Schema Evolution**
+
+Changes to incoming event schemas must also be reflected in the destination BigQuery table.
+
+**3. Partitioning and Clustering**
+
+Use BigQuery table partitioning and clustering for improved query performance on large datasets.
+
+**4. Duplicate Handling**
+
+Streaming inserts do not automatically eliminate duplicate records.
+
+Use unique identifiers or additional Condense logic where idempotent processing is required.
+
+**Best Practices**
+
+1. Keep the Condense message schema aligned with the destination BigQuery schema.
+2. Flatten deeply nested JSON where possible to improve query performance.
+3. Use descriptive project, dataset, and table names.
+4. Monitor BigQuery streaming quotas and connector logs.
+5. Store Service Account credentials securely and rotate them regularly.

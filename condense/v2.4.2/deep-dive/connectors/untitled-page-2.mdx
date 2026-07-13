@@ -1,0 +1,202 @@
+---
+title: "Azure Event Hubs (Input, Stream)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Streams data from Azure Event Hubs into Condense for cloud-native processing and event workflows.
+
+**Brief Description**
+
+The Azure Event Hubs Stream Input Connector enables ingestion of high-throughput real-time events from Azure Event Hubs into Condense's Kafka-native runtime. Azure Event Hubs is a managed event streaming platform capable of handling millions of events per second, making it ideal for telemetry, IoT, logging, and application events.
+
+The connector supports checkpointing and offset tracking using Azure Blob Storage, enabling reliable event consumption and scalable processing across multiple partitions.
+
+**Links to Relevant Documents**
+
+- \[[https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-about)\]
+- \[[https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-programming-guide](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-programming-guide)\]
+- \[[https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-capture-overview](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-capture-overview)\]
+- \[[https://learn.microsoft.com/en-us/azure/storage/common/storage-auth](https://learn.microsoft.com/en-us/azure/storage/common/storage-auth)\]
+
+**Connector Overview**
+
+The connector subscribes to an Azure Event Hub and publishes incoming events into Kafka-native Condense topics. Azure Blob Storage is used to store checkpoints, enabling reliable offset management across connector restarts.
+
+Common use cases include:
+
+A. IoT device telemetry ingestion.
+
+B. Cloud-native application logging.
+
+C. Azure-native observability pipelines.
+
+D. Real-time event processing and alerting.
+
+**Core Functionality**
+
+1. Reads events from all Event Hub partitions.
+2. Uses Azure Blob Storage for checkpointing and offset tracking.
+3. Authenticates using Azure Shared Access Policies.
+4. Publishes events into Kafka-native Condense topics.
+5. Supports scalable, partition-aware event consumption.
+
+**How It Works in Condense**
+
+1. The connector authenticates with Azure Event Hubs and Azure Blob Storage.
+2. It subscribes to the configured Event Hub.
+3. Events are consumed from all available partitions.
+4. Offsets are periodically stored in Azure Blob Storage.
+5. Incoming events are published into the configured Kafka-native Condense topic for downstream processing.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Event Hub | Namespace Name | Azure Event Hubs namespace | Yes |
+| Event Hub | Event Hub Name | Event Hub to consume from | Yes |
+| Authentication | Shared Access Name | Shared Access Policy name | Yes |
+| Authentication | Shared Access Key | Shared Access Policy key | Yes |
+| Blob Storage | Blob Account Name | Storage account used for checkpointing | Yes |
+| Blob Storage | Blob Container Name | Container used to store checkpoints | Yes |
+| Blob Storage | Blob Access Key | Storage account access key | Yes |
+| Condense | Topic (Input) | Kafka-native topic to publish events to | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Unique identifier for the connector.
+
+**Example:**
+
+`eventhub-ingest-iot`
+
+**2. Namespace Name**
+
+Azure Event Hubs namespace containing the Event Hub.
+
+**Example:**
+
+`zeliot-streaming-namespace`
+
+**3. Event Hub Name**
+
+Name of the Event Hub to consume from.
+
+**Examples:**
+
+- device-telemetry-stream
+- application-events
+- iot-logs
+
+**4. Shared Access Name**
+
+Shared Access Policy name with **Listen** permissions.
+
+This can be found in:
+
+**Azure Portal → Event Hubs Namespace → Shared Access Policies**
+
+**Example:**
+
+`streamConsumerPolicy`
+
+**5. Shared Access Key**
+
+Key associated with the configured Shared Access Policy.
+
+Rotate keys periodically and store them securely.
+
+**6. Blob Account Name**
+
+Azure Storage Account used for checkpoint storage.
+
+Checkpointing allows the connector to resume processing after restarts.
+
+**7. Blob Container Name**
+
+Blob container where checkpoint metadata is stored.
+
+Using a dedicated container per connector is recommended.
+
+**8. Blob Access Key**
+
+Credential used to access the checkpoint storage account.
+
+Using SAS Tokens or Managed Identity is recommended where supported.
+
+**9. Topic (Input)**
+
+Kafka-native Condense topic where incoming Event Hub events are published.
+
+Downstream transforms and applications consume events from this topic.
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "azure-eventhub-iot-ingest",
+  "namespaceName": "zeliot-stream.servicebus.windows.net",
+  "eventHubName": "device-telemetry-stream",
+  "sharedAccessName": "streamConsumerPolicy",
+  "sharedAccessKey": "REDACTED",
+  "blobAccountName": "zeliotblobstore",
+  "blobContainerName": "eventhub-checkpoints",
+  "blobAccessKey": "REDACTED",
+  "inputTopic": "iot-raw-events"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Authentication Failed**
+
+**Cause:** Invalid Shared Access Key or insufficient permissions.
+
+**Solution:** Verify the Shared Access Policy has **Listen** permissions and regenerate the key if necessary.
+
+**2. No Events Received**
+
+**Cause:** No incoming traffic or incorrect Event Hub configuration.
+
+**Solution:** Verify the Event Hub is receiving events and confirm the connector configuration.
+
+**3. Offset or Duplicate Processing**
+
+**Cause:** Checkpoint storage is unavailable or misconfigured.
+
+**Solution:** Verify Azure Blob Storage connectivity and checkpoint permissions.
+
+**4. Blob Storage Errors**
+
+**Cause:** Invalid storage credentials.
+
+**Solution:** Verify the Blob Storage Account, container, and access key.
+
+**Advanced Topics**
+
+**1. Throughput Units**
+
+Provision sufficient Throughput Units (TUs) in Azure Event Hubs to match the expected event volume.
+
+**2. Consumer Groups**
+
+Each Condense connector manages its own consumer group to support independent event processing.
+
+**3. Event Format**
+
+Events are forwarded without schema enforcement.
+
+Use Condense Transforms to normalize, enrich, or restructure messages before downstream processing.
+
+**Best Practices**
+
+1. Use dedicated Event Hub namespaces and Blob Storage accounts for production workloads.
+2. Prefer Managed Identity or SAS Tokens over long-lived access keys whenever possible.
+3. Monitor Event Hub throughput, consumer lag, and connector health.
+4. Use Condense Transforms to enrich or validate events before further processing.
+5. Scale Event Hub partitions and Throughput Units based on ingestion requirements.

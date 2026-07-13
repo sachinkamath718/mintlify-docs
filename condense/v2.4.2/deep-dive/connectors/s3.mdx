@@ -1,0 +1,230 @@
+---
+title: "Amazon S3 (Output, Store)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Uploads processed and raw real-time data from Condense to Amazon S3 buckets for storage and analysis.
+
+**Brief Description**
+
+The Amazon S3 Output Connector enables Condense to continuously stream data from Kafka-native topics into Amazon Simple Storage Service (Amazon S3). It is designed for long-term data retention, analytics, data lakes, compliance, and archival use cases.
+
+The connector buffers incoming events and writes them to Amazon S3 as objects in configurable formats such as JSON, CSV, or newline-delimited JSON (NDJSON). Uploaded data can be consumed by downstream AWS services including Amazon Athena, AWS Glue, Amazon EMR, Amazon Redshift Spectrum, and AWS Lambda.
+
+**Links to Relevant Documents**
+
+- [https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+- [https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html)
+- [https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html)
+
+**Connector Overview**
+
+The Amazon S3 Output Connector consumes events from a Condense Kafka topic and writes them into objects within an Amazon S3 bucket. Data is buffered and uploaded based on configurable flush intervals, providing efficient and reliable storage for downstream processing.
+
+Typical use cases include:
+
+- Data lake ingestion
+- Long-term archival
+- Regulatory compliance
+- Machine learning datasets
+- Batch analytics
+- Disaster recovery backups
+
+**Core Functionality**
+
+- Streams Kafka events into Amazon S3.
+- Buffers events before upload for efficient storage.
+- Supports JSON, NDJSON, and CSV output formats.
+- Authenticates using AWS IAM credentials.
+- Automatically retries failed uploads.
+- Supports region-specific S3 buckets.
+
+**How It Works in Condense**
+
+1. The connector subscribes to the configured Kafka topic.
+2. Incoming events are buffered in memory.
+3. Files are generated according to configured batching policies.
+4. Generated files are uploaded to the specified Amazon S3 bucket.
+5. Upload status and operational metrics are available through Condense observability.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| AWS | Bucket Name | Destination Amazon S3 bucket | Yes |
+| AWS | Region | AWS region where the bucket exists | Yes |
+| Authentication | Access Key | AWS Access Key ID | Yes |
+| Authentication | Secret Key | AWS Secret Access Key | Yes |
+| Condense | Input Topic | Kafka topic to consume events from | Yes |
+
+**Field-by-Field Explanation**
+
+### Title
+
+- **Description:** Friendly name for the connector.
+- **Example:** `S3_Event_Archive_Prod`
+
+---
+
+### Bucket Name
+
+- **Description:** Target Amazon S3 bucket where files will be uploaded.
+- **Requirements:**
+  - Bucket must already exist.
+  - IAM credentials must have write access.
+- **Example:** `fleet-event-archive`
+
+---
+
+### Region
+
+- **Description:** AWS Region where the bucket is hosted.
+- **Examples:**
+  - `ap-south-1`
+  - `us-east-1`
+  - `eu-west-1`
+
+---
+
+### Access Key
+
+- **Description:** AWS IAM Access Key ID used to authenticate with Amazon S3.
+- **Permissions Required:**
+  - `s3:PutObject`
+  - `s3:ListBucket`
+  - Optionally `s3:GetObject`
+
+---
+
+### Secret Key
+
+- **Description:** AWS Secret Access Key associated with the Access Key.
+- **Security Recommendation:** Store credentials securely and rotate them regularly.
+
+---
+
+### Input Topic
+
+- **Description:** Kafka topic inside Condense from which events are consumed.
+- **Example:** `vehicle.events.processed`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "S3_Event_Archive_Prod",
+  "bucketName": "fleet-event-archive",
+  "region": "ap-south-1",
+  "accessKey": "AKIA****************",
+  "secretKey": "********************************",
+  "inputTopic": "vehicle.events.processed"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+### Access Denied
+
+**Possible Causes**
+
+- Missing IAM permissions.
+- Incorrect AWS credentials.
+
+**Resolution**
+
+- Verify the IAM user has `s3:PutObject` permission.
+- Validate the configured Access Key and Secret Key.
+
+---
+
+### Bucket Not Found
+
+**Possible Causes**
+
+- Bucket name is incorrect.
+- Incorrect AWS region.
+
+**Resolution**
+
+- Verify the bucket exists.
+- Ensure the configured region matches the bucket region.
+
+---
+
+### Upload Failures
+
+**Possible Causes**
+
+- Network connectivity issues.
+- Temporary AWS service interruptions.
+
+**Resolution**
+
+- Review connector logs.
+- Retry after connectivity is restored.
+
+---
+
+### Files Not Visible
+
+**Possible Causes**
+
+- Objects uploaded under a different prefix.
+
+**Resolution**
+
+- Verify object prefixes within the bucket.
+- Check the generated object key structure.
+
+**Advanced Considerations**
+
+### Object Naming
+
+By default, uploaded objects follow a timestamp-based folder hierarchy similar to:
+
+```text
+condense/<topic>/year=2026/month=07/day=13/hour=15/<uuid>.json
+```
+
+This structure improves compatibility with AWS Glue and Amazon Athena partition discovery.
+
+---
+
+### Supported Output Formats
+
+Depending on upstream transformations, the connector supports:
+
+- JSON
+- NDJSON
+- CSV
+
+---
+
+### Compression
+
+Compression can be applied upstream using Condense transforms before data reaches the connector.
+
+---
+
+### Downstream AWS Integrations
+
+Uploaded objects can be consumed by:
+
+- Amazon Athena
+- AWS Glue
+- Amazon EMR
+- Amazon Redshift Spectrum
+- AWS Lambda
+- Amazon QuickSight
+
+**Best Practices**
+
+1. Enable bucket versioning for recovery from accidental overwrites.
+2. Configure lifecycle policies to archive or delete old objects automatically.
+3. Use dedicated IAM users with least-privilege permissions.
+4. Organize data using date-based folder structures for efficient analytics.
+5. Monitor upload success, latency, and failures using Amazon CloudWatch and Condense observability.

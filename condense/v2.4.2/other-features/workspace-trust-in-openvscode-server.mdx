@@ -1,0 +1,133 @@
+---
+title: "Workspace Trust in OpenVSCode Server"
+---
+
+### Overview
+
+OpenVSCode Server, like Visual Studio Code, provides a secure editing environment by introducing the concept of **Workspace Trust**. This mechanism protects developers from unintentionally executing unsafe code when opening a folder that contains files authored by unknown or untrusted sources.
+
+When you open a folder, OpenVSCode Server prompts you to indicate whether you trust the authors of the files in that folder. Your choice determines whether the workspace runs in **Trusted Mode** (all features enabled) or **Restricted Mode** (limited, safe execution).
+
+---
+
+### Why Workspace Trust Matters
+
+Modern code editors provide advanced features that may automatically execute or interpret files in your workspace. Examples include:
+
+- **Tasks and Build Scripts** – e.g., `tasks.json` running shell commands.
+- **Debug Configurations** – e.g., `launch.json` triggering executables.
+- **Extensions** – some extensions can execute workspace-specific code.
+- **Settings and Code Snippets** – workspace-level configuration can alter execution environments.
+
+If these features run on untrusted code, they could compromise the host system, leak credentials, or introduce malicious behavior. Workspace Trust ensures **security-first execution**.
+
+---
+
+### Trust States
+
+There are two main trust states:
+
+#### 1. Trusted Mode
+
+- All editor features are enabled.
+- Workspace-specific settings, extensions, tasks, and debugging configurations are active.
+- Intended for codebases you authored, or repositories you trust.
+
+#### 2. Restricted Mode
+
+- Editor enters a **locked-down state**.
+- The following are **disabled or limited**:
+  - Execution of workspace tasks and launch configurations.
+  - Automatic activation of workspace-reliant extensions.
+  - Certain APIs that extensions may call.
+  - Access to workspace-level settings that could affect security.
+- Safe for exploring third-party or unknown codebases.
+
+You can always upgrade a workspace from **Restricted** to **Trusted** after verifying the files.
+
+---
+
+### Trust Prompt Explained
+
+When you open a new folder, OpenVSCode Server displays a trust dialog with options:
+
+- **Yes, I trust the authors** Enables trusted mode for the current folder.
+- **No, I don’t trust the authors** Opens the workspace in restricted mode.
+- **Trust the authors of all files in the parent folder** Extends trust to the parent directory (and all subdirectories). Useful for project structures under a common root like `~/Projects/`.
+
+#### Example:
+
+If you open:
+
+Copy
+
+```text
+~/RakeshTigadi/cold-call-sentiment-analysis
+```
+
+and select **Trust parent folder**, then the entire `~/RakeshTigadi/` tree is trusted.
+
+---
+
+### Security Model and Enforcement
+
+The trust system in OpenVSCode Server is built on three principles:
+
+1. **Least Privilege by Default** Unknown code is opened in restricted mode unless explicitly trusted.
+2. **Granular Control** Trust can be applied at the folder or parent-folder level.
+3. **Transparency** The editor clearly indicates when restricted mode is active and lists which features are unavailable.
+
+Restricted mode enforcement includes:
+
+- Blocking execution of code in `tasks.json` and `launch.json`.
+- Preventing execution of workspace `npm`/`yarn`/`pip` scripts via VSCode tasks.
+- Disabling extension APIs that rely on workspace execution.
+- Not loading workspace settings that could alter environment behavior.
+
+---
+
+### Managing Trust Settings
+
+You can manage trust at any time:
+
+- **Status Bar Indicator** Restricted Mode is shown in the status bar. Click to manage trust.
+- **Command Palette** (`Ctrl+Shift+P` / `Cmd+Shift+P`) Run: `Workspaces: Manage Workspace Trust`.
+- **Settings File** Trust decisions are stored in user configuration and can be reset if needed.
+
+---
+
+### Best Practices
+
+- **Trust only code you control**: Personal or organizational repositories.
+- **Review before trusting**: For open-source code, inspect scripts and configs.
+- **Default to Restricted**: When uncertain, start in restricted mode.
+- **Use Parent Folder Trust**: For monorepos or structured org folders.
+- **Audit Extensions**: Only enable extensions you trust, as they can execute code.
+
+---
+
+### Example Scenarios
+
+1. **Personal Project** You open your own repository → Safe to trust authors.
+2. **Organizational Repo** Open a company-managed Git repo → Trust if policies validate it.
+3. **Open-Source Contribution** Opening a random GitHub project → Start in restricted mode, review code, then trust if needed.
+4. **Shared Workspace** Folder downloaded via email/zip → Use restricted mode until you verify contents.
+
+---
+
+### References
+
+- [Visual Studio Code: Workspace Trust ↗︎](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust)
+- [OpenVSCode Server Documentation ↗︎](https://github.com/gitpod-io/openvscode-server)
+
+---
+
+### FAQ
+
+**Q. Can I still edit files in Restricted Mode?** Yes. You can view, edit, and save files normally. Only execution-related features are disabled.
+
+**Q. Will extensions work in Restricted Mode?** Only extensions that don’t require workspace execution will run. Others will remain disabled until trust is granted.
+
+**Q. Can I change my decision later?** Yes, you can always manage trust from the status bar or Command Palette.
+
+**Q. Is trusting a folder permanent?** Trust is remembered until you explicitly revoke it or reset trust settings.

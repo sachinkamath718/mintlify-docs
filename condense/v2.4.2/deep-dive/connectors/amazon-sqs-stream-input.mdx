@@ -1,0 +1,181 @@
+---
+title: "Amazon SQS (Output, Stream)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Publishes processed data to Amazon SQS queues for asynchronous, decoupled processing.
+
+**Brief Description**
+
+The Amazon SQS Stream Output Connector in Condense allows streaming data from Condense's Kafka-native pipelines into Amazon Simple Queue Service (SQS) queues in real time. Amazon SQS is a fully managed message queuing service that enables decoupling and scaling of distributed systems, microservices, and serverless applications.
+
+This connector bridges Condense's high-throughput stream processing with SQS's reliable message delivery infrastructure, making it ideal for asynchronous workflows, system fan-out, and downstream integrations that require queue-based semantics.
+
+**Links to Relevant Documents**
+
+- [https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html)
+- [https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API\_SendMessage.html](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
+- [https://docs.aws.amazon.com/IAM/latest/UserGuide/id\_credentials\_access-keys.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)
+
+**Connector Overview**
+
+The connector takes messages from an internal Condense Kafka-native topic and pushes them as individual messages to the configured SQS queue.
+
+It supports:
+
+A. Secure authentication using AWS access and secret keys
+
+B. Regional queue targeting (for example, us-east-1, ap-south-1)
+
+C. Transparent mapping of streaming events into SQS-compliant JSON payloads
+
+**Core Functionality**
+
+1. Sends Kafka messages from Condense directly to an SQS queue.
+2. Built-in batching, retry, and exponential backoff on failures.
+3. Works with Standard Queues (FIFO queue support is roadmap dependent).
+4. Compatible with downstream AWS Lambda, Step Functions, or EC2 services listening on SQS.
+
+**How it Works in Condense**
+
+1. A Condense Kafka-native topic receives streaming events.
+2. The SQS Output Connector consumes messages from that topic.
+3. Each message is wrapped into a valid SendMessage request to the specified SQS queue.
+4. Condense ensures delivery acknowledgement, retry handling, and error logging.
+5. Message attributes or deduplication parameters (for FIFO) can be extended via transforms.
+
+**Configurations**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique name for identifying this SQS connector | Yes |
+| AWS Details | Input Queue Name | The name of the target SQS queue to send messages to | Yes |
+| AWS Details | Region | AWS Region where the SQS queue is hosted (for example, us-west-2) | Yes |
+| Auth | Access Key | AWS access key with permission to send messages to the queue | Yes |
+| Auth | Secret Key | AWS secret key associated with the above access key | Yes |
+| Condense | Topic (Input) | Kafka-native topic in Condense to consume messages from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+**What It Is:** Logical name of this connector in the Condense pipeline UI.
+
+**Tip:** Use clear identifiers such as `sqs-payment-alert-output`.
+
+**2. Input Queue Name**
+
+**What It Is:** The exact name of the destination SQS queue.
+
+**Note:** Must exist in the configured region prior to use.
+
+**Examples:**
+
+- fraud-events
+- order-processing-queue
+- device-data-queue
+
+**3. Region**
+
+**What It Is:** The AWS Region where your SQS queue resides.
+
+**Example Values:**
+
+- us-east-1 (N. Virginia)
+- ap-south-1 (Mumbai)
+- eu-central-1 (Frankfurt)
+
+**4. Access Key**
+
+**What It Is:** The AWS IAM Access Key ID used for API authentication.
+
+**Permissions Required:**
+
+- `sqs:SendMessage`
+- `sqs:GetQueueUrl` (if not hardcoded)
+
+**5. Secret Key**
+
+**What It Is:** Secret key corresponding to the AWS Access Key.
+
+**Security Note:** Always store securely. Do not hardcode or expose in plain text.
+
+**6. Topic (Input)**
+
+**What It Is:** Kafka-native Condense topic from which messages will be read.
+
+**Content:** Messages are expected to be JSON or serialized text payloads suitable for SQS transmission.
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "sqs-log-output-connector",
+  "inputQueueName": "application-log-events",
+  "region": "ap-south-1",
+  "accessKey": "AKIA***********",
+  "secretKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCY**********",
+  "inputTopic": "logs.realtime.security"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Access Denied**
+
+**Error:** `403 AccessDeniedException`
+
+**Solution:** Ensure the IAM user or role has `sqs:SendMessage` permissions for the queue.
+
+**2. Queue Not Found**
+
+**Error:** `AWS.SimpleQueueService.NonExistentQueue`
+
+**Solution:** Verify the queue name and region match the actual queue.
+
+**3. Throttling or Rate Limits**
+
+**Error:** `ThrottlingException` or `HTTP 429`
+
+**Solution:** Reduce the message publishing rate or increase provisioned limits through AWS Support.
+
+**4. Message Too Large**
+
+**Limit:** Maximum allowed message size is **256 KB**.
+
+**Solution:** Use a transform in Condense to trim, compress, or split large payloads.
+
+**Advanced Topics**
+
+**1. FIFO Queue Support**
+
+A. Current version supports Standard Queues. FIFO support (with `MessageGroupId` and deduplication ID) is planned.
+
+B. To simulate FIFO behavior, use keys and sequence logic in transforms.
+
+**2. Dead-Letter Queue (DLQ)**
+
+A. Use the AWS Console or CLI to attach a DLQ to your queue for failed messages.
+
+B. Condense respects AWS retry policies and delivery delay configurations.
+
+**3. Message Attributes**
+
+Future versions of the connector may support setting message attributes (for example, application, severity, deviceId) through custom logic or transform output.
+
+**4. Security Best Practices**
+
+A. Avoid long-lived access and secret keys. Prefer IAM Roles or short-term credentials with rotation.
+
+B. Use encrypted secret storage and Condense secure environment variables.
+
+**Best Practices**
+
+1. Use clear, purpose-specific queue names to avoid confusion.
+2. Monitor queue length and age using Amazon CloudWatch for flow diagnostics.
+3. If publishing high-frequency telemetry, use batch compression or sampling upstream.
+4. Combine this connector with Condense logic transforms to enrich messages before queuing.
+5. Test IAM policies using the AWS IAM Policy Simulator before deploying to production.

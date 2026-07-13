@@ -1,0 +1,189 @@
+---
+title: "MongoDB (Output)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Stores JSON-formatted event streams from Condense into MongoDB collections for flexible downstream use.
+
+**Brief Description**
+
+The MongoDB Store Output Connector in Condense allows real-time Kafka-native event streams to be written directly into MongoDB collections. MongoDB is a popular NoSQL document database used extensively for flexible schema design, hierarchical data structures, and horizontal scalability.
+
+This connector is ideal for storing JSON documents, event logs, semi-structured IoT data, and unstructured user actions—making it a powerful bridge between Kafka-native pipelines and downstream analytics or operational apps.
+
+**Links to Relevant Documents**
+
+- [https://www.mongodb.com/docs/](https://www.mongodb.com/docs/)
+- [https://www.mongodb.com/docs/manual/reference/connection-string/](https://www.mongodb.com/docs/manual/reference/connection-string/)
+- [https://www.mongodb.com/docs/manual/reference/method/db.collection.insertOne/](https://www.mongodb.com/docs/manual/reference/method/db.collection.insertOne/)
+
+**Connector Overview**
+
+The MongoDB Store Output Connector consumes real-time messages from a Kafka-native topic within Condense and writes each message as a new document into a specified MongoDB collection.
+
+Common Use Cases:
+
+A. Persisting sensor or telemetry data as documents
+
+B. Creating operational data lakes for analytics or visualization
+
+C. Storing unstructured events for fraud detection or audit logs
+
+D. Building microservice backends that use MongoDB for query-heavy workloads
+
+**Core Functionality**
+
+1. Schema-flexible persistence of JSON-like event structures
+2. Real-time, one-to-one event ingestion into MongoDB collections
+3. Support for secure and authenticated database access
+4. Seamless compatibility with MongoDB Atlas and on-prem setups
+
+**How It Works in Condense**
+
+1. Events are streamed to the configured Kafka-native topic.
+2. The connector reads each event and treats it as a document.
+3. Using the provided credentials, it connects to the specified MongoDB host and database.
+4. It inserts each event as a new document into the configured collection.
+5. Condense manages retries, observability, and operational isolation.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique identifier for the connector within Condense | Yes |
+| Connection | Host URL | MongoDB connection URI (including hostname and port) | Yes |
+| Connection | Database | Name of the target MongoDB database | Yes |
+| Connection | Collection Name | Target collection within the database to store documents | Yes |
+| Auth | Username | Username for authentication | Yes |
+| Auth | Password | Password for the given user (if required by auth setup) | No |
+| Condense | Topic (Input) | Kafka-native topic to consume real-time messages from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- **What It Is:** Unique connector name for identifying and managing this integration in Condense.
+- **Best Practice:** Use a name that maps to its role, such as `mongodb-user-tracking-store`.
+
+---
+
+**2. Host URL**
+
+- **What It Is:** Full MongoDB connection string (including protocol, host, port, and optional query parameters).
+- **Format Example:**
+
+```text
+mongodb://username:password@host1:27017,host2:27017/?replicaSet=rs0
+```
+
+- **Atlas Tip:** For MongoDB Atlas, use the connection URI provided in the Atlas dashboard.
+
+---
+
+**3. Database**
+
+- **What It Is:** Logical database name inside the MongoDB cluster.
+- **Example:** `iot_logs`, `user_analytics`, `app_events`
+
+---
+
+**4. Collection Name**
+
+- **What It Is:** The collection where each event is stored as a document.
+- **Note:** The connector creates the collection automatically if it does not exist.
+
+---
+
+**5. Username**
+
+- **What It Is:** Database user with write access to the target collection.
+- **Role Requirement:** The user must have insert privileges on the target database and collection.
+
+---
+
+**6. Password**
+
+- **Description:** Password associated with the MongoDB user.
+- **Required:** Only if MongoDB authentication is enabled.
+- **Best Practice:** Store credentials securely and rotate them periodically.
+
+---
+
+**7. Topic (Input)**
+
+- **What It Is:** Kafka-native topic in Condense from which messages are consumed.
+- **Usage:** Messages should be valid JSON objects or JSON strings that can be converted into MongoDB documents.
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "mongodb-event-log-writer",
+  "mongoHostUrl": "mongodb://mongo-user:REDACTED@cluster0.mongodb.net:27017",
+  "mongoDatabase": "event_logs",
+  "mongoCollectionName": "device_events",
+  "mongoUsername": "mongo-user",
+  "mongoPassword": "REDACTED",
+  "inputTopic": "iot.devices.status"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**Authentication Failed**
+
+- **Symptom:** MongoDB returns an access denied error.
+- **Fix:** Ensure the username and password are correct and the user has write access to the target database and collection.
+
+**Document Rejection**
+
+- **Symptom:** Some events fail to store.
+- **Fix:** Validate JSON structure. MongoDB BSON has document size and nesting limits.
+
+**Connection Timeout**
+
+- **Symptom:** Unable to connect to MongoDB.
+- **Fix:** Verify the host, port, firewall rules, network connectivity, and MongoDB cluster availability.
+
+**Collection Not Found**
+
+- **Symptom:** Error indicating the target collection does not exist.
+- **Fix:** Pre-create the collection or ensure the user has permission to create collections.
+
+**High Write Latency**
+
+- **Symptom:** Slow event ingestion.
+- **Fix:** Optimize indexes, review write concern settings, and monitor MongoDB performance.
+
+**Advanced Topics**
+
+**1. JSON Schema Compatibility**
+
+- MongoDB is schema-flexible, but maintaining a consistent document structure improves querying and analytics.
+
+**2. ObjectId Injection**
+
+- If the incoming document does not contain an `_id` field, MongoDB automatically generates one.
+
+**3. Insertion Modes**
+
+- Future versions may support `bulkWrite` or `replaceOne` with `_id` for update and upsert scenarios.
+
+**4. Atlas \+ VPC Peering**
+
+- For production deployments on MongoDB Atlas, configure VPC peering or Private Endpoints for secure connectivity.
+
+**5. Large Documents**
+
+- MongoDB enforces a maximum document size of **16 MB**. Large payloads should be split before publishing.
+
+**Best Practices**
+
+1. Validate JSON payloads before publishing them to MongoDB.
+2. Use TTL indexes to automatically expire historical documents where appropriate.
+3. Avoid deeply nested document structures unless required.
+4. Monitor connector health using Condense observability and MongoDB monitoring tools.
+5. Keep MongoDB server and driver versions updated for performance and security.

@@ -849,6 +849,341 @@
             ]
           }
         ]
+      },
+      {
+        "version": "v2.4.2",
+        "groups": [
+          {
+            "group": "Overview",
+            "icon": "book",
+            "pages": [
+              "condense/v2.4.2/overview/build-your-first-pipeline",
+              {
+                "group": "Fully Managed Kafka",
+                "pages": [
+                  "condense/v2.4.2/overview/fully-managed-kafka/overview",
+                  "condense/v2.4.2/overview/fully-managed-kafka/kafka-management",
+                  "condense/v2.4.2/overview/fully-managed-kafka/kafka-topics",
+                  "condense/v2.4.2/overview/fully-managed-kafka/consumer-group",
+                  "condense/v2.4.2/overview/fully-managed-kafka/kafka-connect",
+                  "condense/v2.4.2/overview/fully-managed-kafka/schema-registry",
+                  "condense/v2.4.2/overview/fully-managed-kafka/securing-kafka",
+                  {
+                    "group": "Kafka Administration",
+                    "pages": [
+                      "condense/v2.4.2/fully-managed-kafka/kafka-administration/overview",
+                      "condense/v2.4.2/fully-managed-kafka/kafka-administration/users-and-role-management",
+                      "condense/v2.4.2/fully-managed-kafka/kafka-administration/access-control-lists",
+                      "condense/v2.4.2/fully-managed-kafka/kafka-administration/users-and-role-management/resource-management"
+                    ]
+                  },
+                  "condense/v2.4.2/overview/fully-managed-kafka/ksqldb"
+                ]
+              },
+              "condense/v2.4.2/overview/industry-use-cases",
+              "condense/v2.4.2/overview/roles-and-governance",
+              "condense/v2.4.2/overview/help-and-support",
+              {
+                "group": "BYOC",
+                "pages": [
+                  "condense/v2.4.2/overview/byoc",
+                  "condense/v2.4.2/overview/byoc/what-is-byoc",
+                  "condense/v2.4.2/overview/byoc/zeliots-cloud",
+                  "condense/v2.4.2/overview/byoc/deployment-from-aws-marketplace",
+                  "condense/v2.4.2/overview/byoc/deployment-from-gcp-marketplace",
+                  "condense/v2.4.2/overview/byoc/deployment-from-azure-marketplace",
+                  "condense/v2.4.2/overview/byoc/upgrade",
+                  "condense/v2.4.2/overview/byoc/upgrade/condense-upgradation-faq"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Getting Started",
+            "icon": "api-app",
+            "pages": [
+              "condense/v2.4.2/whats-new-in-v2.4.2",
+              "condense/v2.4.2/getting-started/introduction-to-condense",
+              "condense/v2.4.2/getting-started/what-is-condense",
+              "condense/v2.4.2/getting-started/why-condense",
+              "condense/v2.4.2/getting-started/features-of-condense",
+              {
+                "group": "Try For Free",
+                "pages": [
+                  "overview",
+                  "guided",
+                  "trial-experience",
+                  "evaluation-limits",
+                  "faq",
+                  {
+                    "group": "Demo Workspaces",
+                    "pages": [
+                      "demo-workspaces",
+                      "spot-the-fraudster",
+                      "auto-twin"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Architecture",
+                "pages": [
+                  "condense/v2.4.2/getting-started/condense-architecture",
+                  "condense/v2.4.2/getting-started/condense-architecture/detailed-component-breakdown",
+                  "condense/v2.4.2/getting-started/condense-architecture/additional-services",
+                  "condense/v2.4.2/getting-started/condense-architecture/components-and-services-within-the-kubernetes-cluster"
+                ]
+              },
+              "condense/v2.4.2/getting-started/key-benefits-of-condense",
+              "condense/v2.4.2/getting-started/condense-use-cases",
+              "condense/v2.4.2/getting-started/faqs"
+            ]
+          },
+          {
+            "group": "Condense Guide",
+            "icon": "books",
+            "pages": [
+              {
+                "group": "CONDENSE CONSOLE",
+                "pages": [
+                  "condense/v2.4.2/condense-guide/condense-console/create-your-organization",
+                  "condense/v2.4.2/condense-guide/condense-console/invite-members",
+                  "condense/v2.4.2/condense-guide/condense-console/roles-and-permissions",
+                  "condense/v2.4.2/condense-guide/condense-console/deploy-environments",
+                  "condense/v2.4.2/condense-guide/condense-console/link-environments",
+                  {
+                    "group": "Organization Management",
+                    "pages": [
+                      "overview-1",
+                      "creating-an-organization",
+                      "joining-an-organization",
+                      "managing-organization-members",
+                      "multi-organization-support"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "CONDENSE CORE",
+                "pages": [
+                  "condense/v2.4.2/condense-guide/condense-core",
+                  "condense/v2.4.2/condense-guide/condense-core/create-your-workspace",
+                  "condense/v2.4.2/condense-guide/condense-core/understand-and-assign-roles",
+                  "condense/v2.4.2/condense-guide/condense-core/deploy-an-input-connector",
+                  "condense/v2.4.2/condense-guide/condense-core/deploy-an-output-connector",
+                  "condense/v2.4.2/condense-guide/condense-core/deploy-a-custom-transform",
+                  "condense/v2.4.2/condense-guide/condense-core/monitor-grafana"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Billing & Pricing",
+            "pages": [
+              "pricing-model",
+              "flat-pricing",
+              "tiered-pricing",
+              "pricing-calculator",
+              "frequently-asked-questions"
+            ]
+          },
+          {
+            "group": "Condense App",
+            "icon": "app-window",
+            "pages": [
+              "condense/v2.4.2/condense-app-getting-started",
+              "condense/v2.4.2/condense-app-getting-started/guided-tour",
+              "condense/v2.4.2/condense-app-getting-started/demo-workspaces",
+              "condense/v2.4.2/condense-app-getting-started/sso-single-sign-on-creating-an-account-logging-into-the-condense-app",
+              "condense/v2.4.2/condense-app-getting-started/features-of-condense-app",
+              "condense/v2.4.2/condense-app-getting-started/video-guide",
+              "condense/v2.4.2/condense-app-getting-started/glossary"
+            ]
+          },
+          {
+            "group": "AI Agents",
+            "pages": [
+              "overview-2",
+              "getting-started",
+              "kafka-monitoring-agent",
+              "kubernetes-monitoring-agent",
+              "grafana-monitoring-agent",
+              {
+                "group": "Coding Agent",
+                "pages": [
+                  "coding-agent",
+                  "untitled-page",
+                  "git-lab-integration"
+                ]
+              },
+              "frequently-asked-questions-1"
+            ]
+          },
+          {
+            "group": "Deep Dive",
+            "icon": "notebook",
+            "pages": [
+              {
+                "group": "Connectors",
+                "pages": [
+                  "condense/v2.4.2/deep-dive/connectors",
+                  "condense/v2.4.2/deep-dive/connectors/connectors-in-condense",
+                  "condense/v2.4.2/deep-dive/connectors/connectors-in-condense/upcoming-connectors",
+                  {
+                    "group": "Available Connectors",
+                    "pages": [
+                      "condense/v2.4.2/deep-dive/connectors/available-connectors",
+                      "condense/v2.4.2/deep-dive/connectors/amazon-sqs-stream-input",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page",
+                      "condense/v2.4.2/deep-dive/connectors/apache-kafka-output-stream",
+                      "condense/v2.4.2/deep-dive/connectors/azure-blob-storage-output-store",
+                      "condense/v2.4.2/deep-dive/connectors/big-query-output-store",
+                      "condense/v2.4.2/deep-dive/connectors/click-house-output-store",
+                      "condense/v2.4.2/deep-dive/connectors/couchbase-outpurt-store",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page-1",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page-2",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page-3",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page-4",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page-5",
+                      "condense/v2.4.2/deep-dive/connectors/google-cloud-pub-sub",
+                      "condense/v2.4.2/deep-dive/connectors/google-cloud-pub-sub-output-stream",
+                      "condense/v2.4.2/deep-dive/connectors/google-cloud-spanner-input-stream",
+                      "condense/v2.4.2/deep-dive/connectors/google-storage-output-store",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page-6",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page-7",
+                      "condense/v2.4.2/deep-dive/connectors/i-teiangle",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page-8",
+                      "condense/v2.4.2/deep-dive/connectors/kinesis",
+                      "condense/v2.4.2/deep-dive/connectors/kinesis-1",
+                      "condense/v2.4.2/deep-dive/connectors/microsoft-sql-server",
+                      "condense/v2.4.2/deep-dive/connectors/mongo",
+                      "condense/v2.4.2/deep-dive/connectors/mongo-db-output-store",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page-9",
+                      "condense/v2.4.2/deep-dive/connectors/my-sql-output-store",
+                      "condense/v2.4.2/deep-dive/connectors/post",
+                      "condense/v2.4.2/deep-dive/connectors/post-1",
+                      "condense/v2.4.2/deep-dive/connectors/rabit",
+                      "condense/v2.4.2/deep-dive/connectors/rabbit",
+                      "condense/v2.4.2/deep-dive/connectors/rio",
+                      "condense/v2.4.2/deep-dive/connectors/s3",
+                      "condense/v2.4.2/deep-dive/connectors/sftp",
+                      "condense/v2.4.2/deep-dive/connectors/untitled-page-10"
+                    ]
+                  }
+                ]
+              },
+              "condense/v2.4.2/deep-dive/transforms",
+              "condense/v2.4.2/deep-dive/applications",
+              "condense/v2.4.2/deep-dive/pipelines"
+            ]
+          },
+          {
+            "group": "Fully Managed Kafka",
+            "icon": "blocks",
+            "pages": [
+              "condense/v2.4.2/fully-managed-kafka",
+              "condense/v2.4.2/fully-managed-kafka/kafka-management",
+              "condense/v2.4.2/fully-managed-kafka/kafka-topics",
+              "condense/v2.4.2/fully-managed-kafka/kafka-connect",
+              "condense/v2.4.2/fully-managed-kafka/schema-registry",
+              "condense/v2.4.2/fully-managed-kafka/securing-kafka",
+              "condense/v2.4.2/fully-managed-kafka/kafka-administration",
+              "condense/v2.4.2/fully-managed-kafka/untitled-page-1"
+            ]
+          },
+          {
+            "group": "Security",
+            "icon": "shield-check",
+            "pages": [
+              "condense/v2.4.2/security"
+            ]
+          },
+          {
+            "group": "Utilities",
+            "icon": "automatic-gearbox",
+            "pages": [
+              "condense/v2.4.2/utilities/split-utility",
+              "condense/v2.4.2/utilities/alert-utility"
+            ]
+          },
+          {
+            "group": "APIs",
+            "icon": "api",
+            "pages": [
+              "condense/v2.4.2/apis/kafka-management-apis",
+              "condense/v2.4.2/apis/prometheus-apis",
+              "condense/v2.4.2/apis/device-connector-apis"
+            ]
+          },
+          {
+            "group": "Other Features",
+            "icon": "cube",
+            "pages": [
+              "condense/v2.4.2/other-features/settings",
+              "condense/v2.4.2/other-features/activity-auditor",
+              "condense/v2.4.2/other-features/workspace-trust-in-openvscode-server",
+              "condense/v2.4.2/other-features/resource-utilization",
+              "condense/v2.4.2/other-features/campaigns",
+              "condense/v2.4.2/other-features/private-version-control"
+            ]
+          },
+          {
+            "group": "Help & Support",
+            "icon": "headset",
+            "pages": [
+              "condense/v2.4.2/help-and-support/how-to-raise-a-ticket",
+              "condense/v2.4.2/help-and-support/contact-sales",
+              "condense/v2.4.2/help-and-support/reach-out-via-email",
+              "condense/v2.4.2/help-and-support/book-a-meeting"
+            ]
+          },
+          {
+            "group": "Certifications",
+            "icon": "award",
+            "pages": [
+              "condense/v2.4.2/certifications/iso-27001-2013",
+              "condense/v2.4.2/certifications/iso-9001-2015"
+            ]
+          },
+          {
+            "group": "Legal",
+            "icon": "bookmark",
+            "pages": [
+              "condense/v2.4.2/legal/end-user-license-agreement-eula",
+              "condense/v2.4.2/legal/privacy-policy",
+              "condense/v2.4.2/legal/usage-of-cookies",
+              "condense/v2.4.2/legal/terms-and-conditions",
+              "condense/v2.4.2/legal/terms-of-use",
+              "condense/v2.4.2/legal/support-terms"
+            ]
+          },
+          {
+            "group": "Release Notes",
+            "icon": "notes",
+            "hidden": true,
+            "pages": [
+              "condense/v2.4.2/release-notes/july-2024-release",
+              "condense/v2.4.2/release-notes/june-2024-release"
+            ]
+          },
+          {
+            "group": "Roadmap",
+            "icon": "route",
+            "hidden": true,
+            "pages": [
+              "condense/v2.4.2/future-roadmap-and-development/whats-planned",
+              "condense/v2.4.2/future-roadmap-and-development/whats-coming"
+            ]
+          },
+          {
+            "group": "Marketing Assets",
+            "icon": "triangle-square-circle",
+            "pages": [
+              "wallpapers-1",
+              "social-media-1"
+            ]
+          }
+        ]
       }
     ]
   }

@@ -1,0 +1,215 @@
+---
+title: "IBM MQ (Input, Stream)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Ingests enterprise messages from IBM MQ queues into Condense for transformation and routing.
+
+**Brief Description**
+
+The **IBM MQ Stream Input Connector** enables Condense to ingest enterprise-grade messaging data from **IBM MQ** queues into the Condense platform for transformation, routing, and real-time stream processing.
+
+IBM MQ (formerly WebSphere MQ) is a robust enterprise messaging middleware designed for guaranteed message delivery, transactional integrity, and asynchronous communication between distributed systems.
+
+With this connector, Condense can consume messages from IBM MQ queues and forward them to Kafka-native Condense topics allowing integration of legacy enterprise systems with modern data pipelines and event-driven applications.
+
+**Links to Relevant Documents**
+
+- [https://www.ibm.com/docs/en/ibm-mq](https://www.ibm.com/docs/en/ibm-mq)
+- [https://www.ibm.com/docs/en/ibm-mq/latest?topic=reference-rest-api](https://www.ibm.com/docs/en/ibm-mq/latest?topic=reference-rest-api)
+- [https://developer.ibm.com/tutorials/?s=MQ](https://developer.ibm.com/tutorials/?s=MQ)
+
+**Connector Overview**
+
+| **Feature** | **Description** |
+| :-- | :-- |
+| Connector Type | Input |
+| Stream Type | Enterprise Messaging |
+| Integration Type | MQ Queue Consumer (JMS / TCP) |
+| Supported MQ Versions | IBM MQ 9.x and later |
+| Authentication | Username/Password |
+| Data Format | Text, JSON, or Binary (Base64 encoded) |
+| Delivery Semantics | At-least-once |
+
+**Core Functionality**
+
+- **Message Ingestion:** Consumes messages from a configured IBM MQ queue in real time.
+- **Reliable Delivery:** Ensures at-least-once delivery semantics, respecting MQ transaction handling.
+- **Secure Connectivity:** Supports TLS/SSL-secured channels and user authentication.
+- **Topic-Based Routing:** Publishes consumed MQ messages to Condense Kafka topics for downstream processing.
+- **High Throughput:** Optimized for continuous consumption of enterprise-scale message loads.
+
+**How It Works in Condense**
+
+1. **Connection Establishment**
+   The connector connects to the IBM MQ queue manager using the provided **Server Name**, **Port**, **Queue Manager**, and **Channel** configuration.
+2. **Authentication**
+   The connector authenticates using **Username** and **Password**, if required by the MQ server.
+3. **Message Consumption**
+   It continuously listens to the configured **Destination Queue** (Queue Name) for new messages.
+4. **Data Serialization**
+   Retrieved messages are transformed into a structured JSON payload for uniform downstream processing.
+5. **Publishing to Kafka**
+   The connector publishes these messages to a specified Condense **Output Topic**, allowing other systems or Condense applications to process them.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Name for the connector instance | Yes |
+| Connection | Server Name | Hostname/IP of the IBM MQ server | Yes |
+| Connection | Server Port | Port for MQ connection | Yes |
+| Queue | Destination Name | Queue name for message ingestion | Yes |
+| Queue | Queue Manager | Name of the MQ Queue Manager | Yes |
+| Queue | Channel | MQ communication channel | Yes |
+| Authentication | Username | Username for MQ authentication | Yes |
+| Authentication | Password | Password for MQ authentication | Yes |
+| Condense | Topic (Output) | Kafka topic for publishing messages | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Description: Name for the connector instance.
+
+**Example:**
+
+`IBMMQ_Input_Connector_Prod`
+
+**2. Server Name**
+
+Description: Hostname or IP address of the IBM MQ server.
+
+**Example:**
+
+`mq-enterprise-server.company.com`
+
+**3. Server Port**
+
+Description: Port used for IBM MQ communication.
+
+**Example:**
+
+`1414`
+
+**4. Destination Name**
+
+Description: Queue name from which messages are consumed.
+
+**Example:**
+
+`ORDERS.INPUT.QUEUE`
+
+**5. Queue Manager**
+
+Description: Name of the IBM MQ Queue Manager.
+
+**Example:**
+
+`QM1`
+
+**6. Channel**
+
+Description: MQ communication channel.
+
+**Example:**
+
+`DEV.APP.SVRCONN`
+
+**7. Username**
+
+Description: Username used for IBM MQ authentication.
+
+**Example:**
+
+`mq_user`
+
+**8. Password**
+
+Description: Password used for IBM MQ authentication.
+
+**Example:**
+
+`mq_password`
+
+**9. Topic (Output)**
+
+Description: Kafka topic where consumed IBM MQ messages are published.
+
+**Example:**
+
+`ibmmq_input_stream`
+
+**Example Message Flow**
+
+1. Message published to IBM MQ queue `ORDERS.INPUT.QUEUE`.
+2. Condense IBM MQ Input Connector retrieves the message.
+3. Connector converts the message payload to structured JSON.
+
+```json
+{
+  "queue": "ORDERS.INPUT.QUEUE",
+  "messageId": "414D5120514D312020202020202020202032D5A606F42103",
+  "payload": {
+    "order_id": "ORD-12345",
+    "status": "NEW",
+    "timestamp": "2025-10-30T10:10:00Z"
+  },
+  "metadata": {
+    "queueManager": "QM1",
+    "server": "mq-enterprise-server.company.com",
+    "retrievedAt": "2025-10-30T10:10:05Z"
+  }
+}
+```
+
+4. Message is published to the Condense topic `ibmmq_input_stream`.
+
+**Troubleshooting and Common Issues**
+
+**1. Connection Refused (2059)**
+
+- Verify **Server Name**, **Port**, and **Queue Manager** values.
+- Ensure the channel is configured as **SVRCONN**.
+
+**2. MQRC\_NOT\_AUTHORIZED (2035)**
+
+- Check the username and password.
+- Verify that the MQ administrator has granted access to the channel and queue.
+
+**3. Channel Initialization Failure**
+
+- The configured channel may not exist or may be restricted by CHLAUTH rules.
+- Validate using the MQ command:
+
+```text
+DISPLAY CHANNEL(DEV.APP.SVRCONN)
+```
+
+**4. Message Loss or Delay**
+
+- Verify that the **Output Topic** is active in Condense.
+- Ensure the connector status is **RUNNING**.
+
+**5. Timeouts (MQRC\_CONNECTION\_BROKEN)**
+
+- Check firewall or VPN latency.
+- Ensure persistent network connectivity between Condense and IBM MQ.
+
+**Advanced Considerations**
+
+- **TLS/SSL Security:** The connector can be configured to use TLS-enabled channels (for example, `DEV.APP.SVRCONN.SSL`). Ensure the keystore and truststore configurations are managed in your MQ environment.
+- **Message Acknowledgment:** Messages are acknowledged only after successful publishing to the Kafka topic, maintaining reliable delivery.
+- **Data Format Handling:** Binary messages are Base64-encoded before publication to Condense topics.
+- **Performance:** Batch consumption from queues can be optimized using queue depth-based triggers and parallel channel configurations.
+
+**Best Practices**
+
+1. Use dedicated application queues for streaming data to avoid mixing control messages.
+2. Always validate connectivity using IBM MQ command-line tools before configuring in Condense.
+3. Monitor queue depth regularly to detect ingestion delays.
+4. Apply meaningful connector titles and topic names for better observability.
+5. Rotate MQ credentials periodically in accordance with enterprise security policies.

@@ -1,0 +1,182 @@
+---
+title: "MySQL (Input, Store)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Polls processed data from MySQL into Condense for analytics, modeling, and dashboarding.
+
+**Brief Description**
+
+The **MySQL Stream Input Connector** enables Condense to ingest data directly from MySQL databases into Kafka-native topics for analytics, modeling, and dashboarding. This connector queries MySQL tables at configurable intervals, transforms the retrieved records into JSON messages, and streams them into Condense pipelines.
+
+MySQL is a widely adopted open-source relational database management system (RDBMS). By integrating it with Condense, organizations can bring structured transactional data into real-time pipelines for enrichment, monitoring, and downstream applications.
+
+**Links to Relevant Documents**
+
+- [https://dev.mysql.com/doc/](https://dev.mysql.com/doc/)
+- [https://dev.mysql.com/doc/refman/8.0/en/](https://dev.mysql.com/doc/refman/8.0/en/)
+- [https://dev.mysql.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/)
+
+**Connector Overview**
+
+| **Feature** | **Value** |
+| :-- | :-- |
+| Connector Type | Input |
+| Stream Type | Database (RDBMS) |
+| Supported Operations | Polling-based ingestion |
+| Source System | MySQL |
+| Authentication | Username/Password |
+| Output | Condense Kafka topic |
+| Data Format | JSON messages representing MySQL table rows |
+
+**Core Functionality**
+
+- **Polling Queries** – Periodically retrieves data from configured MySQL tables.
+- **Structured Data Ingestion** – Converts rows into JSON messages.
+- **Secure Connection** – Connects using username/password authentication.
+- **Schema Compatibility** – Maps MySQL column types into JSON for Condense topics.
+- **Scalability** – Supports ingesting large batches for high-volume applications.
+
+**How MySQL Input Works in Condense**
+
+1. **Connection Setup** – Connector establishes a secure connection with the configured MySQL host and port.
+2. **Authentication** – Uses the provided database username and password.
+3. **Polling** – Queries the specified database and table at intervals to fetch new or updated records.
+4. **Transformation** – Rows are serialized into JSON documents.
+5. **Publishing** – Messages are published to a designated Kafka topic in Condense for further processing or storage.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | A user-defined name for the connector | Yes |
+| Connection | MySQL Hostname | Hostname or IP address of the MySQL server | Yes |
+| Connection | MySQL Port | Port on which MySQL is listening | Yes |
+| Authentication | Database Username | Username for authenticating to MySQL | Yes |
+| Authentication | Database Password | Password associated with the database user | Yes |
+| Database | Database Name | The database within MySQL to be accessed | Yes |
+| Database | Table Name | The MySQL table from which data will be fetched | Yes |
+| Condense | Output Topic | The Condense Kafka topic where the ingested MySQL data will be published | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- **Description:** A user-defined name for the connector.
+- **Example:** `MySQL_Input_Sales`
+
+---
+
+**2. MySQL Hostname**
+
+- **Description:** Hostname or IP address of the MySQL server.
+- **Example:** `mysql.company.com`
+
+---
+
+**3. MySQL Port**
+
+- **Description:** Port on which MySQL is listening.
+- **Default:** `3306`
+- **Example:** `3306`
+
+---
+
+**4. Database Username**
+
+- **Description:** Username for authenticating to MySQL.
+- **Example:** `db_user`
+
+---
+
+**5. Database Password**
+
+- **Description:** Password associated with the database user.
+- **Example:** `db_password`
+
+---
+
+**6. Database Name**
+
+- **Description:** The database within MySQL to be accessed.
+- **Example:** `sales_db`
+
+---
+
+**7. Table Name**
+
+- **Description:** The MySQL table from which data will be fetched.
+- **Example:** `transactions`
+
+---
+
+**8. Output Topic**
+
+- **Description:** The Condense Kafka topic where the ingested MySQL data will be published.
+- **Example:** `mysql_transaction_stream`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "MySQL_Input_Sales",
+  "mysqlHostname": "mysql.company.com",
+  "mysqlPort": 3306,
+  "databaseUsername": "db_user",
+  "databasePassword": "db_password",
+  "databaseName": "sales_db",
+  "tableName": "transactions",
+  "outputTopic": "mysql_transaction_stream"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**Connection Refused**
+
+- **Cause:** Wrong hostname, port, or firewall restrictions.
+- **Fix:** Verify server details and ensure MySQL is reachable.
+
+**Authentication Failed**
+
+- **Cause:** Invalid username or password.
+- **Fix:** Double-check credentials or reset them in MySQL.
+
+**No Data Fetched**
+
+- **Cause:** Table is empty or polling interval misconfigured.
+- **Fix:** Verify table contents and adjust polling settings.
+
+**Schema Mismatch**
+
+- **Cause:** Unsupported or complex data types in MySQL.
+- **Fix:** Convert or transform complex data types before ingestion.
+
+**Advanced Topics**
+
+**1. Indexing**
+
+- Ensure primary keys are configured for efficient queries.
+
+**2. Batch Size**
+
+- Configure an appropriate fetch size to balance latency and throughput.
+
+**3. Time-based Polling**
+
+- Use timestamp or incremental key-based queries to avoid duplicate ingestion.
+
+**4. Security**
+
+- Secure database credentials and enable SSL/TLS for remote database connections whenever possible.
+
+**Best Practices**
+
+1. Use separate connectors for different databases or business domains.
+2. Create descriptive output topic names for downstream consumers.
+3. Test SQL queries before configuring the connector.
+4. Monitor connector logs to identify ingestion failures early.
+5. Use read-only database accounts for improved security.

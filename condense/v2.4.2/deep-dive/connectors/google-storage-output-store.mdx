@@ -1,0 +1,182 @@
+---
+title: "Google Storage (Output, Store)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Streams Condense Kafka topic data into Google Cloud Storage buckets for archival, analytics, and ML workloads.
+
+**Brief Description**
+
+The Google Cloud Storage (GCS) Store Output Connector enables Condense to automatically write event data from a Kafka-native topic into objects within a GCS bucket. This connector is ideal for use cases requiring long-term archival, data lakes, batch analytics, ML model input staging, or downstream Google services like BigQuery and Vertex AI.
+
+Each event consumed from the input Kafka topic is serialized (usually as JSON, Avro, or user-defined format) and written to a GCS bucket under a time-based or event-key-based naming scheme.
+
+**Links to Relevant Documents**
+
+- [https://cloud.google.com/storage/docs/overview](https://cloud.google.com/storage/docs/overview)
+- [https://cloud.google.com/storage/docs/creating-buckets](https://cloud.google.com/storage/docs/creating-buckets)
+- [https://cloud.google.com/iam/docs/creating-managing-service-account-keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
+- [https://cloud.google.com/storage/docs/json\_api/v1/objects/insert](https://cloud.google.com/storage/docs/json_api/v1/objects/insert)
+- [https://cloud.google.com/storage/docs/best-practices](https://cloud.google.com/storage/docs/best-practices)
+
+**Connector Overview**
+
+This output connector continuously listens to a Condense Kafka-native topic and writes the received events as objects to a designated GCS bucket using a service account for authentication.
+
+Key use cases include:
+
+A. Storing raw, enriched, or processed events for offline querying.
+
+B. Loading batch data into BigQuery or other data warehouses.
+
+C. ML training dataset preparation pipelines.
+
+D. Backups or regulatory archiving of real-time streaming logs.
+
+**Core Functionality**
+
+1. Event-to-Object Serialization into GCS.
+2. Secure OAuth2-based Authentication using Service Account Key.
+3. Time-windowed or event-key-based file grouping.
+4. Data Format Support: JSON, CSV, Avro (based on transform).
+5. Automatic Object Upload per message or per batch window.
+
+**How It Works in Condense**
+
+1. The connector listens to a specified Condense input topic.
+2. Events are serialized to the desired file format (usually JSON).
+3. The connector authenticates to GCP using the Service Account Key.
+4. Each event (or batch) is written as a new object to the configured GCS bucket.
+5. Object filenames can be time-stamped or event-key derived for uniqueness.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique name for the connector instance within Condense | Yes |
+| Storage | Google Bucket Name | Name of the GCS bucket where files should be written | Yes |
+| Authentication | Service Account Key | JSON credentials of a service account with `roles/storage.objectAdmin` | Yes |
+| Condense | Topic (Input) | Kafka-native Condense topic to consume messages from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Purpose: Internal name used within Condense to reference this connector.
+
+Guidelines: Must be unique within a workspace.
+
+**Example:**
+
+`gcs-sensor-dump`
+
+`ml-training-dataset-out`
+
+**2. Google Bucket Name**
+
+Definition: The exact name of the destination GCS bucket.
+
+Requirements:
+
+- Must exist before use; connector does not create buckets.
+- The configured service account must have write access.
+
+**Example:**
+
+`iot-stream-backups`
+
+`condense-ml-records`
+
+**3. Service Account Key**
+
+Type: Raw JSON credential file content (not a file path).
+
+Required IAM Role: `roles/storage.objectAdmin` on the bucket.
+
+Security: Ensure this key is managed securely and rotated periodically.
+
+How to Generate:
+
+- Visit IAM & Admin → Service Accounts in GCP Console.
+- Create or choose a service account.
+- Assign the required Storage role.
+- Generate and download the key as JSON.
+
+**4. Topic (Input)**
+
+Definition: Name of the Condense Kafka-native topic from which to consume messages.
+
+Purpose: Acts as the data source for file creation.
+
+Note: Events should already be cleaned or transformed if needed.
+
+**Example:**
+
+`sensor_readings`
+
+`vehicle_alerts_processed`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "gcs-output-connector",
+  "googleBucketName": "streamed-data-dump",
+  "serviceAccountKey": "{... full JSON credential object ...}",
+  "inputTopic": "condense_output_topic"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Permission Denied**
+
+- Check if the service account has the correct permissions (`roles/storage.objectAdmin`).
+- Verify that the bucket name is correct and exists.
+
+**2. Upload Failures**
+
+- May be caused by an incorrect bucket region.
+- Ensure object size does not exceed 5 TB per object.
+- Verify that object names are correctly formatted.
+
+**3. File Format Errors**
+
+- Ensure events from the input topic are JSON serializable.
+- Avoid binary payloads unless explicitly encoded in a transform.
+
+**4. Latency or Skipped Uploads**
+
+- Check Condense logs for ingestion or transform bottlenecks.
+- Ensure there is no backpressure from downstream logic.
+
+**Advanced Considerations**
+
+**1. Object Naming Strategy**
+
+- Condense assigns filenames based on event timestamp by default (for example, `event-20250725T1543Z.json`).
+- You can use a pre-transform to enrich events with metadata that controls naming or folder structure.
+
+**2. File Format Flexibility**
+
+- While JSON is the default, Condense transforms can be used to serialize data to Avro or CSV prior to upload.
+
+**3. GCS Lifecycle Policies**
+
+- Use native GCS Object Lifecycle Rules to automatically expire files after defined retention periods.
+
+**4. Compression Support**
+
+- GCS supports gzip-compressed objects.
+- Use a transform to compress data before passing it to this connector.
+
+**Best Practices**
+
+1. Use separate buckets for staging, production, and archival environments.
+2. Monitor upload metrics using Google Cloud Monitoring and Condense connector logs.
+3. Validate object writes with automated tests or checksum logic.
+4. Periodically rotate and restrict service account credentials.
+5. Use partitioned folder naming (for example, `year=2025/month=07/day=25/`) to simplify downstream integration with BigQuery.

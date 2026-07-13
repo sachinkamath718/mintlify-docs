@@ -1,0 +1,180 @@
+---
+title: "Couchbase (Outpurt Store)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Writes processed data from Condense into Couchbase buckets for fast access and JSON-based storage.
+
+**Brief Description**
+
+The Couchbase Store Output Connector enables processed data from Kafka-native Condense topics to be written into Couchbase buckets for storage, retrieval, and real-time analytics. Couchbase is a distributed NoSQL document database optimized for low-latency queries, JSON document storage, and scalable indexing.
+
+This connector acts as a Store Output Connector by consuming messages from a Kafka-native topic and persisting them into a Couchbase bucket. It is ideal for real-time applications such as caching, profile stores, content management, and event-driven microservices.
+
+**Links to Relevant Documents**
+
+- [https://docs.couchbase.com/home/index.html](https://docs.couchbase.com/home/index.html)
+- [https://docs.couchbase.com/home/developer.html](https://docs.couchbase.com/home/developer.html)
+- [https://docs.couchbase.com/kafka-connector/current/quickstart.html](https://docs.couchbase.com/kafka-connector/current/quickstart.html)
+
+**Connector Overview**
+
+| **Feature** | **Value** |
+| :-- | :-- |
+| Connector Type | Output |
+| Category | Store |
+| Version | 1.0.0 |
+| Integration Type | Kafka → Couchbase |
+| Managed By | Condense |
+
+**Core Functionality**
+
+1. Consumes messages from a Kafka-native Condense topic and stores them in a Couchbase bucket.
+2. Stores JSON documents without requiring a fixed schema.
+3. Supports secure authentication using username and password.
+4. Connects to both cloud-hosted and on-premises Couchbase clusters.
+5. Routes messages into the configured bucket for application-level data separation.
+
+**How It Works in Condense**
+
+1. Configure the Couchbase host, protocol, port, authentication credentials, and target bucket.
+2. The connector subscribes to the configured Kafka-native topic.
+3. Incoming messages are converted into JSON documents.
+4. Documents are written into the specified Couchbase bucket.
+5. Applications can retrieve the data using N1QL queries, Couchbase SDKs, or external services.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Network | Protocol | HTTP or HTTPS | Yes |
+| Network | Host Name | Couchbase hostname or IP address | Yes |
+| Network | Port | Couchbase service port | Yes |
+| Authentication | Username | Couchbase username | Yes |
+| Authentication | Password | Couchbase password | Yes |
+| Storage | Bucket Name | Destination Couchbase bucket | Yes |
+| Condense | Topic (Input) | Kafka-native topic to consume from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Unique identifier for the connector inside Condense.
+
+**Example:**
+
+`Couchbase_Store_Connector`
+
+**2. Protocol**
+
+Communication protocol used to connect to Couchbase.
+
+Supported values:
+
+- HTTP
+- HTTPS
+
+**3. Host Name**
+
+Hostname or IP address of the Couchbase cluster.
+
+**Example:**
+
+`couchbase.example.com`
+
+**4. Port**
+
+Port used by the Couchbase service.
+
+Common values:
+
+- 8091 (Administration)
+- 11210 (Data Service)
+
+**5. Username**
+
+Username used for Couchbase authentication.
+
+**Example:**
+
+`admin`
+
+**6. Password**
+
+Password associated with the configured Couchbase user.
+
+**7. Bucket Name**
+
+Destination Couchbase bucket where documents are stored.
+
+**Example:**
+
+`telematics_data`
+
+**8. Topic (Input)**
+
+Kafka-native Condense topic from which records are consumed.
+
+**Example:**
+
+`processed_events`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "Couchbase_Store_Connector",
+  "protocol": "https",
+  "hostName": "couchbase.mycluster.local",
+  "port": 8091,
+  "username": "admin",
+  "password": "********",
+  "bucketName": "iot_data_bucket",
+  "inputTopic": "device_updates"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Cannot Connect**
+
+**Cause:** Incorrect host, port, or protocol.
+
+**Solution:** Verify the Couchbase endpoint, port, and network connectivity.
+
+**2. Authentication Failure**
+
+**Cause:** Invalid username or password.
+
+**Solution:** Verify credentials and ensure the user has the required RBAC permissions.
+
+**3. Data Not Appearing**
+
+**Cause:** Incorrect topic mapping or empty messages.
+
+**Solution:** Verify the configured input topic and confirm messages are reaching the connector.
+
+**4. SSL/TLS Issues**
+
+**Cause:** Certificate mismatch or untrusted certificate.
+
+**Solution:** Import the required certificates and verify the HTTPS configuration.
+
+**Best Practices**
+
+1. Use dedicated Couchbase buckets for different applications or pipelines.
+2. Enable RBAC authentication with least-privilege access.
+3. Configure replication and persistence for production deployments.
+4. Create N1QL indexes to optimize query performance.
+5. Tune Couchbase memory quotas appropriately for high-volume workloads.
+
+**Example Use Cases**
+
+- IoT telemetry storage.
+- User profile and session management.
+- Financial transaction storage.
+- Event-driven content management systems.

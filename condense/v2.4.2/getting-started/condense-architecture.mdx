@@ -1,0 +1,53 @@
+---
+title: "Condense Architecture"
+---
+
+<Info>
+  **First Time User? Free Credits on us!**
+
+  Get up to \$200 worth of Free credits when you sign up for the first time. Use this link to create a new account on Condense and claim your free credits!
+
+  [https://www.zeliot.in/try-now](https://www.zeliot.in/try-now)
+</Info>
+
+Condense leverages a robust and secure architecture to facilitate efficient data ingestion. This section analyses the key components of the system and their interactions.
+
+## Condense Architecture - Microsoft Azure
+
+<Frame>
+  ![](/images/gitbook/Condense-Azure.png)
+</Frame>
+
+## Condense Architecture - Amazon Web Services (AWS)
+
+<Frame>
+  ![](/images/gitbook/Condense-AWS.png)
+</Frame>
+
+## Condense Architecture - Google Cloud Platform (GCP)
+
+<Frame>
+  ![](/images/gitbook/Condense-GCP.png)
+</Frame>
+
+## Architecture Components
+
+Condense employs a three-tier architecture, ensuring clear separation of concerns and promoting efficient communication between components:
+
+![Cover](/images/gitbook/CondArchVec2.png)
+
+### Cloud Provider
+
+The cloud marketplace (e.g., Azure, AWS and GCP) serves as the platform for deploying Condense. Users access Condense through the provider's interface.
+
+![Cover](/images/gitbook/CondArchVec3.png)
+
+### Zeliot Central Tower
+
+This central hub manages deployments, user authentication, release updates, and monitors the overall health of Condense instances.
+
+![Cover](/images/gitbook/CondArchVec4.png)
+
+### Condense Application
+
+Deployed within the user's cloud environment, this application processes data from mobility devices, performs transformations, and sends it to designated outputs.

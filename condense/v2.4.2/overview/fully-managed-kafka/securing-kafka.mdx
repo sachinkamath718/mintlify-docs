@@ -1,0 +1,47 @@
+---
+title: "Securing Kafka"
+---
+
+## Overview
+
+Kafka in Condense provides multiple layers of security to protect data in transit, authenticate clients, and control access to Kafka resources. Security is implemented using industry-standard encryption, authentication, and authorization mechanisms while simplifying administration through the Condense platform.
+
+## Encryption
+
+Kafka in Condense supports Transport Layer Security (TLS), a protocol for encrypted communication.
+
+Communication is always encrypted between Kafka components.
+
+## Authentication
+
+Kafka listeners use authentication to ensure a secure client connection to the Kafka cluster. Clients can also be configured for mutual authentication. Security credentials are created and managed by the Cluster and User Operator.
+
+### **Supported authentication mechanisms**
+
+- mTLS authentication (on listeners with TLS-enabled encryption)
+- SASL SCRAM-SHA-512
+- OAuth 2.0 token based authentication
+- Custom authentication (supported by Kafka)
+
+## Authorization
+
+Authorization controls the operations that are permitted on Kafka brokers by specific clients or users.In addition to Kafka's native authorization mechanisms, Condense provides centralized permission management through **Users & Role Management** and **ACL Management** under **Kafka Administration**. These capabilities simplify the administration of Kafka resource permissions through the Condense portal.
+
+### **Supported authorization mechanisms**
+
+- Simple authorization using ACL rules
+- OAuth 2.0 authorization (if you are using OAuth 2.0 token-based authentication)
+- Open Policy Agent (OPA) authorization
+- Custom authorization (supported by Kafka)
+
+## **Federal Information Processing Standards (FIPS)**
+
+Kafka in Condense can run on FIPS-enabled Kubernetes clusters to ensure data security and system interoperability if the native Kubernetes service of the cloud provider supports it.
+
+## Related Documentation
+
+- Users & Role Management
+- ACL Management
+- Kafka Topics
+- Consumer Groups
+- Schema Registry
