@@ -225,19 +225,19 @@
                   "condense/legacy/condense-deployment/condense-app-getting-started/transforms",
                   "condense/legacy/condense-deployment/condense-app-getting-started/applications",
                   "condense/legacy/condense-app-getting-started/pipelines",
-                  "condense/legacy/condense-app-getting-started/settings",
-                  "condense/legacy/condense-app-getting-started/condense-support",
-                  "condense/legacy/condense-app-getting-started/role-based-access-control-rbac",
-                  "condense/legacy/condense-app-getting-started/activity-auditor",
-                  "condense/legacy/condense-app-getting-started/split-utility",
-                  "condense/legacy/condense-app-getting-started/alert-utility",
-                  "condense/legacy/condense-app-getting-started/ksqldb",
-                  "condense/legacy/condense-app-getting-started/campaigns",
-                  "condense/legacy/condense-app-getting-started/workspace-trust-in-openvscode-server",
-                  "condense/legacy/condense-app-getting-started/private-version-control",
-                  "condense/legacy/condense-app-getting-started/resource-utilization",
-                  "condense/legacy/condense-app-getting-started/kafka-topics",
-                  "condense/legacy/condense-app-getting-started/schema-registry"
+                  "condense/legacy/condense-deployment/condense-app-getting-started/settings",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/condense-support",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/role-based-access-control-rbac",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/activity-auditor",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/split-utility",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/alert-utility",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/ksqldb",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/campaigns",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/workspace-trust-in-openvscode-server",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/private-version-control",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/resource-utilization",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/kafka-topics",
+                  "condense/legacy/condense-deployment/condense-app-getting-started/schema-registry"
                 ]
               }
             ]
