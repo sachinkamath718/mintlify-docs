@@ -292,7 +292,7 @@
               {
                 "group": "Fully Managed Kafka",
                 "pages": [
-                  "condense/v2.4.0/fully-managed-kafka/untitled-page",
+                  "condense/v2.4.0/overview/fully-managed-kafka/overview",
                   "condense/v2.4.0/fully-managed-kafka/kafka-management",
                   "condense/v2.4.0/fully-managed-kafka/kafka-connect",
                   "condense/v2.4.0/fully-managed-kafka/kafka-topics",
@@ -314,7 +314,7 @@
                   "condense/v2.4.0/overview/byoc/deployment-from-aws-marketplace",
                   "condense/v2.4.0/overview/byoc/deployment-from-gcp-marketplace",
                   "condense/v2.4.0/overview/byoc/deployment-from-azure-marketplace",
-                  "condense/v2.4.0/overview/byoc/upgrade-1",
+                  "condense/v2.4.0/overview/byoc/upgrade",
                   "condense/v2.4.0/overview/byoc/condense-upgradation-faq"
                 ]
               }
