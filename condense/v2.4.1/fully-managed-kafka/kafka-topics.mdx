@@ -6,7 +6,9 @@ title: "Kafka Topics"
 
 ### Overview
 
-The **Kafka Topics** page in Condense provides a management interface to view, create, and configure topics within a Kafka cluster. From this page, administrators can define replication and partitioning, adjust retention policies, and apply advanced topic-level settings without requiring direct Kafka CLI commands.
+The **Kafka Topics** page provides a centralized interface for managing Kafka topics within a Kafka cluster. Administrators can create new topics, browse existing topics, inspect topic configurations, update topic properties, and delete topics directly from the Condense portal without using Kafka command-line tools.
+
+The page also provides visibility into topic health and operational status, making it easier to administer Kafka topics across environments.
 
 Path: **Kafka Management → Kafka Topics**
 
@@ -14,25 +16,36 @@ Path: **Kafka Management → Kafka Topics**
 
 On the left-hand panel, Condense displays all existing topics in the connected Kafka cluster.
 
-- Topics are listed alphabetically.
-- A search box allows filtering by topic name.
+- Alphabetical topic listing.
+- Search by topic name.
+- Topic selection for viewing detailed information.
 
 ![](/images/condense/v2.4.0/fully-managed-kafka/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FrnW28uxzymQOvFJbWyUu%2Fimage.png)
 
-- Selecting a topic loads its configuration details in the main panel.
+- Selecting a topic loads its details in the main panel, including configuration, partition information, and available management actions.
 
 ![](/images/condense/v2.4.0/fully-managed-kafka/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FTSKtQjqcCfEgiukv39tk%2Fimage.png)
 
 ### Topic Actions
 
-For each topic, Condense provides the following actions in the top-right menu:
+Kafka Topics supports the following management operations.
 
-- **Messages** → Opens the message viewer for browsing records in the topic.
-- **Edit** → Enables modification of topic configuration.
+| Action | Description |
+| --- | --- |
+| Create Topic | Creates a new Kafka topic. |
+| Messages | Opens the message viewer for browsing records. |
+| Edit | Updates the topic configuration. |
+| Delete | Permanently removes the topic from the Kafka cluster. |
 
 ![](/images/condense/v2.4.0/fully-managed-kafka/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FdOKzjOU7T84NTPzYWidw%2Fimage.png)
 
-- **Delete** → Permanently deletes the selected topic from the cluster.
+Topics that are no longer required can be deleted from the Kafka cluster.**Delete** → Permanently deletes the selected topic from the cluster.
+
+<Danger>
+  **Warning**
+
+  Deleting a Kafka topic permanently removes the topic and its stored data. This action cannot be undone.
+</Danger>
 
 ![](/images/condense/v2.4.0/fully-managed-kafka/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FYbKKY2IEZQfT0TkWqrU1%2Fimage.png)
 
@@ -69,6 +82,12 @@ Advanced settings allow fine-grained control of topic behavior. These fields map
 | Segment Size (bytes) | Size of each log segment file before rolling. | `1073741824` |
 | Segment Period (ms) | Time-based rolling interval for log segments. | `604800000` |
 
+### Update Topic Configuration
+
+Existing topic configurations can be modified using the **Edit** action available from the Topic Details page.
+
+After updating the required configuration values, review the changes before saving them.
+
 ### Usage Notes
 
 - All advanced fields correspond to Kafka’s topic-level configuration properties.
@@ -80,45 +99,3 @@ Advanced settings allow fine-grained control of topic behavior. These fields map
 
 - [Resource Utilization](/condense/v2.4.0/other-features/resource-utilization)
 - [ksqlDB](/condense/v2.4.0/fully-managed-kafka/ksqldb)
-
-| Field | Description | Example |
-| --- | --- | --- |
-| Replication Factor | Number of replicas for each partition. Ensures data availability. | `3` |
-| No of Partitions | Number of partitions in the topic. Determines parallelism and throughput. | `6` |
-| Retention Period (days) | Duration for which messages are retained in the topic before deletion. | `7` |
-
-| Field | Description | Example |
-| --- | --- | --- |
-| Cleanup Policy | Determines log cleanup strategy. Options: `Delete` (default), `Compact`. | `Delete` |
-| Delete Retention Period (days) | How long delete markers are retained during log compaction. | `1` |
-| Max Compaction Lag (ms) | Maximum time a record can remain uncompacted. | `9223372036854775807` |
-| Max Message Size (bytes) | Maximum size of an individual message allowed. | `5242940` |
-| Message Timestamp After Max (ms) | Upper bound for timestamp range in messages. | `9223372036854775807` |
-| Message Timestamp Before Max (ms) | Lower bound for timestamp range in messages. | `9223372036854775807` |
-| Message Timestamp Type | Defines how message timestamps are set. Options: `CreateTime`, `LogAppendTime`. | `CreateTime` |
-| Min Compaction Lag (ms) | Minimum time a record must remain before compaction. | `0` |
-| Min In-Sync Replicas | Minimum number of replicas that must acknowledge a write for it to succeed. | `1` |
-| Retention Size (bytes) | Maximum total size of log segments retained before deletion. `-1` = unlimited. | `-1` |
-| Segment Size (bytes) | Size of each log segment file before rolling. | `1073741824` |
-| Segment Period (ms) | Time-based rolling interval for log segments. | `604800000` |
-
-| Field | Description | Example |
-| --- | --- | --- |
-| Replication Factor | Number of replicas for each partition. Ensures data availability. | `3` |
-| No of Partitions | Number of partitions in the topic. Determines parallelism and throughput. | `6` |
-| Retention Period (days) | Duration for which messages are retained in the topic before deletion. | `7` |
-
-| Field | Description | Example |
-| --- | --- | --- |
-| Cleanup Policy | Determines log cleanup strategy. Options: `Delete` (default), `Compact`. | `Delete` |
-| Delete Retention Period (days) | How long delete markers are retained during log compaction. | `1` |
-| Max Compaction Lag (ms) | Maximum time a record can remain uncompacted. | `9223372036854775807` |
-| Max Message Size (bytes) | Maximum size of an individual message allowed. | `5242940` |
-| Message Timestamp After Max (ms) | Upper bound for timestamp range in messages. | `9223372036854775807` |
-| Message Timestamp Before Max (ms) | Lower bound for timestamp range in messages. | `9223372036854775807` |
-| Message Timestamp Type | Defines how message timestamps are set. Options: `CreateTime`, `LogAppendTime`. | `CreateTime` |
-| Min Compaction Lag (ms) | Minimum time a record must remain before compaction. | `0` |
-| Min In-Sync Replicas | Minimum number of replicas that must acknowledge a write for it to succeed. | `1` |
-| Retention Size (bytes) | Maximum total size of log segments retained before deletion. `-1` = unlimited. | `-1` |
-| Segment Size (bytes) | Size of each log segment file before rolling. | `1073741824` |
-| Segment Period (ms) | Time-based rolling interval for log segments. | `604800000` |

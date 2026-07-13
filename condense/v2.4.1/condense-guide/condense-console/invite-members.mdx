@@ -32,6 +32,21 @@ Once accepted, the member appears under the organization.
 
 ![](/images/condense/v2.4.0/condense-guide/condense-console/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FGl5snN5VMjFtcOtDRUXR%2Fimage.png)
 
+### **Inviting Existing Condense Users (New in v2.4.1)**
+
+Starting with **Condense v2.4.1**, users who already have a Condense account can be invited to additional organizations using the same email address.
+
+When the invitation is accepted:
+
+- No new Condense account is created.
+- The new organization is added to the user's existing account.
+- Existing organizations remain unchanged.
+- Roles and permissions are managed independently within each organization.
+
+<Info>
+  A single Condense account can belong to multiple organizations while maintaining separate members, environments, workspaces, and permissions for each organization.
+</Info>
+
 5. Select the member and assign one of the Organization-level roles:
 
 - Organization Admin
@@ -142,4 +157,210 @@ This model keeps permissions clear, secure, and scalable, supporting diverse tea
 
 ## Lifecycle Guide
 
+## Lifecycle Guide
+
+The following lifecycle illustrates how a user is onboarded into an organization and granted access to Condense resources.
+
+### 1. Create an Organization
+
+A new user signs up for Condense and creates an organization. The creator is automatically assigned the **Organization Admin** role.
+
+**Outcome:**
+
+- Organization created
+- Organization Admin assigned
+- Ready to link environments
+
+---
+
+### 2. Link an Environment
+
+The Organization Admin links one or more Condense environments to the organization.
+
+**Outcome:**
+
+- Environment becomes available for member assignment
+- Environment roles can now be configured
+
+---
+
+### 3. Invite Members
+
+The Organization Admin invites users by entering their email address and sending an invitation.
+
+Users receive an invitation email and join the organization after accepting the invitation.
+
+**Outcome:**
+
+- Member added to the organization
+- Ready for role assignment
+
+---
+
+### 4. Assign Organization Roles
+
+Assign one of the available organization-level roles based on administrative responsibilities.
+
+Available roles include:
+
+- Organization Admin
+- Account Admin
+- Billing Admin
+
+**Outcome:**
+
+- Administrative permissions configured
+
+---
+
+### 5. Assign Environment Roles
+
+Assign users to one or more linked environments.
+
+Available roles include:
+
+- Environment Admin
+- Environment User
+
+**Outcome:**
+
+- User gains access to the selected environments
+
+---
+
+### 6. Assign Workspace Roles
+
+For Environment Users, assign workspace-level permissions within Condense Core.
+
+Available workspace roles include:
+
+- Kafka Admin
+- Maintainer
+- Developer
+- Viewer
+
+Workspace roles determine what actions users can perform within their assigned workspaces.
+
+**Outcome:**
+
+- User receives access to the required workspaces
+
+---
+
+### 7. Start Working
+
+Once all required roles have been assigned, members can:
+
+- Access their assigned environments
+- Open authorized workspaces
+- Build and deploy pipelines
+- Manage connectors and transforms (based on role)
+- Monitor Kafka resources and applications
+
+---
+
+### 8. Ongoing Administration
+
+Organization Admins can continue to manage the organization by:
+
+- Inviting new members
+- Updating member roles
+- Removing members
+- Linking additional environments
+- Managing organization settings
+
+Starting with **Condense v2.4.1**, users can also belong to multiple organizations and switch between them without creating separate accounts. Each organization maintains its own members, environments, workspaces, and permissions independently.
+
 ## **Frequently Asked Questions (FAQs)**
+
+## Frequently Asked Questions (FAQs)
+
+### Q1: Who can invite members to an organization?
+
+Only users with the **Organization Admin** role can invite new members to an organization and assign organization-level roles.
+
+---
+
+### Q2: What happens after a member accepts an invitation?
+
+Once the invitation is accepted, the member is added to the organization. An Organization Admin can then assign the appropriate organization and environment roles based on the user's responsibilities.
+
+---
+
+### Q3: Can I invite someone who already has a Condense account?
+
+Yes. Starting with **Condense v2.4.1**, existing Condense users can be invited to additional organizations using the same email address. The new organization is added to their existing account without requiring a new registration.
+
+---
+
+### Q4: Can a user belong to multiple organizations?
+
+Yes. A single Condense account can belong to multiple organizations. Users can switch between organizations while maintaining separate roles, permissions, environments, and workspaces for each organization.
+
+---
+
+### Q5: Do I need a different email address for each organization?
+
+No. The same email address can be used across multiple organizations. Each organization manages access independently.
+
+---
+
+### Q6: Can I assign roles before linking an environment?
+
+Organization-level roles can be assigned without an environment. However, **Environment Admin** and **Environment User** roles can only be assigned after at least one environment has been linked to the organization.
+
+---
+
+### Q7: What is the difference between Organization, Environment, and Workspace roles?
+
+- **Organization Roles** control administrative access to the Condense Console.
+- **Environment Roles** determine access to specific Condense environments.
+- **Workspace Roles** provide fine-grained permissions within individual workspaces in Condense Core.
+
+---
+
+### Q8: What happens if I remove a member from the organization?
+
+Removing a member revokes their access to the organization, including all associated environments and workspaces within that organization. Their access to other organizations remains unaffected.
+
+---
+
+### Q9: Can an Environment User access all workspaces?
+
+No. Environment Users can only access the workspaces to which they have been explicitly assigned a workspace role.
+
+---
+
+### Q10: Can an Environment Admin access every workspace?
+
+Yes. Environment Admins have access to all workspaces within the environments they administer and can manage workspace resources and members.
+
+---
+
+### Q11: Can workspace roles be different across multiple workspaces?
+
+For Environment Users, the same workspace role is applied to all workspaces selected during assignment. If additional workspaces are assigned later, they must use the same role.
+
+---
+
+### Q12: Can I change a member's role later?
+
+Yes. Organization Admins can update organization roles, environment roles, and workspace assignments at any time, provided they have the necessary permissions.
+
+---
+
+### Q13: What happens if a user belongs to multiple organizations?
+
+When signing in, users can switch between organizations using the organization selector. Each organization maintains its own members, environments, workspaces, roles, and permissions independently.
+
+---
+
+### Q14: Is there a limit to the number of members or organizations?
+
+The number of members and organizations depends on your Condense subscription and deployment configuration. Contact your Condense administrator or Zeliot Support for details.
+
+---
+
+### Q15: Why can't I assign Environment Roles?
+
+Environment roles can only be assigned after an environment has been linked to the organization. If no environments are available, link an environment before assigning **Environment Admin** or **Environment User** roles.

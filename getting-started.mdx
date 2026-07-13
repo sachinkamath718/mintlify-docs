@@ -2,38 +2,92 @@
 title: "Getting Started"
 ---
 
-AI Agents are integrated into the Condense platform to assist with platform monitoring and operational visibility.
+Condense AI Agents are built into the Condense platform and are designed to assist users with platform operations, infrastructure monitoring, and application development.
 
-Once AI Agents are available for your organization, they can be accessed directly from the supported areas of the Condense platform.
+Each AI Agent specializes in a specific operational domain and uses a collection of tools to retrieve information, analyze resources, or perform supported tasks.
 
-## Before You Begin
+No additional installation is required. Once AI Agents are enabled for your organization, they are available directly within the Condense platform.
+
+---
+
+# Before You Begin
 
 Before using AI Agents, ensure that:
 
 - You have access to a Condense organization.
-- Your organization has AI Agents enabled.
-- You have the necessary permissions to access the monitored resources.
+- AI Agents have been enabled for your organization.
+- You have the necessary permissions to access the resources you want to query.
+- The required platform components (such as Kafka, Kubernetes, Grafana, or Version Control integrations) are configured and accessible.
 
-## Supported Services
+---
 
-AI Agents currently support monitoring for:
+# Available AI Agents
 
-- Apache Kafka
-- Kubernetes
-- Grafana
+Condense currently provides the following AI Agents:
 
-Additional agents may be introduced in future releases.
+| AI Agent | Primary Responsibility |
+| --- | --- |
+| Kafka Agent | Kafka operations, metadata, topics, schemas, consumer groups, and message retrieval. |
+| Kubernetes Agent | Kubernetes resources, connector logs, Kafka resources, services, jobs, and Schema Registry. |
+| Grafana Monitoring Agent | Grafana alert diagnosis, Prometheus metrics, and infrastructure monitoring. |
+| Coding Agent | Generates applications, connectors, transforms, project structure, and test cases with optional GitHub or GitLab integration. |
 
-## Getting Started
+---
 
-Once enabled, AI Agents automatically analyze supported platform resources and provide contextual operational insights within the Condense platform.
+# Using an AI Agent
 
-No additional installation or configuration is required for supported services.
+Each AI Agent accepts requests related to its supported domain.
 
-## Next Steps
+Depending on the selected agent, users can:
+
+- Retrieve operational information.
+- Analyze platform resources.
+- Diagnose infrastructure issues.
+- Access monitoring data.
+- Generate application code.
+- Manage project files.
+- Integrate with Git repositories.
+
+The selected AI Agent automatically invokes the appropriate tool required to complete the requested task.
+
+---
+
+# Agent Selection
+
+Choose the AI Agent based on the task you want to perform.
+
+| If you want to... | Use |
+| --- | --- |
+| Work with Kafka topics, schemas, or consumer groups | Kafka Agent |
+| Retrieve Kubernetes resources or connector logs | Kubernetes Agent |
+| Diagnose Grafana alerts or query Prometheus | Grafana Monitoring Agent |
+| Generate code, create projects, or integrate with Git repositories | Coding Agent |
+
+---
+
+# Permissions
+
+AI Agents respect the Condense Role-Based Access Control (RBAC) model.
+
+Users can only retrieve information for resources they are authorized to access within the active organization and environment.
+
+---
+
+# Best Practices
+
+- Select the AI Agent that matches the task you want to perform.
+- Ensure the required platform services are available before submitting requests.
+- Review AI-generated responses before applying operational or development changes.
+- Continue using existing monitoring and governance practices alongside AI Agents.
+
+---
+
+# Next Steps
 
 Continue with:
 
-- AI Agents in Condense
-- Supported Agents
+- Kafka Agent
+- Kubernetes Agent
+- Grafana Monitoring Agent
+- Coding Agent
 - Frequently Asked Questions

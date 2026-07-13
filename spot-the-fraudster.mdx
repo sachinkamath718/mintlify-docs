@@ -1,0 +1,241 @@
+---
+title: "Spot the Fraudster"
+---
+
+## TL;DR
+
+Spot the Fraudster is an interactive demo workspace that showcases how Condense detects fraudulent transactions in real time using event streaming, stream processing, and rule-based anomaly detection.
+
+Participants join a multiplayer session from their mobile devices, perform simulated financial transactions, and watch Condense identify suspicious and fraudulent activity within seconds.
+
+---
+
+## What You'll Learn
+
+After completing this demo, you'll understand how Condense can:
+
+- Ingest events from multiple users simultaneously
+- Process streaming events in real time
+- Correlate events across multiple users
+- Detect anomalies using configurable business rules
+- Push instant results back to applications
+- Power real-time fraud detection pipelines
+
+---
+
+## Before You Begin
+
+Ensure you have:
+
+- Access to the Condense Experience Center
+- A mobile phone
+- Internet connectivity
+- A modern web browser
+
+No coding is required.
+
+---
+
+## How the Demo Works
+
+The Spot the Fraudster demo follows a multiplayer workflow:
+
+1. Scan the QR code.
+2. Open the Demo Workspace.
+3. Select **Spot the Fraudster**.
+4. Create or join a game room.
+5. Wait for other participants.
+6. Start the game.
+7. Select a shared persona.
+8. Perform simulated transactions.
+9. Watch Condense classify each transaction in real time.
+
+The game demonstrates live event ingestion, stream processing, fraud detection, and real-time notifications.
+
+---
+
+## Demo Flow
+
+### Step 1. Create or Join a Room
+
+The host creates a room and shares the room code with participants.
+
+Players join using the room code before the game begins.
+
+---
+
+### Step 2. Select a Persona
+
+All players choose the same public personality for the session.
+
+The first player to select a persona locks the selection for everyone else.
+
+If no selection is made within 30 seconds, the system automatically selects one.
+
+---
+
+### Step 3. Make Transactions
+
+Each participant enters a transaction amount and submits it.
+
+The first successful transaction establishes the baseline profile for the session.
+
+Subsequent transactions are evaluated against this baseline.
+
+---
+
+### Step 4. Real-Time Fraud Detection
+
+As each transaction arrives, Condense evaluates it against fraud detection rules and immediately classifies it as:
+
+- Successful
+- Suspicious
+- Fraudulent
+
+Results are pushed back to every participant instantly.
+
+---
+
+## Fraud Detection Rules
+
+The demo evaluates multiple streaming signals, including:
+
+| Rule | Detection |
+| :-- | :-- |
+| Impossible travel | Fraud |
+| High transaction velocity | Suspicious |
+| Amount spike | Suspicious |
+| Amount deviation | Suspicious |
+| GPS and IP mismatch | Fraud |
+| New device | Suspicious |
+| Duplicate device or IP | Suspicious |
+| Odd transaction time | Suspicious |
+| Device type variation | Suspicious |
+| Multiple suspicious activities | Fraud |
+
+These rules are evaluated continuously as new events arrive in the stream.
+
+---
+
+## Data Captured
+
+During the demo, the application processes attributes such as:
+
+- Persona
+- Transaction amount
+- Device location
+- Timestamp
+- Session ID
+- Device ID
+- IP address
+- Device type
+
+These events are streamed through Condense and evaluated in real time.
+
+---
+
+## Behind the Scenes
+
+The Spot the Fraudster workspace demonstrates several Condense capabilities working together:
+
+- Event ingestion
+- Apache Kafka messaging
+- Stream processing
+- Rule evaluation
+- Real-time event routing
+- Live WebSocket notifications
+
+Internally, Condense processes incoming transaction events, applies fraud detection logic, and routes results to separate outputs for successful, suspicious, and fraudulent transactions.
+
+---
+
+## What This Demo Demonstrates
+
+By completing this demo, you'll experience how Condense enables:
+
+- Real-time fraud detection
+- Event-driven architectures
+- Streaming analytics
+- Live dashboards and notifications
+- Low-latency stream processing
+- Scalable event pipelines
+
+---
+
+---
+
+## Frequently Asked Questions (FAQs)
+
+### Q1: Do I need to install an application to play the demo?
+
+No. Spot the Fraudster runs entirely in a web browser. Simply scan the QR code or open the demo link to participate.
+
+---
+
+### Q2: Can multiple users join the same game?
+
+Yes. The demo is designed as a multiplayer experience where multiple participants join the same room and perform transactions simultaneously.
+
+---
+
+### Q3: Why do all players use the same persona?
+
+Using a shared persona allows Condense to establish a baseline transaction profile and demonstrate how suspicious or fraudulent activities can be detected when multiple users perform transactions using the same identity.
+
+---
+
+### Q4: How is the first transaction treated?
+
+The first successful transaction establishes the baseline for the session. Subsequent transactions are evaluated against this baseline using real-time fraud detection rules.
+
+---
+
+### Q5: What determines whether a transaction is suspicious or fraudulent?
+
+Condense continuously evaluates incoming transactions using predefined fraud detection rules, such as unusual transaction amounts, high transaction frequency, device changes, location anomalies, and other behavioural patterns.
+
+---
+
+### Q6: Can I restart the game after it ends?
+
+Yes. Once the game is complete, you can restart the current session, create a new room, or join another game.
+
+---
+
+### Q7: Does the demo process real financial transactions?
+
+No. All transactions are simulated for demonstration purposes. No real payment information or financial accounts are used.
+
+---
+
+### Q8: What Condense capabilities does this demo showcase?
+
+The demo demonstrates several core capabilities of Condense, including:
+
+- Real-time event streaming
+- Apache Kafka-based messaging
+- Stream processing
+- Rule-based fraud detection
+- Event correlation
+- Real-time notifications
+- Interactive dashboards
+
+---
+
+### Q9: Can the fraud detection rules be customized?
+
+Yes. The demo uses predefined rules for demonstration purposes. In production deployments, organizations can configure and extend detection rules to meet their business requirements.
+
+---
+
+### Q10: Is this demo suitable for production use?
+
+The Spot the Fraudster workspace is intended for learning, demonstrations, and proof-of-concept scenarios. The underlying streaming architecture and event processing capabilities can be adapted for production-grade fraud detection solutions.
+
+## Learn More
+
+To understand how this demo is built, including its architecture, Kafka pipeline, APIs, and implementation details, read the developer blog:
+
+**Games Built Using Condense: Spot the Fraudster**
+
+[https://www.zeliot.in/developer-blog/games-built-using-condense-spot-the-fraudster](https://www.zeliot.in/developer-blog/games-built-using-condense-spot-the-fraudster)

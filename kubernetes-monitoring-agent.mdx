@@ -1,0 +1,138 @@
+---
+title: "Kubernetes Monitoring Agent"
+---
+
+# Overview
+
+The Kubernetes Agent is an AI-powered operational assistant that helps users retrieve information from the Kubernetes infrastructure powering the Condense platform.
+
+It provides operational visibility into Kubernetes resources, deployed connectors, Kafka infrastructure, and Schema Registry services, allowing platform administrators to quickly investigate workloads and troubleshoot deployment issues without manually querying the Kubernetes cluster.
+
+The Kubernetes Agent invokes specialized tools to retrieve infrastructure information directly from the Condense platform.
+
+---
+
+# Supported Operations
+
+The Kubernetes Agent can assist with:
+
+- Retrieving Schema Registry information
+- Reading connector logs
+- Retrieving Kafka user information
+- Viewing Kafka cluster details
+- Reading Kubernetes Job information
+- Reading Kubernetes Service information
+
+---
+
+# Available Tools
+
+| Tool | Description | Required Input |
+| --- | --- | --- |
+| **GetSchemaRegistryDetails** | Retrieves Schema Registry deployment information. | None |
+| **GetConnectorLogs** | Retrieves logs for a deployed connector. | Workspace ID, Connector ID, Log Duration |
+| **ReadKafkaUser** | Retrieves information about a Kafka user. | Username |
+| **ReadKafkaClusterDetails** | Retrieves Kafka cluster information. | Cluster Name, Namespace |
+| **ReadJob** | Retrieves details of a Kubernetes Job. | Job Name, Namespace |
+| **ReadService** | Retrieves details of a Kubernetes Service. | Service Name, Namespace |
+
+---
+
+# Typical Use Cases
+
+The Kubernetes Agent can be used to:
+
+- Troubleshoot deployed connectors.
+- Review connector logs during failures.
+- Inspect Kubernetes Jobs.
+- Verify Kubernetes Service configurations.
+- Retrieve Kafka cluster information.
+- Review Kafka user configurations.
+- Verify Schema Registry deployment status.
+- Investigate operational issues affecting platform services.
+
+---
+
+# Future Enhancements
+
+Future releases may introduce additional Kubernetes management capabilities, including:
+
+- Create Kafka Users
+- Update Kafka Users
+- Delete Kafka Users
+- Create Secrets
+- Update Secrets
+- Delete Secrets
+- Create Services
+- Update Services
+- Delete Services
+- Create Jobs
+- Update Jobs
+- Delete Jobs
+- Create ConfigMaps
+- Read ConfigMaps
+- Update ConfigMaps
+- Delete ConfigMaps
+
+> **Note**
+>
+> The features listed above are planned enhancements and may be introduced in future Condense releases.
+
+---
+
+# Best Practices
+
+- Review connector logs before redeploying applications.
+- Verify Kubernetes Jobs after deployment activities.
+- Use Kafka cluster information to validate infrastructure health.
+- Confirm Schema Registry availability before deploying schema-dependent applications.
+- Combine Kubernetes Agent insights with Grafana dashboards for comprehensive operational visibility.
+
+---
+
+# Related Documentation
+
+- AI Agents Overview
+- Getting Started
+- Kafka Agent
+- Grafana Monitoring Agent
+- Schema Registry
+- Platform Monitoring
+
+---
+
+# Frequently Asked Questions (FAQs)
+
+### What resources can the Kubernetes Agent access?
+
+The Kubernetes Agent can retrieve information about Schema Registry, Kafka clusters, Kafka users, Kubernetes Jobs, Kubernetes Services, and deployed connector logs.
+
+---
+
+### Can the Kubernetes Agent modify Kubernetes resources?
+
+No. The current release provides read-only operational capabilities. Administrative operations such as creating or updating Kubernetes resources are planned for future releases.
+
+---
+
+### Can I retrieve logs for deployed connectors?
+
+Yes. The **GetConnectorLogs** tool retrieves connector logs by providing the Workspace ID, Connector ID, and the required log duration.
+
+---
+
+### Can the Kubernetes Agent retrieve Kafka cluster information?
+
+Yes. The **ReadKafkaClusterDetails** tool retrieves Kafka cluster information by specifying the cluster name and namespace.
+
+---
+
+### Does the Kubernetes Agent require Kubernetes access?
+
+No. Users interact with the Kubernetes Agent through Condense. The agent retrieves infrastructure information using the platform's configured integrations and respects Condense Role-Based Access Control (RBAC).
+
+---
+
+### Does the Kubernetes Agent respect Condense permissions?
+
+Yes. The Kubernetes Agent only retrieves information for resources that the authenticated user is authorized to access within the active organization and environment.

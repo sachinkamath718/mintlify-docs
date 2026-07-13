@@ -17,6 +17,24 @@ The RBAC model spans two areas of the Condense platform:
 
 This document describes each role, how access propagates, and how administrators assign members across these layers.
 
+## Multi-Organization Access (New in v2.4.1)
+
+Starting with **Condense v2.4.1**, users can belong to multiple organizations using a single Condense account.
+
+Each organization maintains its own:
+
+- Members
+- Roles
+- Environments
+- Workspaces
+- Permissions
+
+When a user switches organizations, Condense evaluates access using the roles assigned within the currently active organization.
+
+<Info>
+  Roles and permissions are isolated between organizations. Membership in one organization does not grant access to resources in another organization.
+</Info>
+
 ## **Access Layers in Condense**
 
 Condense access is structured into three layers:
@@ -336,4 +354,252 @@ This model keeps permissions clear, secure, and scalable, supporting diverse tea
 
 ## Lifecycle Guide
 
+The following lifecycle illustrates how users are onboarded and granted access to resources in Condense using the Role-Based Access Control (RBAC) model.
+
+### Step 1: Create an Organization
+
+A user signs up for Condense and creates a new organization. The creator is automatically assigned the **Organization Admin** role.
+
+**Outcome**
+
+- Organization created
+- Organization Admin assigned
+- Ready to link environments
+
+---
+
+### Step 2: Link an Environment
+
+The Organization Admin links one or more Condense environments to the organization.
+
+**Outcome**
+
+- Environment becomes available within the organization.
+- Environment-level roles can now be assigned.
+
+---
+
+### Step 3: Invite Members
+
+The Organization Admin invites users to the organization by sending an invitation to their email address.
+
+Once the invitation is accepted, the member becomes part of the organization.
+
+**Outcome**
+
+- Member added to the organization.
+- Ready for role assignment.
+
+---
+
+### Step 4: Assign Organization Roles
+
+Assign the appropriate organization-level role based on the user's responsibilities.
+
+Available roles include:
+
+- Organization Admin
+- Account Admin
+- Billing Admin
+
+These roles determine administrative access within the Condense Console.
+
+**Outcome**
+
+- Organization-level responsibilities assigned.
+
+---
+
+### Step 5: Assign Environment Roles
+
+Assign the user to one or more linked environments.
+
+Available roles include:
+
+- Environment Admin
+- Environment User
+
+These roles determine whether the user can administer or access a specific environment.
+
+**Outcome**
+
+- User gains access to the selected environments.
+
+---
+
+### Step 6: Assign Workspace Roles
+
+For users assigned the **Environment User** role, an Environment Admin grants workspace-level access within Condense Core.
+
+Available workspace roles include:
+
+- Kafka Admin
+- Maintainer
+- Developer
+- Viewer
+
+Workspace roles determine the operations that users can perform within their assigned workspaces.
+
+**Outcome**
+
+- User receives operational access to assigned workspaces.
+
+---
+
+### Step 7: Access Condense Core
+
+After all required roles have been assigned, users can access Condense Core according to their permissions.
+
+Depending on their assigned roles, users can:
+
+- Access workspaces
+- Deploy connectors
+- Develop applications
+- Manage Kafka resources
+- Configure pipelines
+- Monitor platform resources
+
+---
+
+### Step 8: Ongoing Access Management
+
+As teams evolve, administrators can:
+
+- Invite additional members
+- Modify organization roles
+- Update environment assignments
+- Change workspace roles
+- Remove members
+- Link additional environments
+
+Starting with **Condense v2.4.1**, users can belong to multiple organizations using the same Condense account. Each organization maintains its own members, environments, workspaces, roles, and permissions independently.
+
 ## **Frequently Asked Questions (FAQs)**
+
+### Q1: What is Role-Based Access Control (RBAC) in Condense?
+
+RBAC (Role-Based Access Control) is Condense's permission model that controls what users can view and manage within the platform. Access is granted through three layers: Organization, Environment, and Workspace.
+
+---
+
+### Q2: What are the three access layers in Condense?
+
+Condense organizes permissions into three layers:
+
+- **Organization Layer** – Manages users, organization settings, billing, and environments.
+- **Environment Layer** – Controls access to specific Condense environments.
+- **Workspace Layer** – Provides fine-grained operational permissions within individual workspaces.
+
+---
+
+### Q3: Who can invite members to an organization?
+
+Only **Organization Admins** can invite new members to an organization and assign organization-level roles.
+
+---
+
+### Q4: What is the difference between Organization Admin and Environment Admin?
+
+An **Organization Admin** manages the organization, members, billing, and environment assignments through the Condense Console.
+
+An **Environment Admin** manages operational resources within assigned environments, including workspaces, connectors, pipelines, applications, and Kafka resources.
+
+---
+
+### Q5: Can an Organization Admin access every environment automatically?
+
+No. Although an Organization Admin manages organization-wide settings, they must also be assigned as an **Environment Admin** or **Environment User** to access resources inside a specific environment.
+
+---
+
+### Q6: What is the difference between Environment Admin and Environment User?
+
+An **Environment Admin** has full access to all workspaces and resources within the assigned environment.
+
+An **Environment User** can access only the workspaces where they have been assigned a workspace role.
+
+---
+
+### Q7: Do Environment Admins require workspace roles?
+
+No. Environment Admins automatically have access to all workspaces within the environments they administer.
+
+---
+
+### Q8: What workspace roles are available?
+
+Condense supports the following workspace roles:
+
+- Kafka Admin
+- Maintainer
+- Developer
+- Viewer
+
+Each role provides a different level of operational access within assigned workspaces.
+
+---
+
+### Q9: Can an Environment User have different workspace roles in the same environment?
+
+No. An Environment User is assigned a single workspace role within an environment. If additional workspaces are assigned later, the same role applies to all selected workspaces.
+
+---
+
+### Q10: Can workspace roles be changed later?
+
+Yes. Environment Admins can update workspace assignments and roles as required.
+
+---
+
+### Q11: Can I assign Environment Roles before linking an environment?
+
+No. Environment roles can only be assigned after at least one environment has been linked to the organization.
+
+---
+
+### Q12: What happens when a member is removed from an organization?
+
+Removing a member revokes access to all environments and workspaces associated with that organization. Access to other organizations, if any, remains unaffected.
+
+---
+
+### Q13: Can a user belong to multiple organizations?
+
+Yes. Starting with **Condense v2.4.1**, a single Condense account can belong to multiple organizations. Users can switch between organizations without creating separate accounts.
+
+---
+
+### Q14: Can I have different roles in different organizations?
+
+Yes. Roles are evaluated independently within each organization. For example, you may be an **Organization Admin** in one organization and an **Environment User** in another.
+
+---
+
+### Q15: Does switching organizations affect my permissions?
+
+Yes. When you switch organizations, Condense loads the members, environments, workspaces, and permissions associated with the selected organization.
+
+---
+
+### Q16: Are resources shared across organizations?
+
+No. Organizations are isolated from one another. Members, environments, workspaces, connectors, pipelines, applications, and permissions remain independent for each organization.
+
+---
+
+### Q17: What is the recommended approach for assigning roles?
+
+Follow the principle of least privilege:
+
+- Assign **Organization Admin** only to users managing the organization.
+- Assign **Environment Admin** to users managing environments.
+- Assign appropriate workspace roles based on operational responsibilities.
+- Regularly review and update role assignments as team responsibilities change.
+
+---
+
+### Q18: Where can I manage user roles?
+
+- **Organization Roles** are managed in the **Condense Console**.
+- **Environment Roles** are assigned from the **Condense Console** after linking environments.
+- **Workspace Roles** are managed by **Environment Admins** within **Condense Core**.

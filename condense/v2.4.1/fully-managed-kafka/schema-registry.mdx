@@ -2,15 +2,99 @@
 title: "Schema Registry"
 ---
 
-With a managed Kafka instance, Condense ships a schema registry. It provides a RESTful interface for storing and retrieving your Avro®, JSON Schema, and Protobuf schemas.
+## Overview
 
-It stores a versioned history of all schemas based on a specified subject name strategy, provides multiple compatibility settings, and allows the evolution of schemas according to the configured compatibility settings and expanded support for these schema types.
+Schema Registry provides centralized schema management for Apache Kafka applications. It enables producers and consumers to share versioned schemas, enforce compatibility rules, and safely evolve event structures across distributed applications.
 
-It provides serializers that plug into Apache Kafka® clients that handle schema storage and retrieval for Kafka messages sent in any supported formats.
+Every Condense deployment includes a fully managed Schema Registry that supports **Apache Avro®**, **JSON Schema**, and **Protocol Buffers (Protobuf)**. Schemas are versioned and stored centrally, allowing applications to evolve while maintaining compatibility based on the configured compatibility policy.
 
-Schema registry is hosted with the Condense deployment and the APIs are available on an internal load balancer IP.
+The Schema Registry exposes a REST API for registering, retrieving, validating, and managing schemas. It also provides serializers that integrate with Apache Kafka clients, enabling automatic schema registration and retrieval for supported serialization formats.
 
-## Examples
+Schema Registry is deployed as part of the Condense platform and is accessible through an internal endpoint within the deployed environment.
+
+## Schema Registry Dashboard
+
+The Schema Registry dashboard provides a centralized interface for managing schema subjects and compatibility settings.
+
+The page includes:
+
+- Global compatibility level
+- Subject search
+- Schema subject list
+- Schema details
+- Create Schema action
+- Registry endpoint
+
+<Frame>
+  ![Image](/images/image-106.png)
+</Frame>
+
+Administrators can manage schema definitions and compatibility policies without interacting directly with the Schema Registry APIs.
+
+## Global Compatibility Level
+
+The **Global Compatibility Level** defines the default compatibility policy applied to schemas managed by the Schema Registry.
+
+Compatibility policies help ensure schema evolution does not break existing producers or consumers.
+
+Administrators can configure the global compatibility level directly from the Schema Registry dashboard.
+
+## Schema Subjects
+
+Schema subjects represent versioned schema definitions stored within the Schema Registry.
+
+The subject list allows administrators to:
+
+- Browse registered subjects.
+- Search for subjects.
+- View schema versions.
+- Review compatibility settings.
+- Inspect schema definitions.
+
+## Create a Schema
+
+<Frame>
+  ![Image](/images/image-107.png)
+</Frame>
+
+To create a schema:
+
+1. Navigate to **Schema Registry**.
+2. Select **Create Schema**.
+3. Enter the subject name.
+4. Select the schema type.
+5. Define the schema.
+6. Create the schema.
+
+After creation, the schema is registered under the specified subject.
+
+## Supported Schema Types
+
+Condense supports the following schema formats.
+
+| Schema Type | Description |
+| --- | --- |
+| Avro | Apache Avro schema definitions. |
+| JSON Schema | JSON-based schema validation. |
+| Protobuf | Protocol Buffers schema definitions. |
+
+<Frame>
+  ![Image](/images/image-108.png)
+</Frame>
+
+## View Registry Endpoint
+
+The Schema Registry endpoint can be viewed directly from the Schema Registry page.
+
+The endpoint is used by Kafka producers, consumers, and external applications to access the managed Schema Registry.
+
+Select the **Registry URL** action to copy the endpoint for client configuration.
+
+<Frame>
+  ![Image](/images/image-109.png)
+</Frame>
+
+## REST API Examples
 
 ```text
 # Register a new version of a schema under the subject "Kafka-key"
@@ -81,3 +165,10 @@ $ curl -X PUT -H "Content-Type: application/vnd.schemaregistry.v1+json" \
     http://<internal-lb-ip>:8081/config/Kafka-value
   {"compatibility":"BACKWARD"}
 ```
+
+## Related Documentation
+
+- Kafka Topics
+- Kafka Connect
+- Consumer Groups
+- Securing Kafka

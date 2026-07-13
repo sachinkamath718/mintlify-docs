@@ -1,0 +1,148 @@
+---
+title: "GitLab Integration"
+---
+
+# Overview
+
+The Coding Agent integrates with GitLab to help developers manage repositories, source code, branches, merge requests, and project files directly from the Condense platform.
+
+Using GitLab integration, developers can generate applications, connectors, and transforms, update existing repositories, and collaborate with development teams without leaving Condense.
+
+The Coding Agent invokes GitLab tools to perform repository operations while respecting project permissions and branch protection rules.
+
+---
+
+# Prerequisites
+
+Before using GitLab Integration, ensure that:
+
+- GitLab integration is enabled for your organization.
+- Your GitLab account is authenticated with Condense.
+- You have access to the target GitLab project.
+- The required project permissions have been granted.
+
+---
+
+# Supported Operations
+
+GitLab Integration supports:
+
+- Creating repositories
+- Searching repositories
+- Reading repository contents
+- Creating or updating files
+- Creating branches
+- Forking repositories
+- Creating issues
+- Creating merge requests
+
+---
+
+# Available Tools
+
+| Tool | Description | Required Input |
+| --- | --- | --- |
+| **createRepository** | Creates a new GitLab project. | None |
+| **searchRepositories** | Searches GitLab repositories. | Project ID |
+| **getFileContents** | Retrieves the contents of a file or directory. | Project ID |
+| **createOrUpdateFile** | Creates or updates a file in a GitLab project. | Project ID |
+| **forkRepository** | Creates a fork of an existing GitLab project. | Project ID |
+| **createBranch** | Creates a new branch from an existing reference. | Project ID, Branch Name |
+| **createIssue** | Creates a new GitLab issue. | Project ID |
+| **createMergeRequest** | Creates a Merge Request between branches. | Project ID |
+
+---
+
+# Typical Workflow
+
+A typical GitLab workflow consists of:
+
+1. Search for an existing project or create a new one.
+2. Create a feature branch.
+3. Generate or update project files.
+4. Commit the generated code.
+5. Create an issue (optional).
+6. Create a Merge Request.
+7. Complete code review and merge.
+
+---
+
+# Typical Use Cases
+
+GitLab Integration can be used to:
+
+- Create new Condense projects.
+- Update existing applications.
+- Generate connectors and transforms.
+- Maintain source code repositories.
+- Create feature branches.
+- Raise development issues.
+- Submit Merge Requests for review.
+
+---
+
+# Best Practices
+
+- Use feature branches for new development.
+- Review AI-generated code before merging.
+- Protect production branches.
+- Require Merge Request approvals.
+- Manage repository permissions using GitLab access controls.
+
+---
+
+# Related Documentation
+
+- Coding Agent
+- GitHub Integration
+- Private Version Control
+
+---
+
+# Frequently Asked Questions (FAQs)
+
+### Can the Coding Agent create GitLab projects?
+
+Yes. The Coding Agent can create new GitLab projects using the configured GitLab integration.
+
+---
+
+### Can it update existing GitLab repositories?
+
+Yes. Files within existing GitLab repositories can be created, updated, and managed through the available GitLab tools.
+
+---
+
+### Can it create Merge Requests?
+
+Yes. After code changes have been committed to a branch, the Coding Agent can create a Merge Request for review.
+
+---
+
+### Can it create new branches?
+
+Yes. New Git branches can be created directly within the selected GitLab project.
+
+---
+
+### Does GitLab Integration require authentication?
+
+Yes. Users must authenticate with GitLab and have the necessary project permissions before repository operations can be performed.
+
+---
+
+### Can the Coding Agent work with self-hosted GitLab?
+
+Yes. Condense supports both GitLab.com and private/self-hosted GitLab instances, provided they are configured within the Condense platform.
+
+---
+
+### Does the Coding Agent overwrite existing files?
+
+No. File operations are performed only for the files specified in the request. Existing files are updated only when explicitly requested.
+
+---
+
+### Does GitLab Integration respect repository permissions?
+
+Yes. All repository operations follow the permissions granted within GitLab. The Coding Agent cannot perform actions beyond the authenticated user's access rights.

@@ -1,0 +1,230 @@
+---
+title: "Frequently Asked Questions"
+---
+
+# Frequently Asked Questions (FAQs)
+
+## General
+
+### What are Condense AI Agents?
+
+Condense AI Agents are intelligent, task-oriented assistants that help users monitor, manage, troubleshoot, and develop applications on the Condense platform. Each AI Agent specializes in a specific operational domain and invokes dedicated tools to complete supported tasks.
+
+---
+
+### Which AI Agents are currently available?
+
+Condense currently provides the following AI Agents:
+
+- Kafka Agent
+- Kubernetes Agent
+- Grafana Monitoring Agent
+- Coding Agent
+
+Additional AI Agents may be introduced in future releases.
+
+---
+
+### Do AI Agents require additional installation?
+
+No. AI Agents are integrated into the Condense platform. Once enabled for your organization, they are available without requiring additional installation.
+
+---
+
+### How do AI Agents work?
+
+Each AI Agent invokes one or more specialized tools to retrieve information, analyze resources, or perform supported development tasks. Depending on the request, the appropriate tool is automatically selected and executed.
+
+---
+
+### Do AI Agents replace existing monitoring tools?
+
+No. AI Agents complement existing monitoring and management tools by providing contextual insights and simplifying operational workflows.
+
+---
+
+## Access & Permissions
+
+### Who can use AI Agents?
+
+AI Agents are available to organizations where the feature has been enabled. Users can access only the resources permitted by their assigned roles and permissions.
+
+---
+
+### Do AI Agents follow Condense RBAC?
+
+Yes. AI Agents fully respect Condense Role-Based Access Control (RBAC). Users can retrieve information only for resources they are authorized to access.
+
+---
+
+### Can different organizations have different AI Agent access?
+
+Yes. AI Agent availability and access permissions are managed independently for each organization.
+
+---
+
+## Kafka Agent
+
+### What information can the Kafka Agent retrieve?
+
+The Kafka Agent can retrieve:
+
+- Kafka topics
+- Topic metadata
+- Topic partition details
+- Consumer group information
+- Schema Registry subjects
+- Schema versions
+- Compatibility settings
+- Latest messages from Kafka topics
+
+---
+
+### Can the Kafka Agent create or modify Kafka resources?
+
+The current release provides read-only capabilities. Administrative operations such as creating topics, updating topic configurations, and publishing messages are planned for future releases.
+
+---
+
+## Kubernetes Agent
+
+### What Kubernetes resources are supported?
+
+The Kubernetes Agent currently supports:
+
+- Schema Registry details
+- Kafka Users
+- Kafka Clusters
+- Kubernetes Jobs
+- Kubernetes Services
+- Connector Logs
+
+---
+
+### Can the Kubernetes Agent modify Kubernetes resources?
+
+No. The current release provides read-only operational capabilities. Resource management operations are planned for future releases.
+
+---
+
+## Grafana Monitoring Agent
+
+### What does the Grafana Monitoring Agent do?
+
+The Grafana Monitoring Agent retrieves Grafana alerts, executes Prometheus queries, analyzes monitoring data, and assists users in diagnosing infrastructure and application issues.
+
+---
+
+### Can the Grafana Monitoring Agent execute PromQL queries?
+
+Yes. Both instant and range-based PromQL queries are supported.
+
+---
+
+### Can it retrieve connector logs?
+
+Yes. Connector logs can be retrieved for deployed connectors by providing the required workspace, connector, and duration information.
+
+---
+
+## Coding Agent
+
+### What can the Coding Agent generate?
+
+The Coding Agent can generate:
+
+- Condense Applications
+- Custom Connectors
+- Custom Transforms
+- Project structures
+- Source code
+- Automated test cases
+
+---
+
+### Does the Coding Agent generate test cases?
+
+Yes. The integrated Testing Agent generates test cases for the produced code.
+
+---
+
+### Can the Coding Agent manage project files?
+
+Yes. It supports creating, reading, updating, renaming, and deleting files and folders.
+
+---
+
+### Does the Coding Agent integrate with version control systems?
+
+Yes. The Coding Agent supports both GitHub and GitLab integration for repository management and collaboration.
+
+---
+
+## GitHub & GitLab
+
+### Which version control platforms are supported?
+
+The Coding Agent supports:
+
+- GitHub
+- GitLab
+- Private GitLab instances configured in Condense
+
+---
+
+### What repository operations are supported?
+
+Depending on the selected platform, supported operations include:
+
+- Creating repositories
+- Searching repositories
+- Reading repository contents
+- Creating and updating files
+- Creating branches
+- Forking repositories
+- Creating issues
+- Creating Pull Requests (GitHub)
+- Creating Merge Requests (GitLab)
+
+---
+
+### Does the Coding Agent require repository permissions?
+
+Yes. Repository operations are performed using the authenticated user's permissions. The Coding Agent cannot perform actions beyond the access granted by GitHub or GitLab.
+
+---
+
+## Future Enhancements
+
+### Will more AI Agents be added?
+
+Yes. Condense will continue expanding the AI Agent framework with additional agents and operational capabilities in future releases.
+
+---
+
+### Will AI Agents support write operations in the future?
+
+Additional capabilities, including infrastructure management and Kafka administration, are planned for future releases. Availability will depend on the specific AI Agent and platform component.
+
+---
+
+## Support
+
+### Where can I learn more about AI Agents?
+
+Refer to the following documentation:
+
+- Overview
+- Getting Started
+- Kafka Agent
+- Kubernetes Agent
+- Grafana Monitoring Agent
+- Coding Agent
+- GitHub Integration
+- GitLab Integration
+
+---
+
+### Who should I contact if an AI Agent is unavailable?
+
+If AI Agents are not enabled for your organization or you experience issues while using them, contact your Condense administrator or the Condense Support team.

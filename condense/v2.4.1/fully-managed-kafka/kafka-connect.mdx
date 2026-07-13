@@ -2,9 +2,9 @@
 title: "Kafka Connect"
 ---
 
-Kafka Connect uses connector instances to integrate with other systems to stream data.
+## Overview
 
-Kafka Connect loads existing connector instances on start-up and distributes data streaming tasks and connector configuration across worker pods. Workers run the tasks for the connector instances. Each worker runs as a separate pod to make the Kafka Connect cluster more fault-tolerant. If there are more tasks than workers, workers are assigned multiple tasks. If a worker fails, its tasks are automatically assigned to active workers in the Kafka Connect cluster.
+Kafka Connect in Condense provides a managed framework for integrating Apache Kafka with external systems through reusable source and sink connectors. Kafka Connect loads existing connector instances on start-up and distributes data streaming tasks and connector configuration across worker pods. Workers run the tasks for the connector instances. Each worker runs as a separate pod to make the Kafka Connect cluster more fault-tolerant. If there are more tasks than workers, workers are assigned multiple tasks. If a worker fails, its tasks are automatically assigned to active workers in the Kafka Connect cluster.
 
 The main Kafka Connect components used in streaming data are as follows:
 
@@ -15,6 +15,10 @@ The main Kafka Connect components used in streaming data are as follows:
 - Converters to convert data
 
 ## Connectors
+
+### Connector Types
+
+Condense supports two categories of Kafka Connect connectors.
 
 Connectors can be one of the following types:
 

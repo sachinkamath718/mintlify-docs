@@ -1,0 +1,242 @@
+---
+title: "Auto Twin"
+---
+
+## TL;DR
+
+Auto Twin is an interactive demo workspace that showcases how Condense enables real-time digital twin experiences using event streaming, bidirectional communication, and live vehicle state synchronization.
+
+Participants connect to a simulated vehicle by scanning a QR code, securely pair with the vehicle using OTP verification, and interact with vehicle controls while observing live state updates across connected applications.
+
+---
+
+## What You'll Learn
+
+After completing this demo, you'll understand how Condense can:
+
+- Build real-time digital twin applications
+- Synchronize state across multiple applications
+- Process bidirectional streaming events
+- Enable real-time command and control
+- Maintain live vehicle state using event streaming
+- Build interactive IoT experiences with Apache Kafka
+
+---
+
+## Before You Begin
+
+Ensure you have:
+
+- Access to the Condense Experience Center
+- A mobile phone
+- Internet connectivity
+- A modern web browser
+
+No coding is required.
+
+---
+
+## How the Demo Works
+
+The Auto Twin demo demonstrates how Condense maintains a live digital representation of a connected vehicle.
+
+Participants scan a QR code to launch the application, securely connect to a vehicle using OTP verification, and interact with various vehicle controls. Every action is streamed through Condense and synchronized instantly between the mobile application and the Fleet Management System (FMS).
+
+The demo showcases secure device pairing, bidirectional communication, and real-time state synchronization.
+
+---
+
+## Demo Flow
+
+### Step 1. Scan the QR Code
+
+Scan the QR code to launch the Auto Twin application.
+
+The application creates a new vehicle session or restores an existing session if one is already available.
+
+---
+
+### Step 2. Connect the Vehicle
+
+A unique Vehicle ID and one-time password (OTP) are generated.
+
+Use the Vehicle ID and OTP to pair the mobile application with the Fleet Management System (FMS).
+
+Once verification is successful, the vehicle is securely linked and ready for interaction.
+
+---
+
+### Step 3. Explore Vehicle Controls
+
+After pairing is complete, interact with the available vehicle controls, including:
+
+- Ignition
+- Engine
+- Air Conditioning
+- Lights
+- Horn
+- Music
+- SOS
+
+Each action is streamed instantly through Condense and synchronized across connected applications.
+
+---
+
+### Step 4. Observe Real-Time Synchronization
+
+As vehicle controls are updated, both the mobile application and the Fleet Management System display the latest vehicle state in real time.
+
+Every command is acknowledged immediately, ensuring that both interfaces remain synchronized throughout the session.
+
+---
+
+## Vehicle Features Demonstrated
+
+The Auto Twin workspace demonstrates live synchronization of vehicle features including:
+
+- Vehicle connection status
+- Ignition state
+- Engine state
+- Air conditioning
+- Vehicle lights
+- Horn
+- Music controls
+- SOS activation
+- Diagnostic information
+- Tire pressure monitoring
+
+---
+
+## Data Processed
+
+During the demo, Condense continuously processes information including:
+
+- Vehicle ID
+- Session ID
+- Vehicle state
+- Vehicle commands
+- Command acknowledgements
+- Connection status
+- Location information
+- Diagnostic events
+- Tire pressure data
+- Session heartbeat events
+
+---
+
+## Behind the Scenes
+
+The Auto Twin workspace demonstrates several Condense capabilities working together:
+
+- Real-time event ingestion
+- Apache Kafka messaging
+- Bidirectional event streaming
+- WebSocket communication
+- Live state synchronization
+- Event-driven command processing
+- Session management
+- Real-time acknowledgements
+
+Internally, Condense streams vehicle commands, synchronizes vehicle state between connected applications, validates secure sessions, and maintains a live digital representation of the connected vehicle.
+
+---
+
+## What This Demo Demonstrates
+
+By completing this demo, you'll experience how Condense enables:
+
+- Digital Twin applications
+- Connected vehicle platforms
+- IoT event streaming
+- Real-time synchronization
+- Bidirectional communication
+- Event-driven architectures
+- Live state management
+- Low-latency stream processing
+
+---
+
+---
+
+## Frequently Asked Questions (FAQs)
+
+### Q1: What is Auto Twin?
+
+Auto Twin is an interactive demo workspace that demonstrates how Condense creates and maintains a real-time digital twin of a connected vehicle by synchronizing vehicle state between a mobile application and a Fleet Management System (FMS).
+
+---
+
+### Q2: Do I need to install an application to use the demo?
+
+No. Auto Twin runs in a web browser. Simply scan the QR code to launch the demo and begin the pairing process.
+
+---
+
+### Q3: How is the vehicle connected?
+
+When the demo starts, Condense generates a unique Vehicle ID and a one-time password (OTP). The OTP verification securely pairs the mobile application with the Fleet Management System before any vehicle interactions are allowed.
+
+---
+
+### Q4: Why can't I control the vehicle immediately?
+
+Vehicle controls remain disabled until the pairing process is successfully completed. This ensures that only verified sessions can interact with the connected vehicle.
+
+---
+
+### Q5: What vehicle controls are available?
+
+Depending on the demo configuration, you can interact with features such as:
+
+- Ignition
+- Engine
+- Air Conditioning
+- Vehicle Lights
+- Horn
+- Music
+- SOS
+
+All actions are synchronized in real time across connected applications.
+
+---
+
+### Q6: What happens when I perform an action?
+
+Every action is streamed through Condense, processed in real time, and immediately synchronized between the mobile application and the Fleet Management System. Both interfaces always display the latest vehicle state.
+
+---
+
+### Q7: What happens if the connection is interrupted?
+
+Condense continuously monitors the session using heartbeat events. If the connection is lost or the session becomes inactive, the session is automatically cleaned up to ensure secure and reliable operation.
+
+---
+
+### Q8: What Condense capabilities does this demo showcase?
+
+The Auto Twin workspace demonstrates several core capabilities of Condense, including:
+
+- Real-time event streaming
+- Apache Kafka messaging
+- Bidirectional communication
+- Digital Twin implementation
+- Live state synchronization
+- Event-driven architectures
+- Low-latency stream processing
+- Secure session management
+
+---
+
+### Q9: Can multiple users connect to the same vehicle?
+
+The demo establishes a secure session between the mobile application and the Fleet Management System using vehicle pairing and OTP verification. Session management ensures that vehicle interactions remain synchronized and secure throughout the demonstration.
+
+---
+
+### Q10: Is Auto Twin intended for production use?
+
+The Auto Twin workspace is designed for learning, demonstrations, and proof-of-concept scenarios. The underlying architecture can be extended to build production-grade connected vehicle, IoT, and digital twin solutions using the Condense platform.
+
+## Learn More
+
+To learn more about building real-time digital twin applications with Condense, explore the Connected Mobility documentation and related developer resources.

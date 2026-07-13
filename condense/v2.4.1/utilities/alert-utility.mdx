@@ -108,17 +108,29 @@ Real-Time Rule Preview - The top preview bar shows your current rule structure (
 
 ![](/images/condense/v2.4.0/utilities/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FcWWxwuaGjYht7mY3FvkJ%2Fimage.png)
 
-1. Navigate to the **Pipelines** page
-2. Select the deployed Alert Utility you wish to modify
+1. Navigate to the **Pipelines** page.
+2. Select the deployed **Alert Utility** you want to modify.
 
 ![](/images/condense/v2.4.0/utilities/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FkIZcrzOMaMCbIQmdZxCq%2Fimage.png)
 
-3. Click **Edit Configurations** to access settings
+3. Click **Edit Configurations** to open the utility configuration.
 
 ![](/images/condense/v2.4.0/utilities/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FBtPCTD5C29OzKpDk1SmS%2Fimage.png)
 
-4. Update rule parameters as needed
-5. Click **Deploy Utility** to apply changes
+4. Update the required configuration, including:
+   - Utility Name
+   - Input Topic
+   - Output Topic
+   - Group By field
+   - Alert Duration
+   - Rule conditions
+   - Variables used in rule expressions _(New in v2.4.0)_
+5. Review the updated rule expression using the preview bar.
+6. Click **Deploy Utility** to apply the updated configuration.
+
+<Info>
+  Starting with **Condense v2.4.1**, variables used in Alert Utility rule expressions can be edited directly without recreating the utility. This simplifies updates when field names, thresholds, or rule logic change.
+</Info>
 
 ## **Deleting an Alert Configuration**
 

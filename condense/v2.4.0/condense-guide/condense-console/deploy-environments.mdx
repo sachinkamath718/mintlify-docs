@@ -1,3 +1,80 @@
 ---
 title: "Deploy Environments"
 ---
+
+Deploy Environments allow organizations to provision and manage isolated Condense environments for developing, testing, and running real-time streaming applications. Each environment includes the core platform services required to build, deploy, and monitor data pipelines.
+
+## Overview
+
+A deployment environment provides:
+
+- Dedicated Condense Core services
+- Managed Apache Kafka cluster
+- Stream processing engine
+- Connector runtime
+- Monitoring and observability
+- Secure access controls
+
+Organizations can deploy multiple environments based on their operational requirements.
+
+## Prerequisites
+
+Before deploying an environment, ensure that:
+
+- You have Organization Admin permissions.
+- Your cloud account (BYOC or Zeliot Managed Cloud) is configured.
+- Required networking and IAM permissions are available.
+- Deployment quotas and resources are sufficient.
+
+## Deploying an Environment
+
+1. Navigate to **Condense Console**.
+2. Open **Deploy Environments**.
+3. Click **Create Environment**.
+4. Enter the required environment details.
+5. Configure the deployment settings.
+6. Review the configuration.
+7. Click **Deploy**.
+
+The deployment process provisions all required platform services automatically.
+
+---
+
+## Replica Configuration (New in v2.4.0)
+
+Starting with **Condense v2.4.0**, applications can be deployed with a fixed number of replicas even when autoscaling is disabled.
+
+### Configuring Manual Replicas
+
+1. Open the deployment configuration.
+2. Disable **Autoscaling**.
+3. Specify the required **Replica Count**.
+4. Save the configuration.
+5. Deploy the environment.
+
+The configured number of replicas will remain active until modified or autoscaling is enabled.
+
+| Configuration | Behavior |
+| --- | --- |
+| Autoscaling Enabled | Replicas are managed automatically. |
+| Autoscaling Disabled \+ Replica Count | Condense maintains the specified number of replicas. |
+
+> **Note**
+>
+> Manual replica configuration is useful for workloads that require predictable capacity or fixed infrastructure allocation.
+
+---
+
+## Monitoring Deployment
+
+After deployment, monitor the environment status from the Condense Console to verify that all platform services are running successfully.
+
+## Next Steps
+
+After the environment is deployed, you can:
+
+- Create a Workspace
+- Deploy Connectors
+- Create Transforms
+- Build Pipelines
+- Monitor Resources

@@ -385,11 +385,20 @@
                 "pages": [
                   "condense/v2.4.1/fully-managed-kafka/untitled-page",
                   "condense/v2.4.1/fully-managed-kafka/kafka-management",
-                  "condense/v2.4.1/fully-managed-kafka/kafka-connect",
                   "condense/v2.4.1/fully-managed-kafka/kafka-topics",
+                  "condense/fully-managed-kafka/consumer-group",
+                  "condense/v2.4.1/fully-managed-kafka/kafka-connect",
                   "condense/v2.4.1/fully-managed-kafka/schema-registry",
                   "condense/v2.4.1/fully-managed-kafka/securing-kafka",
-                  "condense/v2.4.1/fully-managed-kafka/kafka-administration",
+                  {
+                    "group": "Kafka Administration",
+                    "pages": [
+                      "condense/v2.4.1/fully-managed-kafka/kafka-administration",
+                      "condense/v2.4.1/fully-managed-kafka/users-and-role-management",
+                      "condense/v2.4.1/fully-managed-kafka/untitled-page-1",
+                      "condense/v2.4.1/fully-managed-kafka/untitled-page-2"
+                    ]
+                  },
                   "condense/v2.4.1/fully-managed-kafka/ksqldb"
                 ]
               },
@@ -426,9 +435,16 @@
                   "overview",
                   "guided",
                   "trial-experience",
-                  "demo-workspaces",
                   "evaluation-limits",
-                  "faq"
+                  "faq",
+                  {
+                    "group": "Demo Workspaces",
+                    "pages": [
+                      "demo-workspaces",
+                      "spot-the-fraudster",
+                      "auto-twin"
+                    ]
+                  }
                 ]
               },
               {
@@ -498,10 +514,12 @@
             "group": "Condense App",
             "pages": [
               "condense/v2.4.1/condense-app-getting-started",
+              "condense/v2.4.1/condense-app-getting-started/guided-tour",
+              "condense/v2.4.1/condense-app-getting-started/demo-workspaces",
               "condense/v2.4.1/condense-app-getting-started/sso-single-sign-on-creating-an-account-logging-into-the-condense-app",
               "condense/v2.4.1/condense-app-getting-started/features-of-condense-app",
-              "condense/v2.4.1/condense-app-getting-started/glossary",
-              "condense/v2.4.1/condense-app-getting-started/video-guide"
+              "condense/v2.4.1/condense-app-getting-started/video-guide",
+              "condense/v2.4.1/condense-app-getting-started/glossary"
             ],
             "icon": "app-window"
           },
@@ -510,28 +528,32 @@
             "pages": [
               "overview-2",
               "getting-started",
-              "untitled-page"
+              "kafka-monitoring-agent",
+              "kubernetes-monitoring-agent",
+              "grafana-monitoring-agent",
+              {
+                "group": "Coding Agent",
+                "pages": [
+                  "coding-agent",
+                  "untitled-page",
+                  "git-lab-integration"
+                ]
+              },
+              "frequently-asked-questions-1"
             ]
           },
           {
             "group": "Deep Dive",
             "pages": [
-              "condense/v2.4.1/deep-dive/deep-dive",
               {
                 "group": "Connectors",
                 "pages": [
                   "condense/v2.4.1/deep-dive/connectors",
-                  {
-                    "group": "Connectors in Condense",
-                    "pages": [
-                      "condense/v2.4.1/deep-dive/connectors/connectors-in-condense",
-                      "condense/v2.4.1/deep-dive/connectors/connectors-in-condense/upcoming-connectors"
-                    ]
-                  },
-                  "condense/v2.4.1/deep-dive/connectors/available-connectors"
+                  "condense/v2.4.1/deep-dive/connectors/connectors-in-condense",
+                  "condense/v2.4.1/deep-dive/connectors/available-connectors",
+                  "condense/v2.4.1/deep-dive/connectors/connectors-in-condense/upcoming-connectors"
                 ]
               },
-              "condense/v2.4.1/deep-dive/connectors/connectors-in-condense/custom-connectors",
               "condense/v2.4.1/deep-dive/transforms",
               "condense/v2.4.1/deep-dive/applications",
               "condense/v2.4.1/deep-dive/pipelines"

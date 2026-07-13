@@ -1,0 +1,64 @@
+---
+title: "Users & Role Management"
+---
+
+Users & Role Management enables Kafka Administrators to manage access to Kafka resources by assigning predefined Condense roles to users within an environment. These roles are mapped to Kafka Access Control Lists (ACLs), providing a simplified and consistent approach to managing permissions across Kafka resources. :contentReference\[oaicite:0\]{index=0}
+
+The feature provides a centralized interface for assigning roles, reviewing permission mappings, and managing access for both onboarded environment users and external users.
+
+## Overview
+
+The **Users & Role Management** page allows Kafka Administrators to manage role assignments using a role-resource-permission matrix.
+
+From this page, Kafka Administrators can:
+
+- View predefined Condense roles.
+- Review permissions associated with each role.
+- Manage access for onboarded environment users.
+- Manage access for external users.
+- Configure role assignments for Kafka resources.
+
+The interface provides a centralized view of roles and permission mappings, making it easier to administer access across Kafka resources.
+
+## Supported User Types
+
+Users & Role Management supports the following user types.
+
+### Onboarded Users
+
+Onboarded users are members of the Condense environment who have been invited through the organization and environment onboarding workflow.
+
+These users can be assigned predefined Condense roles to access Kafka resources.
+
+### External Users
+
+External users are users who require access to Kafka resources but are not members of the Condense environment.
+
+Kafka Administrators can manage access for external users independently of environment membership.
+
+## Predefined Condense Roles
+
+Condense provides the following predefined roles for managing access to Kafka resources.
+
+| Role | Description |
+| --- | --- |
+| **Maintainer** | Intended for users who require broader management capabilities for assigned Kafka resources. |
+| **Developer** | Intended for users who develop or integrate applications that interact with Kafka resources. |
+| **Viewer** | Intended for users who require read-only visibility into assigned Kafka resources. |
+
+> **Note**
+>
+> Maintainer, Developer, and Viewer are predefined **Condense roles**. These roles are mapped to Kafka ACL permissions and are not native Apache Kafka roles.
+
+## Role-Permission Matrix
+
+The Users & Role Management page presents a role-resource-permission matrix that helps Kafka Administrators understand which permissions are associated with each predefined role.
+
+Permissions are preconfigured for the predefined roles and are displayed for visibility within the interface. :contentReference\[oaicite:2\]{index=2}
+
+## Related Documentation
+
+- ACL Management
+- Resource Management
+- Consumer Groups
+- Kafka Topics

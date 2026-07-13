@@ -78,6 +78,39 @@ Once created, your organization can be managed from **Settings → Organization*
 
 ---
 
+### Multi-Organization Support (New in v2.4.1)
+
+Starting with **Condense v2.4.1**, users can belong to **multiple organizations** using a single Condense account. This allows administrators, partners, and users working across multiple customers or business units to access all their organizations without creating separate accounts.
+
+Each organization maintains its own members, workspaces, environments, roles, and settings. Switching between organizations does not affect resources or permissions in other organizations.
+
+#### Switching Organizations
+
+If your account belongs to multiple organizations:
+
+1. Sign in to Condense.
+2. Click the **Organization Selector** in the application header.
+3. Select the organization you want to access.
+4. Condense switches your active organization and loads the corresponding resources.
+
+<Info>
+  Workspaces, connectors, pipelines, environments, and users are always scoped to the currently selected organization.
+</Info>
+
+#### Access Control
+
+Organization membership does not automatically grant access to resources.
+
+Permissions continue to be enforced through Condense's Role-Based Access Control (RBAC). Your role and permissions are evaluated independently for each organization you belong to.
+
+#### Benefits
+
+- Access multiple organizations using a single login.
+- Switch organizations without signing out.
+- Maintain separate roles and permissions for each organization.
+- Keep resources isolated between organizations.
+- Simplify collaboration across customers, partners, and internal teams.
+
 ### Organization Roles
 
 Condense has two organization-level roles:
@@ -99,3 +132,4 @@ After creating your organization:
 2. **Create a workspace** - set up an isolated environment for your pipeline
 3. **Link an environment** - connect your deployed Condense environment
 4. **Build your first pipeline** - deploy connectors and transforms
+5. **Join or switch organizations** - if you've been invited to multiple organizations, use the organization selector to access the required workspace.

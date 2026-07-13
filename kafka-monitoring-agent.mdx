@@ -1,0 +1,126 @@
+---
+title: "Kafka Agent"
+---
+
+The Kafka Agent is an AI-powered operational assistant that helps users retrieve information from Apache Kafka and Schema Registry without manually navigating the platform.
+
+It provides read-only access to Kafka resources and enables users to quickly retrieve topic metadata, consumer group information, schema details, compatibility settings, and recent messages from Kafka topics.
+
+The Kafka Agent simplifies operational tasks by invoking specialized tools to retrieve information directly from the Condense platform.
+
+---
+
+# Supported Operations
+
+The Kafka Agent can assist with:
+
+- Listing Kafka topics
+- Retrieving Schema Registry subjects
+- Viewing schema compatibility settings
+- Retrieving the latest message from a topic
+- Viewing topic metadata and configurations
+- Viewing partition information
+- Retrieving schema metadata
+- Listing schema versions
+- Viewing consumer group information
+
+---
+
+# Available Tools
+
+| Tool | Description | Required Input |
+| --- | --- | --- |
+| **ListTopics** | Lists all Kafka topics available in Condense. | None |
+| **GetAllSubjects** | Lists all Schema Registry subjects. | None |
+| **GetCurrentGlobalCompatibilityLevel** | Returns the global Schema Registry compatibility level. | None |
+| **GetSubjectLevelCompatibility** | Returns the compatibility level configured for a specific subject. | Subject Name |
+| **GetLastMessageFromTopic** | Retrieves the latest message from a Kafka topic. | Topic Name |
+| **GetTopicMetadataAndConfigs** | Returns metadata and configuration for a topic. | Topic Name |
+| **GetTopicPartitionsDetails** | Returns partition details for a topic. | Topic Name |
+| **GetSchemaMetadata** | Retrieves metadata for a schema. | Schema Subject |
+| **GetAllVersionsUnderSubject** | Lists all schema versions for a subject. | Subject Name |
+| **GetSchemaByVersionFromRegistry** | Retrieves a specific schema version. | Subject Name, Version |
+| **GetAllVersionsAndIds** | Lists all schema versions and corresponding IDs. | Subject Name |
+| **GetConsumerGroupDetails** | Retrieves details for a consumer group. | Consumer Group ID |
+
+---
+
+# Typical Use Cases
+
+The Kafka Agent can be used to:
+
+- Explore available Kafka topics.
+- Retrieve topic configurations before deploying applications.
+- Review partition layouts for capacity planning.
+- Verify Schema Registry compatibility settings.
+- Inspect schema versions during application upgrades.
+- Retrieve the latest message from a topic for debugging.
+- Investigate consumer group activity.
+- Validate Kafka metadata during troubleshooting.
+
+---
+
+# Future Enhancements
+
+Future releases may introduce additional Kafka management capabilities, including:
+
+- Create Kafka Topics
+- Update Topic Configurations
+- Publish Messages to Kafka Topics
+- Update Subject Compatibility Levels
+
+> **Note**
+>
+> The features listed above are planned enhancements and may be introduced in future Condense releases.
+
+---
+
+# Best Practices
+
+- Use the Kafka Agent to retrieve operational information before making infrastructure changes.
+- Validate topic configurations before deploying producers and consumers.
+- Review Schema Registry compatibility settings before evolving schemas.
+- Inspect consumer groups regularly to understand application consumption patterns.
+
+---
+
+# Related Documentation
+
+- AI Agents Overview
+- Getting Started
+- Kubernetes Agent
+- Grafana Monitoring Agent
+- Schema Registry
+- Kafka Topics
+
+---
+
+# Frequently Asked Questions (FAQs)
+
+### What can the Kafka Agent access?
+
+The Kafka Agent can retrieve Kafka topics, consumer groups, Schema Registry information, topic metadata, partition details, and recent topic messages.
+
+---
+
+### Can the Kafka Agent modify Kafka resources?
+
+The current release provides read-only operational capabilities. Administrative operations such as creating topics or publishing messages are planned for future releases.
+
+---
+
+### Can I retrieve the latest message from a topic?
+
+Yes. The **GetLastMessageFromTopic** tool retrieves the most recent message from a specified Kafka topic.
+
+---
+
+### Does the Kafka Agent support Schema Registry?
+
+Yes. The Kafka Agent provides access to Schema Registry subjects, schema metadata, schema versions, and compatibility settings.
+
+---
+
+### Does the Kafka Agent respect Condense permissions?
+
+Yes. The Kafka Agent operates within the Condense Role-Based Access Control (RBAC) model and only returns information that the user is authorized to access.

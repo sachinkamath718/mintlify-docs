@@ -1,0 +1,105 @@
+---
+title: "Consumer Groups"
+---
+
+Consumer Groups in Condense provide centralized visibility into Kafka consumer activity, allowing administrators to monitor message consumption, inspect consumer group details, and perform management operations through the Kafka Management interface.
+
+The Consumer Groups page helps you understand how consumer applications are processing messages, identify inactive groups, and monitor consumption progress across Kafka topics.
+
+<Frame caption="Consumer Groups page displaying all available consumer groups and their current status.">
+  ![Image](/images/image-108.png)
+</Frame>
+
+## Accessing Consumer Groups
+
+To access Consumer Groups:
+
+1. Navigate to **Kafka Management**.
+2. Select the required Kafka Cluster.
+3. Click **Consumer Groups** from the left navigation panel.
+
+The Consumer Groups page displays all consumer groups available within the selected Kafka cluster.
+
+## Consumer Groups Overview
+
+The Consumer Groups page provides a consolidated view of all consumer groups. Each row represents a consumer group and includes operational information such as:
+
+| Field | Description |
+| --- | --- |
+| Consumer Group | Name of the consumer group. |
+| Members | Number of active consumers in the group. |
+| Topics | Number of subscribed Kafka topics. |
+| Status | Current operational status of the consumer group. |
+| Actions | View details or delete the consumer group. |
+
+Use the search bar to quickly locate a specific consumer group.
+
+## View Consumer Group Details
+
+Select **View Details** to inspect a consumer group.
+
+<Frame caption="Consumer Group details displaying topic subscriptions and partition-level offset information.">
+  ![Image](/images/image-109.png)
+</Frame>
+
+The details page provides partition-level information for every subscribed topic, including:
+
+| Field | Description |
+| --- | --- |
+| Topic | Kafka topic being consumed. |
+| Partition | Topic partition number. |
+| Last Offset | Latest available offset in the partition. |
+| Committed Offset | Latest offset committed by the consumer group. |
+| Lag | Difference between the latest offset and the committed offset. |
+
+This information helps administrators monitor consumer progress and identify message processing delays.
+
+## Consumer Lag
+
+Consumer Lag represents the number of messages that have not yet been processed by a consumer group.
+
+A low lag generally indicates that consumers are processing messages efficiently, while a consistently increasing lag may indicate slower processing or consumer performance issues.
+
+Review lag periodically to ensure applications continue processing data as expected.
+
+## Delete a Consumer Group
+
+Consumer Groups can be removed directly from the Kafka Management interface.
+
+To delete a consumer group:
+
+1. Locate the required consumer group.
+2. Click **Delete**.
+3. Review the confirmation dialog.
+4. Confirm the deletion.
+
+<Frame caption="Confirmation dialog displayed before permanently deleting a consumer group.">
+  ![Image](/images/image-110.png)
+</Frame>
+
+<Card title="Important" type="danger">
+  Deleting a consumer group permanently removes its metadata from the Kafka cluster. Ensure the consumer group is no longer required before confirming this action.
+</Card>
+
+## Empty Consumer Groups
+
+A consumer group may not display any topic or partition information if it has not yet started consuming messages or currently has no active subscriptions.
+
+<Frame caption="Consumer Group details for a group without active topic subscriptions.">
+  ![Image](/images/image-111.png)
+</Frame>
+
+## Best Practices
+
+- Regularly monitor consumer lag to identify processing bottlenecks.
+- Remove obsolete consumer groups that are no longer required.
+- Review consumer group activity before deleting a group.
+- Verify consumer status after deploying new consumer applications.
+- Monitor consumer groups as part of routine Kafka cluster health checks.
+
+## Related Documentation
+
+- Kafka Topics
+- Kafka Connect
+- Kafka Administration
+- Securing Kafka

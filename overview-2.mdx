@@ -2,37 +2,85 @@
 title: "Overview"
 ---
 
-Condense AI Agents are intelligent assistants designed to simplify the operation and management of real-time streaming platforms. They help engineering teams monitor platform health, identify operational issues, and provide contextual insights across different platform components.
+Condense AI Agents are intelligent, task-oriented assistants that simplify the operation, monitoring, and development of real-time streaming applications on the Condense platform.
 
-AI Agents continuously analyze operational data and surface relevant information, allowing teams to respond to infrastructure events more efficiently and reduce the operational overhead associated with managing distributed streaming environments.
+Unlike traditional monitoring tools that only visualize metrics, AI Agents can understand platform state, retrieve operational information, analyze infrastructure, diagnose issues, and assist developers through specialized capabilities exposed as executable tools.
 
-AI Agents are integrated into the Condense platform and work alongside existing monitoring and management capabilities.
+Each AI Agent focuses on a specific operational domain and provides contextual responses by interacting directly with the underlying Condense platform and supported services.
 
-## Available AI Agents
+AI Agents are fully integrated into Condense and help engineering teams reduce operational effort, accelerate troubleshooting, and improve developer productivity.
 
-Condense currently provides AI Agents for the following platform components:
+---
+
+# Available AI Agents
+
+Condense currently provides the following AI Agents:
 
 | AI Agent | Purpose |
 | --- | --- |
-| **Kafka Monitoring Agent** | Monitors Apache Kafka clusters and provides operational insights into brokers, topics, partitions, consumer groups, and cluster health. |
-| **Kubernetes Monitoring Agent** | Monitors Kubernetes resources supporting the Condense platform, helping identify workload and infrastructure issues. |
-| **Grafana Monitoring Agent** | Assists in interpreting monitoring dashboards and infrastructure metrics to improve operational visibility. |
+| **Kafka Agent** | Retrieves Kafka topics, schemas, consumer groups, metadata, partition information, and recent messages from Kafka. |
+| **Kubernetes Agent** | Retrieves Kubernetes resources including services, jobs, Kafka clusters, users, Schema Registry information, and connector logs. |
+| **Grafana Monitoring Agent** | Diagnoses Grafana alerts and retrieves monitoring data from Prometheus and Kubernetes to assist with root cause analysis. |
+| **Coding Agent** | Generates Condense Applications, Connectors, and Transforms, manages project files, creates automated tests, and integrates with GitHub and GitLab repositories. |
 
-Additional AI Agents may be introduced in future releases.
+Additional AI Agents will be introduced in future Condense releases.
 
-## Key Capabilities
+---
 
-AI Agents help you:
+# How AI Agents Work
 
-- Monitor platform health.
-- Identify operational issues.
-- Analyze infrastructure metrics.
+Each AI Agent specializes in a particular domain and executes predefined tools to retrieve or process information.
+
+Instead of manually navigating dashboards or infrastructure resources, users can request information from an AI Agent, which invokes the appropriate tool and returns contextual results.
+
+Depending on the agent, supported operations include:
+
+- Retrieving platform metadata
+- Reading Kafka information
+- Accessing Kubernetes resources
+- Diagnosing monitoring alerts
+- Querying Prometheus metrics
+- Generating application source code
+- Managing project files
+- Integrating with Git repositories
+
+---
+
+# Benefits
+
+Condense AI Agents help organizations:
+
+- Reduce operational overhead.
+- Accelerate troubleshooting.
 - Improve platform observability.
-- Reduce operational troubleshooting time.
+- Simplify Kafka and Kubernetes operations.
+- Assist developers in building Condense applications.
+- Automate repetitive engineering tasks.
+- Improve productivity across development and operations teams.
 
-## Related Documentation
+---
 
-- Kafka Monitoring Agent
-- Kubernetes Monitoring Agent
+# Supported Platform Components
+
+Current AI Agents support operations across:
+
+- Apache Kafka
+- Kubernetes
+- Schema Registry
+- Prometheus
+- Grafana
+- GitHub
+- GitLab
+- Condense Applications
+
+Support for additional services and integrations will continue to expand in future releases.
+
+---
+
+# Related Documentation
+
+- Getting Started
+- Kafka Agent
+- Kubernetes Agent
 - Grafana Monitoring Agent
-- Platform Monitoring
+- Coding Agent

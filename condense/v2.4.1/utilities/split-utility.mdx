@@ -86,20 +86,31 @@ Check the preview bar to verify:
 
 ## **Editing a Split Configuration**
 
-1. Navigate to the **Pipelines** page
+1. Navigate to the **Pipelines** page.
 
 ![](/images/condense/v2.4.0/utilities/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FZUHq3gE1TAV0Xl7XS3im%2Fimage.png)
 
-2. Select the deployed Split Utility you wish to modify
-3. Click **Edit Configurations** to access settings
+2. Select the deployed **Split Utility** you want to modify.
+3. Click **Edit Configurations** to open the utility configuration.
 
 ![](/images/condense/v2.4.0/utilities/rwKRGO3QthZ6EMqqYblg%2Fblobs%2FG7hXPOsQsqiFKHvwk3Kh%2Fimage.png)
 
-4. Update rule parameters as needed
+4. Update the required configuration, including:
+   - Utility Name
+   - Input Topic
+   - Primary Output Topic
+   - Secondary Output Topic
+   - Rule conditions
+   - Variables used in rule expressions _(New in v2.4.0)_
 
 ![](/images/condense/v2.4.0/utilities/rwKRGO3QthZ6EMqqYblg%2Fblobs%2Fj8XdLwSs7Pxl2qUJ3WnA%2Fimage.png)
 
-5. Click **Deploy Utility** to apply changes
+5. Review the updated rule expression using the preview bar.
+6. Click **Deploy Utility** to apply the updated configuration.
+
+<Info>
+  Starting with **Condense v2.4.0**, variables used in Split Utility rule expressions can be edited directly without recreating the utility. This allows routing logic to be updated quickly when field names, conditions, or business rules change.
+</Info>
 
 ## **Deleting a Split Configuration**
 
