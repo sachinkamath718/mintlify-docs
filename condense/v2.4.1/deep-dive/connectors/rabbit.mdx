@@ -1,0 +1,210 @@
+---
+title: "RabbitMQ (Output, Stream)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Delivers processed data from Condense to RabbitMQ queues for system-wide messaging integration.
+
+**Brief Description**
+
+The RabbitMQ Stream Output Connector enables Condense to publish messages from Kafka-native topics to RabbitMQ exchanges for downstream messaging, workflow orchestration, and application integration.
+
+The connector consumes events from a Condense topic, connects to a RabbitMQ broker using AMQP, and publishes each message to a configured exchange using the specified routing key. RabbitMQ then routes the message to one or more queues based on the exchange configuration.
+
+**Links to Relevant Documents**
+
+- [https://www.rabbitmq.com/documentation.html](https://www.rabbitmq.com/documentation.html)
+- [https://www.rabbitmq.com/tutorials/amqp-concepts.html](https://www.rabbitmq.com/tutorials/amqp-concepts.html)
+- [https://www.rabbitmq.com/getstarted.html](https://www.rabbitmq.com/getstarted.html)
+
+**Connector Overview**
+
+The RabbitMQ Stream Output Connector bridges Kafka-native Condense pipelines with RabbitMQ messaging infrastructure, enabling downstream systems to consume real-time events using AMQP.
+
+Typical use cases include:
+
+- Publishing processed events to enterprise messaging systems.
+- Integrating Condense with RabbitMQ-based microservices.
+- Triggering asynchronous workflows.
+- Delivering events to applications that consume RabbitMQ queues.
+
+**Core Functionality**
+
+- Publishes messages from Condense topics to RabbitMQ exchanges.
+- Supports direct, topic, fanout, and headers exchange types.
+- Uses username/password authentication.
+- Supports RabbitMQ Virtual Hosts.
+- Routes messages using configurable routing keys.
+
+**How It Works in Condense**
+
+1. The connector consumes messages from the configured Condense topic.
+2. It establishes an authenticated connection to the RabbitMQ broker.
+3. Each message is published to the configured exchange.
+4. RabbitMQ routes the message to matching queues based on the routing key.
+5. Downstream consumers receive the messages from their subscribed queues.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| RabbitMQ | Host | RabbitMQ server hostname or IP | Yes |
+| RabbitMQ | Port | RabbitMQ server port | Yes |
+| Authentication | Username | RabbitMQ username | Yes |
+| Authentication | Password | RabbitMQ password | No |
+| Messaging | Exchange Name | RabbitMQ exchange used for publishing | Yes |
+| Messaging | Virtual Host | RabbitMQ virtual host | Yes |
+| Messaging | Queue | Destination queue (must already exist) | Yes |
+| Messaging | Routing Key | Routing key used for publishing | Yes |
+| Condense | Topic (Input) | Condense topic from which messages are consumed | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- **Description:** User-defined name for the connector.
+- **Example:** `order-events-to-rabbit`
+
+---
+
+**2. Host**
+
+- **Description:** Hostname or IP address of the RabbitMQ broker.
+- **Example:** `rabbitmq.internal.company.com`
+
+---
+
+**3. Port**
+
+- **Description:** RabbitMQ listener port.
+- **Default:** `5672`
+- **TLS Default:** `5671`
+- **Example:** `5672`
+
+---
+
+**4. Username**
+
+- **Description:** RabbitMQ username used for authentication.
+- **Example:** `streamer`
+
+---
+
+**5. Password**
+
+- **Description:** Password associated with the configured username.
+- **Example:** `********`
+
+---
+
+**6. Exchange Name**
+
+- **Description:** RabbitMQ exchange that receives published messages.
+- **Example:** `sensor_events_exchange`
+
+---
+
+**7. Virtual Host**
+
+- **Description:** RabbitMQ virtual host containing the exchange and queues.
+- **Default:** `/`
+- **Example:** `iot_streams`
+
+---
+
+**8. Queue**
+
+- **Description:** Destination queue that is bound to the configured exchange.
+- **Example:** `sensor_ingest_queue`
+
+---
+
+**9. Routing Key**
+
+- **Description:** Routing key used by RabbitMQ to route messages.
+- **Example:** `region.north.sensor`
+
+---
+
+**10. Topic (Input)**
+
+- **Description:** Condense Kafka topic whose messages are published to RabbitMQ.
+- **Example:** `device_stream_north`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "amqpSensorPusher",
+  "rabbitmqHost": "rabbitmq.corp.net",
+  "rabbitmqPort": 5672,
+  "rabbitmqUsername": "streamer",
+  "rabbitmqPassword": "secureToken123",
+  "rabbitmqExchangeName": "sensor_events_exchange",
+  "rabbitmqVirtualHost": "iot_streams",
+  "rabbitmqQueue": "sensor_ingest_queue",
+  "rabbitmqRoutingKey": "region.north.sensor",
+  "inputTopic": "device_stream_north"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**Authentication Failed**
+
+- Verify the configured username and password.
+- Ensure the user has access to the configured Virtual Host.
+
+**Messages Not Routed**
+
+- Verify the exchange exists.
+- Confirm the routing key matches the queue binding.
+
+**Queue Not Found**
+
+- RabbitMQ does not create queues automatically during publishing.
+- Ensure the destination queue already exists.
+
+**Connection Failure**
+
+- Verify hostname, port, firewall rules, and network connectivity.
+
+**Messages Not Delivered**
+
+- Check exchange bindings and queue configuration.
+- Verify RabbitMQ broker logs for delivery issues.
+
+**Advanced Topics**
+
+**1. Exchange Types**
+
+- Direct exchanges use exact routing-key matching.
+- Topic exchanges support wildcard routing.
+- Fanout exchanges broadcast to all bound queues.
+- Headers exchanges route using message headers.
+
+**2. Publisher Confirmations**
+
+- RabbitMQ publisher confirmations can be used to verify successful message delivery where supported.
+
+**3. Load Distribution**
+
+- Multiple queues can be bound to the same exchange for fan-out processing.
+
+**4. Security**
+
+- Use TLS-enabled connections where possible.
+- Use dedicated Virtual Hosts for environment isolation.
+- Apply least-privilege permissions to RabbitMQ users.
+
+**Best Practices**
+
+1. Create exchanges and queues before deploying the connector.
+2. Use descriptive routing keys and topic names.
+3. Secure RabbitMQ credentials and rotate them regularly.
+4. Monitor RabbitMQ broker health and connector logs.
+5. Use durable exchanges and queues for production workloads.

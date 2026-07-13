@@ -1,0 +1,200 @@
+---
+title: "PostgreSQL (Input, Store)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Captures processed data from PostgreSQL into Condense for analytics, modeling, and dashboarding.
+
+**Brief Description**
+
+The **PostgreSQL Input Connector** enables Condense to ingest structured data from a PostgreSQL database into the Condense platform for analytics, modeling, and dashboarding.
+
+PostgreSQL is a widely used open-source relational database known for reliability, extensibility, and strong SQL compliance. This connector allows Condense to connect to a PostgreSQL instance, read data from a specified table, and publish the records into Kafka-native Condense topics for downstream stream processing.
+
+This connector is designed for **pull-based ingestion** of relational data where PostgreSQL acts as the system of record and Condense serves as the streaming and analytics layer.
+
+**Links to Relevant Documents**
+
+- [https://www.postgresql.org/docs/](https://www.postgresql.org/docs/)
+- [https://www.postgresql.org/docs/current/auth-methods.html](https://www.postgresql.org/docs/current/auth-methods.html)
+- [https://www.postgresql.org/docs/current/sql.html](https://www.postgresql.org/docs/current/sql.html)
+
+**Connector Overview**
+
+| **Feature** | **Description** |
+| :-- | :-- |
+| Connector Type | Input |
+| Connector Category | Store |
+| Source System | PostgreSQL |
+| Integration Model | Table-based polling |
+| Data Format | Structured rows mapped to JSON |
+| Authentication | Username / Password |
+| Delivery Semantics | At-least-once |
+| Managed By | Condense |
+
+**Core Functionality**
+
+- Connects to a PostgreSQL database using standard TCP connectivity.
+- Reads data from a specified database table.
+- Converts relational rows into structured JSON records.
+- Publishes ingested records into a Condense Kafka topic.
+- Enables downstream processing, transformations, and analytics.
+
+**How It Works in Condense**
+
+1. **Database Connection** – The connector establishes a connection to the PostgreSQL server using the provided hostname, port, and credentials.
+2. **Table Access** – The configured table name is used as the source for data ingestion.
+3. **Data Retrieval** – Rows from the table are read and mapped into structured JSON messages.
+4. **Publishing to Condense Topic** – Each record is published to the configured Condense output topic for further processing.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | A user-defined name to identify the PostgreSQL connector | Yes |
+| Connection | PostgreSQL Hostname | Hostname or IP address of the PostgreSQL server | Yes |
+| Connection | PostgreSQL Port | Port on which PostgreSQL is listening | Yes |
+| Authentication | Database Username | Username used to authenticate with PostgreSQL | Yes |
+| Authentication | Database Password | Password associated with the database user | Yes |
+| Database | Database Name | Name of the PostgreSQL database | Yes |
+| Database | Table Name | Name of the table to ingest | Yes |
+| Condense | Output Topic | Condense Kafka topic where records will be published | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- **Description:** A user-defined name to identify the PostgreSQL Input Connector.
+- **Example:** `Postgres_Input_Connector_Prod`
+
+---
+
+**2. PostgreSQL Hostname**
+
+- **Description:** Hostname or IP address of the PostgreSQL server.
+- **Example:** `postgres-db.internal.company.com`
+
+---
+
+**3. PostgreSQL Port**
+
+- **Description:** Port on which the PostgreSQL server is listening.
+- **Default:** `5432`
+- **Example:** `5432`
+
+---
+
+**4. Database Username**
+
+- **Description:** Username used to authenticate with the PostgreSQL database.
+- **Example:** `condense_reader`
+
+---
+
+**5. Database Password**
+
+- **Description:** Password associated with the PostgreSQL database user.
+- **Example:** `********`
+
+---
+
+**6. Database Name**
+
+- **Description:** Name of the PostgreSQL database from which data will be read.
+- **Example:** `analytics_db`
+
+---
+
+**7. Table Name**
+
+- **Description:** Name of the table to be ingested into Condense.
+- **Example:** `users`, `orders`, `transactions`
+
+---
+
+**8. Output Topic**
+
+- **Description:** The Condense Kafka topic where ingested PostgreSQL records will be published.
+- **Example:** `postgres_input_stream`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "Postgres_Input_Connector_Prod",
+  "postgresHost": "postgres-db.internal.company.com",
+  "postgresPort": 5432,
+  "databaseUsername": "condense_reader",
+  "databasePassword": "********",
+  "databaseName": "analytics_db",
+  "tableName": "users",
+  "outputTopic": "postgres_input_stream"
+}
+```
+
+**Example Message Structure**
+
+Each row from PostgreSQL is published as a JSON message to the output topic.
+
+```json
+{
+  "table": "users",
+  "database": "analytics_db",
+  "payload": {
+    "id": 1021,
+    "email": "user@example.com",
+    "status": "active",
+    "created_at": "2025-10-30T09:12:45Z"
+  },
+  "metadata": {
+    "source": "postgresql",
+    "ingested_at": "2025-10-30T09:13:02Z"
+  }
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**Connection Failed**
+
+- Verify the hostname and port.
+- Ensure PostgreSQL allows inbound connections from Condense.
+
+**Authentication Error**
+
+- Confirm the username and password.
+- Ensure the database user has read access to the specified table.
+
+**No Data Published**
+
+- Verify the table exists.
+- Ensure the output topic is configured and active in Condense.
+
+**Permission Denied**
+
+- Ensure the database user has `SELECT` privileges on the configured table.
+
+**Advanced Topics**
+
+**1. Large Tables**
+
+- Large tables may generate high event volumes. Configure downstream topics to handle the expected throughput.
+
+**2. Data Type Mapping**
+
+- PostgreSQL column types are serialized into equivalent JSON values.
+
+**3. NULL Value Handling**
+
+- NULL values are preserved in the output JSON payload.
+
+**Best Practices**
+
+1. Use dedicated read-only database users for ingestion.
+2. Use separate output topics for different tables or business domains.
+3. Apply downstream transforms for filtering or enrichment.
+4. Use descriptive connector names for easier management.
+5. Monitor connector health and topic throughput through Condense observability.

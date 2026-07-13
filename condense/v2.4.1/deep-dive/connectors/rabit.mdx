@@ -1,0 +1,199 @@
+---
+title: "RabbitMQ (Input, Stream)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Ingests messages from RabbitMQ queues into Condense pipelines for processing and secure routing.
+
+**Brief Description**
+
+RabbitMQ is a powerful open-source message broker that implements the Advanced Message Queuing Protocol (AMQP). It is widely adopted for decoupling microservices, managing asynchronous workflows, and buffering high-throughput data streams.
+
+The RabbitMQ Stream Input Connector enables Condense to consume messages from RabbitMQ queues or exchanges and publish them into Kafka-native Condense topics for downstream processing, transformations, and integrations.
+
+**Links to Relevant Documents**
+
+- [https://www.rabbitmq.com/documentation.html](https://www.rabbitmq.com/documentation.html)
+- [https://www.rabbitmq.com/tutorials/amqp-concepts.html](https://www.rabbitmq.com/tutorials/amqp-concepts.html)
+- [https://www.rabbitmq.com/tutorials/tutorial-four-python.html](https://www.rabbitmq.com/tutorials/tutorial-four-python.html)
+
+**Connector Overview**
+
+The RabbitMQ Stream Input Connector establishes an AMQP connection to a RabbitMQ broker, consumes messages from a configured queue, and publishes them into a Condense topic for real-time processing.
+
+**Core Functionality**
+
+- Consumes messages from RabbitMQ queues.
+- Supports direct, topic, fanout, and headers exchanges.
+- Authenticates using RabbitMQ username and password.
+- Supports custom virtual hosts.
+- Publishes incoming messages to Condense Kafka topics.
+
+**How It Works in Condense**
+
+1. The connector establishes a connection to the RabbitMQ broker.
+2. It connects to the configured Virtual Host.
+3. The configured queue is consumed using the specified exchange and routing key.
+4. Incoming messages are read in real time.
+5. Messages are published to the configured Condense topic.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Connection | Host | RabbitMQ server hostname or IP | Yes |
+| Connection | Port | RabbitMQ server port | Yes |
+| Authentication | Username | RabbitMQ username | Yes |
+| Authentication | Password | RabbitMQ password | No |
+| Messaging | Exchange Name | RabbitMQ exchange name | Yes |
+| Messaging | Virtual Host | RabbitMQ virtual host | Yes |
+| Messaging | Queue | Queue to consume messages from | Yes |
+| Messaging | Routing Key | Routing key for queue binding | Yes |
+| Condense | Topic (Output) | Condense topic for publishing consumed messages | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- **Description:** User-defined name for the connector.
+- **Example:** `RabbitMQ_Device_Stream_Input`
+
+---
+
+**2. Host**
+
+- **Description:** Hostname or IP address of the RabbitMQ broker.
+- **Example:** `rabbitmq.internal.company.com`
+
+---
+
+**3. Port**
+
+- **Description:** RabbitMQ listener port.
+- **Default:** `5672`
+- **TLS Default:** `5671`
+- **Example:** `5672`
+
+---
+
+**4. Username**
+
+- **Description:** RabbitMQ username.
+- **Example:** `stream_ingest_user`
+
+---
+
+**5. Password**
+
+- **Description:** Password associated with the configured username.
+- **Example:** `********`
+
+---
+
+**6. Exchange Name**
+
+- **Description:** RabbitMQ exchange from which messages are routed.
+- **Example:** `device_data_exchange`
+
+---
+
+**7. Virtual Host**
+
+- **Description:** RabbitMQ virtual host.
+- **Default:** `/`
+- **Example:** `/iot_streaming`
+
+---
+
+**8. Queue**
+
+- **Description:** Queue from which messages are consumed.
+- **Example:** `sensor_ingest_queue`
+
+---
+
+**9. Routing Key**
+
+- **Description:** Routing key used for exchange-to-queue binding.
+- **Example:** `sensor.india.temperature`
+
+---
+
+**10. Topic (Output)**
+
+- **Description:** Condense Kafka topic where RabbitMQ messages are published.
+- **Example:** `temperature_events`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "RabbitMQ_Device_Stream_Input",
+  "rabbitmqHost": "rabbitmq.mycompany.internal",
+  "rabbitmqPort": 5672,
+  "rabbitmqUsername": "stream_user",
+  "rabbitmqPassword": "strong_password_123",
+  "rabbitmqExchange": "device_data_exchange",
+  "rabbitmqVHost": "/iot_streaming",
+  "rabbitmqQueue": "sensor_ingest_queue",
+  "rabbitmqRoutingKey": "sensor.india.temperature",
+  "condenseTopic": "temperature_events"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**Connection Failure**
+
+- Verify the hostname, port, username, and password.
+- Ensure the broker is reachable from Condense.
+- Confirm TLS settings match the RabbitMQ server configuration.
+
+**Authentication Failed**
+
+- Verify the configured credentials.
+- Ensure the user has access to the specified Virtual Host.
+
+**No Messages Received**
+
+- Verify the queue exists.
+- Confirm the queue is bound to the exchange.
+- Verify the routing key matches the exchange binding.
+
+**Queue Not Found**
+
+- Ensure the queue is created before deploying the connector.
+
+**Advanced Topics**
+
+**1. Exchange Types**
+
+- Direct exchanges route using exact routing-key matches.
+- Topic exchanges support wildcard routing.
+- Fanout exchanges broadcast messages to all bound queues.
+- Headers exchanges use message headers instead of routing keys.
+
+**2. Performance**
+
+- Use durable queues for production workloads.
+- Configure message TTL and dead-letter exchanges when appropriate.
+- Monitor queue depth to identify backlogs.
+
+**3. Security**
+
+- Use TLS connections where possible.
+- Avoid using the default Virtual Host in production.
+- Rotate credentials regularly.
+- Apply least-privilege permissions for RabbitMQ users.
+
+**Best Practices**
+
+1. Use descriptive connector and topic names.
+2. Prefer JSON or Avro message formats.
+3. Use durable queues and persistent messages.
+4. Monitor connector health and RabbitMQ metrics.
+5. Secure RabbitMQ credentials and rotate them periodically.

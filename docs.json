@@ -721,7 +721,15 @@
                       "condense/v2.4.1/deep-dive/connectors/kinesis",
                       "condense/v2.4.1/deep-dive/connectors/kinesis-1",
                       "condense/v2.4.1/deep-dive/connectors/microsoft-sql-server",
-                      "condense/v2.4.1/deep-dive/connectors/mongo"
+                      "condense/v2.4.1/deep-dive/connectors/mongo",
+                      "condense/v2.4.1/deep-dive/connectors/mongo-db-output-store",
+                      "condense/v2.4.1/deep-dive/connectors/untitled-page-9",
+                      "condense/v2.4.1/deep-dive/connectors/my-sql-output-store",
+                      "condense/v2.4.1/deep-dive/connectors/post",
+                      "condense/v2.4.1/deep-dive/connectors/post-1",
+                      "condense/v2.4.1/deep-dive/connectors/rabit",
+                      "condense/v2.4.1/deep-dive/connectors/rabbit",
+                      "condense/v2.4.1/deep-dive/connectors/rio"
                     ]
                   }
                 ]

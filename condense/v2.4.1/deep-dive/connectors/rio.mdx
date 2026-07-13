@@ -1,0 +1,214 @@
+---
+title: "RIO (Input, Stream)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Ingests real-time vehicle data into Condense for fleet tracking and analytics.
+
+**Brief Description**
+
+The RIO Cloud Input Connector enables Condense to ingest vehicle, driver, telematics, maintenance, and operational data from MAN RIO Cloud APIs into Kafka-native Condense topics.
+
+The connector manages authentication, VIN discovery, resource polling, pagination, rate limiting, retries, and publishing, allowing organizations to integrate RIO Cloud data into real-time streaming pipelines without building custom integrations.
+
+**Links to Relevant Documents**
+
+- [https://rio.cloud/en/apis/driver-data](https://rio.cloud/en/apis/driver-data)
+- [https://company.rio.cloud/en/partner/onboarding](https://company.rio.cloud/en/partner/onboarding)
+
+**Connector Overview**
+
+The RIO Cloud Input Connector connects to MAN RIO Cloud using an approved Partner Integration and continuously retrieves subscribed vehicle resources. Retrieved data is normalized and published into Condense Kafka topics for downstream processing.
+
+Supported resource categories include:
+
+- Telematics data
+- Vehicle data
+- Driver data
+- Maintenance data
+- MAN Data Package S
+- MAN Data Package Perform
+
+Only resources enabled for the configured Partner Integration are available.
+
+**Core Functionality**
+
+- Authenticates using RIO Partner Integration credentials.
+- Discovers accessible vehicle VINs.
+- Polls subscribed RIO APIs at configurable intervals.
+- Handles pagination, retries, and API rate limiting.
+- Publishes normalized events to Condense Kafka topics.
+
+**How It Works in Condense**
+
+1. The connector authenticates with RIO Cloud using the Client ID, Client Secret, and Integration ID.
+2. Available VINs are retrieved from the RIO Assets API.
+3. Users select one or more VINs.
+4. Resource polling is configured for each required RIO resource.
+5. Data is periodically retrieved from RIO Cloud.
+6. Retrieved events are normalized and published to the configured Condense topics.
+
+**Prerequisites**
+
+Before configuring the connector, ensure the following are available:
+
+- Active RIO Cloud tenant.
+- Required RIO Marketplace subscriptions.
+- Approved RIO Partner Integration.
+- Client ID.
+- Client Secret.
+- Integration ID.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Authentication | Client ID | RIO Partner Integration Client ID | Yes |
+| Authentication | Client Secret | RIO Partner Integration Client Secret | Yes |
+| Authentication | Integration ID | Approved RIO Integration ID | Yes |
+| Assets | Vehicle VINs | Vehicles to monitor | Yes |
+| Resources | Resource Configuration | RIO resources to ingest | Yes |
+| Resources | Polling Frequency | API polling interval | Yes |
+| Condense | Output Topic | Kafka topic for each configured resource | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- **Description:** User-defined connector name.
+- **Example:** `RIO_Fleet_Input`
+
+---
+
+**2. Client ID**
+
+- **Description:** OAuth Client ID issued by RIO after Partner Integration approval.
+
+---
+
+**3. Client Secret**
+
+- **Description:** OAuth Client Secret issued by RIO.
+
+---
+
+**4. Integration ID**
+
+- **Description:** Approved Partner Integration identifier provided by RIO.
+
+---
+
+**5. Vehicle VINs**
+
+- **Description:** One or more VINs returned by the RIO Assets API.
+- **Note:** Only VINs associated with the configured Integration ID are available.
+
+---
+
+**6. Resource Configuration**
+
+- **Description:** Select the RIO resources that should be ingested.
+- **Examples:**
+  - Telematics
+  - Vehicle Data
+  - Driver Data
+  - Maintenance
+  - MAN Data Package S
+  - MAN Data Package Perform
+
+---
+
+**7. Polling Frequency**
+
+- **Description:** Interval at which the connector polls each configured API.
+- **Note:** Must comply with RIO API rate limits.
+
+---
+
+**8. Output Topic**
+
+- **Description:** Condense Kafka topic where the retrieved resource data is published.
+- **Example:** `rio_telematics_stream`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "RIO_Fleet_Input",
+  "clientId": "xxxxxxxx",
+  "clientSecret": "********",
+  "integrationId": "integration-12345",
+  "vehicleVINs": [
+    "WMA06XZZ6KP123456"
+  ],
+  "resources": [
+    "Telematics",
+    "VehicleData"
+  ],
+  "pollingFrequency": "60s",
+  "outputTopic": "rio_telematics_stream"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**Authentication Failed**
+
+- Verify the Client ID, Client Secret, and Integration ID.
+- Ensure the Partner Integration has been approved by RIO.
+
+**No VINs Returned**
+
+- Verify Marketplace subscriptions.
+- Ensure the Integration ID has access to the subscribed vehicles.
+
+**No Data Published**
+
+- Confirm resources are enabled for the Integration.
+- Verify polling intervals and output topic configuration.
+
+**Rate Limit Errors**
+
+- Reduce polling frequency.
+- Verify API usage complies with RIO limits.
+
+**Deployment Validation Failed**
+
+- Ensure at least one VIN and one resource have been configured.
+
+**Advanced Topics**
+
+**1. VIN Discovery**
+
+- VIN discovery is performed using the RIO Assets API after successful authentication.
+- Only authorized VINs are returned.
+
+**2. Pagination**
+
+- API pagination is handled automatically until all available data has been retrieved.
+
+**3. Retry Handling**
+
+- Transient API failures use bounded retries with exponential backoff.
+
+**4. State Management**
+
+- The connector stores the last successful polling state for each VIN and resource combination to support reliable recovery.
+
+**5. Security**
+
+- Client Secrets are securely stored and masked.
+- OAuth access tokens are managed internally and are never exposed.
+- Connector configuration becomes immutable after deployment.
+
+**Best Practices**
+
+1. Configure only the required RIO resources.
+2. Use polling intervals that comply with RIO API limits.
+3. Create dedicated Kafka topics for different resource types.
+4. Monitor connector logs for authentication, polling, and publishing status.
+5. Secure Partner Integration credentials using Condense Secret Manager.

@@ -1,0 +1,181 @@
+---
+title: "MySQL (Output, Store)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Stores processed real-time events in MySQL tables for downstream applications.
+
+**Brief Description**
+
+The MySQL Store Output Connector allows Condense to persist streaming data from a Kafka-native topic into a MySQL database. This is ideal for storing real-time event data for further querying, reporting, or integration with traditional business systems that rely on relational databases.
+
+It supports parameterized writes, connection pooling, error handling, and controlled execution of SQL insert or update queries triggered by real-time data flows.
+
+**Links to Relevant Documents**
+
+- [https://dev.mysql.com/doc/](https://dev.mysql.com/doc/)
+- [https://dev.mysql.com/doc/connector-j/8.0/en/](https://dev.mysql.com/doc/connector-j/8.0/en/)
+- [https://dev.mysql.com/doc/refman/8.0/en/sql-syntax.html](https://dev.mysql.com/doc/refman/8.0/en/sql-syntax.html)
+
+**Connector Overview**
+
+This output connector listens to an input Kafka topic in Condense and executes a user-defined SQL query for each message, using a live connection to a MySQL server. It enables seamless integration between real-time event streams and relational storage for data warehousing, analytics, or operational systems.
+
+**Core Functionality**
+
+1. Parameterized SQL Execution: Executes an INSERT, UPDATE, or MERGE statement for each record.
+2. Kafka-to-MySQL Mapping: Supports extracting values from Kafka message fields and mapping them into SQL placeholders.
+3. Secure Connectivity: Handles credentials and secure access to on-prem or cloud-hosted MySQL databases.
+4. Data Durability: Stores transactional, analytical, or historical data reliably in relational storage.
+
+**How It Works in Condense**
+
+1. Data is consumed from the Kafka-native input topic.
+2. Each event is parsed into a record or key-value structure.
+3. The user-defined SQL query is executed with dynamic field substitution from the event data.
+4. The result is written to the specified MySQL database and table.
+5. Failures are logged, retried, or moved to dead-letter queues based on pipeline settings.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique identifier for this connector in the Condense platform | Yes |
+| Connection | Host | Hostname or IP address of the MySQL server | Yes |
+| Connection | Port | TCP port for MySQL (default is 3306) | Yes |
+| Connection | Database Name | Name of the target MySQL database | Yes |
+| Authentication | User | Username with sufficient privileges to execute queries | Yes |
+| Authentication | Password | Password for the above user | No |
+| Execution | Query | SQL query to execute for each message (INSERT, UPDATE, etc.) | Yes |
+| Condense | Topic (Input) | Kafka-native topic in Condense from which messages are consumed | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- **What It Is:** Unique label for identifying the connector instance.
+- **Best Practice:** Use names like `mysql-sales-log-writer` or `mysql-realtime-inserts`.
+
+---
+
+**2. Host**
+
+- **What It Is:** Address of the MySQL server (public IP or internal hostname).
+- **Tip:** For cloud MySQL services (for example, AWS RDS or Google Cloud SQL), use the service endpoint.
+
+---
+
+**3. Port**
+
+- **Default:** `3306`
+- **What It Is:** Port used by the MySQL service. Custom ports may be used in secured deployments.
+
+---
+
+**4. Database Name**
+
+- **What It Is:** The database where the SQL query will be executed.
+- **Note:** The configured user must have access to this database and its target tables.
+
+---
+
+**5. User**
+
+- **What It Is:** Username used to authenticate with the MySQL server.
+- **Permission Required:** The user should have INSERT, UPDATE, or EXECUTE permissions on the relevant tables.
+
+---
+
+**6. Password**
+
+- **Description:** Password associated with the MySQL user.
+- **Required:** Only if MySQL authentication is enabled.
+- **Best Practice:** Store credentials securely using a secrets manager or vault.
+
+---
+
+**7. Query**
+
+- **Purpose:** SQL statement executed for every incoming message.
+- **Format:** Can include parameter placeholders.
+- **Example:**
+
+```sql
+INSERT INTO vehicle_logs (vin, speed, timestamp)
+VALUES (?, ?, ?)
+```
+
+- **Data Mapping:** Event fields are mapped to the query parameters.
+
+---
+
+**8. Topic (Input)**
+
+- **What It Is:** Kafka-native topic from which Condense consumes messages.
+- **Example:** `event.vehicle.realtime`, `alerts.device.health`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "mysql-output-vehicle-logs",
+  "mysqlHost": "mysql-db.internal.local",
+  "mysqlPort": 3306,
+  "mysqlDatabaseName": "fleetdb",
+  "mysqlUser": "condense_writer",
+  "mysqlPassword": "REDACTED",
+  "mysqlQuery": "INSERT INTO vehicle_logs (vin, speed, ts) VALUES (?, ?, ?)",
+  "inputTopic": "vehicle-speed-events"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**Access Denied**
+
+- **Cause:** User does not have write permission on the target database or table.
+- **Fix:** Grant INSERT, UPDATE, or appropriate execution privileges.
+
+**Query Syntax Errors**
+
+- **Cause:** Invalid SQL syntax or mismatch between query parameters and event fields.
+- **Fix:** Validate the SQL statement and ensure the number of placeholders matches the mapped fields.
+
+**Data Mapping Failures**
+
+- **Cause:** Incoming messages do not contain all required fields.
+- **Fix:** Add a preprocessing transform to populate the required fields before writing to MySQL.
+
+**Connection Refused**
+
+- **Cause:** Incorrect host, port, or network connectivity issues.
+- **Fix:** Verify connectivity between Condense and the MySQL server.
+
+**Advanced Topics**
+
+**1. Parameterized Execution**
+
+- Using prepared statements with placeholders improves performance and protects against SQL injection.
+
+**2. Idempotent Writes**
+
+- Use `INSERT IGNORE` or `ON DUPLICATE KEY UPDATE` when duplicate events are possible.
+
+**3. Batch Handling**
+
+- Future versions may support batched SQL execution for improved throughput.
+
+**4. Schema Migrations**
+
+- Changes to table schemas can impact connector execution. Coordinate schema updates with pipeline changes.
+
+**Best Practices**
+
+1. Create a dedicated database user with only the required permissions.
+2. Add indexes on frequently queried columns such as timestamps or entity identifiers.
+3. Monitor connector logs and metrics for failed writes.
+4. Rotate database credentials regularly and manage them using a secrets manager.
+5. Keep SQL operations efficient and avoid unnecessarily large row payloads.

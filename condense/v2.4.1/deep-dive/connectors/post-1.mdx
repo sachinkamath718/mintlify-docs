@@ -1,0 +1,192 @@
+---
+title: "PostgreSQL (Output, Store)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Stores processed events into PostgreSQL tables for dependable relational storage and querying.
+
+**Brief Description**
+
+The PostgreSQL Store Output Connector enables Condense pipelines to persist real-time streaming data directly into PostgreSQL. It is designed for durable storage of event records in structured relational formats, supporting operational databases, analytics, compliance, and audit use cases.
+
+PostgreSQL is widely used across industries due to its reliability, transactional integrity (ACID compliance), extensibility, and SQL support. This connector maps each Kafka event into a parameterized SQL query and executes it against a PostgreSQL database.
+
+**Links to Relevant Documents**
+
+- [https://www.postgresql.org/docs/](https://www.postgresql.org/docs/)
+- [https://www.postgresql.org/docs/current/sql-commands.html](https://www.postgresql.org/docs/current/sql-commands.html)
+- [https://jdbc.postgresql.org/documentation/](https://jdbc.postgresql.org/documentation/)
+
+**Connector Overview**
+
+This connector listens to a Kafka-native input topic and executes a specified SQL query for each record using a secure connection to a PostgreSQL server. It supports inserts, updates, or upserts depending on the structure of the SQL provided.
+
+It is ideal for use cases such as:
+
+- Persisting real-time transactional data
+- Streaming analytics aggregation into materialized tables
+- Logging and audit trails
+- Compliance data retention
+- Integration with BI tools or custom SQL-based applications
+
+**Core Functionality**
+
+- Executes parameterized SQL statements for each incoming Kafka event.
+- Maps Kafka message fields to SQL query parameters.
+- Supports secure connections to PostgreSQL using username/password authentication.
+- Persists streaming events into relational tables with retry and error handling.
+
+**How It Works in Condense**
+
+1. Data is consumed from the configured Kafka input topic.
+2. Each event is parsed and mapped to the configured SQL query.
+3. The connector establishes a secure connection to the PostgreSQL database.
+4. The SQL statement is executed using the mapped event values.
+5. Connector logs, retries, and monitoring ensure reliable delivery.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique identifier for the connector | Yes |
+| Connection | Server Name | Hostname or IP address of the PostgreSQL server | Yes |
+| Connection | Server Port | PostgreSQL server port | Yes |
+| Connection | Database Name | Target PostgreSQL database | Yes |
+| Authentication | Username | PostgreSQL username | Yes |
+| Authentication | Password | PostgreSQL password | No |
+| Execution | Query | SQL statement executed for every record | Yes |
+| Condense | Topic (Input) | Condense topic to consume messages from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- **Description:** User-defined name used to identify the connector.
+- **Example:** `postgres-output-iot-events`
+
+---
+
+**2. Server Name**
+
+- **Description:** Hostname or IP address of the PostgreSQL server.
+- **Example:** `postgres.example.com`
+
+---
+
+**3. Server Port**
+
+- **Description:** TCP port used by PostgreSQL.
+- **Default:** `5432`
+- **Example:** `5432`
+
+---
+
+**4. Database Name**
+
+- **Description:** Name of the PostgreSQL database.
+- **Example:** `telematics_db`
+
+---
+
+**5. Username**
+
+- **Description:** PostgreSQL user with permission to execute the configured SQL query.
+- **Example:** `condense_writer`
+
+---
+
+**6. Password**
+
+- **Description:** Password for the PostgreSQL user.
+- **Example:** `********`
+
+---
+
+**7. Query**
+
+- **Description:** SQL statement executed for every incoming Kafka event.
+- **Example:**
+
+```sql
+INSERT INTO iot_logs (vin, temperature, timestamp)
+VALUES (?, ?, ?)
+```
+
+---
+
+**8. Topic (Input)**
+
+- **Description:** Condense Kafka topic whose events are written to PostgreSQL.
+- **Example:** `iot.device.raw`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "postgres-output-iot-events",
+  "serverName": "postgres.example.com",
+  "serverPort": 5432,
+  "databaseName": "telematics_db",
+  "username": "condense_writer",
+  "password": "REDACTED",
+  "query": "INSERT INTO iot_logs (vin, temperature, timestamp) VALUES (?, ?, ?)",
+  "inputTopic": "iot.device.raw"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**Connection Errors**
+
+- Verify the hostname, port, credentials, and network connectivity.
+
+**Invalid Query or Parameter Mismatch**
+
+- Ensure the number of SQL placeholders matches the incoming event fields.
+- Validate SQL syntax.
+
+**Table or Column Not Found**
+
+- Confirm that the target table and columns exist.
+- Use fully qualified table names when required.
+
+**Permission Denied**
+
+- Ensure the PostgreSQL user has INSERT, UPDATE, or other required privileges.
+
+**SSL/TLS Errors**
+
+- Verify PostgreSQL SSL configuration and client certificates when SSL is enabled.
+
+**Advanced Topics**
+
+**1. Connection Pooling**
+
+- Use connection pooling (for example, pgBouncer) for high-throughput deployments.
+
+**2. Idempotent Writes**
+
+- Use `INSERT ... ON CONFLICT` or UPSERT queries to prevent duplicate records during retries.
+
+**3. Timestamp Handling**
+
+- Store timestamps using `timestamptz` or normalize values to UTC.
+
+**4. JSONB Storage**
+
+- Store complete Kafka payloads in `jsonb` columns when schema flexibility is required.
+
+**5. Table Partitioning**
+
+- Partition large tables by time or another key to improve write and query performance.
+
+**Best Practices**
+
+1. Always use parameterized SQL queries.
+2. Keep each transaction lightweight.
+3. Monitor connector logs and latency.
+4. Index frequently queried columns.
+5. Rotate database credentials regularly and store them securely.
