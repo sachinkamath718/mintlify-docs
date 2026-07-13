@@ -1,0 +1,220 @@
+---
+title: "Microsoft SQL Server"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Writes processed data from Condense into SQL Server tables for downstream business applications.
+
+**Brief Description**
+
+The **Microsoft SQL Server Store Input Connector** enables Condense to ingest structured data from **Microsoft SQL Server** databases into the Condense platform for analytics, modeling, and dashboarding.
+
+Microsoft SQL Server is a widely used relational database system for transactional and analytical workloads. This connector allows Condense to connect securely to a SQL Server instance, read data from specified tables, and publish the retrieved records into Kafka-native Condense topics for downstream stream processing and integrations.
+
+This connector is designed for **pull-based ingestion**, where Condense periodically queries SQL Server tables and converts the results into streaming events.
+
+**Links to Relevant Documents**
+
+- [https://learn.microsoft.com/en-us/sql/sql-server](https://learn.microsoft.com/en-us/sql/sql-server)
+- [https://learn.microsoft.com/en-us/sql/connect/jdbc](https://learn.microsoft.com/en-us/sql/connect/jdbc)
+- [https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/authentication-access](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/authentication-access)
+
+**Connector Overview**
+
+| **Feature** | **Description** |
+| :-- | :-- |
+| Connector Type | Input |
+| Connector Category | Store |
+| Integration Type | Database Polling |
+| Supported SQL Server Versions | SQL Server 2016 and later |
+| Authentication | Username / Password |
+| Data Format | Relational rows mapped to JSON |
+| Delivery Semantics | At-least-once |
+
+**Core Functionality**
+
+- **Relational Data Ingestion:** Reads data from SQL Server tables into Condense streams.
+- **Secure Connectivity:** Connects using authenticated SQL Server credentials over TCP.
+- **Structured Mapping:** Converts each database row into a JSON event.
+- **Kafka-Native Output:** Publishes records into Condense Kafka topics for downstream use.
+- **Scalable Reads:** Supports ingestion from large tables for analytics and reporting pipelines.
+
+**How It Works in Condense**
+
+1. **Database Connection:**<br />The connector establishes a connection to the SQL Server instance using the provided hostname, port, and credentials.
+2. **Table Access:**<br />The specified database and table are queried based on the connector configuration.
+3. **Data Extraction:**<br />Rows from the table are read and serialized into structured JSON payloads.
+4. **Event Publishing:**<br />Each extracted record is published to a configured Condense **Output Topic**.
+5. **Downstream Processing:**<br />The published data can be transformed, filtered, or routed using Condense pipelines and connectors.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | User-defined name to identify the SQL Server connector in Condense | Yes |
+| Database | SQL Server Hostname | Hostname or IP address of the SQL Server instance | Yes |
+| Database | SQL Server Port | Port on which SQL Server is listening | Yes |
+| Database | Database Username | Username used to authenticate with SQL Server | Yes |
+| Database | Database Password | Password associated with the database username | Yes |
+| Database | Database Name | Name of the SQL Server database | Yes |
+| Database | Table Name | Name of the table to be ingested | Yes |
+| Condense | Output Topic | Kafka-native Condense topic where records will be published | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+A user-defined name to identify the SQL Server Input Connector in Condense.
+
+**Example:**
+
+`SQLServer_Input_Orders`
+
+---
+
+**2. SQL Server Hostname**
+
+Hostname or IP address of the SQL Server instance.
+
+**Example:**
+
+`sqlserver.company.internal`
+
+---
+
+**3. SQL Server Port**
+
+Port on which SQL Server is listening.
+
+**Default:**
+
+`1433`
+
+---
+
+**4. Database Username**
+
+Username used to authenticate with SQL Server.
+
+**Example:**
+
+`db_reader_user`
+
+---
+
+**5. Database Password**
+
+Password associated with the configured database user.
+
+---
+
+**6. Database Name**
+
+Name of the SQL Server database from which data will be read.
+
+**Example:**
+
+`sales_db`
+
+---
+
+**7. Table Name**
+
+Name of the table to ingest.
+
+**Example:**
+
+`orders`
+
+---
+
+**8. Output Topic**
+
+Kafka-native Condense topic where SQL Server records will be published.
+
+**Example:**
+
+`sqlserver_orders_stream`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "SQLServer_Input_Orders",
+  "sqlServerHostname": "sqlserver.company.internal",
+  "sqlServerPort": 1433,
+  "databaseUsername": "db_reader_user",
+  "databasePassword": "********",
+  "databaseName": "sales_db",
+  "tableName": "orders",
+  "outputTopic": "sqlserver_orders_stream"
+}
+```
+
+**Example Event Payload**
+
+Each row from the SQL Server table is published as a structured JSON message.
+
+```json
+{
+  "table": "orders",
+  "database": "sales_db",
+  "payload": {
+    "order_id": 10234,
+    "customer_id": 883,
+    "order_status": "SHIPPED",
+    "order_total": 1299.50,
+    "created_at": "2025-10-30T09:42:00Z"
+  },
+  "metadata": {
+    "source": "sqlserver",
+    "ingested_at": "2025-10-30T09:42:05Z"
+  }
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Connection Failure**
+
+- Verify hostname, port, and network reachability.
+- Ensure SQL Server allows remote connections.
+
+**2. Authentication Error**
+
+- Confirm username and password are correct.
+- Ensure the user has read access to the target database and table.
+
+**3. No Data Published**
+
+- Verify the table contains records.
+- Ensure the selected Output Topic exists and is active in Condense.
+
+**4. Permission Denied**
+
+- Confirm the database user has `SELECT` privileges on the specified table.
+
+**Advanced Topics**
+
+**1. Large Tables**
+
+- Ingesting large tables may produce high event volumes.
+- Ensure downstream topics are appropriately configured.
+
+**2. Schema Changes**
+
+- Changes to the table schema are reflected automatically in emitted JSON payloads.
+
+**3. Data Types**
+
+- SQL Server data types are mapped to equivalent JSON representations.
+
+**Best Practices**
+
+1. Use dedicated read-only database users for Condense ingestion.
+2. Assign clear and descriptive connector titles.
+3. Use separate topics per table or data domain for better pipeline organization.
+4. Monitor connector status and topic throughput using Condense monitoring tools.
