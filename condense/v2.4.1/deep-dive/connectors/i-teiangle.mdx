@@ -1,0 +1,163 @@
+---
+title: "iTriangle (Input, Stream)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Ingests real-time telematics data from iTriangle devices into Condense.
+
+**Brief Description**
+
+The **iTriangle Connector** is a fully managed, pre-integrated connector within the Condense platform that ingests and processes real-time data from iTriangle's wide range of telematics and GPS tracking devices. This connector supports high-frequency location updates, telematics diagnostics, driver behavior insights, and sensor-based telemetry. It is designed for secure, low-latency communication between iTriangle-powered vehicles or assets and real-time pipelines inside Condense.
+
+Condense manages all decoding, parsing, and message transformation internally. The connector operates without requiring users to manage any parsing logic, protocols, or infrastructure, delivering clean, structured data ready for use in real-time alerts, dashboards, and logic apps.
+
+**Links to Relevant Documents**
+
+- [https://www.itriangle.in/](https://www.itriangle.in/)
+- [https://kafka.apache.org/documentation/#security\_sasl](https://kafka.apache.org/documentation/#security_sasl)
+
+**Supported Devices**
+
+The iTriangle connector is compatible with the following devices:
+
+- **Bharat 101 PLUS 4G – Brahma**
+- **Bharat 101 PLUS 4G – Brahma\+**
+- **Bharat 101 PLUS 4G – Sarva**
+- **TS 101 Plus 4G – Yantra**
+- **TS 101 Basic EV**
+- **BHARAT 101 – With IRNSS**
+- **TS 101 Advance**
+- **OBD-II**
+
+Each device may offer slightly different telemetry fields and update intervals, which are normalized and parsed into domain-ready Kafka events within Condense.
+
+**Core Functionality**
+
+- **Real-Time GPS & Telematics Streaming:** Location, speed, ignition status, fuel, accelerometer data.
+- **Secure Kafka-Native Transport:** Uses SASL authentication to ensure secure communication.
+- **Schema-Aware Decoding:** Condense-managed logic decodes each device's payload based on its variant.
+- **Plug-and-Stream:** Devices auto-connect with zero-code configuration once provisioned.
+- **Event-Driven Readiness:** Streams are published to output topics that can power alerting, logic transforms, and application integrations.
+
+**How It Works in Condense**
+
+1. An iTriangle device (for example, TS 101 Advance) sends GPS and telemetry packets to the Condense ingress endpoint.
+2. The connector authenticates via Kafka SASL using credentials provided in the Admin Console.
+3. Condense parses the binary or semi-structured message into JSON events with a consistent schema.
+4. Parsed data is published to a configured Kafka topic in Condense.
+5. Downstream applications, alerts, or dashboards consume from this topic in real time.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | User-defined label for the connector instance | Yes |
+| Messaging | Output Topic | Kafka topic in Condense to stream processed events | Yes |
+| Security | SASL Username | Kafka SASL authentication username provided by Condense Admin Console | Yes |
+| Security | SASL Password | Associated password for authentication (default: admin password) | No |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+- **Purpose:** Helps identify the connector within Condense.
+- **Format:** Any string. Avoid duplicates for clarity.
+
+**Example:**
+
+`VehicleTracker_Bharat101_Zone3`
+
+**2. Output Topic**
+
+- **Purpose:** Destination Kafka topic in Condense where the processed data will be published.
+- **Options:**
+  - Choose from existing topics in the Topics Dashboard.
+  - Or define a new topic aligned to a device role or event type.
+
+**Example Values:**
+
+`geo_position_updates`
+
+`vehicle_health`
+
+`ev_battery_telemetry`
+
+**3. SASL Username**
+
+- **Purpose:** Authenticates the iTriangle connector with the Condense Kafka layer.
+- **How to Obtain:**
+  - Go to **Condense Admin Console → Security Settings**.
+  - Use the default admin username or custom provisioned credentials.
+
+**Example:**
+
+`iot-ingestion-user`
+
+**4. SASL Password**
+
+- **Purpose:** Paired with the SASL username for secure authentication.
+- **Default Behavior:** Uses the platform admin password unless overridden.
+- **How to Obtain:** From **Condense Admin Console → Credentials**.
+
+**Example:**
+
+`3uuqhR2WHaxzC`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "iTriangleConnector_FleetEast",
+  "outputTopic": "vehicle_location_data",
+  "saslUsername": "iot-connect-user",
+  "saslPassword": "3uuqhR2WHaxzC"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Device Sending But No Data Seen**
+
+- **Cause:** Output topic not correctly configured or no transform linked.
+- **Fix:** Check topic assignment under Pipeline Builder and verify the topic exists.
+
+**2. Authentication Error**
+
+- **Cause:** Invalid or expired SASL credentials.
+- **Fix:** Retrieve the correct SASL username and password from the Admin Console and reconfigure the connector.
+
+**3. Schema Mismatch in Output**
+
+- **Cause:** Device firmware changes introduced new fields.
+- **Fix:** Condense automatically adapts the schema. Contact support if field mapping fails.
+
+**Advanced Considerations**
+
+**1. Multi-Device Pipelines**
+
+- It is possible to ingest multiple devices into a shared topic **if the schema is uniform**.
+- For mixed-device fleets, prefer one topic per device class (for example, `ev_fleet`, `diesel_fleet`).
+
+**2. Transform Compatibility**
+
+- Parsed output from this connector is JSON with consistent keys such as:
+  `latitude`, `longitude`, `ignitionStatus`, `speed`, `timestamp`, `vehicleId`
+- Easily consumable by:
+  - Rule-based alert transforms
+  - Custom Git-backed logic
+  - Dashboard and analytics sinks
+
+**3. Offline Buffering**
+
+- If the device loses connectivity, most iTriangle devices store packets and replay them.
+- The connector accepts out-of-order timestamps, but downstream logic should handle deduplication if required.
+
+**Best Practices**
+
+1. Group devices logically by region, fleet type, or use case using topic naming.
+2. Secure SASL credentials and rotate them regularly via the Admin Console.
+3. Visualize flows using Condense's topic observability tools to debug live telemetry.
+4. Use Git-based transforms to post-process location data (for example, zone classification, route adherence, and idle alerts).

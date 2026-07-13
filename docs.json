@@ -526,10 +526,10 @@
               {
                 "group": "Fully Managed Kafka",
                 "pages": [
-                  "condense/v2.4.1/fully-managed-kafka/untitled-page",
-                  "condense/v2.4.1/fully-managed-kafka/kafka-management",
-                  "condense/v2.4.1/fully-managed-kafka/kafka-topics",
-                  "condense/fully-managed-kafka/consumer-group",
+                  "condense/v2.4.1/overview/fully-managed-kafka/overview",
+                  "condense/v2.4.1/overview1/fully-managed-kafka/kafka-management",
+                  "condense/v2.4.1/overview1/fully-managed-kafka/kafka-topics",
+                  "condense/v2.4.1/overview1/fully-managed-kafka/consumer-group",
                   "condense/v2.4.1/fully-managed-kafka/kafka-connect",
                   "condense/v2.4.1/fully-managed-kafka/schema-registry",
                   "condense/v2.4.1/fully-managed-kafka/securing-kafka",
@@ -714,7 +714,10 @@
                       "condense/v2.4.1/deep-dive/connectors/google-cloud-pub-sub-output-stream",
                       "condense/v2.4.1/deep-dive/connectors/google-cloud-spanner-input-stream",
                       "condense/v2.4.1/deep-dive/connectors/google-storage-output-store",
-                      "condense/v2.4.1/deep-dive/connectors/untitled-page-6"
+                      "condense/v2.4.1/deep-dive/connectors/untitled-page-6",
+                      "condense/v2.4.1/deep-dive/connectors/untitled-page-7",
+                      "condense/v2.4.1/deep-dive/connectors/i-teiangle",
+                      "condense/v2.4.1/deep-dive/connectors/untitled-page-8"
                     ]
                   }
                 ]
