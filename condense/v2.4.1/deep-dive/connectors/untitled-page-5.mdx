@@ -1,0 +1,198 @@
+---
+title: "Firebase Firestore (Output, Stream)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Streams processed data from Condense into Firebase Firestore for real-time storage, downstream analytics, and cloud-native integrations.
+
+**Brief Description**
+
+The Firebase Firestore Stream Output Connector enables Condense to publish messages from Kafka-native topics into Google Firebase Firestore collections. It authenticates using a Google Cloud Service Account, transforms incoming Kafka messages into Firestore documents, and writes them using configurable write modes and batch sizes.
+
+This connector is ideal for real-time application backends, user profile storage, IoT telemetry, mobile applications, and event-driven architectures built on Firebase.
+
+**Links to Relevant Documents**
+
+- [https://firebase.google.com/docs/firestore](https://firebase.google.com/docs/firestore)
+- [https://cloud.google.com/firestore/docs/reference/rest](https://cloud.google.com/firestore/docs/reference/rest)
+- [https://cloud.google.com/iam/docs/service-accounts](https://cloud.google.com/iam/docs/service-accounts)
+
+**Connector Overview**
+
+The Firebase Firestore Stream Output Connector integrates Condense with Google Firestore, enabling continuous streaming of processed events into Firestore collections.
+
+Common use cases include:
+
+A. Persisting application events.
+
+B. IoT telemetry storage.
+
+C. Mobile and web application backends.
+
+D. Event-driven microservices using Firebase.
+
+**Core Functionality**
+
+1. Consumes messages from Kafka-native Condense topics.
+2. Writes documents into Firestore collections.
+3. Supports Insert, Update, and Upsert write modes.
+4. Performs configurable batch writes for improved throughput.
+5. Authenticates securely using Google Cloud Service Accounts.
+
+**How It Works in Condense**
+
+1. The connector subscribes to the configured Kafka-native topic.
+2. It authenticates using the provided Google Cloud Service Account.
+3. Incoming messages are converted into Firestore document format.
+4. Documents are written into the configured Firestore collection.
+5. Depending on the selected write mode, documents are inserted, updated, or upserted.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Firebase | Firebase Project ID | Firebase project identifier | Yes |
+| Authentication | Service Account Key | Google Cloud Service Account JSON | Yes |
+| Firestore | Collection Path | Destination Firestore collection | Yes |
+| Firestore | Write Mode | Insert, Update, or Upsert | Yes |
+| Performance | Batch Write Size | Number of documents per batch | No |
+| Condense | Topic (Input) | Kafka-native topic to consume from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Unique identifier for the connector.
+
+**Example:**
+
+`Firestore_Output_Connector`
+
+**2. Firebase Project ID**
+
+Identifier of the Firebase project hosting Firestore.
+
+**Example:**
+
+`my-firebase-project`
+
+**3. Service Account Key**
+
+JSON credentials for a Google Cloud Service Account with Firestore write permissions.
+
+Generate the key from:
+
+**Firebase Console → Project Settings → Service Accounts**
+
+**4. Firestore Collection Path**
+
+Destination collection where documents will be stored.
+
+**Examples:**
+
+- telemetry\_data
+- fleet/vehicle\_logs
+
+**5. Write Mode**
+
+Determines how documents are written.
+
+Supported values:
+
+- Insert
+- Update
+- Upsert
+
+Choose the mode that best matches your application requirements.
+
+**6. Batch Write Size**
+
+Number of records grouped into a single Firestore write operation.
+
+**Default:**
+
+`100`
+
+Larger batch sizes improve throughput but should remain within Firestore limits.
+
+**7. Topic (Input)**
+
+Kafka-native Condense topic from which records are consumed.
+
+**Example:**
+
+`vehicle_data_stream`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "Firestore_Output_Connector",
+  "firebaseProjectId": "my-firebase-project",
+  "serviceAccountKey": "{...}",
+  "firestoreCollectionPath": "fleet/vehicle_logs",
+  "writeMode": "upsert",
+  "batchWriteSize": 100,
+  "inputTopic": "vehicle_data_stream"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. No Documents Written**
+
+**Cause:** Connector is not running or the configured topic has no messages.
+
+**Solution:** Verify connector status and confirm messages are available in the configured Kafka-native topic.
+
+**2. Permission Denied**
+
+**Cause:** Service Account lacks Firestore write permissions.
+
+**Solution:** Assign the required Firestore IAM roles and verify the Service Account credentials.
+
+**3. Invalid Collection Path**
+
+**Cause:** Incorrect collection path syntax.
+
+**Solution:** Verify the configured Firestore collection path.
+
+**4. Partial Batch Failures**
+
+**Cause:** Invalid document payloads or schema issues.
+
+**Solution:** Review connector logs to identify failed records and correct the payload before retrying.
+
+**Advanced Topics**
+
+**1. Document ID Mapping**
+
+Documents can use a field from the incoming message as the Firestore document ID or allow Firestore to generate document IDs automatically.
+
+**2. Batch Writes**
+
+Batch operations improve write throughput while reducing network overhead.
+
+Configure batch sizes based on expected event volume and Firestore limits.
+
+**3. Retry Handling**
+
+Transient failures such as network interruptions or quota throttling are automatically retried according to Condense retry policies.
+
+**4. Payload Requirements**
+
+Incoming records should be valid JSON documents.
+
+Binary or non-JSON formats should be transformed before reaching this connector.
+
+**Best Practices**
+
+1. Use dedicated Firestore collections for different business domains.
+2. Use least-privilege Service Accounts for authentication.
+3. Rotate Service Account credentials periodically.
+4. Test connector configurations with small batch sizes before deploying to production.
+5. Monitor connector logs and Firestore quotas to ensure reliable streaming.

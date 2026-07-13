@@ -151,8 +151,7 @@ Starting the development of an application involves completing all required step
 
 ### **7) Deleting an Application**
 
-Who can delete: Admins (and Maintainers if policy allows) \
-Warning: Deletion is irreversible. If a published Application is referenced by a transform/connector in a pipeline, update or remove that deployment first to avoid runtime errors.
+Who can delete: Admins (and Maintainers if policy allows) <br />Warning: Deletion is irreversible. If a published Application is referenced by a transform/connector in a pipeline, update or remove that deployment first to avoid runtime errors.
 
 ### **Naming Rules**
 
@@ -334,21 +333,11 @@ Summary Pane (left): provider, repo, branch; detected language/runtime; app name
 
 ## **Common Pitfalls and How to Avoid Them**
 
-- Published artefact not visible for deployment \
-  **Cause**: Wrong publication as a custom choice. \
-  **Avoidance**: Confirm the Transform vs Input/Output Connector before publishing.
-- Unreachable HTTP/TCP during testing \
-  **Cause**: Server not exposed or wrong port binding. \
-  **Avoidance**: Enable the correct toggle and match the port ENV in code.
-- “No messages yet” in Subscribe \
-  **Cause**: Topic/partition/offset mismatch or too small a fetch window. \
-  **Avoidance**: Use First/Last/Size presets and verify topic \+ partition.
-- Build failures due to missing dependencies \
-  **Cause**: Dependencies not in project config. \
-  **Avoidance**: Add to dependency file (e.g., requirements.txt) and rebuild.
-- Deleting an Application still referenced by deployments \
-  **Cause**: Active transform/connector points to this Application. \
-  **Avoidance**: Update or remove dependent deployments first.
+- Published artefact not visible for deployment <br />**Cause**: Wrong publication as a custom choice. <br />**Avoidance**: Confirm the Transform vs Input/Output Connector before publishing.
+- Unreachable HTTP/TCP during testing <br />**Cause**: Server not exposed or wrong port binding. <br />**Avoidance**: Enable the correct toggle and match the port ENV in code.
+- “No messages yet” in Subscribe <br />**Cause**: Topic/partition/offset mismatch or too small a fetch window. <br />**Avoidance**: Use First/Last/Size presets and verify topic \+ partition.
+- Build failures due to missing dependencies <br />**Cause**: Dependencies not in project config. <br />**Avoidance**: Add to dependency file (e.g., requirements.txt) and rebuild.
+- Deleting an Application still referenced by deployments <br />**Cause**: Active transform/connector points to this Application. <br />**Avoidance**: Update or remove dependent deployments first.
 
 ## **Related Links**
 
