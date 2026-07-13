@@ -1,0 +1,228 @@
+---
+title: "Kinesis (Output, Stream)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Streams processed data from Condense into AWS Kinesis for downstream analytics and integrations.
+
+**Brief Description**
+
+The Kinesis Stream Output Connector in Condense allows real-time data from any Kafka topic within Condense to be published directly to an Amazon Kinesis Data Stream. This enables seamless integration between Kafka-native data pipelines and AWS-native analytics, storage, or real-time consumer applications. It is designed for users who need to deliver processed, filtered, or transformed data from Condense into cloud-native AWS services for further real-time analysis, alerting, or archival.
+
+Whether integrating with AWS Lambda, Kinesis Data Analytics, or third-party tools consuming Kinesis streams, this connector simplifies the delivery path and ensures high-throughput, low-latency interoperability between Kafka and AWS Kinesis.
+
+**Core Features**
+
+1. Real-Time Output to AWS Kinesis: Transmits data from a Condense topic to Kinesis with millisecond-level latency.
+2. Secure AWS Integration: Uses IAM-based Access Key/Secret Key pairs for authenticated access to the Kinesis service.
+3. Region-Aware Streaming: Supports all AWS commercial regions and routes traffic to the correct regional endpoint.
+4. Batching with Retry Logic: Efficiently batches messages and retries on transient AWS errors such as throttling.
+5. Production-Grade Observability: Logs delivery outcomes and exposes metrics including success/failure count, latency, and throughput.
+6. Dead-Letter Queue Support (Optional): Failed records can be routed to a DLQ topic for debugging or recovery.
+
+**Links to Relevant Documentation**
+
+- [https://docs.aws.amazon.com/streams/latest/dev/introduction.html](https://docs.aws.amazon.com/streams/latest/dev/introduction.html)
+- [https://docs.aws.amazon.com/kinesis/latest/APIReference/API\_PutRecords.html](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecords.html)
+- [https://docs.aws.amazon.com/streams/latest/dev/best-practices.html](https://docs.aws.amazon.com/streams/latest/dev/best-practices.html)
+- [https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
+
+**Connector Overview**
+
+The Kinesis Stream Output Connector publishes processed events from Kafka-native Condense topics into Amazon Kinesis Data Streams for downstream analytics, storage, and cloud-native integrations.
+
+**Core Functionality**
+
+1. Publishes real-time events from Condense to Amazon Kinesis Data Streams.
+2. Authenticates securely using AWS IAM Access Key and Secret Key credentials.
+3. Supports regional Kinesis endpoints across all AWS commercial regions.
+4. Uses batching and retry logic to optimize throughput and resilience.
+5. Enables integration with AWS Lambda, Kinesis Data Analytics, Firehose, and other downstream consumers.
+
+**How It Works in Condense**
+
+1. The connector subscribes to the configured Kafka-native topic in Condense.
+2. Each event is optionally transformed before publishing.
+3. The connector authenticates with AWS using the configured IAM credentials.
+4. Messages are sent to the target Kinesis Data Stream using the PutRecord or PutRecords API.
+5. Records are batched and retried automatically to maximize delivery efficiency.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique name for the connector within Condense | Yes |
+| Stream | Stream Name | Name of the target Kinesis Data Stream | Yes |
+| Region | Region | AWS Region where the Kinesis stream resides | Yes |
+| Auth | Access Key | AWS IAM Access Key ID | Yes |
+| Auth | Secret Key | AWS IAM Secret Access Key | Yes |
+| Condense | Topic (Input) | Kafka-native Condense topic to consume from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+A human-readable name used to identify this connector inside the Condense UI and logs.
+
+**Example:**
+
+`KinesisOutbound_Alerts_IN`
+
+---
+
+**2. Stream Name**
+
+The name of the Amazon Kinesis Data Stream that will receive the events.
+
+**How to Obtain**
+
+- Open the AWS Console.
+- Navigate to **Amazon Kinesis → Data Streams**.
+- Copy the existing stream name.
+
+**Example:**
+
+`iot_ingestion_stream`
+
+`fleet_logs_output`
+
+---
+
+**3. Region**
+
+The AWS Region where the Kinesis stream is deployed.
+
+**Example Values**
+
+- `us-west-2`
+- `eu-central-1`
+- `ap-south-1`
+
+Ensure this matches the region of the destination stream.
+
+---
+
+**4. Access Key**
+
+AWS IAM Access Key ID used by Condense to authenticate with Kinesis.
+
+**Best Practices**
+
+- Use a dedicated IAM user or role.
+- Grant only the required permissions such as:
+  - `kinesis:PutRecords`
+  - `kinesis:DescribeStream`
+- Rotate credentials periodically.
+
+**Example:**
+
+`AKIAIOSFODNN7EXAMPLE`
+
+---
+
+**5. Secret Key**
+
+AWS IAM Secret Access Key associated with the configured Access Key.
+
+Condense encrypts this credential securely after configuration.
+
+**Example:**
+
+`wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`
+
+---
+
+**6. Topic (Input)**
+
+Kafka-native Condense topic whose events will be published to Kinesis.
+
+**Recommended Examples**
+
+`transformed_orders`
+
+`sensor_payloads_stream`
+
+`geofence_alerts`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "KinesisExport_GeoAlerts_APS1",
+  "streamName": "geo_alerts_stream",
+  "region": "ap-south-1",
+  "accessKey": "AKIAIOSFODNN7EXAMPLE",
+  "secretKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+  "condenseTopic": "geo_alerts_topic"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. ProvisionedThroughputExceeded**
+
+**Cause:** Destination Kinesis stream has insufficient shard capacity.
+
+**Fix:** Increase shard count or reduce publishing throughput.
+
+**2. Invalid AWS Credentials**
+
+**Cause:** Incorrect or expired IAM Access Key or Secret Key.
+
+**Fix:** Verify credentials and confirm IAM permissions.
+
+**3. Stream Not Found**
+
+**Cause:** Incorrect stream name or AWS Region.
+
+**Fix:** Verify that the Kinesis stream exists and the configured region matches.
+
+**4. Serialization Errors**
+
+**Cause:** Kafka message format is incompatible with the connector.
+
+**Fix:** Validate or transform the message before publishing.
+
+**Advanced Topics**
+
+**1. Stream Behavior and Batch Delivery**
+
+- Condense batches Kafka records using the AWS `PutRecords` API to improve throughput.
+- A default hash-based partition key is used for message distribution.
+- Transient AWS errors are retried automatically using exponential backoff.
+- Message ordering is guaranteed only within an individual Kinesis shard.
+
+**2. Security and Authentication**
+
+- Use dedicated IAM users or roles with minimum required permissions.
+- Rotate credentials regularly.
+- Store credentials securely using environment variables or secret management systems whenever possible.
+
+**3. Monitoring and Metrics**
+
+Condense tracks:
+
+- Message delivery latency
+- Batch size and throughput
+- Failure count and failure reasons
+- AWS SDK response codes
+
+Metrics can be integrated with CloudWatch, Prometheus, or OpenTelemetry using Condense observability modules.
+
+**4. Performance Tuning**
+
+- Ensure sufficient shard capacity for expected throughput.
+- Kinesis supports a maximum record size of **1 MB**.
+- Use smaller batches for lower latency or larger batches for better cost efficiency.
+- Select an AWS Region that aligns with downstream consumers and data residency requirements.
+
+**Best Practices**
+
+1. Use meaningful names for both Condense topics and Kinesis streams.
+2. Size Kinesis shard capacity according to expected throughput.
+3. Configure CloudWatch alarms for delivery failures and throughput bottlenecks.
+4. Encrypt data in transit and use AWS KMS or VPC endpoints where applicable.
+5. Rotate IAM credentials regularly and follow least-privilege access principles.
