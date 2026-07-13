@@ -154,7 +154,7 @@
       {
         "version": "Legacy",
         "pages": [
-          "condense",
+          "condense/legacy/overview",
           {
             "group": "Introduction to Condense",
             "icon": "cube",
@@ -707,7 +707,8 @@
                       "condense/v2.4.1/deep-dive/connectors/couchbase-outpurt-store",
                       "condense/v2.4.1/deep-dive/connectors/untitled-page-1",
                       "condense/v2.4.1/deep-dive/connectors/untitled-page-2",
-                      "condense/v2.4.1/deep-dive/connectors/untitled-page-3"
+                      "condense/v2.4.1/deep-dive/connectors/untitled-page-3",
+                      "condense/v2.4.1/deep-dive/connectors/untitled-page-4"
                     ]
                   }
                 ]

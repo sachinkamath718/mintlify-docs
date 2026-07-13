@@ -1,0 +1,193 @@
+---
+title: "Firebase Firestore (Input, Stream)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Receives Firestore collection data from Firebase and publishes change events into Kafka-native Condense topics.
+
+**Brief Description**
+
+The Firebase Firestore Stream Input Connector enables Condense to ingest real-time document changes from Google Firestore collections. Firestore is a cloud-native NoSQL document database designed for scalable, low-latency applications and stores data as collections of JSON-like documents.
+
+The connector monitors Firestore collections for document additions, modifications, and deletions, converts these changes into structured events, and publishes them into Kafka-native Condense topics for downstream processing, analytics, and integrations.
+
+**Links to Relevant Documents**
+
+- [https://firebase.google.com/docs/firestore](https://firebase.google.com/docs/firestore)
+- [https://cloud.google.com/firestore/docs/reference/rest](https://cloud.google.com/firestore/docs/reference/rest)
+- [https://cloud.google.com/iam/docs/service-accounts](https://cloud.google.com/iam/docs/service-accounts)
+
+**Connector Overview**
+
+The Firebase Firestore Stream Input Connector bridges Google Firestore and Condense, enabling real-time ingestion of Firestore collection changes.
+
+Common use cases include:
+
+A. Streaming application data into Condense.
+
+B. Synchronizing Firestore updates with enterprise systems.
+
+C. Real-time analytics and reporting.
+
+D. Event-driven workflows based on Firestore document changes.
+
+**Core Functionality**
+
+1. Monitors Firestore collections for document changes.
+2. Captures document create, update, and delete events.
+3. Authenticates using Google Cloud Service Account credentials.
+4. Converts Firestore events into structured JSON.
+5. Publishes events into Kafka-native Condense topics.
+
+**How It Works in Condense**
+
+1. The connector authenticates using a Google Cloud Service Account.
+2. It connects to the configured Firestore collection.
+3. Firestore snapshot listeners monitor document changes.
+4. Each change is converted into a structured JSON event.
+5. Events are published into the configured Kafka-native Condense topic.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique connector name | Yes |
+| Firebase | Firebase Project ID | Firebase project identifier | Yes |
+| Authentication | Service Account Key | Google Cloud Service Account JSON | Yes |
+| Firestore | Collection Path | Firestore collection or subcollection path | Yes |
+| Firestore | Event Types | Events to capture (ADDED, MODIFIED, REMOVED) | Yes |
+| Condense | Topic (Output) | Kafka-native topic to publish events to | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Unique identifier for the connector.
+
+**Example:**
+
+`Firestore_Input_Connector`
+
+**2. Firebase Project ID**
+
+Identifier of the Firebase project hosting Firestore.
+
+**Example:**
+
+`my-firebase-project`
+
+**3. Service Account Key**
+
+JSON credentials for a Google Cloud Service Account with Firestore read access.
+
+Generate the key from:
+
+**Firebase Console → Project Settings → Service Accounts**
+
+**4. Firestore Collection Path**
+
+Collection or subcollection to monitor.
+
+**Examples:**
+
+- telemetry\_data
+- fleet/vehicle\_logs
+
+**5. Event Types**
+
+Specifies which Firestore events are captured.
+
+Supported values:
+
+- ADDED
+- MODIFIED
+- REMOVED
+
+Choose only the events required for your workload.
+
+**6. Topic (Output)**
+
+Kafka-native Condense topic where Firestore events are published.
+
+**Example:**
+
+`firestore_input_stream`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "Firestore_Input_Connector",
+  "firebaseProjectId": "my-firebase-project",
+  "serviceAccountKey": "{...}",
+  "firestoreCollectionPath": "fleet/vehicle_logs",
+  "eventTypes": [
+    "ADDED",
+    "MODIFIED"
+  ],
+  "outputTopic": "firestore_input_stream"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. No Events Received**
+
+**Cause:** Incorrect collection path or no document activity.
+
+**Solution:** Verify the configured collection path and ensure documents are being created or updated.
+
+**2. Authentication Failure**
+
+**Cause:** Invalid or expired Service Account credentials.
+
+**Solution:** Generate a new Service Account key and update the connector configuration.
+
+**3. Permission Denied**
+
+**Cause:** Service Account lacks Firestore read permissions.
+
+**Solution:** Assign an appropriate IAM role such as **Cloud Datastore Viewer**.
+
+**4. Missing Events**
+
+**Cause:** Firestore quota limits or temporary connectivity issues.
+
+**Solution:** Review Firestore quotas and inspect connector logs for retry attempts.
+
+**Advanced Topics**
+
+**1. Event Types**
+
+The connector captures:
+
+- ADDED
+- MODIFIED
+- REMOVED
+
+Each event includes metadata such as document ID, timestamp, and event type.
+
+**2. Event Ordering**
+
+Ordering is guaranteed per document but not across the entire collection.
+
+**3. Duplicate Events**
+
+Snapshot listeners may occasionally deliver duplicate events. Downstream applications should implement idempotent processing if required.
+
+**4. Document Size**
+
+Firestore limits individual documents to 1 MB.
+
+Large payloads should be reduced or transformed before ingestion.
+
+**Best Practices**
+
+1. Use separate Kafka-native topics for different Firestore collections.
+2. Capture only the required event types.
+3. Use dedicated Service Accounts with least-privilege access.
+4. Rotate Service Account credentials periodically.
+5. Monitor connector health and event throughput using Condense observability tools.
