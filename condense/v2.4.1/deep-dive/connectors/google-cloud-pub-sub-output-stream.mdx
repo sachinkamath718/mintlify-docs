@@ -1,0 +1,194 @@
+---
+title: "Google Cloud Pub/Sub (Output, Stream)"
+---
+
+**Connector Type:** Output Connector
+
+**Description**
+
+Publishes processed data to Google Cloud Pub/Sub topics for downstream cloud applications.
+
+**Brief Description**
+
+The Google Cloud Pub/Sub Stream Output Connector allows Condense to publish real-time messages from Kafka-native topics into a Google Cloud Pub/Sub topic via a configured subscription. It is designed for teams that rely on GCP's native messaging infrastructure and want to extend their Condense pipeline outputs into Google-native services, APIs, and event-driven systems.
+
+This connector bridges Kafka-native output topics within Condense to GCP Pub/Sub, enabling seamless integration with Cloud Functions, BigQuery, App Engine, IoT Core, and other GCP-native subscribers.
+
+**Links to Relevant Documents**
+
+- Google Cloud Pub/Sub Overview: [https://cloud.google.com/pubsub/docs/overview](https://cloud.google.com/pubsub/docs/overview)
+- Topic and Subscription Management: [https://cloud.google.com/pubsub/docs/admin](https://cloud.google.com/pubsub/docs/admin)
+- IAM Roles and Permissions (Publisher): [https://cloud.google.com/pubsub/docs/access-control](https://cloud.google.com/pubsub/docs/access-control)
+- Service Account Key JSON Management: [https://cloud.google.com/iam/docs/creating-managing-service-account-keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
+- Publishing Messages to Pub/Sub: [https://cloud.google.com/pubsub/docs/publisher](https://cloud.google.com/pubsub/docs/publisher)
+
+**Connector Overview**
+
+This connector acts as a publisher to Google Cloud Pub/Sub. It listens to events from a configured Kafka-native input topic in Condense, formats each message as a Pub/Sub-compliant payload, and publishes them to a target topic within GCP.
+
+Key scenarios include:
+
+A. Forwarding streaming output to GCP-hosted downstream systems
+
+B. Triggering GCP Cloud Functions or Cloud Run apps from Kafka-native logic
+
+C. Connecting Condense pipelines with GCP's data lake, ML, or analytics services
+
+D. Hybrid deployments across Condense (BYOC) and Google Cloud
+
+**Core Functionality**
+
+1. Kafka-to-GCP publishing from Condense topics to Pub/Sub topics
+2. Service Account Authentication for secure GCP access
+3. Schema-less JSON Publishing with automatic encoding
+4. High Throughput async message publishing with retries
+5. Backpressure-aware publishing that scales with Condense topic load
+
+**How It Works in Condense**
+
+1. The connector consumes events from a configured input topic in Condense.
+2. Messages are serialized to a Pub/Sub-compatible JSON format.
+3. Using the Service Account Key, the connector authenticates and publishes to Pub/Sub.
+4. The configured subscription receives the messages immediately in GCP.
+5. Any downstream system subscribed to the GCP Pub/Sub topic receives the data.
+
+**Note:** The connector does not create topics or subscriptions. These must exist and be accessible beforehand.
+
+**Configuration**
+
+| **CATEGORY** | **FIELD NAME** | **DESCRIPTION** | **REQUIRED** |
+| :-- | :-- | :-- | :-- |
+| General | Title | Unique name for the connector instance within Condense | Yes |
+| Pub/Sub | Subscription Name | The name of the GCP Pub/Sub subscription linked to the topic | Yes |
+| Pub/Sub | Project ID | The Google Cloud Project containing the Pub/Sub topic | Yes |
+| Pub/Sub | Service Account Key | JSON credentials of a service account with Pub/Sub Publisher role | Yes |
+| Condense | Topic (Input) | Kafka-native Condense topic to read from | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Purpose: Internally identifies the connector in the Condense UI and logs.
+
+Format: Simple identifier. Must be unique within the workspace.
+
+Example: `pubsub-outbound-connector`, `analytics-to-gcp-stream`
+
+**2. Subscription Name**
+
+Definition: Name of the GCP Pub/Sub subscription attached to the topic that should receive published data.
+
+Important: Ensure this subscription exists and is actively connected to the correct topic.
+
+Example: `raw-alerts-sub`, `iot-stream-analytics-sub`
+
+**3. Project ID**
+
+Definition: The unique GCP project identifier that owns the topic.
+
+Purpose: Used to route the publishing API calls correctly.
+
+Example: `condense-platform-io`, `data-streamer-dev-19233`
+
+**4. Service Account Key**
+
+Type: Full JSON object of the service account credentials.
+
+Required IAM Role: Must have `roles/pubsub.publisher` access on the destination topic.
+
+Security: Never expose this key in logs or UI. Use environment variable mapping or vault reference if available.
+
+How to Obtain:
+
+A. Go to IAM \> Service Accounts in the GCP Console.
+
+B. Create a new service account or use an existing one.
+
+C. Grant Pub/Sub Publisher role.
+
+D. Generate and download a JSON key.
+
+**5. Topic (Input)**
+
+Definition: The name of the Kafka-native Condense topic that supplies data for this connector.
+
+Role: Acts as the source stream for all outgoing messages.
+
+Example: `sensor-enriched-events`, `ml-detections`, `fraud-detection-results`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "gcp-pubsub-output",
+  "subscriptionName": "stream-app-subscription",
+  "projectId": "iot-insights-88271",
+  "serviceAccountKey": "{... full JSON key ...}",
+  "inputTopic": "enriched_gps_data"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Permission Denied**
+
+A. Ensure the service account has `roles/pubsub.publisher`.
+
+B. Validate the service account's access to the correct project.
+
+**2. Topic or Subscription Does Not Exist**
+
+A. This connector does not create Pub/Sub resources.
+
+B. Pre-create the topic and attach the subscription before use.
+
+**3. Failed Message Delivery**
+
+A. Messages that fail during publishing will be retried automatically.
+
+B. Persistent failures may indicate a network or quota issue.
+
+**4. Serialization Errors**
+
+A. Ensure message payloads are JSON serializable.
+
+B. Avoid binary blobs or malformed UTF-8 strings.
+
+**5. API Rate Limits**
+
+A. Google Cloud Pub/Sub enforces rate limits.
+
+B. Distribute load or increase quota if required.
+
+**Advanced Considerations**
+
+**1. Message Format**
+
+A. Condense publishes messages as raw JSON.
+
+B. Metadata fields (e.g., event timestamp, source, topic ID) can optionally be included via transforms before output.
+
+**2. Pub/Sub Topic Retention**
+
+A. Messages published to a topic persist for a configurable retention window (default: 7 days).
+
+B. Consider retention vs downstream consumer acknowledgment timing.
+
+**3. Pub/Sub Delivery Guarantees**
+
+A. Delivery is at least once from Condense to Pub/Sub.
+
+B. Consumers must be idempotent if downstream duplication matters.
+
+**4. Large Payloads**
+
+A. Google Pub/Sub enforces a 10MB limit per message.
+
+B. Split large payloads into multiple messages in the upstream transform if necessary.
+
+**Best Practices**
+
+1. Use dedicated Pub/Sub topics for Condense outputs to avoid noisy data mixing.
+2. Rotate service account keys regularly and store them securely.
+3. Monitor delivery metrics via Condense logs and GCP Pub/Sub metrics.
+4. Integrate Pub/Sub outputs with GCP-native consumers like Cloud Functions, Dataflow, or BigQuery for scalable processing.

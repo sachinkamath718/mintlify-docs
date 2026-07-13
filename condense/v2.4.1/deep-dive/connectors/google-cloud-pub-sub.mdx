@@ -1,0 +1,181 @@
+---
+title: "Google Cloud Pub/Sub (Input, Stream)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Ingests messages from Google Cloud Pub/Sub subscriptions into Condense for processing and transformation.
+
+**Brief Description**
+
+The Google Cloud Pub/Sub Stream Input Connector enables Condense to consume messages from a Google Cloud Pub/Sub subscription and inject them into a real-time Kafka-native stream for further processing. This connector is critical for organizations using GCP infrastructure who wish to bridge Google-native data pipelines into real-time streaming use cases.
+
+Pub/Sub acts as a high-throughput, asynchronous messaging service that decouples senders and receivers. This connector allows Condense to tap into those streams, ingesting messages from Pub/Sub topics via secure, authenticated access using a service account.
+
+**Links to Relevant Documents**
+
+- Google Cloud Pub/Sub Official Overview: [https://cloud.google.com/pubsub/docs/overview](https://cloud.google.com/pubsub/docs/overview)
+- Pub/Sub Subscriber Guide (Streaming Pull): [https://cloud.google.com/pubsub/docs/pull](https://cloud.google.com/pubsub/docs/pull)
+- IAM Permissions for Pub/Sub: [https://cloud.google.com/pubsub/docs/access-control](https://cloud.google.com/pubsub/docs/access-control)
+- Service Account Key JSON Format: [https://cloud.google.com/iam/docs/creating-managing-service-account-keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
+
+**Connector Overview**
+
+This connector uses the Streaming Pull model of Pub/Sub, enabling Condense to receive events as they arrive without polling. It authenticates using a Google Cloud Service Account, reads from the specified subscription, and forwards all messages into a configured Condense topic for real-time processing, enrichment, or routing.
+
+Typical use cases include:
+
+A. Streaming IoT or device telemetry from Pub/Sub into Condense
+
+B. Ingesting cloud-native events from GCP services (Cloud Functions, App Engine, etc.)
+
+C. Migrating from GCP pipelines to Kafka-native applications
+
+D. Processing real-time alerts, logs, or change events from GCP sources
+
+**Core Functionality**
+
+1. Streaming Ingestion from Google Cloud Pub/Sub using subscription ID
+2. Secure Auth via Service Account JSON keys
+3. Auto-Ack mechanism with offset management handled by Pub/Sub
+4. High-Throughput Pull Model using native GCP APIs
+5. Automatic Scaling aligned with Condense pipeline performance
+
+**How it Works in Condense**
+
+1. Authentication: Condense uses a Service Account JSON file to authenticate with GCP.
+2. Subscription Connection: The connector connects to the specified Pub/Sub subscription.
+3. Message Ingestion: Messages are pulled continuously via the streaming pull API.
+4. Forwarding: Each message is published to a Kafka-native Condense topic in real-time.
+5. Pipeline Processing: Downstream Condense transforms or applications can process the events.
+
+**Configuration**
+
+| **CATEGORY** | **FIELD NAME** | **DESCRIPTION** |
+| :-- | :-- | :-- |
+| General | Title | Unique name to identify the connector within Condense |
+| Pub/Sub | Subscription Name | The name of the Pub/Sub subscription to consume from |
+| Pub/Sub | Project ID | The GCP project under which the Pub/Sub resources are hosted |
+| Pub/Sub | Service Account Key | Full contents of the service account JSON file (as a string or secret) |
+| Condense | Topic (Input) | Kafka-native topic in Condense where incoming messages will be published |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Purpose: Used to track, audit, and manage this connector instance.
+
+Example: `gcp-pubsub-ingestor`, `alert-stream-from-gcp`
+
+**2. Subscription Name**
+
+Format:
+
+`projects/{project_id}/subscriptions/{subscription_name}`
+
+Only the `subscription_name` is needed.
+
+Note: The subscription must already be created and accessible by the service account.
+
+**3. Project ID**
+
+Definition: The unique GCP project identifier (not the name).
+
+Example:
+
+A. `zeliot-platform`
+
+B. `iot-alerts-prod`
+
+Purpose: Used to scope API calls and locate the Pub/Sub subscription.
+
+**4. Service Account Key**
+
+Contents: Raw JSON key for a GCP Service Account with Pub/Sub Subscriber role.
+
+How to obtain:
+
+A. Go to IAM & Admin → Service Accounts
+
+B. Create or select a service account
+
+C. Grant Pub/Sub Subscriber permission
+
+D. Generate a JSON key
+
+Security Note: This credential must be securely stored. Never expose it in logs.
+
+**5. Topic (Input)**
+
+Definition: A Condense Kafka-native topic into which Pub/Sub messages will be published.
+
+Example:
+
+A. `gcp-device-ingest`
+
+B. `raw-alerts-from-pubsub`
+
+C. `cloud-logs-stream`
+
+**Sample Configuration Example**
+
+```json
+{
+  "title": "iot-stream-gcp",
+  "subscriptionName": "device-alerts-sub",
+  "projectId": "realtime-iot-3245",
+  "serviceAccountKey": "{... full JSON key ...}",
+  "inputTopic": "iot_pubsub_stream"
+}
+```
+
+**Troubleshooting and Common Issues**
+
+**1. Invalid Credentials**
+
+A. Ensure the service account has proper permissions (Pub/Sub Subscriber).
+
+B. Verify the full JSON key is provided without format errors.
+
+**2. Permission Denied**
+
+A. The service account must be added to the correct GCP project with the required IAM role.
+
+**3. No Messages Received**
+
+A. Check if the subscription is correctly attached to the Pub/Sub topic.
+
+B. Confirm if messages are being published to the topic in GCP.
+
+**4. Message Duplication**
+
+A. Pub/Sub guarantees at-least-once delivery. Downstream deduplication may be necessary.
+
+**5. API Quota Errors**
+
+A. Monitor and increase GCP API quotas if the connector consumes at a high rate.
+
+**Advanced Considerations**
+
+**1. Message Acknowledgment**
+
+A. Condense uses auto-acknowledgment after successful publishing to the Kafka topic.
+
+B. Failed publishing results in retry; no manual ack control is exposed.
+
+**2. Ordering Guarantees**
+
+A. Pub/Sub does not guarantee message ordering unless explicitly configured with `orderingKey` and the subscription is set to enable message ordering. This connector does not expose ordering settings currently.
+
+**3. Load Management**
+
+A. Condense auto-manages pull threads and concurrency. For high-throughput topics, use multiple connector instances.
+
+**Best Practices**
+
+1. Use Dedicated Service Accounts: Assign least-privilege IAM roles.
+2. Secure Key Management: Rotate keys regularly and store in secure vaults or environment secrets.
+3. Use Dead-Letter Topics in Pub/Sub: For resilient error handling in GCP.
+4. Benchmark with Real Load: Some latency may be observed with idle subscriptions.

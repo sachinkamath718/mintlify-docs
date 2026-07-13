@@ -293,12 +293,12 @@
                 "group": "Fully Managed Kafka",
                 "pages": [
                   "condense/v2.4.0/overview/fully-managed-kafka/overview",
-                  "condense/v2.4.0/fully-managed-kafka/kafka-management",
-                  "condense/v2.4.0/fully-managed-kafka/kafka-connect",
-                  "condense/v2.4.0/fully-managed-kafka/kafka-topics",
-                  "condense/v2.4.0/fully-managed-kafka/schema-registry",
-                  "condense/v2.4.0/fully-managed-kafka/securing-kafka",
-                  "condense/v2.4.0/fully-managed-kafka/kafka-administration",
+                  "condense/v2.4.0/overview/fully-managed-kafka/kafka-management",
+                  "condense/v2.4.0/overview/fully-managed-kafka/kafka-connect",
+                  "condense/v2.4.0/overview/fully-managed-kafka/kafka-topics",
+                  "condense/v2.4.0/overview/fully-managed-kafka/schema-registry",
+                  "condense/v2.4.0/overview/fully-managed-kafka/securing-kafka",
+                  "condense/v2.4.0/overview/fully-managed-kafka/kafka-administration",
                   "condense/v2.4.0/fully-managed-kafka/ksqldb"
                 ]
               },
@@ -401,7 +401,7 @@
                   "condense/v2.4.0/deep-dive/connectors/available-connectors"
                 ]
               },
-              "condense/v2.4.0/deep-dive/connectors/connectors-in-condense/custom-connectors",
+              "condense/v2.4.0/deep-dive/connectors-in-condense/custom-connectors",
               "condense/v2.4.0/deep-dive/transforms",
               "condense/v2.4.0/deep-dive/applications",
               "condense/v2.4.0/deep-dive/pipelines"
@@ -411,14 +411,14 @@
             "group": "Fully Managed Kafka",
             "icon": "blocks",
             "pages": [
-              "condense/v2.4.0/overview/fully-managed-kafka",
-              "condense/v2.4.0/overview/fully-managed-kafka/kafka-management",
-              "condense/v2.4.0/overview/fully-managed-kafka/untitled-page",
-              "condense/v2.4.0/overview/fully-managed-kafka/kafka-connect",
-              "condense/v2.4.0/overview/fully-managed-kafka/schema-registry",
-              "condense/v2.4.0/overview/fully-managed-kafka/securing-kafka",
-              "condense/v2.4.0/overview/fully-managed-kafka/kafka-administration",
-              "condense/v2.4.0/overview/fully-managed-kafka/untitled-page-1"
+              "condense/v2.4.0/fully-managed-kafka",
+              "condense/v2.4.0/fully-managed-kafka/kafka-management",
+              "condense/v2.4.0/fully-managed-kafka/untitled-page",
+              "condense/v2.4.0/fully-managed-kafka/kafka-connect",
+              "condense/v2.4.0/fully-managed-kafka/schema-registry",
+              "condense/v2.4.0/fully-managed-kafka/securing-kafka",
+              "condense/v2.4.0/fully-managed-kafka/kafka-administration",
+              "condense/v2.4.0/fully-managed-kafka/ksqlDB"
             ]
           },
           {
@@ -509,7 +509,7 @@
             "group": "Marketing Assets",
             "icon": "triangle-square-circle",
             "pages": [
-              "wallpapers-1",
+              "condense/v2.4.0/marketing-assets/wallpapers",
               "social-media-1"
             ]
           }
@@ -709,7 +709,12 @@
                       "condense/v2.4.1/deep-dive/connectors/untitled-page-2",
                       "condense/v2.4.1/deep-dive/connectors/untitled-page-3",
                       "condense/v2.4.1/deep-dive/connectors/untitled-page-4",
-                      "condense/v2.4.1/deep-dive/connectors/untitled-page-5"
+                      "condense/v2.4.1/deep-dive/connectors/untitled-page-5",
+                      "condense/v2.4.1/deep-dive/connectors/google-cloud-pub-sub",
+                      "condense/v2.4.1/deep-dive/connectors/google-cloud-pub-sub-output-stream",
+                      "condense/v2.4.1/deep-dive/connectors/google-cloud-spanner-input-stream",
+                      "condense/v2.4.1/deep-dive/connectors/google-storage-output-store",
+                      "condense/v2.4.1/deep-dive/connectors/untitled-page-6"
                     ]
                   }
                 ]

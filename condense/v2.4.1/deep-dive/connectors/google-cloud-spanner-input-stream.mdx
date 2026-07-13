@@ -1,0 +1,218 @@
+---
+title: "Google Cloud Spanner (Input, Store)"
+---
+
+**Connector Type:** Input Connector
+
+**Description**
+
+Captures processed data from Google Cloud Spanner into Condense for analytics, modeling, and dashboarding.
+
+**Brief Description**
+
+The **Google Cloud Spanner CDC (Change Data Capture) Store Input Connector** enables Condense to ingest real-time database change events from **Google Cloud Spanner** into Condense-managed Kafka topics.
+
+This connector continuously streams inserts, updates, and deletes from Spanner tables via native **Change Streams**, using **Debezium's Spanner CDC connector** under the hood. It allows enterprises to synchronize operational data, build event-driven applications, or maintain analytical stores directly from transactional databases with strong consistency.
+
+**Links to Relevant Documents**
+
+- **Google Cloud Spanner Documentation:** [https://cloud.google.com/spanner/docs](https://cloud.google.com/spanner/docs)
+- **Spanner Change Streams Overview:** [https://cloud.google.com/spanner/docs/change-streams](https://cloud.google.com/spanner/docs/change-streams)
+- **Debezium Spanner Connector Reference:** [https://debezium.io/documentation/reference/connectors/spanner.html](https://debezium.io/documentation/reference/connectors/spanner.html)
+
+**Connector Overview**
+
+| **Feature** | **Description** |
+| :-- | :-- |
+| Connector Type | Input |
+| Stream Type | Database CDC (Change Data Capture) |
+| Integration Method | Native Spanner Change Streams via Debezium |
+| Target System | Google Cloud Spanner |
+| Authentication | Google Service Account (JSON key) |
+| Delivery Semantics | At-least-once |
+| Data Format | JSON-formatted change event |
+
+**Core Functionality**
+
+- **Change Stream Capture:** Reads database mutations (inserts, updates, deletes) from Spanner in near real time.
+- **Table-Level Granularity:** Optionally capture changes from all tables or a defined subset.
+- **Transactional Consistency:** Reflects Spanner's globally consistent commit order.
+- **Service Account Authentication:** Secure access to Spanner APIs using IAM credentials.
+- **Kafka Integration:** Publishes change events to configured Condense Kafka topics for downstream analytics or transformations.
+
+**How It Works in Condense**
+
+1. **Setup in GCP**
+   1. A Spanner instance and database are created.
+   2. A Change Stream is defined (either for all tables or specific tables).
+   3. A Google Cloud Service Account with `roles/spanner.databaseReader` access is generated.
+2. **Connector Configuration in Condense**
+   1. Credentials (Service Account JSON) and connection identifiers are provided.
+   2. Condense establishes a secure connection to Spanner.
+3. **CDC Event Stream**
+   1. Debezium's Spanner connector reads changes from Spanner's Change Stream API.
+   2. Events are parsed and serialized into JSON.
+4. **Publish to Kafka Topics**
+   1. Condense automatically creates output topics using a prefix-based convention (`{topic.prefix}.{table_name}`).
+   2. Each table change event (insert/update/delete) is delivered to the corresponding Kafka topic.
+
+**Configuration**
+
+| **Category** | **Field Name** | **Description** | **Required** |
+| :-- | :-- | :-- | :-: |
+| General | Title | Unique name to identify the Spanner CDC connector in Condense | Yes |
+| Google Cloud | GCP Project ID | ID of your Google Cloud Project where the Spanner instance resides | Yes |
+| Google Cloud | Spanner Instance ID | Name of the Google Cloud Spanner instance | Yes |
+| Google Cloud | Spanner Database ID | Database name within the Spanner instance | Yes |
+| Google Cloud | Change Stream Name | Name of the change stream configured in Spanner | Yes |
+| Authentication | Service Account JSON | JSON credentials for the service account with `spanner.databaseReader` permissions | Yes |
+| CDC | Table Names | Comma-separated list of tables to monitor. Leave empty to capture all tables | No |
+| Kafka | Topic Prefix | Prefix for automatically generated Kafka topics | Yes |
+| Condense | Topic (Output) | Kafka topic in Condense where the captured CDC events are published | Yes |
+
+**Field-by-Field Explanation**
+
+**1. Title**
+
+Description: Unique name to identify the Spanner CDC connector in Condense.
+
+Example: `Spanner_CDC_Production`
+
+**2. GCP Project ID**
+
+Description: ID of your Google Cloud Project where the Spanner instance resides.
+
+Example: `prj-condense-prod`
+
+**3. Spanner Instance ID**
+
+Description: Name of the Google Cloud Spanner instance.
+
+Example: `condense-connector-instance`
+
+**4. Spanner Database ID**
+
+Description: Database name within the Spanner instance.
+
+Example: `condense_db`
+
+**5. Change Stream Name**
+
+Description: Name of the change stream configured in Spanner.
+
+Example: `change_stream_all`
+
+**6. Service Account JSON**
+
+Description: JSON credentials for the service account with `spanner.databaseReader` permissions.
+
+How to Obtain:
+
+```bash
+gcloud iam service-accounts keys create spanner-cdc-key.json \
+--iam-account=spanner-cdc-connector@<PROJECT_ID>.iam.gserviceaccount.com
+```
+
+**7. Table Names**
+
+Description: Comma-separated list of tables to monitor. Leave empty to capture all tables.
+
+Example: `users,orders,transactions`
+
+**8. Topic Prefix**
+
+Description: Prefix for automatically generated Kafka topics.
+
+Example: `spanner-cdc`
+
+**9. Topic (Output)**
+
+Description: The Kafka topic in Condense where the captured CDC events are published.
+
+Example: `spanner-cdc-events`
+
+**Example Topic Mapping**
+
+| **Table** | **Topic Created** |
+| :-- | :-- |
+| users | spanner-cdc.users |
+| orders | spanner-cdc.orders |
+| transactions | spanner-cdc.transactions |
+
+**Event Format**
+
+Each record published to Kafka includes a **before** and **after** payload, representing state changes, along with metadata.
+
+```json
+{
+  "payload": {
+    "before": {
+      "user_id": 1,
+      "name": "John Doe"
+    },
+    "after": {
+      "user_id": 1,
+      "name": "John Smith"
+    },
+    "source": {
+      "db": "condense_db",
+      "table": "users",
+      "change_stream_name": "change_stream_all",
+      "commit_timestamp": "2025-10-30T09:30:00Z"
+    },
+    "op": "u"
+  }
+}
+```
+
+Where:
+
+- `op`: Operation type (`c` = create, `u` = update, `d` = delete).
+- `commit_timestamp`: Exact time the change was committed in Spanner.
+- `table`: Table name of the event origin.
+
+**Troubleshooting and Common Issues**
+
+**1. Connection Failure**
+
+Ensure the service account has the correct IAM role (`spanner.databaseReader`).
+
+**2. Change Stream Not Found**
+
+Verify the change stream exists and is active:
+
+```sql
+SELECT change_stream_name
+FROM information_schema.change_streams;
+```
+
+**3. No Events Received**
+
+- Change stream may not include specific tables.
+- Retention period expired.
+- Verify `tables.include.list` configuration.
+
+**4. Duplicate Events**
+
+Occurs if the connector restarts without offset recovery. Ensure proper offset management in Kafka Connect.
+
+**Advanced Considerations**
+
+- **Change Stream Retention:** Default retention is 7 days. Adjust via:
+
+```sql
+CREATE CHANGE STREAM change_stream_all
+FOR ALL
+OPTIONS (retention_period = "7d");
+```
+
+- **Scaling:** Increase Spanner processing units or connector tasks for large data volumes.
+- **Partition Parallelism:** Connector scales with the number of change stream partitions.
+- **Security:** Use a dedicated service account with minimal permissions and rotate keys periodically.
+
+**Best Practices**
+
+1. Use specific `tables.include.list` for optimized performance.
+2. Monitor `MillisecondsBehindMaster` metric for replication lag.
+3. Set a descriptive `topic.prefix` for environment separation.
+4. Always validate change stream health before deploying.
